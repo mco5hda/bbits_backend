@@ -1,21 +1,104 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<header class="O-Header">
+  <div class="O-Header__logoRow">
+    <div class="container-fluid">
+      <a class="O-Header__brandLogo" href="https://www.bosch.com/" itemprop="url" aria-label="Logo">
+        <figure class="A-Image__figure">
+          <div class="A-Image__preloadWrapper A-Image__preloadWrapper--ratio113to37">
+            <div itemprop="logo" itemscope="" itemtype="https://schema.org/ImageObject">
+              <meta itemprop="url" content="/assets/logo/bosch_logo_w340.png">
+              <meta itemprop="width" content="100%">
+              <meta itemprop="height" content="100%">
+            </div>
+            <picture class="A-Image__picture">
+              <source srcset="/assets/logo/bosch_logo_w340.png" media="(min-width: 992px)">
+              <source srcset="/assets/logo/bosch_logo_w250.png" media="(min-width: 768px)">
+              <img class="A-Image A-Image--preload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                srcset="/assets/logo/bosch_logo_w260.png" alt="Bosch Global">
+            </picture>
+          </div>
+        </figure>
+      </a>
+      <div class="O-Header__meta">
+        <nav class="M-Navigation" aria-label="">
+          <ul class="M-Navigation-Meta" role="menubar">
+            <li class="M-Navigation__item M-Navigation-Meta__item">
+              <a class="M-Navigation__link M-Navigation-Meta__link" role="menuitem">Bosch group</a>
+            </li>
+            <li class="M-Navigation__item M-Navigation-Meta__item">
+              <a class="M-Navigation__link M-Navigation-Meta__link" role="menuitem">Press</a>
+            </li>
+            <li class="M-Navigation__item M-Navigation-Meta__item">
+              <a class="M-Navigation__link M-Navigation-Meta__link" role="menuitem">Contact</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="A-Text__brandIdentifier " itemprop="name">Bosch Building Installation Technology System</div>
+      </div>
+    </div>
+  </div>
 
+  
+  <div id="header-content" class="O-Header__navRow A-StickyElement" data-a-sticky-item="" >
+    <nav id="nav-content" data-js-component="main-navigation" class="M-Navigation M-Navigation-Main">
+      <div class="container-fluid">
+        <button id="button-content" type="button" class="M-Navigation-Main__toggle" (click)="onClickShowMenu()" aria-label="Navigation toggle button">
+          <span class="M-Navigation-Main__toggleBar"></span>
+          <span class="M-Navigation-Main__toggleBar"></span>
+          <span class="M-Navigation-Main__toggleBar"></span>
+          <span class="M-Navigation-Main__toggleBar"></span>
+        </button>
+      </div>
+      <div id="navigation-content" class="M-Navigation-Main__itemsWrapper is-hidden">
+        <ul id="list-content" class="M-Navigation-Main__items" role="menubar">
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub M-Navigation__link--active M-Navigation-Main__link--active">
+              <span>Video</span>
+            </a>
+            <div class="M-Navigation__flyoutWrapper">
+              <!-- Colocar aca los elementos del menu -->
+              <button>sdasd</button>
+            </div>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Access</span>
+            </a>
+            <div class="M-Navigation__flyoutWrapper">
+              <!-- Colocar aca los elementos del menu -->
+              <button>sdasd</button>
+            </div>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Intrusion</span>
+            </a>
+            <div class="M-Navigation__flyoutWrapper">
+              <!-- Colocar aca los elementos del menu -->
+              <button>sdasd</button>
+            </div>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Communications</span>
+            </a>
+            <div class="M-Navigation__flyoutWrapper">
+              <!-- Colocar aca los elementos del menu -->
+              <button>sdasd</button>
+            </div>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Fire</span>
+            </a>
+            <div class="M-Navigation__flyoutWrapper">
+              <!-- Colocar aca los elementos del menu -->
+              <button>sdasd</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
 <router-outlet></router-outlet>
+
