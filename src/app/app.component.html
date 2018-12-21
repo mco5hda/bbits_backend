@@ -37,7 +37,6 @@
     </div>
   </div>
 
-  
   <div id="header-content" class="O-Header__navRow A-StickyElement" data-a-sticky-item="" >
     <nav id="nav-content" data-js-component="main-navigation" class="M-Navigation M-Navigation-Main">
       <div class="container-fluid">
@@ -50,55 +49,70 @@
       </div>
       <div id="navigation-content" class="M-Navigation-Main__itemsWrapper is-hidden">
         <ul id="list-content" class="M-Navigation-Main__items" role="menubar">
-          <li class="M-Navigation__item M-Navigation-Main__item">
+          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Video')" (mouseleave)="onMenuExit('Video')">
             <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub M-Navigation__link--active M-Navigation-Main__link--active">
               <span>Video</span>
             </a>
-            <div class="M-Navigation__flyoutWrapper">
-              <!-- Colocar aca los elementos del menu -->
-              <button>sdasd</button>
-            </div>
           </li>
-          <li class="M-Navigation__item M-Navigation-Main__item">
+          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Access')" (mouseleave)="onMenuExit('Access')">
             <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
               <span>Access</span>
             </a>
-            <div class="M-Navigation__flyoutWrapper">
-              <!-- Colocar aca los elementos del menu -->
-              <button>sdasd</button>
-            </div>
           </li>
-          <li class="M-Navigation__item M-Navigation-Main__item">
+          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Intrusion')" (mouseleave)="onMenuExit('Intrusion')">
             <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
               <span>Intrusion</span>
             </a>
-            <div class="M-Navigation__flyoutWrapper">
-              <!-- Colocar aca los elementos del menu -->
-              <button>sdasd</button>
-            </div>
           </li>
-          <li class="M-Navigation__item M-Navigation-Main__item">
+          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Communication')" (mouseleave)="onMenuExit('Communication')">
             <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
               <span>Communications</span>
             </a>
-            <div class="M-Navigation__flyoutWrapper">
-              <!-- Colocar aca los elementos del menu -->
-              <button>sdasd</button>
-            </div>
           </li>
-          <li class="M-Navigation__item M-Navigation-Main__item">
+          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Fire')" (mouseleave)="onMenuExit('Fire')">
             <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
               <span>Fire</span>
             </a>
-            <div class="M-Navigation__flyoutWrapper">
-              <!-- Colocar aca los elementos del menu -->
-              <button>sdasd</button>
-            </div>
           </li>
         </ul>
       </div>
     </nav>
   </div>
+
+  <div id="subMenu-video" class="O-Header__navRow" style="display: none" (mouseover)="onMenuOver('Video')" (mouseleave)="onMenuExit('Video')">
+    <nav data-js-component="main-navigation" class="M-Navigation M-Navigation-Main">
+      <div class="M-Navigation-Main__itemsWrapper is-hidden">
+        <ul  class="M-Navigation-Main__items" role="menubar">
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub M-Navigation__link--active">
+              <span>IP Cameras</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Analog Cameras</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>IP Recording</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Analog Recording</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Accessories</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
 </header>
 <router-outlet></router-outlet>
 
