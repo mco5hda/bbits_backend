@@ -46,8 +46,8 @@ export class AppComponent implements OnInit {
   onMenuOver(option): void {
     switch (option) {
       case 'Video' :
-        const  navContent = document.getElementById('nav-content');
-        if (navContent.classList[2] === MENU_CLASS_ACTIVE) {
+        const  buttonContent = document.getElementById('button-content');
+        if (this.isElementTotallyVisible(buttonContent)) {
         } else {
           document.getElementById('subMenu-video').style.display = 'inherit';
         }
@@ -70,8 +70,8 @@ export class AppComponent implements OnInit {
   onMenuExit(option): void {
     switch (option) {
       case 'Video' :
-        const  navContent = document.getElementById('nav-content');
-        if (navContent.classList[2] === MENU_CLASS_ACTIVE) {
+        const  buttonContent = document.getElementById('button-content');
+        if (this.isElementTotallyVisible(buttonContent)) {
         } else {
           document.getElementById('subMenu-video').style.display = 'none';
         }
@@ -118,4 +118,15 @@ export class AppComponent implements OnInit {
       active = true;
     }
   }
+
+  isElementTotallyVisible(element) {
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const box = element.getBoundingClientRect();
+    return ( box.top >= 0 &&
+      box.bottom <= viewportHeight &&
+      box.left >= 0 &&
+      box.right <= viewportWidth );
+  }
+
 }
