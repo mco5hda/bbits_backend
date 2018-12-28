@@ -1,0 +1,557 @@
+<app-header></app-header>
+
+<body>
+  <main>
+    <div class="container">
+      <img class="spinner spinner-collapsed" id="spinner" src="../../../../assets/spinner.gif">
+
+      <form id="addProductForm" class="mwf-form" #formControl="ngForm" >
+
+        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+          <div class="form-steps row .M-Form-ResponsiveSlider__steps">
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+          </div>
+        </div>
+
+        <!--First section of form-->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2 ">
+          <div class="fileUploader">
+            <span>Please upload the datasheet of the product.</span>
+            <br />
+            <br />
+            <div class="fileUploader-dropzone">
+              <input type="file" name="datasheet" id="file1" (change)="onLoadDataSheet()" accept="application/pdf">
+              <label for="file1" class="fileUploader-label">Drop files here to attach them</label>
+              <button class="btn-Uploader" type="">
+                Select files
+              </button>
+            </div>
+
+            <!--Div to load the files selected and the button to delete-->
+            <div id="files-list"></div>
+          </div>
+        </div>
+        
+        <!--
+          Second section of form
+          General information
+        -->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+          <ul>      
+            <li class="mwf-field">
+              <h3>General information</h3>
+              <hr>
+            </li>
+
+            <!-- Name Input -->
+            <li class="mwf-field">
+                <label class="mwf-label mwf-label-input">
+                  Name
+                  <span class="mwf-required">*</span>
+                </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="name" name="name" [(ngModel)]="analogCamera.name" value="{{analogCamera.name}}" #name="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Family Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Family
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="family" name="family" [(ngModel)]="analogCamera.family" value="{{analogCamera.family}}" #family="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Category Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Category
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <select class="mwf-select" id="category" name="category" [(ngModel)]="analogCamera.category" value="{{analogCamera.category}}" #category="ngModel">
+                  <option class="mwf-select-option" *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+                </select>
+              </div>
+            </li>
+
+            <!-- CTN Class Input -->
+            <li class="mwf-field mwf-m">
+                <label class="mwf-label mwf-label-input">
+                    CtnClass
+                    <span class="mwf-required">*</span>
+                  </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="ctnClass" name="ctnClass" [(ngModel)]="analogCamera.ctnClass" value="{{analogCamera.ctnClass}}" #ctnClass="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- ctnclassfull Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                CtnClassFull
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="ctnClassFull" name="ctnClassFull" [(ngModel)]="analogCamera.ctnClassFull" value="{{analogCamera.ctnClassFull}}" #ctnClassFull="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Price Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Price
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="price" name="price" [(ngModel)]="analogCamera.price" value="{{analogCamera.price}}" #price="ngModel" type="text">
+              </div>
+            </li>
+
+            <!--Image uploader-->
+            <div class="mwf-field fileUploader">
+              <span>Please upload the product image.</span>
+              <br />
+              <br />
+              <div class="fileUploader-dropzone">
+                <input type="file" name="image" id="uploaderImage" (change)="preview_image($event)" accept="image/*">
+                <label for="file1" class="fileUploader-label">Drop files here to attach them</label>
+                <button class="btn-Uploader" type="">
+                  Select image
+                </button>
+              </div>
+
+              <!--Div to load the files selected and the button to delete-->
+              <div  id="image-list" class="image-list">
+
+              </div>
+            </div>
+          </ul>
+        </div>
+
+        <!--
+          Third section of form
+          Basic and Advanced Features
+        -->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+          <!--Basic Features area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Basic Features</h3>
+              <hr>
+            </li>
+
+            <!-- Resolution Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Resolution
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maxResolution" name="maxResolution" [(ngModel)]="analogCamera.basicFeatures.maxResolution" value="{{analogCamera.basicFeatures.maxResolution}}" #maxResolution="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Image Sensor type Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Image sensor type
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="sensorType" name="sensorType" [(ngModel)]="analogCamera.basicFeatures.sensorType" value="{{analogCamera.basicFeatures.sensorType}}" #sensorType="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- indoorOutdoor Input -->
+            <li class="mwf-field mwf-m">
+                <label class="mwf-label mwf-label-input">
+                    Indoor/outdoor
+                    <span class="mwf-required">*</span>
+                  </label>
+              <div class="mwf-input">
+                <select class="mwf-select mwf-multiple" id="indoorOutdoor" name="indoorOutdoor" [(ngModel)]="analogCamera.basicFeatures.indoorOutdoor" value="{{analogCamera.basicFeatures.indoorOutdoor}}" #indoorOutdoor="ngModel">
+                  <option class="mwf-select-option" *ngFor="let indoor of indoorOutdoorArray" value="{{indoor}}">{{indoor}}</option>
+                </select>
+              </div>
+            </li>
+
+            <!-- dayNight Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Day/night
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <select class="mwf-select mwf-multiple" id="dayNight" name="dayNight" [(ngModel)]="analogCamera.basicFeatures.dayNight" value="{{analogCamera.basicFeatures.dayNight}}" #dayNight="ngModel">
+                  <option class="mwf-select-option" *ngFor="let day of dayNightArray" value="{{day}}">{{day}}</option>
+                </select>
+              </div>
+            </li>
+
+            <!-- Wide dynamic range Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Wide Dynamic Range
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="wideDinamicRange" name="wideDinamicRange" [(ngModel)]="analogCamera.basicFeatures.wideDinamicRange" value="{{analogCamera.basicFeatures.dayNight}}" #wideDinamicRange="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="irSensitive" name="irSensitive" [(ngModel)]="analogCamera.basicFeatures.irSensitive" value="{{analogCamera.basicFeatures.irSensitive}}" #irSensitive="ngModel">
+                    <label for="irSensitive">IR Sensitive</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+
+          <!--Advanced Features area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Advanced Features</h3>
+              <hr>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--privacy masking input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="privacyMasking" name="privacyMasking" [(ngModel)]="analogCamera.advancedFeatures.privacyMasking" value="{{analogCamera.advancedFeatures.privacyMasking}}" #privacyMasking="ngModel">
+                    <label for="privacyMasking">Privacy masking</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!--
+          Fourth section of form
+          Alarm triggering, sensitivity and dcri
+        -->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+          <!--Alarm triggering area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Alarm triggering</h3>
+              <hr>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--Tamper input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="tamperDetection" name="tamperDetection" [(ngModel)]="analogCamera.alarmTriggering.tamperDetection" value="{{analogCamera.alarmTriggering.tamperDetection}}" #tamperDetection="ngModel">
+                    <label for="tamperDetection">Tamper detection</label>
+                  </span>
+
+                  <!--Motion detection input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="videoMotionDetection" name="videoMotionDetection" [(ngModel)]="analogCamera.alarmTriggering.videoMotionDetection" value="{{analogCamera.alarmTriggering.videoMotionDetection}}" #videoMotionDetection="ngModel">
+                    <label for="videoMotionDetection">Video motion detection</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+
+          <!--Sensitivity area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Sensitivity</h3>
+              <hr>
+            </li>
+
+            <!-- Min illumination day mode Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Min ilumination day mode (color)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="minIluminationDayMode" name="minIluminationDayMode"  type="text" [(ngModel)]="analogCamera.sensitivity.minIluminationDayMode" value="{{analogCamera.sensitivity.minIluminationDayMode}}" #minIluminationDayMode="ngModel">
+              </div>
+            </li>
+
+            <!-- Min Illuminattion night mode Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Min illumination night mode (B/W)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="minIlluminationNightMode" name="minIlluminationNightMode"  type="text" [(ngModel)]="analogCamera.sensitivity.minIlluminationNightMode" value="{{analogCamera.sensitivity.minIlluminationNightMode}}" #minIlluminationNightMode="ngModel">
+              </div>
+            </li>
+
+            <!-- maxRangeAtNight mode Input -->
+            <li class="mwf-field ">
+              <label class="mwf-label mwf-label-input">
+                Max Range at Night
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maxRangeAtNight" name="maxRangeAtNight"  type="text" [(ngModel)]="analogCamera.sensitivity.maxRangeAtNight" value="{{analogCamera.sensitivity.maxRangeAtNight}}" #maxRangeAtNight="ngModel">
+              </div>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!-- nightVision Input -->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="nightVision" name="nightVision" [(ngModel)]="analogCamera.sensitivity.nightVision" value="{{analogCamera.sensitivity.nightVision}}" #nightVision="ngModel">
+                    <label for="nightVision">Integrated IR-lighting</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!--
+        Fifth section of form
+        Lens and connectiond Features
+        -->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+          <!--Lens area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Lens</h3>
+              <hr>
+            </li>
+
+            <!-- focalLengthFrom Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Focal Length From
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="focalLengthFrom" name="focalLengthFrom" [(ngModel)]="analogCamera.lens.focalLengthFrom" value="{{analogCamera.lens.focalLengthFrom}}" #focalLengthFrom="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- focalLengthTill Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Focal Length Till
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="focalLengthTill" name="focalLengthTill" [(ngModel)]="analogCamera.lens.focalLengthTill" value="{{analogCamera.lens.focalLengthTill}}" #focalLengthTill="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- minAngleH Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Min. view angle (H)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="minAngleH" name="minAngleH" [(ngModel)]="analogCamera.lens.minAngleH" value="{{analogCamera.lens.minAngleH}}" #minAngleH="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- maxAngleH Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Max. view angle (H)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maxAngleH" name="maxAngleH" [(ngModel)]="analogCamera.lens.maxAngleH" value="{{analogCamera.lens.maxAngleH}}" #maxAngleH="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- tilt angle Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Tilt Angle
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="tiltAngle" name="tiltAngle" [(ngModel)]="analogCamera.lens.tiltAngle" value="{{analogCamera.lens.tiltAngle}}" #tiltAngle="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--ptzZoomDigital INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="ptzZoomDigital" name="ptzZoomDigital" [(ngModel)]="analogCamera.lens.ptzZoomDigital" value="{{analogCamera.lens.ptzZoomDigital}}" #ptzZoomDigital="ngModel">
+                    <label for="ptzZoomDigital">PTZ Digital Zoom</label>
+                  </span>
+                  <!--ptzOpticalZoom lens INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="ptzOpticalZoom" name="ptzOpticalZoom" [(ngModel)]="analogCamera.lens.ptzOpticalZoom" value="{{analogCamera.lens.ptzOpticalZoom}}" #ptzOpticalZoom="ngModel">
+                    <label for="ptzOpticalZoom">PTZ Optical Zoom</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+
+          <!--Connections area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Connections</h3>
+              <hr>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--Alarm input/output INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="alarmInputOutput" name="alarmInputOutput" [(ngModel)]="analogCamera.connections.alarmInputOutput" value="{{analogCamera.connections.alarmInputOutput}}" #alarmInputOutput="ngModel">
+                    <label for="alarmInputOutput">Alarm input/output</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!--
+        Sixth section of form
+        Housing and Electrical
+        -->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2">          
+          <!--Housing area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Housing</h3>
+              <hr>
+            </li>
+
+            <!-- weatherRating Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Weather rating
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="weatherRating" name="weatherRating" [(ngModel)]="analogCamera.housing.weatherRating" value="{{analogCamera.housing.weatherRating}}" #weatherRating="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- vandalResistant Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Vandal resistant
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="vandalResistant" name="vandalResistant" [(ngModel)]="analogCamera.housing.vandalResistant" value="{{analogCamera.housing.vandalResistant}}" #vandalResistant="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- operatingTemperature Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Operating temperature
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="operatingTemperature" name="operatingTemperature" [(ngModel)]="analogCamera.housing.operatingTemperature" value="{{analogCamera.housing.operatingTemperature}}" #operatingTemperature="ngModel" type="text">
+              </div>
+            </li>
+          </ul>
+
+          <!--Electrical area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Electrical Information</h3>
+              <hr>
+            </li>
+
+            <!-- input voltage Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Input voltage
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="analogCamera.electricalData.inputVoltage" value="{{analogCamera.electricalData.inputVoltage}}" #inputVoltage="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- normalVersion Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Normal version
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="analogCamera.electricalData.normalVersion" value="{{analogCamera.electricalData.normalVersion}}" #normalVersion="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- irVersion Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                IR version
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="irVersion" name="irVersion" [(ngModel)]="analogCamera.electricalData.irVersion" value="{{analogCamera.electricalData.irVersion}}" #irVersion="ngModel" type="text">
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!--Buttons-->
+        <div class="col-xs-12 col-sm-8 col-sm-push-2 forms-buttons col-xs-12">
+          <div class="form-back-button">
+            <button class="btn-Primary" type="button" id="prevBtn" (click)="nextPrev(-1)">Back</button>
+          </div>
+
+          <div class="form-next-button">
+            <button class="btn-Secondary" type="button" style="margin-right: 5px;">Cancel</button>
+            <button class="btn-Primary" type="button" id="nextBtn" (click)="nextPrev(1)">Next</button>            
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </main>
+
+</body>

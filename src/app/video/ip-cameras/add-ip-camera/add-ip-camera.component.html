@@ -1,0 +1,835 @@
+<app-header></app-header>
+
+<body>
+  <main>
+    <div class="container">
+      <img class="spinner spinner-collapsed" id="spinner" src="../../../../assets/spinner.gif">
+
+      <form id="addProductForm" class="mwf-form" #formControl="ngForm" >
+
+        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+          <div class="form-steps row .M-Form-ResponsiveSlider__steps">
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+            <div class="col-sm-2">
+              <span class="step .M-Form-ResponsiveSlider__step"></span>
+            </div>
+          </div>
+        </div>
+
+        <!--First section of form-->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2 ">
+          <div class="fileUploader">
+            <span>Please upload the datasheet of the product.</span>
+            <br />
+            <br />
+            <div class="fileUploader-dropzone">
+              <input type="file" name="datasheet" id="file1" (change)="onLoadDataSheet()" accept="application/pdf">
+              <label for="file1" class="fileUploader-label">Drop files here to attach them</label>
+              <button class="btn-Uploader" type="">
+                Select files
+              </button>
+            </div>
+
+            <!--Div to load the files selected and the button to delete-->
+            <div id="files-list"></div>
+          </div>
+        </div>
+        
+        <!--
+          Second section of form
+          General information
+        -->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+          <ul>      
+            <li class="mwf-field">
+              <h3>General information</h3>
+              <hr>
+            </li>
+
+            <!-- Name Input -->
+            <li class="mwf-field">
+                <label class="mwf-label mwf-label-input">
+                  Name
+                  <span class="mwf-required">*</span>
+                </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="name" name="name" [(ngModel)]="ipCamera.name" value="{{ipCamera.name}}" #name="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Family Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Family
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="family" name="family" [(ngModel)]="ipCamera.family" value="{{ipCamera.family}}" #family="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Category Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Category
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <select class="mwf-select mwf-multiple" id="category" name="category" [(ngModel)]="ipCamera.category" value="{{ipCamera.category}}" #category="ngModel">
+                  <option class="mwf-select-option" *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+                </select>
+              </div>
+            </li>
+
+            <!-- CTN Class Input -->
+            <li class="mwf-field mwf-m">
+                <label class="mwf-label mwf-label-input">
+                    CtnClass
+                    <span class="mwf-required">*</span>
+                  </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="ctnClass" name="ctnClass" [(ngModel)]="ipCamera.ctnClass" value="{{ipCamera.ctnClass}}" #ctnClass="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- ctnclassfull Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                CtnClassFull
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="ctnClassFull" name="ctnClassFull" [(ngModel)]="ipCamera.ctnClassFull" value="{{ipCamera.ctnClassFull}}" #ctnClassFull="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Price Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Price
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="price" name="price" [(ngModel)]="ipCamera.price" value="{{ipCamera.price}}" #price="ngModel" type="text">
+              </div>
+            </li>
+
+            <!--Image uploader-->
+            <div class="mwf-field fileUploader">
+              <span>Please upload the product image.</span>
+              <br />
+              <br />
+              <div class="fileUploader-dropzone">
+                <input type="file" name="image" id="uploaderImage" (change)="preview_image($event)" accept="image/*">
+                <label for="file1" class="fileUploader-label">Drop files here to attach them</label>
+                <button class="btn-Uploader" type="">
+                  Select image
+                </button>
+              </div>
+
+              <!--Div to load the files selected and the button to delete-->
+              <div  id="image-list" class="image-list">
+
+              </div>
+            </div>
+          </ul>
+        </div>
+
+        <!--
+          Third section of form
+          Basic and Advanced Features
+        -->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+          <!--Basic Features area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Basic Features</h3>
+              <hr>
+            </li>
+
+            <!-- Resolution Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Resolution
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maxResolution" name="maxResolution" [(ngModel)]="ipCamera.basicFeatures.maxResolution" value="{{ipCamera.basicFeatures.maxResolution}}" #maxResolution="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Image Sensor type Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Image sensor type
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="sensorType" name="sensorType" [(ngModel)]="ipCamera.basicFeatures.sensorType" value="{{ipCamera.basicFeatures.sensorType}}" #sensorType="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- MaxFPS Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Max. frames per second (fps)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maxFPS" name="maxFPS" [(ngModel)]="ipCamera.basicFeatures.maxFPS" value="{{ipCamera.basicFeatures.maxFPS}}" #maxFPS="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- indoorOutdoor Input -->
+            <li class="mwf-field mwf-m">
+                <label class="mwf-label mwf-label-input">
+                    Indoor/outdoor
+                    <span class="mwf-required">*</span>
+                  </label>
+              <div class="mwf-input">
+                <select class="mwf-select mwf-multiple" id="indoorOutdoor" name="indoorOutdoor" [(ngModel)]="ipCamera.basicFeatures.indoorOutdoor" value="{{ipCamera.basicFeatures.indoorOutdoor}}" #indoorOutdoor="ngModel">
+                  <option class="mwf-select-option" *ngFor="let indoor of indoorOutdoorArray" value="{{indoor}}">{{indoor}}</option>
+                </select>
+              </div>
+            </li>
+
+            <!-- dayNight Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Day/night
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <select class="mwf-select mwf-multiple" id="dayNight" name="dayNight" [(ngModel)]="ipCamera.basicFeatures.dayNight" value="{{ipCamera.basicFeatures.dayNight}}" #dayNight="ngModel" #category="ngModel">
+                  <option class="mwf-select-option" *ngFor="let day of dayNightArray" value="{{day}}">{{day}}</option>
+                </select>
+              </div>
+            </li>
+
+            <!-- Wide dynamic range Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Wide Dynamic Range
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="wideDinamicRange" name="wideDinamicRange" [(ngModel)]="ipCamera.basicFeatures.wideDinamicRange" value="{{ipCamera.basicFeatures.dayNight}}" #wideDinamicRange="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="onvif" name="onvif" [(ngModel)]="ipCamera.basicFeatures.onvif" value="{{ipCamera.basicFeatures.onvif}}" #onvif="ngModel">
+                    <label for="onvif">ONVIF conformant</label>
+                  </span>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="microphone" name="microphone" [(ngModel)]="ipCamera.basicFeatures.microphone" value="{{ipCamera.basicFeatures.microphone}}" #microphone="ngModel">
+                    <label for="microphone">Built-in microphone</label>
+                  </span>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="poe" name="poe" [(ngModel)]="ipCamera.basicFeatures.poe" value="{{ipCamera.basicFeatures.poe}}" #poe="ngModel">
+                    <label for="poe">Power over Ethernet (Poe)</label>
+                  </span>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="irSensitive" name="irSensitive" [(ngModel)]="ipCamera.basicFeatures.irSensitive" value="{{ipCamera.basicFeatures.irSensitive}}" #irSensitive="ngModel">
+                    <label for="irSensitive">IR Sensitive</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+
+          <!--Advanced Features area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Advanced Features</h3>
+              <hr>
+            </li>
+
+            <!-- Compression Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Compression
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="compression" name="compression"  type="text" [(ngModel)]="ipCamera.advancedFeatures.compression" value="{{ipCamera.advancedFeatures.compression}}" #compression="ngModel">
+              </div>
+            </li>
+
+            <!-- Multistreaming Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Multi-streaming
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="multiStreaming" name="multiStreaming" type="text" [(ngModel)]="ipCamera.advancedFeatures.multiStreaming" value="{{ipCamera.advancedFeatures.multiStreaming}}" #multiStreaming="ngModel">
+              </div>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--Intelligent dynamic noise reduction input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="idnr" name="idnr" [(ngModel)]="ipCamera.advancedFeatures.idnr" value="{{ipCamera.advancedFeatures.idnr}}" #idnr="ngModel">
+                    <label for="idnr">Intelligent Dynamic Noise Reduction</label>
+                  </span>
+
+                  <!--Intelligent auto exposure input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="iae" name="iae" [(ngModel)]="ipCamera.advancedFeatures.iae" value="{{ipCamera.advancedFeatures.iae}}" #iae="ngModel">
+                    <label for="iae">Intelligent Auto Exposure</label>
+                  </span>
+
+                  <!--privacy masking input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="privacyMasking" name="privacyMasking" [(ngModel)]="ipCamera.advancedFeatures.privacyMasking" value="{{ipCamera.advancedFeatures.privacyMasking}}" #privacyMasking="ngModel">
+                    <label for="privacyMasking">Privacy masking</label>
+                  </span>
+
+                  <!--Refion of interest input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="regionOfInterest" name="regionOfInterest" [(ngModel)]="ipCamera.advancedFeatures.regionOfInterest" value="{{ipCamera.advancedFeatures.regionOfInterest}}" #regionOfInterest="ngModel">
+                    <label for="regionOfInterest">Region of Interest (ROI) & E-PTZ</label>
+                  </span>
+
+                  <!--Region of interest tracking input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="interestTracking" name="interestTracking" [(ngModel)]="ipCamera.advancedFeatures.interestTracking" value="{{ipCamera.advancedFeatures.interestTracking}}" #interestTracking="ngModel">
+                    <label for="interestTracking">Region of Interest Tracking</label>
+                  </span>
+
+                  <!--Pressets input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="noPresets" name="noPresets" [(ngModel)]="ipCamera.advancedFeatures.noPresets" value="{{ipCamera.advancedFeatures.noPresets}}" #noPresets="ngModel">
+                    <label for="noPresets">No. of pressets / guard tours</label>
+                  </span>
+
+                  <!--Wiper input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="wiper" name="wiper" [(ngModel)]="ipCamera.advancedFeatures.wiper" value="{{ipCamera.advancedFeatures.wiper}}" #wiper="ngModel">
+                    <label for="wiper">Wiper</label>
+                  </span>
+
+                  <!--Thermal input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="thermal" name="thermal" [(ngModel)]="ipCamera.advancedFeatures.thermal" value="{{ipCamera.advancedFeatures.thermal}}" #thermal="ngModel">
+                    <label for="thermal">Thermal</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!--
+          Fourth section of form
+          Alarm triggering, sensitivity and dcri
+        -->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+          <!--Alarm triggering area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Alarm triggering</h3>
+              <hr>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--Tamper input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="tamperDetection" name="tamperDetection" [(ngModel)]="ipCamera.alarmTriggering.tamperDetection" value="{{ipCamera.alarmTriggering.tamperDetection}}" #tamperDetection="ngModel">
+                    <label for="tamperDetection">Tamper detection</label>
+                  </span>
+
+                  <!--Motion detection input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="videoMotionDetection" name="videoMotionDetection" [(ngModel)]="ipCamera.alarmTriggering.videoMotionDetection" value="{{ipCamera.alarmTriggering.videoMotionDetection}}" #videoMotionDetection="ngModel">
+                    <label for="videoMotionDetection">Video motion detection</label>
+                  </span>
+
+                  <!--Audio detection input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="audioDetection" name="audioDetection" [(ngModel)]="ipCamera.alarmTriggering.audioDetection" value="{{ipCamera.alarmTriggering.audioDetection}}" #audioDetection="ngModel">
+                    <label for="audioDetection">Audio detection</label>
+                  </span>
+
+                  <!--Face detection input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="faceDetection" name="faceDetection" [(ngModel)]="ipCamera.alarmTriggering.faceDetection" value="{{ipCamera.alarmTriggering.faceDetection}}" #faceDetection="ngModel">
+                    <label for="faceDetection">Face detection</label>
+                  </span>
+
+                  <!--PTZ Intelligent tracking input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="intelligentTracking" name="intelligentTracking" [(ngModel)]="ipCamera.alarmTriggering.intelligentTracking" value="{{ipCamera.alarmTriggering.intelligentTracking}}"#intelligentTracking="ngModel">
+                    <label for="intelligentTracking">PTZ Intelligent Tracking</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+
+          <!--Sensitivity area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Sensitivity</h3>
+              <hr>
+            </li>
+
+            <!-- Min illumination day mode Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Min ilumination day mode (color)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="minIluminationDayMode" name="minIluminationDayMode"  type="text" [(ngModel)]="ipCamera.sensitivity.minIluminationDayMode" value="{{ipCamera.sensitivity.minIluminationDayMode}}" #minIluminationDayMode="ngModel">
+              </div>
+            </li>
+
+            <!-- Min Illuminattion night mode Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Min illumination night mode (B/W)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="minIlluminationNightMode" name="minIlluminationNightMode"  type="text" [(ngModel)]="ipCamera.sensitivity.minIlluminationNightMode" value="{{ipCamera.sensitivity.minIlluminationNightMode}}" #minIlluminationNightMode="ngModel">
+              </div>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!-- Integrated IR Input -->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="integratedIr" name="integratedIr" [(ngModel)]="ipCamera.sensitivity.integratedIr" value="{{ipCamera.sensitivity.integratedIr}}" #integratedIr="ngModel">
+                    <label for="integratedIr">Integrated IR-lighting</label>
+                  </span>
+
+                  <!--Starlight input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="startLight" name="startLight" [(ngModel)]="ipCamera.sensitivity.startLight" value="{{ipCamera.sensitivity.startLight}}" #startLight="ngModel">
+                    <label for="startLight">Starlight (extreme low-light)</label>
+                  </span>
+
+                  <!--Optional IR input-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="optionalIr" name="optionalIr" [(ngModel)]="ipCamera.sensitivity.optionalIr" value="{{ipCamera.sensitivity.optionalIr}}" #optionalIr="ngModel">
+                    <label for="optionalIr">Optional IR-lighting</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+
+          <!--DCRI area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>DCRI</h3>
+              <hr>
+            </li>
+
+            <!-- detection Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Detection
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="detection" name="detection" [(ngModel)]="ipCamera.dcri.detection" value="{{ipCamera.dcri.detection}}" #detection="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- clasification Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Clasification
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="clasification" name="clasification" [(ngModel)]="ipCamera.dcri.clasification" value="{{ipCamera.dcri.clasification}}" #clasification="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- recognition Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Recognition
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="recognition" name="recognition" [(ngModel)]="ipCamera.dcri.recognition" value="{{ipCamera.dcri.recognition}}" #recognition="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- identification Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                iIdentification
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="identification" name="identification" [(ngModel)]="ipCamera.dcri.identification" value="{{ipCamera.dcri.identification}}" #identification="ngModel" type="text">
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!--
+        Fifth section of form
+        Lens and Storage Features
+        -->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+          <!--Lens area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Lens</h3>
+              <hr>
+            </li>
+
+            <!-- focalLengthFrom Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Focal Length From
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="focalLengthFrom" name="focalLengthFrom" [(ngModel)]="ipCamera.lens.focalLengthFrom" value="{{ipCamera.lens.focalLengthFrom}}" #focalLengthFrom="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- focalLengthTill Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Focal Length Till
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="focalLengthTill" name="focalLengthTill" [(ngModel)]="ipCamera.lens.focalLengthTill" value="{{ipCamera.lens.focalLengthTill}}" #focalLengthTill="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- minAngleH Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Min. view angle (H)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="minAngleH" name="minAngleH" [(ngModel)]="ipCamera.lens.minAngleH" value="{{ipCamera.lens.minAngleH}}" #minAngleH="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- maxAngleH Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Max. view angle (H)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maxAngleH" name="maxAngleH" [(ngModel)]="ipCamera.lens.maxAngleH" value="{{ipCamera.lens.maxAngleH}}" #maxAngleH="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- minAngleV Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Min. view angle (V)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="minAngleV" name="minAngleV" [(ngModel)]="ipCamera.lens.minAngleV" value="{{ipCamera.lens.minAngleV}}" #minAngleV="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- maxAngleV Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Max. view angle (V)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maxAngleV" name="maxAngleV" [(ngModel)]="ipCamera.lens.maxAngleV" value="{{ipCamera.lens.maxAngleV}}" #maxAngleV="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- tilt angle Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Tilt Angle
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="tiltAngle" name="tiltAngle" [(ngModel)]="ipCamera.lens.tiltAngle" value="{{ipCamera.lens.tiltAngle}}" #tiltAngle="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- iNTELLIGENt VIDEO ANALYTICS Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Video analytics at the edge
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <select class="mwf-select mwf-multiple" id="iva" name="iva" [(ngModel)]="ipCamera.lens.iva" value="{{ipCamera.lens.iva}}" #iva="ngModel">
+                  <option value="IVA">Intelligent Video Analytics</option>
+                  <option value="EVA">Esentials Video Analytics</option>
+                </select>
+              </div>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--Automatic Back Focus (ABF) INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="automaticBackFocus" name="automaticBackFocus" [(ngModel)]="ipCamera.lens.automaticBackFocus" value="{{ipCamera.lens.automaticBackFocus}}" #automaticBackFocus="ngModel">
+                    <label for="automaticBackFocus">Automatic Back Focus (ABF)</label>
+                  </span>
+                  <!--Varifocal INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="varifocal" name="varifocal" [(ngModel)]="ipCamera.lens.varifocal" value="{{ipCamera.lens.varifocal}}" #varifocal="ngModel">
+                    <label for="varifocal">Varifocal</label>
+                  </span>
+                  <!--Automatic Varifocal INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="autoVarifocal" name="autoVarifocal" [(ngModel)]="ipCamera.lens.autoVarifocal" value="{{ipCamera.lens.autoVarifocal}}" #autoVarifocal="ngModel">
+                    <label for="autoVarifocal">Automatic Varifocal (AVF)</label>
+                  </span>
+                  <!--Super resolutions lens INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="superResolutionLens" name="superResolutionLens" [(ngModel)]="ipCamera.lens.superResolutionLens" value="{{ipCamera.lens.superResolutionLens}}" #superResolutionLens="ngModel">
+                    <label for="superResolutionLens">Super resolution lens</label>
+                  </span>
+                  <!--ptzZoomDigital INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="ptzZoomDigital" name="ptzZoomDigital" [(ngModel)]="ipCamera.lens.ptzZoomDigital" value="{{ipCamera.lens.ptzZoomDigital}}" #ptzZoomDigital="ngModel">
+                    <label for="ptzZoomDigital">PTZ Digital Zoom</label>
+                  </span>
+                  <!--ptzOpticalZoom lens INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="ptzOpticalZoom" name="ptzOpticalZoom" [(ngModel)]="ipCamera.lens.ptzOpticalZoom" value="{{ipCamera.lens.ptzOpticalZoom}}" #ptzOpticalZoom="ngModel">
+                    <label for="ptzOpticalZoom">PTZ Optical Zoom</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+
+          <!--Storage area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Storage</h3>
+              <hr>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--Built-in storage INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="builtInStorage" name="builtInStorage" [(ngModel)]="ipCamera.storage.builtInStorage" value="{{ipCamera.storage.builtInStorage}}" #builtInStorage="ngModel">
+                    <label for="builtInStorage">Built-in storage</label>
+                  </span>
+                  <!--Direct-to-iSCSI INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="directToIscsi" name="directToIscsi" [(ngModel)]="ipCamera.storage.directToIscsi" value="{{ipCamera.storage.directToIscsi}}" #directToIscsi="ngModel">
+                    <label for="directToIscsi">Direct-to-iSCSI</label>
+                  </span>
+                  <!--Cloud storage INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="cloudStorage" name="cloudStorage" [(ngModel)]="ipCamera.storage.cloudStorage" value="{{ipCamera.storage.cloudStorage}}" #cloudStorage="ngModel">
+                    <label for="cloudStorage">Cloud storage</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!--
+        Sixth section of form
+        Connections, Housing and Electrical
+        -->
+        <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+          <!--Connections area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Connections</h3>
+              <hr>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--Alarm input/output INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="alarmInputOutput" name="alarmInputOutput" [(ngModel)]="ipCamera.connections.alarmInputOutput" value="{{ipCamera.connections.alarmInputOutput}}" #alarmInputOutput="ngModel">
+                    <label for="alarmInputOutput">Alarm input/output</label>
+                  </span>
+                  <!--Audio in/out INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="audioInOut" name="audioInOut" [(ngModel)]="ipCamera.connections.audioInOut" value="{{ipCamera.connections.audioInOut}}" #audioInOut="ngModel">
+                    <label for="audioInOut">Audio in/out</label>
+                  </span>
+                  <!--Hybrid INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="hybrid" name="hybrid" [(ngModel)]="ipCamera.connections.hybrid" value="{{ipCamera.connections.hybrid}}" #hybrid="ngModel">
+                    <label for="hybrid">Hybrid</label>
+                  </span>
+                  <!--Monitor INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="confrontationMonitor" name="confrontationMonitor" [(ngModel)]="ipCamera.connections.confrontationMonitor" value="{{ipCamera.connections.confrontationMonitor}}" #confrontationMonitor="ngModel">
+                    <label for="confrontationMonitor">Confrontation monitor</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+          
+          <!--Housing area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Housing</h3>
+              <hr>
+            </li>
+
+            <!-- weatherRating Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Weather rating
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="weatherRating" name="weatherRating" [(ngModel)]="ipCamera.housing.weatherRating" value="{{ipCamera.housing.weatherRating}}" #weatherRating="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- vandalResistant Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Vandal resistant
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="vandalResistant" name="vandalResistant" [(ngModel)]="ipCamera.housing.vandalResistant" value="{{ipCamera.housing.vandalResistant}}" #vandalResistant="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- operatingTemperature Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Operating temperature
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="operatingTemperature" name="operatingTemperature" [(ngModel)]="ipCamera.housing.operatingTemperature" value="{{ipCamera.housing.operatingTemperature}}" #operatingTemperature="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--Corrosion proof INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="corrosionProof" name="corrosionProof" [(ngModel)]="ipCamera.housing.corrosionProof" value="{{ipCamera.housing.corrosionProof}}" #explosionProof="ngModel">
+                    <label for="corrosionProof">Corrosion proof</label>
+                  </span>
+                  <!--Explosion proof INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="explosionProof" name="explosionProof" [(ngModel)]="ipCamera.housing.explosionProof" value="{{ipCamera.housing.explosionProof}}" #explosionProof="ngModel">
+                    <label for="explosionProof">Explosion proof</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+          </ul>
+
+          <!--Electrical area-->
+          <ul>      
+            <li class="mwf-field">
+              <h3>Electrical Information</h3>
+              <hr>
+            </li>
+
+            <!-- input voltage Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Input voltage
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="ipCamera.electricalData.inputVoltage" value="{{ipCamera.electricalData.inputVoltage}}" #inputVoltage="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- normalVersion Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Normal version
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="ipCamera.electricalData.normalVersion" value="{{ipCamera.electricalData.normalVersion}}" #normalVersion="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- irVersion Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                IR version
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="irVersion" name="irVersion" [(ngModel)]="ipCamera.electricalData.irVersion" value="{{ipCamera.electricalData.irVersion}}" #irVersion="ngModel" type="text">
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!--Buttons-->
+        <div class="col-xs-12 col-sm-8 col-sm-push-2 forms-buttons col-xs-12">
+          <div class="form-back-button">
+            <button class="btn-Primary" type="button" id="prevBtn" (click)="nextPrev(-1)">Back</button>
+          </div>
+
+          <div class="form-next-button">
+            <button class="btn-Secondary" type="button" style="margin-right: 5px;">Cancel</button>
+            <button class="btn-Primary" type="button" id="nextBtn" (click)="nextPrev(1)">Next</button>            
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </main>
+
+</body>

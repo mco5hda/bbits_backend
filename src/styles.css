@@ -2,7 +2,6 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
 /* [rb.clickdummy.ro-npm] Version: 3.3.0 - 2018-12-17 11:05:38 */ 
-@charset "UTF-8";
     
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 @-webkit-keyframes fpFadeInDown {
@@ -729,7 +728,7 @@ to {
 }
 body {
     font-size: 14px;
-    background-color: #fff;
+    background-color: transparent;
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
     display: block;

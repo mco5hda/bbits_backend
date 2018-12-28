@@ -1,0 +1,116 @@
+<header class="O-Header">
+  <div class="O-Header__logoRow">
+    <div class="container-fluid">
+      <a class="O-Header__brandLogo" href="https://www.bosch.com/" itemprop="url" aria-label="Logo">
+        <figure class="A-Image__figure">
+          <div class="A-Image__preloadWrapper A-Image__preloadWrapper--ratio113to37">
+            <div itemprop="logo" itemscope="" itemtype="https://schema.org/ImageObject">
+              <meta itemprop="url" content="/assets/logo/bosch_logo_w340.png">
+              <meta itemprop="width" content="100%">
+              <meta itemprop="height" content="100%">
+            </div>
+            <picture class="A-Image__picture">
+              <source srcset="/assets/logo/bosch_logo_w340.png" media="(min-width: 992px)">
+              <source srcset="/assets/logo/bosch_logo_w250.png" media="(min-width: 768px)">
+              <img class="A-Image A-Image--preload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                srcset="/assets/logo/bosch_logo_w260.png" alt="Bosch Global">
+            </picture>
+          </div>
+        </figure>
+      </a>
+      <div class="O-Header__meta">
+        <nav class="M-Navigation" aria-label="">
+          <ul class="M-Navigation-Meta" role="menubar">
+            <li class="M-Navigation__item M-Navigation-Meta__item">
+              <a class="M-Navigation__link M-Navigation-Meta__link" role="menuitem">Bosch group</a>
+            </li>
+            <li class="M-Navigation__item M-Navigation-Meta__item">
+              <a class="M-Navigation__link M-Navigation-Meta__link" role="menuitem">Press</a>
+            </li>
+            <li class="M-Navigation__item M-Navigation-Meta__item">
+              <a class="M-Navigation__link M-Navigation-Meta__link" role="menuitem">Contact</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="A-Text__brandIdentifier " itemprop="name">Bosch Building Installation Technology System</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="header-content" class="O-Header__navRow A-StickyElement" data-a-sticky-item="" >
+    <nav id="nav-content" data-js-component="main-navigation" class="M-Navigation M-Navigation-Main">
+      <div class="container-fluid">
+        <button id="button-content" type="button" class="M-Navigation-Main__toggle" (click)="onClickShowMenu()" aria-label="Navigation toggle button">
+          <span class="M-Navigation-Main__toggleBar"></span>
+          <span class="M-Navigation-Main__toggleBar"></span>
+          <span class="M-Navigation-Main__toggleBar"></span>
+          <span class="M-Navigation-Main__toggleBar"></span>
+        </button>
+      </div>
+      <div id="navigation-content" class="M-Navigation-Main__itemsWrapper is-hidden">
+        <ul id="list-content" class="M-Navigation-Main__items" role="menubar">
+          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Video')" (mouseleave)="onMenuExit('Video')">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub M-Navigation__link--active M-Navigation-Main__link--active">
+              <span>Video</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Access')" (mouseleave)="onMenuExit('Access')">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Access</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Intrusion')" (mouseleave)="onMenuExit('Intrusion')">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Intrusion</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Communication')" (mouseleave)="onMenuExit('Communication')">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Communications</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Fire')" (mouseleave)="onMenuExit('Fire')">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Fire</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div id="subMenu-video" class="O-Header__navRow" style="display: none" (mouseover)="onMenuOver('Video')" (mouseleave)="onMenuExit('Video')">
+    <nav data-js-component="main-navigation" class="M-Navigation M-Navigation-Main">
+      <div class="M-Navigation-Main__itemsWrapper is-hidden">
+        <ul  class="M-Navigation-Main__items" role="menubar">
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub M-Navigation__link--active">
+              <span>IP Cameras</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Analog Cameras</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>IP Recording</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Analog Recording</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Accessories</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</header>
