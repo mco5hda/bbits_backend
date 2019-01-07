@@ -1,6 +1,16 @@
+
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
+.hidden {
+  display: none;
+}
+.show {
+  display: inherit;
+}
+.translade {
+  transform: translate3d(-100%, 0, 0);
+}
 /* [rb.clickdummy.ro-npm] Version: 3.3.0 - 2018-12-17 11:05:38 */ 
     
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -14587,11 +14597,12 @@ p {
     color: #000;
     font-weight: 200;
     padding: 20px 15px;
-    border-bottom: 1px solid #cfd0d1;
+    border-top: 1px solid #cfd0d1;
 }
 .M-Navigation__backLinkText {
     width: 100%;
     text-align: center;
+    margin-right: 30px;
 }
 .M-Navigation__flyoutWrapper {
     position: absolute;

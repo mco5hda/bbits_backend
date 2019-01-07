@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-//Angular material
 import { MatSnackBarModule, MatDialogModule, MatMenuModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +18,9 @@ import { AddAnalogCameraComponent } from './video/analog-cameras/add-analog-came
 import { AddAnalogRecordingComponent } from './video/analog-recordings/add-analog-recording/add-analog-recording.component';
 import { AddIpRecordingComponent } from './video/ip-recordings/add-ip-recording/add-ip-recording.component';
 
+import { MainSubmenuComponent } from './header/header/header-submenus/main-submenu';
+import { VideoDesktopSubmenuComponent } from  './header/header/header-submenus/desktop-submenu/video-desktop-submenu';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +33,8 @@ import { AddIpRecordingComponent } from './video/ip-recordings/add-ip-recording/
     AddAnalogCameraComponent,
     AddAnalogRecordingComponent,
     AddIpRecordingComponent,
+    MainSubmenuComponent,
+    VideoDesktopSubmenuComponent
   ],
   imports: [
     BrowserAnimationsModule,
