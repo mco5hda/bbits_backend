@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-
 //Pagination
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
@@ -39,6 +38,9 @@ import { ConsultWorkstationsComponent } from './video/workstations/consult-works
 import { EditWorkstationComponent } from './video/workstations/edit-workstation/edit-workstation.component';
 import { DetailsWorkstationComponent } from './video/workstations/details-workstation/details-workstation.component';
 
+import { MainSubmenuComponent } from './header/header/header-submenus/main-submenu';
+import { VideoDesktopSubmenuComponent } from  './header/header/header-submenus/desktop-submenu/video-desktop-submenu';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +69,8 @@ import { DetailsWorkstationComponent } from './video/workstations/details-workst
     ConsultWorkstationsComponent,
     EditWorkstationComponent,
     DetailsWorkstationComponent,
+    MainSubmenuComponent,
+    VideoDesktopSubmenuComponent
   ],
   imports: [
     BrowserAnimationsModule,

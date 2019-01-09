@@ -48,33 +48,7 @@
         </button>
       </div>
       <div id="navigation-content" class="M-Navigation-Main__itemsWrapper is-hidden">
-        <ul id="list-content" class="M-Navigation-Main__items" role="menubar">
-          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Video')" (mouseleave)="onMenuExit('Video')">
-            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub M-Navigation__link--active M-Navigation-Main__link--active">
-              <span>Video</span>
-            </a>
-          </li>
-          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Access')" (mouseleave)="onMenuExit('Access')">
-            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
-              <span>Access</span>
-            </a>
-          </li>
-          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Intrusion')" (mouseleave)="onMenuExit('Intrusion')">
-            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
-              <span>Intrusion</span>
-            </a>
-          </li>
-          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Communication')" (mouseleave)="onMenuExit('Communication')">
-            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
-              <span>Communications</span>
-            </a>
-          </li>
-          <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Fire')" (mouseleave)="onMenuExit('Fire')">
-            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
-              <span>Fire</span>
-            </a>
-          </li>
-        </ul>
+        <main-submenu></main-submenu>
       </div>
     </nav>
   </div>
@@ -112,5 +86,33 @@
       </div>
     </nav>
   </div>
-
 </header>
+
+<ul id="video-mobil-submenu" class="M-Navigation-Main__items hidden" role="menubar">
+  <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Video')" (mouseleave)="onMenuExit('Video')">
+    <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub M-Navigation__link--active M-Navigation-Main__link--active">
+      <span>IP Cameras</span>
+    </a>
+  </li>
+  <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Access')" (mouseleave)="onMenuExit('Access')">
+    <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+      <span>Analog Cameras</span>
+    </a>
+  </li>
+  <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Intrusion')" (mouseleave)="onMenuExit('Intrusion')">
+    <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+      <span>IP Recording</span>
+    </a>
+  </li>
+  <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Communication')" (mouseleave)="onMenuExit('Communication')">
+    <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+      <span>Analog Recording</span>
+    </a>
+  </li>
+  <li class="M-Navigation__item M-Navigation-Main__item" (mouseover)="onMenuOver('Fire')" (mouseleave)="onMenuExit('Fire')">
+    <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+      <span>Accessories</span>
+    </a>
+  </li>
+</ul>
+
