@@ -1,0 +1,775 @@
+<app-header></app-header>
+
+<main class="vhHeight">
+  <div class="container">
+    <img class="spinner spinner-collapsed" id="spinner" src="../../../../assets/spinner.gif">
+
+    <form id="addProductForm" class="mwf-form" #formControl="ngForm">
+
+      <!-- progressbar -->
+      <ul id="progressbar" class="col-xs-12 col-sm-8 col-sm-push-2">
+        <li class="step active"></li>
+        <li class="step"></li>
+        <li class="step"></li>
+        <li class="step"></li>
+        <li class="step"></li>
+      </ul>
+
+      <!--First section of form
+        General information
+      -->
+      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+        <ul>      
+          <li class="mwf-field">
+            <h3>General information</h3>
+            <hr>
+          </li>
+
+          <!-- Name Input -->
+          <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Name
+                <span class="mwf-required">*</span>
+              </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="name" name="name" [(ngModel)]="ipRecording.name" (change)="validateInput($event)" #name="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Family Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Family
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="family" name="family" [(ngModel)]="ipRecording.family" (change)="validateInput($event)" #family="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Category Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Category
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <select class="mwf-select mwf-multiple" id="category" name="category" [(ngModel)]="ipRecording.category" #category="ngModel">
+                <option class="mwf-select-option" *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+              </select>
+            </div>
+          </li>
+
+          <!-- CTN Class Input -->
+          <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                  CtnClass
+                  <span class="mwf-required">*</span>
+                </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="ctnClass" name="ctnClass" [(ngModel)]="ipRecording.ctnClass" (change)="validateInput($event)" #ctnClass="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- ctnclassfull Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              CtnClassFull
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="ctnClassFull" name="ctnClassFull" [(ngModel)]="ipRecording.ctnClassFull" (change)="validateInput($event)" #ctnClassFull="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Price Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Price
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="ipRecording.price" (change)="validateInput($event)" #price="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Dataformar Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Dataformat
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="dataFormat" name="dataFormat" [(ngModel)]="ipRecording.dataFormat" (change)="validateInput($event)" #dataFormat="ngModel" type="text">
+            </div>
+          </li>
+
+          <!--Image uploader-->
+          <div class="mwf-field fileUploader">
+            <span>Please upload the product image.</span>
+            <br />
+            <br />
+            <div class="fileUploader-dropzone">
+              <input type="file" name="image" id="uploaderImage" (change)="preview_image($event)" accept="image/*">
+              <label for="file1" class="fileUploader-label">Drop files here to attach them</label>
+              <button class="btn-Uploader" type="">
+                Select image
+              </button>
+            </div>
+
+            <!--Div to load the files selected and the button to delete-->
+            <div  id="image-list" class="image-list">
+
+            </div>
+          </div>
+
+          <div class="mwf-field fileUploader">
+            <span>Please upload the datasheet of the product.</span>
+            <br />
+            <br />
+            <div class="fileUploader-dropzone">
+              <input type="file" name="datasheet" id="file1" (change)="onLoadDataSheet()" accept="application/pdf">
+              <label for="file1" class="fileUploader-label">Drop files here to attach them</label>
+              <button class="btn-Uploader" type="">
+                Select files
+              </button>
+            </div>
+  
+            <!--Div to load the files selected and the button to delete-->
+            <div id="files-list"></div>
+          </div>
+
+        </ul>
+      </div>
+
+      <!--
+        Third section of form
+        Basic and Advanced Features and aio functions
+      -->
+      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+        <!--Basic Features area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Basic Features</h3>
+            <hr>
+          </li>
+
+          <!-- Resolution Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Default system size
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="systemSize" name="systemSize" [(ngModel)]="ipRecording.basicFeatures.systemSize" (change)="validateInput($event)" #systemSize="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Image Sensor type Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Video compression
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="videoCompression" name="videoCompression" [(ngModel)]="ipRecording.basicFeatures.videoCompression" (change)="validateInput($event)" #videoCompression="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- MaxFPS Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              No. of IP Channels
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="ipChannels" name="ipChannels" [(ngModel)]="ipRecording.basicFeatures.ipChannels" (change)="validateInput($event)" #ipChannels="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Wide dynamic range Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Bandwidth
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="bandwidth" name="bandwidth" [(ngModel)]="ipRecording.basicFeatures.bandwidth" (change)="validateInput($event)" #bandwidth="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Wide dynamic range Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Supported resolutions
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="supportedResolution" name="supportedResolution" [(ngModel)]="ipRecording.basicFeatures.supportedResolution" (change)="validateInput($event)" #supportedResolution="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Wide dynamic range Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              RAID Level
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="raid" name="raid" [(ngModel)]="ipRecording.basicFeatures.raid" (change)="validateInput($event)" #raid="ngModel" type="text">
+            </div>
+          </li>
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="integratedVideoManagement" name="integratedVideoManagement" [(ngModel)]="ipRecording.basicFeatures.integratedVideoManagement" (change)="validateInput($event)" #integratedVideoManagement="ngModel">
+                  <label for="onvif">Integrated Video Management</label>
+                </span>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="onvif" name="onvif" [(ngModel)]="ipRecording.basicFeatures.onvif" (change)="validateInput($event)" #onvif="ngModel">
+                  <label for="onvif">ONVIF</label>
+                </span>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="onBoardTranscoding" name="onBoardTranscoding" [(ngModel)]="ipRecording.basicFeatures.onBoardTranscoding" (change)="validateInput($event)" #onBoardTranscoding="ngModel">
+                  <label for="microphone">On-board transcoding</label>
+                </span>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="psr" name="psr" [(ngModel)]="ipRecording.basicFeatures.psr" (change)="validateInput($event)" #psr="ngModel">
+                  <label for="psr">Power Supply Redundancy</label>
+                </span>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="hotSwappablwHDD" name="hotSwappablwHDD" [(ngModel)]="ipRecording.basicFeatures.hotSwappablwHDD" (change)="validateInput($event)" #hotSwappablwHDD="ngModel">
+                  <label for="hotSwappablwHDD">Hot swppable HDD</label>
+                </span>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="monitorOutput" name="monitorOutput" [(ngModel)]="ipRecording.basicFeatures.monitorOutput"(change)="validateInput($event)" #monitorOutput="ngModel">
+                  <label for="monitorOutput">Monitor output</label>
+                </span>
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+
+        <!--Advanced Features area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Advanced Features</h3>
+            <hr>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="forensicSearchSupport" name="forensicSearchSupport" [(ngModel)]="ipRecording.advancedFeatures.forensicSearchSupport" (change)="validateInput($event)" #forensicSearchSupport="ngModel">
+                  <label for="forensicSearchSupport">Forensic search support</label>
+                </span>
+
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="supportWebClient" name="supportWebClient" [(ngModel)]="ipRecording.advancedFeatures.supportWebClient" (change)="validateInput($event)" #supportWebClient="ngModel">
+                  <label for="supportWebClient">Support webclient</label>
+                </span>
+
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+
+        <!--AIO Functions Features area-->
+        <ul>      
+            <li class="mwf-field">
+              <h3>All in one functions</h3>
+              <hr>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="ptzControls" name="ptzControls" [(ngModel)]="ipRecording.aioFunctions.ptzControls" (change)="validateInput($event)" #ptzControls="ngModel">
+                    <label for="ptzControls">PTZ Control</label>
+                  </span>
+
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="adminControl" name="adminControl" [(ngModel)]="ipRecording.aioFunctions.adminControl" (change)="validateInput($event)" #adminControl="ngModel">
+                    <label for="adminControl">Admin control</label>
+                  </span>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="exportOptions" name="exportOptions" [(ngModel)]="ipRecording.aioFunctions.exportOptions" (change)="validateInput($event)" #exportOptions="ngModel">
+                    <label for="exportOptions">Export options</label>
+                  </span>
+
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="cctvKeyboardSupport" name="cctvKeyboardSupport" [(ngModel)]="ipRecording.aioFunctions.cctvKeyboardSupport" (change)="validateInput($event)" #cctvKeyboardSupport="ngModel">
+                    <label for="cctvKeyboardSupport">CCTV Keyboard support</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+        </ul>
+      </div>
+
+      <!--
+        Fourth section of form
+        Audio back up integration lar viewing
+      -->
+      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+        <!--Audio area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Audio</h3>
+            <hr>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <!--Tamper input-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="inOutChanels" name="inOutChanels" [(ngModel)]="ipRecording.audio.inOutChanels" (change)="validateInput($event)" #inOutChanels="ngModel">
+                  <label for="inOutChanels">In/out channels</label>
+                </span>
+
+                <!--Motion detection input-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="compressionType" name="compressionType" [(ngModel)]="ipRecording.audio.compressionType" (change)="validateInput($event)" #compressionType="ngModel">
+                  <label for="compressionType">Compression</label>
+                </span>
+
+                <!--Audio detection input-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="synchronousType" name="synchronousType" [(ngModel)]="ipRecording.audio.synchronousType" (change)="validateInput($event)" #synchronousType="ngModel">
+                  <label for="synchronousType">Synchronous audio</label>
+                </span>
+
+                <!--Face detection input-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="amcta" name="amcta" [(ngModel)]="ipRecording.audio.amcta" (change)="validateInput($event)" #amcta="ngModel">
+                  <label for="amcta">Associate multiple cameras to audio</label>
+                </span>
+
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+
+        <!--Back up area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Export/Back-up of data</h3>
+            <hr>
+          </li>
+
+          <!-- Min illumination day mode Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Supported devices
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="supportedDevices" name="supportedDevices"  type="text" [(ngModel)]="ipRecording.backUp.supportedDevices" (change)="validateInput($event)" #supportedDevices="ngModel">
+            </div>
+          </li>
+
+          <!-- Min Illuminattion night mode Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Back-up mode
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="backUpMode" name="backUpMode"  type="text" [(ngModel)]="ipRecording.backUp.backUpMode" (change)="validateInput($event)" #backUpMode="ngModel">
+            </div>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="dvdWritter" name="dvdWritter" [(ngModel)]="ipRecording.backUp.dvdWritter" (change)="validateInput($event)" #dvdWritter="ngModel">
+                  <label for="dvdWritter">Built-in DVD writter</label>
+                </span>
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+
+        <!--Integration area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Integration Tools</h3>
+            <hr>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="optionalAtpmPos" name="optionalAtpmPos" [(ngModel)]="ipRecording.integration.optionalAtpmPos" (change)="validateInput($event)" #optionalAtpmPos="ngModel">
+                  <label for="optionalAtpmPos">Optional ATM/POS integration</label>
+                </span>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="integrationToolsSDK" name="integrationToolsSDK" [(ngModel)]="ipRecording.integration.integrationToolsSDK" (change)="validateInput($event)" #integrationToolsSDK="ngModel">
+                  <label for="integrationToolsSDK">SDK (IPP)</label>
+                </span>
+              </fieldset>
+            </div>
+          </li>
+          
+        </ul>
+
+        <!--Lar viewing area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Local and Remote Viewing Support</h3>
+            <hr>
+          </li>
+
+          <li class="mwf-field">
+            <label class="mwf-label mwf-label-input">
+              Simultaneous accesible users
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="simultaneousUsers" name="simultaneousUsers"  type="text" [(ngModel)]="ipRecording.larViewing.simultaneousUsers" (change)="validateInput($event)" #simultaneousUsers="ngModel">
+            </div>
+          </li>
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="videoSecurityApp" name="videoSecurityApp" [(ngModel)]="ipRecording.larViewing.videoSecurityApp" (change)="validateInput($event)" #videoSecurityApp="ngModel">
+                  <label for="videoSecurityApp">Video Security App</label>
+                </span>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="webBrowserAccess" name="webBrowserAccess" [(ngModel)]="ipRecording.larViewing.webBrowserAccess" (change)="validateInput($event)" #webBrowserAccess="ngModel">
+                  <label for="webBrowserAccess">Web browser access</label>
+                </span>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="viewingBVC" name="viewingBVC" [(ngModel)]="ipRecording.larViewing.viewingBVC" (change)="validateInput($event)" #viewingBVC="ngModel">
+                    <label for="viewingBVC">Bosch Video Client</label>
+                  </span>
+                  <!-- Integrated IR Input -->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="bvms" name="bvms" [(ngModel)]="ipRecording.larViewing.bvms" (change)="validateInput($event)" #bvms="ngModel">
+                    <label for="bvms">Bosch Video Management System</label>
+                  </span>
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!--
+      Fifth section of form
+      Mehcanical recoridng storage
+      -->
+      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+        <!--Mehcanical area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Mechanical</h3>
+            <hr>
+          </li>
+
+          <!-- focalLengthFrom Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Form factor
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="formFactor" name="formFactor" [(ngModel)]="ipRecording.mechanical.formFactor" (change)="validateInput($event)" #formFactor="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- focalLengthTill Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Network connections (LAN)
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="networkConnection" name="networkConnection" [(ngModel)]="ipRecording.mechanical.networkConnection" (change)="validateInput($event)" #networkConnection="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- minAngleH Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              USB ports
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="usbPorts" name="usbPorts" [(ngModel)]="ipRecording.mechanical.usbPorts" (change)="validateInput($event)" #usbPorts="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- maxAngleH Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Number of power supplies
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="numberOfPowerSupplies" name="numberOfPowerSupplies" [(ngModel)]="ipRecording.mechanical.numberOfPowerSupplies" (change)="validateInput($event)" #numberOfPowerSupplies="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <!--Automatic Back Focus (ABF) INPUT-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="powerSuppliesHS" name="powerSuppliesHS" [(ngModel)]="ipRecording.mechanical.powerSuppliesHS" (change)="validateInput($event)" #powerSuppliesHS="ngModel">
+                  <label for="powerSuppliesHS">Power supplies hot swapplable</label>
+                </span>
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+
+        <!--Recording area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Recording</h3>
+            <hr>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <!--Built-in storage INPUT-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="videoRecordingManager" name="videoRecordingManager" [(ngModel)]="ipRecording.recording.videoRecordingManager" (change)="validateInput($event)" #videoRecordingManager="ngModel">
+                  <label for="videoRecordingManager">Video Recording Manager</label>
+                </span>
+                <!--Direct-to-iSCSI INPUT-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="scheduleRecording" name="scheduleRecording" [(ngModel)]="ipRecording.recording.scheduleRecording" (change)="validateInput($event)" #scheduleRecording="ngModel">
+                  <label for="scheduleRecording">Schedule recording modes</label>
+                </span>
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+
+        <!--Storage options area-->
+        <ul>      
+            <li class="mwf-field">
+              <h3>Storage Options</h3>
+              <hr>
+            </li>
+  
+            <!-- input voltage Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Max drives supported
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maxDrivesSupported" name="maxDrivesSupported" [(ngModel)]="ipRecording.storageOptions.maxDrivesSupported" (change)="validateInput($event)" #maxDrivesSupported="ngModel" type="text">
+              </div>
+            </li>
+  
+            <!-- normalVersion Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Base system capacity (TB)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="baseSystemCapacity" name="baseSystemCapacity" [(ngModel)]="ipRecording.storageOptions.baseSystemCapacity" (change)="validateInput($event)" #baseSystemCapacity="ngModel" type="text">
+              </div>
+            </li>
+  
+            <!-- input voltage Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Max base system capacity (TB)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maxBaseSystemCapacity" name="maxBaseSystemCapacity" [(ngModel)]="ipRecording.storageOptions.maxBaseSystemCapacity" (change)="validateInput($event)" #maxBaseSystemCapacity="ngModel" type="text">
+              </div>
+            </li>
+  
+            <!-- normalVersion Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Full system capacity (TB)
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="fullSystemCapacity" name="fullSystemCapacity" [(ngModel)]="ipRecording.storageOptions.fullSystemCapacity" (change)="validateInput($event)" #fullSystemCapacity="ngModel" type="text">
+              </div>
+            </li>
+  
+            <!-- irVersion Input -->
+            <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Available capacities per drive
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="availableCapacitiesPerDrive" name="availableCapacitiesPerDrive" [(ngModel)]="ipRecording.storageOptions.availableCapacitiesPerDrive" (change)="validateInput($event)" #availableCapacitiesPerDrive="ngModel" type="text">
+              </div>
+            </li>
+  
+        </ul>
+
+      </div>
+
+      <!--
+      Sixth section of form
+      Storage extensions options video output and Electrical
+      -->
+      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+
+        <!--Storage extensions area-->
+        <ul>      
+            <li class="mwf-field">
+              <h3>Storage Extensions</h3>
+              <hr>
+            </li>
+  
+            <!-- focalLengthFrom Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Max number of units
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maxNumberOfUnits" name="maxNumberOfUnits" [(ngModel)]="ipRecording.storageExtensions.maxNumberOfUnits" (change)="validateInput($event)" #maxNumberOfUnits="ngModel" type="text">
+              </div>
+            </li>
+  
+            <!-- focalLengthTill Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Maximum drives supported
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="maximumDrievesSupported" name="maximumDrievesSupported" [(ngModel)]="ipRecording.storageExtensions.maximumDrievesSupported" (change)="validateInput($event)" #maximumDrievesSupported="ngModel" type="text">
+              </div>
+            </li>
+  
+            <!-- minAngleH Input -->
+            <li class="mwf-field ">
+              <label class="mwf-label mwf-label-input">
+                Available capacities per drive
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="availableCapacitiesPerDriveExtensions" name="availableCapacitiesPerDriveExtensions" [(ngModel)]="ipRecording.storageExtensions.availableCapacitiesPerDriveExtensions" (change)="validateInput($event)" #availableCapacitiesPerDriveExtensions="ngModel" type="text">
+              </div>
+            </li>
+  
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--Automatic Back Focus (ABF) INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="hotSwappable" name="hotSwappable" [(ngModel)]="ipRecording.storageExtensions.hotSwappable" (change)="validateInput($event)" #hotSwappable="ngModel">
+                    <label for="hotSwappable">Hot swapplable</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+        </ul>
+    
+        <!--Video output area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Video Output</h3>
+            <hr>
+          </li>
+
+          <!-- weatherRating Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Connector type
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="connectorType" name="connectorType" [(ngModel)]="ipRecording.videoOutput.connectorType" (change)="validateInput($event)" #connectorType="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- vandalResistant Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Spot monitor
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="spotMonitor" name="spotMonitor" [(ngModel)]="ipRecording.videoOutput.spotMonitor" (change)="validateInput($event)" #spotMonitor="ngModel" type="text">
+            </div>
+          </li>
+        </ul>
+
+        <!--Electrical area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Electrical Information</h3>
+            <hr>
+          </li>
+
+          <!-- input voltage Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Input voltage
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="ipRecording.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- normalVersion Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Normal version
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="ipRecording.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="text">
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <!--Buttons-->
+      <div class="col-xs-12 col-sm-8 col-sm-push-2 forms-buttons col-xs-12">
+        <div class="form-back-button">
+          <button class="btn-Primary" type="button" id="prevBtn" (click)="nextPrev(-1)">Back</button>
+        </div>
+
+        <div class="form-next-button">
+          <button class="btn-Secondary" routerLink="/consult-ip-recordings" type="button" style="margin-right: 5px;">Cancel</button>
+          <button class="btn-Primary" type="button" id="nextBtn" (click)="nextPrev(1)">Next</button>            
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</main>

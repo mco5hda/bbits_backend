@@ -1,0 +1,93 @@
+<app-header></app-header>
+
+<main class="vhHeight">
+  <div class="M-Table M-Table--collapse-column">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="A-Text-ComponentHeader  col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <h2 class="A-Text-ComponentHeader__headline   u-TextColor--fuchsia h3">Workstations</h2>
+        </div>
+        
+        <div class="col-xs-12 M-Table__container">
+          <table class="M-Table__contentWrapper">
+            <tbody class="M-Table__content">
+              <!--Header-->
+              <tr class="M-Table__row M-Table__headlineRow">
+                <th class="M-Table__cell M-Table__cell--head">
+                  Model
+                </th>
+                <th class="M-Table__cell M-Table__cell--head">
+                  Processor
+                </th>
+                <th class="M-Table__cell M-Table__cell--head">
+                  Graphics cards
+                </th>
+                <th class="M-Table__cell M-Table__cell--head">
+                  Memory
+                </th>
+                <th class="M-Table__cell M-Table__cell--head">
+                  Price
+                </th>
+                <th class="M-Table__cell M-Table__cell--head">
+                  Actions
+                </th>
+              </tr>
+
+              <!--Body-->
+              <tr class="M-Table__row" *ngFor="let workStation of workStations | paginate: { itemsPerPage: elementsPerPage, currentPage: currentPage }">
+                <td class="M-Table__cell">
+                  <div class="">
+                    {{workStation.model}}
+                  </div>
+                </td>
+                <td class="M-Table__cell">
+                  <div class="A-Text-RichText">
+                    {{workStation.processor}}
+                  </div>
+                </td>
+                <td class="M-Table__cell">
+                  <div class="A-Text-RichText">
+                    {{workStation.graphicsCard}}
+                  </div>
+                </td>
+                <td class="M-Table__cell">
+                  <div class="A-Text-RichText">
+                    {{workStation.memory}}
+                  </div>
+                </td>
+                <td class="M-Table__cell">
+                  <div class="A-Text-RichText">
+                    {{workStation.price}}
+                  </div>
+                </td>
+                <td class="M-Table__cell">
+                  <div class="A-Text-RichText actions-buttons">
+                    <a routerLink="/details-ip-workStation" class="btn-image details" title="Details" (click)="detailsWorkStation(workStation.id)"></a>
+                    <a routerLink="/edit-ip-workStation" class="btn-image edit" title="Edit" (click)="editWorkStation(workStation.id)"></a>
+                    <a class="btn-image delete" title="Delete" (click)="deleteWorkStation(workStation.id)"></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pagination">
+        <pagination-controls class="custom-pagination"
+          (pageChange)="currentPage = $event"
+          maxSize="7"
+          directionLinks="true"
+          autoHide="false"
+          responsive="true"
+          previousLabel=""
+          nextLabel=""
+          screenReaderPaginationLabel=""
+          screenReaderPageLabel=""
+          screenReaderCurrentLabel="">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</main>

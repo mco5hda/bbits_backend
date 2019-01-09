@@ -1,0 +1,731 @@
+<app-header></app-header>
+
+<main class="vhHeight">
+  <div class="container">
+    <img class="spinner spinner-collapsed" id="spinner" src="../../../../assets/spinner.gif">
+
+    <form id="addProductForm" class="mwf-form" #formControl="ngForm">
+
+      <!-- progressbar -->
+      <ul id="progressbar" class="col-xs-12 col-sm-8 col-sm-push-2">
+        <li class="step active"></li>
+        <li class="step"></li>
+        <li class="step"></li>
+        <li class="step"></li>
+      </ul>
+
+      <!--First section of form
+        General information
+      -->
+      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+        <ul>      
+          <li class="mwf-field">
+            <h3>General information</h3>
+            <hr>
+          </li>
+
+          <!-- Name Input -->
+          <li class="mwf-field">
+              <label class="mwf-label mwf-label-input">
+                Name
+                <span class="mwf-required">*</span>
+              </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="name" name="name" [(ngModel)]="analogRecording.name" (change)="validateInput($event)" #name="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Family Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Family
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="family" name="family" [(ngModel)]="analogRecording.family" (change)="validateInput($event)" #family="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Category Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Category
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <select class="mwf-select mwf-multiple" id="category" name="category" [(ngModel)]="analogRecording.category" #category="ngModel">
+                <option class="mwf-select-option" *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+              </select>
+            </div>
+          </li>
+
+          <!-- CTN Class Input -->
+          <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                  CtnClass
+                  <span class="mwf-required">*</span>
+                </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="ctnClass" name="ctnClass" [(ngModel)]="analogRecording.ctnClass" (change)="validateInput($event)" #ctnClass="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- ctnclassfull Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              CtnClassFull
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="ctnClassFull" name="ctnClassFull" [(ngModel)]="analogRecording.ctnClassFull" (change)="validateInput($event)" #ctnClassFull="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Price Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Price
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="analogRecording.price" (change)="validateInput($event)" #price="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Dataformar Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Dataformat
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="dataFormat" name="dataFormat" [(ngModel)]="analogRecording.dataFormat" (change)="validateInput($event)" #dataFormat="ngModel" type="text">
+            </div>
+          </li>
+
+          
+          <!-- input relays Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Input relay outputs
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="inputRelayOutputs" name="inputRelayOutputs" [(ngModel)]="analogRecording.inputRelayOutputs" (change)="validateInput($event)" #inputRelayOutputs="ngModel" type="text">
+            </div>
+          </li>
+
+          
+          <!-- targetSystemSize Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Target system size
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="targetSystemSize" name="targetSystemSize" [(ngModel)]="analogRecording.targetSystemSize" (change)="validateInput($event)" #targetSystemSize="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- UserLevels Input -->
+          <li class="mwf-field">
+            <label class="mwf-label mwf-label-input">
+              User levels
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="userLevels" name="userLevels" [(ngModel)]="analogRecording.userLevels" (change)="validateInput($event)" #userLevels="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="timeLine" name="timeLine" [(ngModel)]="analogRecording.timeLine" (change)="validateInput($event)" #timeLine="ngModel">
+                  <label for="timeLine">Timeline</label>
+                </span>
+              </fieldset>
+            </div>
+          </li>
+
+          <!--Image uploader-->
+          <div class="mwf-field fileUploader">
+            <span>Please upload the product image.</span>
+            <br />
+            <br />
+            <div class="fileUploader-dropzone">
+              <input type="file" name="image" id="uploaderImage" (change)="preview_image($event)" accept="image/*">
+              <label for="file1" class="fileUploader-label">Drop files here to attach them</label>
+              <button class="btn-Uploader" type="">
+                Select image
+              </button>
+            </div>
+
+            <!--Div to load the files selected and the button to delete-->
+            <div  id="image-list" class="image-list">
+
+            </div>
+          </div>
+
+          <div class="mwf-field fileUploader">
+            <span>Please upload the datasheet of the product.</span>
+            <br />
+            <br />
+            <div class="fileUploader-dropzone">
+              <input type="file" name="datasheet" id="file1" (change)="onLoadDataSheet()" accept="application/pdf">
+              <label for="file1" class="fileUploader-label">Drop files here to attach them</label>
+              <button class="btn-Uploader" type="">
+                Select files
+              </button>
+            </div>
+  
+            <!--Div to load the files selected and the button to delete-->
+            <div id="files-list"></div>
+          </div>
+        </ul>
+      </div>
+
+      <!--
+        Third section of form
+        Basic and Advanced Features
+      -->
+      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+        <!--Basic Features area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Basic Features</h3>
+            <hr>
+          </li>
+
+          <!-- channels Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Channels
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="channels" name="channels" [(ngModel)]="analogRecording.basicFeatures.channels" (change)="validateInput($event)" #channels="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- ips Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Framerate IPS
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="frameRateIPS" name="frameRateIPS" [(ngModel)]="analogRecording.basicFeatures.frameRateIPS" (change)="validateInput($event)" #frameRateIPS="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- ips per camera Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              IPS per camera
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="ipsPerCamera" name="ipsPerCamera" [(ngModel)]="analogRecording.basicFeatures.ipsPerCamera" (change)="validateInput($event)" #ipsPerCamera="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Live resolution Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Live resolution
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="liveResolution" name="liveResolution" [(ngModel)]="analogRecording.basicFeatures.liveResolution" (change)="validateInput($event)" #liveResolution="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- System size Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              System size
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="systemSize" name="systemSize" [(ngModel)]="analogRecording.basicFeatures.systemSize" (change)="validateInput($event)" #systemSize="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Video compression Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Video compression
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="videoCompression" name="videoCompression" [(ngModel)]="analogRecording.basicFeatures.videoCompression" (change)="validateInput($event)" #videoCompression="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Network Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Network
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="network" name="network" [(ngModel)]="analogRecording.basicFeatures.network" (change)="validateInput($event)" #network="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Operative system Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Operative system
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="operativeSystem" name="operativeSystem" [(ngModel)]="analogRecording.basicFeatures.operativeSystem" (change)="validateInput($event)" #operativeSystem="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="loopinVideo" name="loopinVideo" [(ngModel)]="analogRecording.basicFeatures.loopinVideo" (change)="validateInput($event)" #loopinVideo="ngModel">
+                  <label for="loopinVideo">Looping video</label>
+                </span>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="preAlarm" name="preAlarm" [(ngModel)]="analogRecording.basicFeatures.preAlarm" (change)="validateInput($event)" #preAlarm="ngModel">
+                  <label for="preAlarm">Prealarm</label>
+                </span>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="motionDetection" name="motionDetection" [(ngModel)]="analogRecording.basicFeatures.motionDetection" (change)="validateInput($event)" #motionDetection="ngModel">
+                  <label for="motionDetection">Motion detection</label>
+                </span>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="mountableRack" name="mountableRack" [(ngModel)]="analogRecording.basicFeatures.mountableRack" (change)="validateInput($event)" #mountableRack="ngModel">
+                  <label for="mountableRack">Mountable rack</label>
+                </span>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="multipleCamera" name="multipleCamera" [(ngModel)]="analogRecording.basicFeatures.multipleCamera" (change)="validateInput($event)" #multipleCamera="ngModel">
+                  <label for="multipleCamera">Multiple camera</label>
+                </span>
+                <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="hResolution" name="hResolution" [(ngModel)]="analogRecording.basicFeatures.monitorOutput" (change)="validateInput($event)" #hResolution="ngModel">
+                    <label for="hResolution">H Resolution</label>
+                  </span>
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+
+        <!--Advanced Features area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Advanced Features</h3>
+            <hr>
+          </li>
+
+          <!-- channels Input -->
+          <li class="mwf-field">
+            <label class="mwf-label mwf-label-input">
+              Search mode
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="searchMode" name="searchMode" [(ngModel)]="analogRecording.advancedFeatures.searchMode" (change)="validateInput($event)" #searchMode="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="smartMotionSearch" name="smartMotionSearch" [(ngModel)]="analogRecording.advancedFeatures.smartMotionSearch" (change)="validateInput($event)" #smartMotionSearch="ngModel">
+                  <label for="smartMotionSearch">Smart motion search</label>
+                </span>
+
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="instantPlayBack" name="instantPlayBack" [(ngModel)]="analogRecording.advancedFeatures.instantPlayBack" (change)="validateInput($event)" #instantPlayBack="ngModel">
+                  <label for="instantPlayBack">Instant playback</label>
+                </span>
+
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="callUpPrepositionOnDome" name="callUpPrepositionOnDome" [(ngModel)]="analogRecording.advancedFeatures.callUpPrepositionOnDome" (change)="validateInput($event)" #callUpPrepositionOnDome="ngModel">
+                  <label for="callUpPrepositionOnDome">Call up preposition on dome</label>
+                </span>
+
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="cameraLockoutsByUser" name="cameraLockoutsByUser" [(ngModel)]="analogRecording.advancedFeatures.cameraLockoutsByUser" (change)="validateInput($event)" #cameraLockoutsByUser="ngModel">
+                  <label for="cameraLockoutsByUser">Camera lockouts by user</label>
+                </span>
+
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="dataIntegrityCheck" name="dataIntegrityCheck" [(ngModel)]="analogRecording.advancedFeatures.dataIntegrityCheck" (change)="validateInput($event)"#dataIntegrityCheck="ngModel">
+                  <label for="dataIntegrityCheck">Data integrity check</label>
+                </span>
+
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="increaseFrameRateOnAlarm" name="increaseFrameRateOnAlarm" [(ngModel)]="analogRecording.advancedFeatures.increaseFrameRateOnAlarm" (change)="validateInput($event)" #increaseFrameRateOnAlarm="ngModel">
+                  <label for="increaseFrameRateOnAlarm">Increase framerate on alarm</label>
+                </span>
+
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="individualCameraAdjustment" name="individualCameraAdjustment" [(ngModel)]="analogRecording.advancedFeatures.individualCameraAdjustment" (change)="validateInput($event)" #individualCameraAdjustment="ngModel">
+                  <label for="individualCameraAdjustment">Individual camera adjustment</label>
+                </span>
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!--
+        Fourth section of form
+        aio functions, Audio back up integration lar viewing
+      -->
+      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+
+        <!--AIO Functions Features area-->
+        <ul>      
+            <li class="mwf-field">
+              <h3>All in one functions</h3>
+              <hr>
+            </li>
+
+            <!-- Checkboxes -->
+            <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="ptzControls" name="ptzControls" [(ngModel)]="analogRecording.aioFunctions.ptzControls" (change)="validateInput($event)" #ptzControls="ngModel">
+                    <label for="ptzControls">PTZ Control</label>
+                  </span>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="ptzJoystickControl" name="ptzJoystickControl" [(ngModel)]="analogRecording.aioFunctions.ptzJoystickControl" (change)="validateInput($event)" #ptzJoystickControl="ngModel">
+                    <label for="ptzJoystickControl">PTZ joystick control</label>
+                  </span>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="adminControl" name="adminControl" [(ngModel)]="analogRecording.aioFunctions.adminControl" (change)="validateInput($event)" #adminControl="ngModel">
+                    <label for="adminControl">Admin control</label>
+                  </span>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="exportOptions" name="exportOptions" [(ngModel)]="analogRecording.aioFunctions.exportOptions" (change)="validateInput($event)" #exportOptions="ngModel">
+                    <label for="exportOptions">Export options</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+        </ul>
+
+        <!--Audio area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Audio</h3>
+            <hr>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <!--Tamper input-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="inOutChanels" name="inOutChanels" [(ngModel)]="analogRecording.audio.inOutChanels" (change)="validateInput($event)" #inOutChanels="ngModel">
+                  <label for="inOutChanels">In/out channels</label>
+                </span>
+
+                <!--Motion detection input-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="associateCameraToAudio" name="associateCameraToAudio" [(ngModel)]="analogRecording.audio.associateCameraToAudio" (change)="validateInput($event)" #associateCameraToAudio="ngModel">
+                  <label for="associateCameraToAudio">Associate camera to audio</label>
+                </span>
+
+                <!--Audio detection input-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="biDirectionalAudio" name="biDirectionalAudio" [(ngModel)]="analogRecording.audio.biDirectionalAudio" (change)="validateInput($event)" #biDirectionalAudio="ngModel">
+                  <label for="biDirectionalAudio">Bidirectional audio</label>
+                </span>
+
+                <!--Face detection input-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="synchronousAudio" name="synchronousAudio" [(ngModel)]="analogRecording.audio.synchronousAudio" (change)="validateInput($event)" #synchronousAudio="ngModel">
+                  <label for="synchronousAudio">Synchronous audio</label>
+                </span>
+
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+
+        <!--Integration area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Integration Tools</h3>
+            <hr>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="optionalAtpmPos" name="optionalAtpmPos" [(ngModel)]="analogRecording.integration.optionalAtpmPos" (change)="validateInput($event)" #optionalAtpmPos="ngModel">
+                  <label for="optionalAtpmPos">Optional ATM/POS integration</label>
+                </span>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="sdk" name="sdk" [(ngModel)]="analogRecording.integration.sdk" (change)="validateInput($event)" #sdk="ngModel">
+                  <label for="sdk">SDK</label>
+                </span>
+              </fieldset>
+            </div>
+          </li>
+          
+        </ul>
+
+        <!--Lar viewing area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Local and Remote Viewing Support</h3>
+            <hr>
+          </li>
+
+          <li class="mwf-field ">
+            <label class="mwf-label mwf-label-input">
+              Simultaneous accessible users
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="simultaneousAccessibleUser" name="simultaneousAccessibleUser"  type="text" [(ngModel)]="analogRecording.larViewing.simultaneousAccessibleUser" (change)="validateInput($event)" #simultaneousAccessibleUser="ngModel">
+            </div>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="mobileClientAccess" name="mobileClientAccess" [(ngModel)]="analogRecording.larViewing.mobileClientAccess" (change)="validateInput($event)" #mobileClientAccess="ngModel">
+                  <label for="mobileClientAccess">Mobile client access</label>
+                </span>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="webBrowserAccess" name="webBrowserAccess" [(ngModel)]="analogRecording.larViewing.webBrowserAccess" (change)="validateInput($event)" #webBrowserAccess="ngModel">
+                  <label for="webBrowserAccess">Web browser access</label>
+                </span>
+                <!-- Integrated IR Input -->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="setViewingPermissions" name="setViewingPermissions" [(ngModel)]="analogRecording.larViewing.setViewingPermissions" (change)="validateInput($event)" #setViewingPermissions="ngModel">
+                  <label for="setViewingPermissions">Set viewing permissions</label>
+                </span>
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!--
+      Fifth section of form
+      recoridng storage video output and Electrical
+      -->
+      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+        <!--Recording area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Recording</h3>
+            <hr>
+          </li>
+
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Schedule recording modes
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="scheduleRecordingModes" name="scheduleRecordingModes" [(ngModel)]="analogRecording.storageOptions.scheduleRecordingModes" (change)="validateInput($event)" #scheduleRecordingModes="ngModel" type="text">
+            </div>
+          </li>
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Recording resolution
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="recordingResolution" name="recordingResolution" [(ngModel)]="analogRecording.storageOptions.recordingResolution" (change)="validateInput($event)" #recordingResolution="ngModel" type="text">
+            </div>
+          </li>
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <!--Built-in storage INPUT-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="screenDivisionMultiScreen" name="screenDivisionMultiScreen" [(ngModel)]="analogRecording.recording.screenDivisionMultiScreen" (change)="validateInput($event)" #screenDivisionMultiScreen="ngModel">
+                  <label for="screenDivisionMultiScreen">Screen division in multiscreen</label>
+                </span>
+                <!--Direct-to-iSCSI INPUT-->
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="digitalZoomLive" name="digitalZoomLive" [(ngModel)]="analogRecording.recording.digitalZoomLive" (change)="validateInput($event)" #digitalZoomLive="ngModel">
+                  <label for="digitalZoomLive">Digital zoom live</label>
+                </span>
+              </fieldset>
+            </div>
+          </li>
+        </ul>
+
+        <!--Storage options area-->
+        <ul>      
+            <li class="mwf-field">
+              <h3>Storage Options</h3>
+              <hr>
+            </li>
+  
+            <!-- input voltage Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Support devices
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="supportDevices" name="supportDevices" [(ngModel)]="analogRecording.storageOptions.supportDevices" (change)="validateInput($event)" #supportDevices="ngModel" type="text">
+              </div>
+            </li>
+  
+            <!-- normalVersion Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Number of HD
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="numberHD" name="numberHD" [(ngModel)]="analogRecording.storageOptions.numberHD" (change)="validateInput($event)" #numberHD="ngModel" type="text">
+              </div>
+            </li>
+  
+            <!-- input voltage Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Export options
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="exportOptionsStorage" name="exportOptionsStorage" [(ngModel)]="analogRecording.storageOptions.exportOptionsStorage" (change)="validateInput($event)" #exportOptionsStorage="ngModel" type="text">
+              </div>
+            </li>
+  
+            <!-- normalVersion Input -->
+            <li class="mwf-field mwf-m">
+              <label class="mwf-label mwf-label-input">
+                Back-up mode
+                <span class="mwf-required">*</span>
+              </label>
+              <div class="mwf-input">
+                <input class="mwf-text" id="backUpMode" name="backUpMode" [(ngModel)]="analogRecording.storageOptions.backUpMode" (change)="validateInput($event)" #backUpMode="ngModel" type="text">
+              </div>
+            </li>
+
+            <!-- Checkboxes -->
+          <li class="mwf-field">              
+              <div class="mwf-input">
+                <fieldset>
+                  <!--Built-in storage INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="expandable" name="expandable" [(ngModel)]="analogRecording.recording.expandable" (change)="validateInput($event)" #expandable="ngModel">
+                    <label for="expandable">Expandable</label>
+                  </span>
+                  <!--Direct-to-iSCSI INPUT-->
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="externalStorage" name="externalStorage" [(ngModel)]="analogRecording.recording.externalStorage" (change)="validateInput($event)" #externalStorage="ngModel">
+                    <label for="externalStorage">External storage</label>
+                  </span>
+                  <span class="mwf-option">
+                    <input type="checkbox" class="mwf-checkbox" id="onBoardRaid" name="onBoardRaid" [(ngModel)]="analogRecording.recording.onBoardRaid" (change)="validateInput($event)" #onBoardRaid="ngModel">
+                    <label for="onBoardRaid">Onboard RAID</label>
+                  </span>
+                </fieldset>
+              </div>
+            </li>
+  
+        </ul>
+   
+        <!--Video output area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Video Output</h3>
+            <hr>
+          </li>
+
+          <!-- weatherRating Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Connector type
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="connectorType" name="connectorType" [(ngModel)]="analogRecording.videoOutput.connectorType" (change)="validateInput($event)" #connectorType="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- vandalResistant Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Spot monitor
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="spotMonitor" name="spotMonitor" [(ngModel)]="analogRecording.videoOutput.spotMonitor" (change)="validateInput($event)" #spotMonitor="ngModel" type="text">
+            </div>
+          </li>
+        </ul>
+
+        <!--Electrical area-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>Electrical Information</h3>
+            <hr>
+          </li>
+
+          <!-- input voltage Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Input voltage
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="analogRecording.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="text">
+            </div>
+          </li>
+
+          <!-- normalVersion Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Normal version
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="analogRecording.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="text">
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!--Buttons-->
+      <div class="col-xs-12 col-sm-8 col-sm-push-2 forms-buttons col-xs-12">
+        <div class="form-back-button">
+          <button class="btn-Primary" type="button" id="prevBtn" (click)="nextPrev(-1)">Back</button>
+        </div>
+
+        <div class="form-next-button">
+          <button class="btn-Secondary" routerLink="/consult-analog-recordings" type="button" style="margin-right: 5px;">Cancel</button>
+          <button class="btn-Primary" type="button" id="nextBtn" (click)="nextPrev(1)">Next</button>            
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</main>

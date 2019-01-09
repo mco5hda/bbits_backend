@@ -1,0 +1,93 @@
+<app-header></app-header>
+
+<main class="vhHeight">
+  <div class="M-Table M-Table--collapse-column">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="A-Text-ComponentHeader  col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <h2 class="A-Text-ComponentHeader__headline   u-TextColor--fuchsia h3">IP Cameras</h2>
+        </div>
+        
+        <div class="col-xs-12 M-Table__container">
+          <table class="M-Table__contentWrapper">
+            <tbody class="M-Table__content">
+              <!--Header-->
+              <tr class="M-Table__row M-Table__headlineRow">
+                <th class="M-Table__cell M-Table__cell--head">
+                  CtnClassFull
+                </th>
+                <th class="M-Table__cell M-Table__cell--head">
+                  Name
+                </th>
+                <th class="M-Table__cell M-Table__cell--head">
+                  Family
+                </th>
+                <th class="M-Table__cell M-Table__cell--head">
+                  Category
+                </th>
+                <th class="M-Table__cell M-Table__cell--head">
+                  Price
+                </th>
+                <th class="M-Table__cell M-Table__cell--head">
+                  Actions
+                </th>
+              </tr>
+
+              <!--Body-->
+              <tr class="M-Table__row" *ngFor="let camera of ipCameras | paginate: { itemsPerPage: elementsPerPage, currentPage: currentPage }">
+                <td class="M-Table__cell">
+                  <div class="">
+                    {{camera.ctnClassFull}}
+                  </div>
+                </td>
+                <td class="M-Table__cell">
+                  <div class="A-Text-RichText">
+                    {{camera.name}}
+                  </div>
+                </td>
+                <td class="M-Table__cell">
+                  <div class="A-Text-RichText">
+                    {{camera.family}}
+                  </div>
+                </td>
+                <td class="M-Table__cell">
+                  <div class="A-Text-RichText">
+                    {{camera.category}}
+                  </div>
+                </td>
+                <td class="M-Table__cell">
+                  <div class="A-Text-RichText">
+                    {{camera.price}}
+                  </div>
+                </td>
+                <td class="M-Table__cell">
+                  <div class="A-Text-RichText actions-buttons">
+                    <a routerLink="/details-ip-camera" class="btn-image details" title="Details" (click)="detailsIPCamera(camera.id)"></a>
+                    <a routerLink="/edit-ip-camera" class="btn-image edit" title="Edit" (click)="editIPCamera(camera.id)"></a>
+                    <a class="btn-image delete" title="Delete" (click)="deleteIPCamera(camera.id)"></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pagination">
+        <pagination-controls class="custom-pagination"
+          (pageChange)="currentPage = $event"
+          maxSize="7"
+          directionLinks="true"
+          autoHide="false"
+          responsive="true"
+          previousLabel=""
+          nextLabel=""
+          screenReaderPaginationLabel=""
+          screenReaderPageLabel=""
+          screenReaderCurrentLabel="">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</main>

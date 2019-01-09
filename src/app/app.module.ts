@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+
+//Pagination
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
 //Angular material
 import { MatSnackBarModule, MatDialogModule, MatMenuModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +22,22 @@ import { MainComponent } from './main/main/main.component';
 import { AddAnalogCameraComponent } from './video/analog-cameras/add-analog-camera/add-analog-camera.component';
 import { AddAnalogRecordingComponent } from './video/analog-recordings/add-analog-recording/add-analog-recording.component';
 import { AddIpRecordingComponent } from './video/ip-recordings/add-ip-recording/add-ip-recording.component';
+import { AddWorkstationComponent } from './video/workstations/add-workstation/add-workstation.component';
+import { ConsultIpCamerasComponent } from './video/ip-cameras/consult-ip-cameras/consult-ip-cameras.component';
+import { DetailsIpCameraComponent } from './video/ip-cameras/details-ip-camera/details-ip-camera.component';
+import { EditIpCameraComponent } from './video/ip-cameras/edit-ip-camera/edit-ip-camera.component';
+import { EditIpRecordingComponent } from './video/ip-recordings/edit-ip-recording/edit-ip-recording.component';
+import { DetailsIpRecordingComponent } from './video/ip-recordings/details-ip-recording/details-ip-recording.component';
+import { ConsultIpRecordingsComponent } from './video/ip-recordings/consult-ip-recordings/consult-ip-recordings.component';
+import { ConsultAnalogRecordingsComponent } from './video/analog-recordings/consult-analog-recordings/consult-analog-recordings.component';
+import { EditAnalogRecordingComponent } from './video/analog-recordings/edit-analog-recording/edit-analog-recording.component';
+import { DetailsAnalogRecordingComponent } from './video/analog-recordings/details-analog-recording/details-analog-recording.component';
+import { DetailsAnalogCameraComponent } from './video/analog-cameras/details-analog-camera/details-analog-camera.component';
+import { EditAnalogCameraComponent } from './video/analog-cameras/edit-analog-camera/edit-analog-camera.component';
+import { ConsultAnalogCamerasComponent } from './video/analog-cameras/consult-analog-cameras/consult-analog-cameras.component';
+import { ConsultWorkstationsComponent } from './video/workstations/consult-workstations/consult-workstations.component';
+import { EditWorkstationComponent } from './video/workstations/edit-workstation/edit-workstation.component';
+import { DetailsWorkstationComponent } from './video/workstations/details-workstation/details-workstation.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +51,22 @@ import { AddIpRecordingComponent } from './video/ip-recordings/add-ip-recording/
     AddAnalogCameraComponent,
     AddAnalogRecordingComponent,
     AddIpRecordingComponent,
+    AddWorkstationComponent,
+    ConsultIpCamerasComponent,
+    DetailsIpCameraComponent,
+    EditIpCameraComponent,
+    EditIpRecordingComponent,
+    DetailsIpRecordingComponent,
+    ConsultIpRecordingsComponent,
+    ConsultAnalogRecordingsComponent,
+    EditAnalogRecordingComponent,
+    DetailsAnalogRecordingComponent,
+    DetailsAnalogCameraComponent,
+    EditAnalogCameraComponent,
+    ConsultAnalogCamerasComponent,
+    ConsultWorkstationsComponent,
+    EditWorkstationComponent,
+    DetailsWorkstationComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -41,6 +77,7 @@ import { AddIpRecordingComponent } from './video/ip-recordings/add-ip-recording/
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
