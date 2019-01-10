@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: "add-analog-camera", component: AddAnalogCameraComponent},
   { path: "add-ip-recording", component: AddIpRecordingComponent},
   { path: "add-analog-recording", component: AddAnalogRecordingComponent},
-  { path: "view-ip-camera", component : ViewIpCameraComponent }
+  { path: "view-ip-camera", component : ViewIpCameraComponent },
   { path: "add-workstation", component: AddWorkstationComponent},
   { path: "consult-ip-cameras", component: ConsultIpCamerasComponent},
   { path: "details-ip-camera", component: DetailsIpCameraComponent},

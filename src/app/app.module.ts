@@ -88,7 +88,7 @@ import  { MainService } from './main/main/main.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
     NgxPaginationModule
   ],
   providers: [MainService],
