@@ -44,6 +44,7 @@ import { VideoDesktopSubmenuComponent } from  './header/header/header-submenus/d
 import { ViewIpCameraComponent } from './video/ip-cameras/view-ip-camera/view-ip-camera.component';
 
 import  { MainService } from './main/main/main.service';
+import { DatasheetService } from './video/datasheet.service';
 
 
 
@@ -91,7 +92,7 @@ import  { MainService } from './main/main/main.service';
     HttpClientModule,
     NgxPaginationModule
   ],
-  providers: [MainService],
+  providers: [MainService, DatasheetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

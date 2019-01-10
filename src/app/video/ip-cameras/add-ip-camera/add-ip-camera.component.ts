@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Directive } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPCamera } from '../../models/cameras/ip-cameras.model';
+import { DatasheetService } from '../../datasheet.service';
 
 
 
@@ -20,8 +21,13 @@ export class AddIpCameraComponent implements OnInit {
   indoorOutdoorArray = ["Indoor", "Outdoor"];
   dayNightArray = ["Day/Night","E-Day/Night","Thermal"];
 
+  selectedFiles: FileList;
+  currentFileUpload: File;
+  productType : string = 'ip_camera';
+
   constructor(
-    private router: Router 
+    private router: Router,
+    private datasheetService: DatasheetService
   ) { }
 
   ngOnInit() {    
@@ -34,7 +40,7 @@ export class AddIpCameraComponent implements OnInit {
   onLoadDataSheet(){
     let e = this;
     let uploader = (<HTMLInputElement>document.getElementById('file1')).files;
-
+    this.selectedFiles = uploader;
     this.ipCamera.datasheet = (<HTMLInputElement>document.getElementById('file1')).value;
 
     if(uploader[0] !== undefined){
@@ -223,283 +229,198 @@ export class AddIpCameraComponent implements OnInit {
     document.getElementById('spinner').className += ' spinner-collapsed';
     document.getElementById('addProductForm').classList.remove('spinner-collapsed');
 
-    let data = {
-      "name": undefined,
-      "family": undefined,
-      "category": undefined,
-      "ctnClass": undefined,
-      "ctnClassFull": undefined,
-      "basicFeatures":{
-        "maxResolution" : "2MP",
-        "sensorType" : "1/2.8‑inch CMOS",
-        "maxFPS" : "60",
-        "indoorOutdoor" : "Outdoor",
-        "dayNight" : "Day",
-        "wideDinamicRange" : "dB WDR",
-        "onvif" : true,
-        "microphone" : false,
-        "poe" : true,
-        "irSensitive" : false
-      },
-      "advancedFeatures":{
-        "compression" : "H.264 (MP); M- JPEG",
-        "multiStreaming" : "Multiple configurable streams in H.264 and M-",
-        "idnr" : true,
-        "iae" : true,
-        "privacyMasking" : true,
-        "regionOfInterest" : true,
-        "interestTracking" : true,
-        "noPresets" : false,
-        "wiper" : false,
-        "thermal" : false
-      },
-      "alarmTriggering":{
-        "tamperDetection" : true,
-        "videoMotionDetection" : true,
-        "audioDetection" : false,
-        "faceDetection" : false,
-        "intelligentTracking" : true
-      },
-      "sensitivity":{
-        "minIluminationDayMode" : undefined,
-        "minIlluminationNightMode" : undefined,
-        "startLight" :true,
-        "integratedIr" : false,
-        "optionalIr" : true
-      },
-      "lens":{
-        "automaticBackFocus" : false,
-        "varifocal" : true,
-        "superResolutionLens" : true,
-        "focalLengthFrom" : "3",
-        "focalLengthTill" : "9",
-        "maxAngleH" : "117",
-        "maxAngleV" : "59",
-        "minAngleH" : "37",
-        "minAngleV" : "21",
-        "ptzZoomDigital" : false,
-        "ptzOpticalZoom" : false,
-        "tiltAngle" : undefined,
-        "autoVarifocal" : true,
-        "iva" : "IVA"
-      },
-      "dcri":{
-        "detection" : undefined,
-        "clasification" : undefined,
-        "recognition" : undefined,
-        "identification" : undefined
-      },
-      "storage":{
-        "builtInStorage" : true,
-        "directToIscsi" : true,
-        "cloudStorage" : true
-      },
-      "connections":{
-        "alarmInputOutput" : true,
-        "audioInOut" : true,
-        "hybrid" : true,
-        "confrontationMonitor" : true
-      },
-      "housing":{
-        "weatherRating" : "IP66",
-        "vandalResistant" : "IK10).",
-        "corrosionProof" : false,
-        "explosionProof" : false,
-        "operatingTemperature" : "EnvironmentalEN 50130-5:2011 Class IV"
-      },
-      "price" : "1.0",
-      "electricalData":{
-        "inputVoltage" : undefined,
-        "normalVersion" : "7.2 w max.",
-        "irVersion" : undefined
-      }
-    }
 
-    for(let key in data){
-      if(key === 'name'){
-        this.ipCamera.name = this.validateUndefinedValue(key, data[key]);
-      }else if(key === 'family'){
-        this.ipCamera.family = this.validateUndefinedValue(key, data[key]);
-      }else if(key === 'category'){
-        this.ipCamera.category = this.validateUndefinedValue(key, data[key]);
-      }else if(key === 'ctnClass'){
-        this.ipCamera.ctnClass = this.validateUndefinedValue(key, data[key]);
-      }else if(key === 'ctnClassFull'){
-        this.ipCamera.ctnClassFull = this.validateUndefinedValue(key, data[key]);
-      }else if(key === 'price'){
-        this.ipCamera.price = this.validateUndefinedValue(key, data[key]);
-      }else if(key === 'basicFeatures'){
-        for(let index in data[key]){
-          if(index === 'maxResolution'){
-            this.ipCamera.basicFeatures.maxResolution = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'sensorType'){
-            this.ipCamera.basicFeatures.sensorType = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'maxFPS'){
-            this.ipCamera.basicFeatures.maxFPS = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'indoorOutdoor'){
-            this.ipCamera.basicFeatures.indoorOutdoor = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'dayNight'){
-            this.ipCamera.basicFeatures.dayNight = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'wideDinamicRange'){
-            this.ipCamera.basicFeatures.wideDinamicRange = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'onvif'){
-            this.ipCamera.basicFeatures.onvif = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'microphone'){
-            this.ipCamera.basicFeatures.microphone = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'poe'){
-            this.ipCamera.basicFeatures.poe = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'irSensitive'){
-            this.ipCamera.basicFeatures.irSensitive = this.validateUndefinedValue(index, data[key][index]);
+    this.currentFileUpload = this.selectedFiles.item(0);
+
+    this.datasheetService.getDatasheetInformation(this.currentFileUpload, this.productType)
+      .subscribe((data) => {
+        let info = data['body']
+        for(let key in info){
+          if(key === 'name'){
+            this.ipCamera.name = this.validateUndefinedValue(key, info[key]);
+          }else if(key === 'family'){
+            this.ipCamera.family = this.validateUndefinedValue(key, info[key]);
+          }else if(key === 'category'){
+            this.ipCamera.category = this.validateUndefinedValue(key, info[key]);
+          }else if(key === 'ctnClass'){
+            this.ipCamera.ctnClass = this.validateUndefinedValue(key, info[key]);
+          }else if(key === 'ctnClassFull'){
+            this.ipCamera.ctnClassFull = this.validateUndefinedValue(key, info[key]);
+          }else if(key === 'price'){
+            this.ipCamera.price = this.validateUndefinedValue(key, info[key]);
+          }else if(key === 'basicFeatures'){
+            for(let index in info[key]){
+              if(index === 'maxResolution'){
+                this.ipCamera.basicFeatures.maxResolution = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'sensorType'){
+                this.ipCamera.basicFeatures.sensorType = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'maxFPS'){
+                this.ipCamera.basicFeatures.maxFPS = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'indoorOutdoor'){
+                this.ipCamera.basicFeatures.indoorOutdoor = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'dayNight'){
+                this.ipCamera.basicFeatures.dayNight = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'wideDinamicRange'){
+                this.ipCamera.basicFeatures.wideDinamicRange = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'onvif'){
+                this.ipCamera.basicFeatures.onvif = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'microphone'){
+                this.ipCamera.basicFeatures.microphone = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'poe'){
+                this.ipCamera.basicFeatures.poe = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'irSensitive'){
+                this.ipCamera.basicFeatures.irSensitive = this.validateUndefinedValue(index, info[key][index]);
+              }
+            }
+          }else if(key === 'advancedFeatures'){
+            for(let index in info[key]){
+              if(index === 'compression'){
+                this.ipCamera.advancedFeatures.compression = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'multiStreaming'){
+                this.ipCamera.advancedFeatures.multiStreaming = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'idnr'){
+                this.ipCamera.advancedFeatures.idnr = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'iae'){
+                this.ipCamera.advancedFeatures.iae = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'privacyMasking'){
+                this.ipCamera.advancedFeatures.privacyMasking = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'regionOfInterest'){
+                this.ipCamera.advancedFeatures.regionOfInterest = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'interestTracking'){
+                this.ipCamera.advancedFeatures.interestTracking = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'noPresets'){
+                this.ipCamera.advancedFeatures.noPresets = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'wiper'){
+                this.ipCamera.advancedFeatures.wiper = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'thermal'){
+                this.ipCamera.advancedFeatures.thermal = this.validateUndefinedValue(index, info[key][index]);
+              }
+            }
+          }else if(key === 'alarmTriggering'){
+            for(let index in info[key]){
+              if(index === 'tamperDetection'){
+                this.ipCamera.alarmTriggering.tamperDetection = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'videoMotionDetection'){
+                this.ipCamera.alarmTriggering.videoMotionDetection = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'audioDetection'){
+                this.ipCamera.alarmTriggering.audioDetection = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'faceDetection'){
+                this.ipCamera.alarmTriggering.faceDetection = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'intelligentTracking'){
+                this.ipCamera.alarmTriggering.intelligentTracking = this.validateUndefinedValue(index, info[key][index]);
+              }
+            }
+          }else if(key === 'sensitivity'){
+            for(let index in info[key]){
+              if(index === 'minIluminationDayMode'){
+                this.ipCamera.sensitivity.minIluminationDayMode = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'minIlluminationNightMode'){
+                this.ipCamera.sensitivity.minIlluminationNightMode = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'startLight'){
+                this.ipCamera.sensitivity.startLight = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'integratedIr'){
+                this.ipCamera.sensitivity.integratedIr = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'optionalIr'){
+                this.ipCamera.sensitivity.optionalIr = this.validateUndefinedValue(index, info[key][index]);
+              }
+            }
+          }else if(key === 'lens'){
+            for(let index in info[key]){
+              if(index === 'automaticBackFocus'){
+                this.ipCamera.lens.automaticBackFocus = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'varifocal'){
+                this.ipCamera.lens.varifocal = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'superResolutionLens'){
+                this.ipCamera.lens.superResolutionLens = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'focalLengthFrom'){
+                this.ipCamera.lens.focalLengthFrom = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'focalLengthTill'){
+                this.ipCamera.lens.focalLengthTill = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'maxAngleH'){
+                this.ipCamera.lens.maxAngleH = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'maxAngleV'){
+                this.ipCamera.lens.maxAngleV = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'minAngleH'){
+                this.ipCamera.lens.minAngleH = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'minAngleV'){
+                this.ipCamera.lens.minAngleV = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'ptzZoomDigital'){
+                this.ipCamera.lens.ptzZoomDigital = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'ptzOpticalZoom'){
+                this.ipCamera.lens.ptzOpticalZoom = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'tiltAngle'){
+                this.ipCamera.lens.tiltAngle = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'autoVarifocal'){
+                this.ipCamera.lens.autoVarifocal = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'iva'){
+                this.ipCamera.lens.iva = this.validateUndefinedValue(index, info[key][index]);
+              }
+            }
+          }else if(key === 'dcri'){
+            for(let index in info[key]){
+              if(index === 'detection'){
+                this.ipCamera.dcri.detection = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'clasification'){
+                this.ipCamera.dcri.clasification = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'recognition'){
+                this.ipCamera.dcri.recognition = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'identification'){
+                this.ipCamera.dcri.identification = this.validateUndefinedValue(index, info[key][index]);
+              }
+            }
+          }else if(key === 'storage'){
+            for(let index in info[key]){
+              if(index === 'builtInStorage'){
+                this.ipCamera.storage.builtInStorage = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'directToIscsi'){
+                this.ipCamera.storage.directToIscsi = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'cloudStorage'){
+                this.ipCamera.storage.cloudStorage = this.validateUndefinedValue(index, info[key][index]);
+              }
+            }
+          }else if(key === 'connections'){
+            for(let index in info[key]){
+              if(index === 'alarmInputOutput'){
+                this.ipCamera.connections.alarmInputOutput = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'audioInOut'){
+                this.ipCamera.connections.audioInOut = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'hybrid'){
+                this.ipCamera.connections.hybrid = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'confrontationMonitor'){
+                this.ipCamera.connections.confrontationMonitor = this.validateUndefinedValue(index, info[key][index]);
+              }
+            }
+          }else if(key === 'housing'){
+            for(let index in info[key]){
+              if(index === 'weatherRating'){
+                this.ipCamera.housing.weatherRating = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'vandalResistant'){
+                this.ipCamera.housing.vandalResistant = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'corrosionProof'){
+                this.ipCamera.housing.corrosionProof = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'explosionProof'){
+                this.ipCamera.housing.explosionProof = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'operatingTemperature'){
+                this.ipCamera.housing.operatingTemperature = this.validateUndefinedValue(index, info[key][index]);
+              }
+            }
+          }else if(key === 'electricalData'){
+            for(let index in info[key]){
+              if(index === 'inputVoltage'){
+                this.ipCamera.electricalData.inputVoltage = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'normalVersion'){
+                this.ipCamera.electricalData.normalVersion = this.validateUndefinedValue(index, info[key][index]);
+              }else if(index === 'irVersion'){
+                this.ipCamera.electricalData.irVersion = this.validateUndefinedValue(index, info[key][index]);
+              }
+            }
           }
         }
-      }else if(key === 'advancedFeatures'){
-        for(let index in data[key]){
-          if(index === 'compression'){
-            this.ipCamera.advancedFeatures.compression = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'multiStreaming'){
-            this.ipCamera.advancedFeatures.multiStreaming = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'idnr'){
-            this.ipCamera.advancedFeatures.idnr = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'iae'){
-            this.ipCamera.advancedFeatures.iae = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'privacyMasking'){
-            this.ipCamera.advancedFeatures.privacyMasking = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'regionOfInterest'){
-            this.ipCamera.advancedFeatures.regionOfInterest = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'interestTracking'){
-            this.ipCamera.advancedFeatures.interestTracking = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'noPresets'){
-            this.ipCamera.advancedFeatures.noPresets = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'wiper'){
-            this.ipCamera.advancedFeatures.wiper = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'thermal'){
-            this.ipCamera.advancedFeatures.thermal = this.validateUndefinedValue(index, data[key][index]);
-          }
-        }
-      }else if(key === 'alarmTriggering'){
-        for(let index in data[key]){
-          if(index === 'tamperDetection'){
-            this.ipCamera.alarmTriggering.tamperDetection = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'videoMotionDetection'){
-            this.ipCamera.alarmTriggering.videoMotionDetection = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'audioDetection'){
-            this.ipCamera.alarmTriggering.audioDetection = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'faceDetection'){
-            this.ipCamera.alarmTriggering.faceDetection = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'intelligentTracking'){
-            this.ipCamera.alarmTriggering.intelligentTracking = this.validateUndefinedValue(index, data[key][index]);
-          }
-        }
-      }else if(key === 'sensitivity'){
-        for(let index in data[key]){
-          if(index === 'minIluminationDayMode'){
-            this.ipCamera.sensitivity.minIluminationDayMode = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'minIlluminationNightMode'){
-            this.ipCamera.sensitivity.minIlluminationNightMode = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'startLight'){
-            this.ipCamera.sensitivity.startLight = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'integratedIr'){
-            this.ipCamera.sensitivity.integratedIr = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'optionalIr'){
-            this.ipCamera.sensitivity.optionalIr = this.validateUndefinedValue(index, data[key][index]);
-          }
-        }
-      }else if(key === 'lens'){
-        for(let index in data[key]){
-          if(index === 'automaticBackFocus'){
-            this.ipCamera.lens.automaticBackFocus = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'varifocal'){
-            this.ipCamera.lens.varifocal = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'superResolutionLens'){
-            this.ipCamera.lens.superResolutionLens = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'focalLengthFrom'){
-            this.ipCamera.lens.focalLengthFrom = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'focalLengthTill'){
-            this.ipCamera.lens.focalLengthTill = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'maxAngleH'){
-            this.ipCamera.lens.maxAngleH = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'maxAngleV'){
-            this.ipCamera.lens.maxAngleV = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'minAngleH'){
-            this.ipCamera.lens.minAngleH = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'minAngleV'){
-            this.ipCamera.lens.minAngleV = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'ptzZoomDigital'){
-            this.ipCamera.lens.ptzZoomDigital = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'ptzOpticalZoom'){
-            this.ipCamera.lens.ptzOpticalZoom = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'tiltAngle'){
-            this.ipCamera.lens.tiltAngle = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'autoVarifocal'){
-            this.ipCamera.lens.autoVarifocal = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'iva'){
-            this.ipCamera.lens.iva = this.validateUndefinedValue(index, data[key][index]);
-          }
-        }
-      }else if(key === 'dcri'){
-        for(let index in data[key]){
-          if(index === 'detection'){
-            this.ipCamera.dcri.detection = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'clasification'){
-            this.ipCamera.dcri.clasification = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'recognition'){
-            this.ipCamera.dcri.recognition = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'identification'){
-            this.ipCamera.dcri.identification = this.validateUndefinedValue(index, data[key][index]);
-          }
-        }
-      }else if(key === 'storage'){
-        for(let index in data[key]){
-          if(index === 'builtInStorage'){
-            this.ipCamera.storage.builtInStorage = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'directToIscsi'){
-            this.ipCamera.storage.directToIscsi = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'cloudStorage'){
-            this.ipCamera.storage.cloudStorage = this.validateUndefinedValue(index, data[key][index]);
-          }
-        }
-      }else if(key === 'connections'){
-        for(let index in data[key]){
-          if(index === 'alarmInputOutput'){
-            this.ipCamera.connections.alarmInputOutput = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'audioInOut'){
-            this.ipCamera.connections.audioInOut = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'hybrid'){
-            this.ipCamera.connections.hybrid = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'confrontationMonitor'){
-            this.ipCamera.connections.confrontationMonitor = this.validateUndefinedValue(index, data[key][index]);
-          }
-        }
-      }else if(key === 'housing'){
-        for(let index in data[key]){
-          if(index === 'weatherRating'){
-            this.ipCamera.housing.weatherRating = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'vandalResistant'){
-            this.ipCamera.housing.vandalResistant = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'corrosionProof'){
-            this.ipCamera.housing.corrosionProof = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'explosionProof'){
-            this.ipCamera.housing.explosionProof = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'operatingTemperature'){
-            this.ipCamera.housing.operatingTemperature = this.validateUndefinedValue(index, data[key][index]);
-          }
-        }
-      }else if(key === 'electricalData'){
-        for(let index in data[key]){
-          if(index === 'inputVoltage'){
-            this.ipCamera.electricalData.inputVoltage = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'normalVersion'){
-            this.ipCamera.electricalData.normalVersion = this.validateUndefinedValue(index, data[key][index]);
-          }else if(index === 'irVersion'){
-            this.ipCamera.electricalData.irVersion = this.validateUndefinedValue(index, data[key][index]);
-          }
-        }
-      }
-    }
+      });
   }
 
   validateUndefinedValue(key, value){
-    if(value === undefined){
+    if(value === "undefined"){
       (<HTMLInputElement>document.getElementById(key)).value = '';
       (<HTMLInputElement>document.getElementById(key)).className += " warning-validation"
       return '';
@@ -511,7 +432,6 @@ export class AddIpCameraComponent implements OnInit {
   }
 
   validateInput(event){
-    console.log(this.ipCamera)
     if(event.target.value !== ''){
       event.target.classList.remove("warning-validation");
       event.target.classList.remove("error-validation");
