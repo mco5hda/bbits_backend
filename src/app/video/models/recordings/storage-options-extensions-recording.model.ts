@@ -1,6 +1,6 @@
 export class StorageOptionsExtensionsRecording{
     maxNumberOfUnits: string;
     maximumDrievesSupported: string;
-    availableCapacitiesPerDrive: string;
+    availableCapacitiesPerDriveExtensions: string;
     hotSwappable: boolean;
 }

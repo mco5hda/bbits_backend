@@ -11,4 +11,18 @@ export class BasicFeaturesRecording{
     hotSwappablwHDD: boolean;
     monitorOutput: boolean;
     raid: string;
+
+    //Analog recording atributtes
+    channels: string;
+    frameRateIPS: string;
+    ipsPerCamera: string;
+    liveResolution: string;
+    loopinVideo: boolean;
+    preAlarm: boolean;
+    motionDetection: boolean;
+    mountableRack: boolean;
+    multipleCamera: boolean;
+    hResolution: boolean;
+    network: string;
+    operativeSystem: string;
 }

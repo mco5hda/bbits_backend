@@ -24,5 +24,5 @@ export class AnalogCamera{
     lens: Lens = new Lens();
     connections: Connections = new Connections;
     housing: Housing = new Housing();
-    electricalData: ElectricalData
+    electricalData: ElectricalData = new ElectricalData();
 }

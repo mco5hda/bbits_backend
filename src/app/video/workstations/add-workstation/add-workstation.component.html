@@ -1,0 +1,199 @@
+<app-header></app-header>
+
+<main class="vhHeight">
+  <div class="container">
+    <form id="addProductForm" class="mwf-form" #formControl="ngForm">
+      <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <!--General information-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>General information</h3>
+            <hr>
+          </li>
+
+          <!-- Model Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Model
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="model" name="model" [(ngModel)]="workstation.model" (change)="validateInput($event)" #model="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- Base unit Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Base unit
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="baseUnit" name="baseUnit" [(ngModel)]="workstation.baseUnit" (change)="validateInput($event)" #baseUnit="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- HDD Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              HDD
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="hdd" name="hdd" [(ngModel)]="workstation.hdd" (change)="validateInput($event)" #hdd="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- DVD DRIVE Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              DVD drive
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="dvdDrive" name="dvdDrive" [(ngModel)]="workstation.dvdDrive" (change)="validateInput($event)" #dvdDrive="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- Processor Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Processor
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="processor" name="processor" [(ngModel)]="workstation.processor" (change)="validateInput($event)" #processor="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- Memory Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Memory
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="memory" name="memory" [(ngModel)]="workstation.memory" (change)="validateInput($event)" #memory="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- OS Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Operative system
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="operativeSystem" name="operativeSystem" [(ngModel)]="workstation.operativeSystem" (change)="validateInput($event)" #operativeSystem="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- Price Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Price
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="workstation.price" (change)="validateInput($event)" #price="ngModel" type="text" required>
+            </div>
+          </li>
+        </ul>
+
+        <!--Graphics card information-->
+        <ul style="margin-top: 20px;">      
+          <li class="mwf-field">
+            <h3>Graphics card information</h3>
+            <hr>
+          </li>
+
+          <!-- Graphics cards Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Graphics cards
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="graphicsCard" name="graphicsCard" [(ngModel)]="workstation.graphicsCard" (change)="validateInput($event)" #graphicsCard="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- Application Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Application
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="application" name="application" [(ngModel)]="workstation.application" (change)="validateInput($event)" #application="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- Description Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Description
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="description" name="description" [(ngModel)]="workstation.description" (change)="validateInput($event)" #description="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- No of cards supported Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              No of cards supported
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="cardsSupported" name="cardsSupported" [(ngModel)]="workstation.cardsSupported" (change)="validateInput($event)" #cardsSupported="ngModel" type="text" required>
+            </div>
+          </li>
+
+          <!-- Max. monitors per card Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Max. monitors per card
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="maxMonitorsPerCard" name="maxMonitorsPerCard" [(ngModel)]="workstation.maxMonitorsPerCard" (change)="validateInput($event)" #maxMonitorsPerCard="ngModel" type="number" min="0" required>
+            </div>
+          </li>
+
+          <!-- Max. monitors per workstation Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Max. monitors per workstation
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="maxMonitorPerWorkstation" name="maxMonitorPerWorkstation" [(ngModel)]="workstation.maxMonitorPerWorkstation" (change)="validateInput($event)" #maxMonitorPerWorkstation="ngModel" type="number" min="0" required>
+            </div>
+          </li>
+
+          <!-- Checkboxes -->
+          <li class="mwf-field">              
+            <div class="mwf-input">
+              <fieldset>
+                <span class="mwf-option">
+                  <input type="checkbox" class="mwf-checkbox" id="gpuDecoding" name="gpuDecoding" [(ngModel)]="workstation.gpuDecoding" (change)="validateInput($event)" #gpuDecoding="ngModel" required>
+                  <label for="gpuDecoding">GPU decoding supported</label>
+                </span>
+              </fieldset>
+            </div>
+            </li>
+        </ul>
+      </div>
+
+      <!--Buttons-->
+      <div class="col-xs-12 col-sm-8 col-sm-push-2 forms-buttons col-xs-12">
+        <div class="form-next-button">
+          <button class="btn-Secondary" routerLink="/consult-workstations" type="button" style="margin-right: 5px;">Cancel</button>
+          <button class="btn-Primary" type="button" [disabled]="!formValid" id="submitBtn" (click)="addWorkStation()">Submit</button>            
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</main>
