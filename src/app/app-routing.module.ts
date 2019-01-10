@@ -8,6 +8,8 @@ import { MainComponent } from './main/main/main.component';
 import { AddAnalogCameraComponent } from './video/analog-cameras/add-analog-camera/add-analog-camera.component';
 import { AddIpRecordingComponent } from './video/ip-recordings/add-ip-recording/add-ip-recording.component';
 import { AddAnalogRecordingComponent } from './video/analog-recordings/add-analog-recording/add-analog-recording.component';
+import { ViewIpCameraComponent } from './video/ip-cameras/view-ip-camera/view-ip-camera.component';
+
 
 const routes: Routes = [
   { path: "", component: SignInComponent },
@@ -19,6 +21,7 @@ const routes: Routes = [
   { path: "add-analog-camera", component: AddAnalogCameraComponent},
   { path: "add-ip-recording", component: AddIpRecordingComponent},
   { path: "add-analog-recording", component: AddAnalogRecordingComponent},
+  { path: "view-ip-camera", component : ViewIpCameraComponent }
 ];
 
 @NgModule({

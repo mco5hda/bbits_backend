@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatSnackBarModule, MatDialogModule, MatMenuModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +21,11 @@ import { AddIpRecordingComponent } from './video/ip-recordings/add-ip-recording/
 
 import { MainSubmenuComponent } from './header/header/header-submenus/main-submenu';
 import { VideoDesktopSubmenuComponent } from  './header/header/header-submenus/desktop-submenu/video-desktop-submenu';
+import { ViewIpCameraComponent } from './video/ip-cameras/view-ip-camera/view-ip-camera.component';
+
+import  { MainService } from './main/main/main.service';
+
+
 
 @NgModule({
   declarations: [
@@ -34,7 +40,8 @@ import { VideoDesktopSubmenuComponent } from  './header/header/header-submenus/d
     AddAnalogRecordingComponent,
     AddIpRecordingComponent,
     MainSubmenuComponent,
-    VideoDesktopSubmenuComponent
+    VideoDesktopSubmenuComponent,
+    ViewIpCameraComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -45,8 +52,9 @@ import { VideoDesktopSubmenuComponent } from  './header/header/header-submenus/d
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [MainService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

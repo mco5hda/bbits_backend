@@ -1,14 +1,4 @@
-html {
-    background-image: url('../../../assets/login/supergraphic.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-color: #fff;
-    min-width: 0;
-    height: 100%;
-}
-
-.logo img {    
+.logo img {
     height:40px;
 }
 a.logo {    
@@ -28,19 +18,18 @@ a.logo {
     font-weight: 400;
     line-height: 20px;
     color: #FFF;
-
     cursor: pointer;
 
 }
 
-.btn-signin:hover {    
-    background-color: rgb(127, 198, 231);    
+.btn-signin:hover {
+    background-color: rgb(127, 198, 231);
     border-color: rgb(127, 198, 231);
     color: #FFF;
 }
 
-.btn-signin:active {    
-    background-color: rgb(0, 142, 207);    
+.btn-signin:active {
+    background-color: rgb(0, 142, 207);
     border-color: rgb(0, 142, 207);
     color: #FFF;
 }
@@ -110,7 +99,7 @@ a.logo {
     width: 415px;
     margin: auto;
     margin-top: 10%;
-    display: block
+
 }
 
 .modAuth .logo {

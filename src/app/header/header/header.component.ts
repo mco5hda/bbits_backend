@@ -9,7 +9,6 @@ let active = true;
 })
 export class HeaderComponent implements OnInit {
 
-  public
   title = 'bbits-backend';
 
   ngOnInit(): void {
@@ -69,7 +68,7 @@ export class HeaderComponent implements OnInit {
   onClickShowMenu(): void {
     if (active) {
         const navContent = document.getElementById('nav-content');
-        navContent.classList.remove('M-Navigation-Main--active');
+        navContent.classList.remove('M-Navigation-Extractor--active');
         const buttonContent = document.getElementById('button-content');
         buttonContent.classList.remove('M-Navigation-Main__toggle--active');
         const navigationContent = document.getElementById('navigation-content');
@@ -80,7 +79,7 @@ export class HeaderComponent implements OnInit {
 
     } else {
         const navContent = document.getElementById('nav-content');
-        navContent.classList.add('M-Navigation-Main--active');
+        navContent.classList.add('M-Navigation-Extractor--active');
         const buttonContent = document.getElementById('button-content');
         buttonContent.classList.add('M-Navigation-Main__toggle--active');
         navContent.classList.add('is-hidden');

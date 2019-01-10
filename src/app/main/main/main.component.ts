@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { MainService} from './main.service';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  selectedFiles: FileList;
+  currentFileUpload: File;
+  productType : string = '';
+
+  constructor( private service : MainService) { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+
+  }
+
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+  }
+
+  uploadFile() {
+
+    this.currentFileUpload = this.selectedFiles.item(0);
+
+    this.service.getDatasheetInformation(this.currentFileUpload, this.productType)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
 }

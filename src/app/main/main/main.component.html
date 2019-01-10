@@ -1,31 +1,39 @@
 <app-header></app-header>
+   <main class="vhHeight">
+          <div class="container">
+              <ul>
+                  <li><a routerLink="/view-ip-camera">Add IP Camera</a></li>
+                  <li><a routerLink="/consult-ip-cameras">Consult IP Camera</a></li>
+                  <li><a routerLink="/edit-ip-camera">Edit IP Camera</a></li>
+              </ul>
 
-<body>
-    <main>
-        <div class="container">
-            <ul>
-                <li><a routerLink="/add-ip-camera">Add IP Camera</a></li>
-                <li><a routerLink="/consult-ip-cameras">Consult IP Camera</a></li>
-                <li><a routerLink="/edit-ip-camera">Edit IP Camera</a></li>
-            </ul>
+              <ul>
+                  <li><a routerLink="/add-analog-camera">Add Analog Camera</a></li>
+                  <li><a routerLink="/consult-analog-cameras">Consult Analog Camera</a></li>
+                  <li><a routerLink="/edit-analog-camera">Edit Analog Camera</a></li>
+              </ul>
 
-            <ul>
-                <li><a routerLink="/add-analog-camera">Add Analog Camera</a></li>
-                <li><a routerLink="/consult-analog-cameras">Consult Analog Camera</a></li>
-                <li><a routerLink="/edit-analog-camera">Edit Analog Camera</a></li>
-            </ul>
+              <ul>
+                  <li><a routerLink="/add-ip-recording">Add IP Recording</a></li>
+                  <li><a routerLink="/consult-ip-recording">Consult IP Recording</a></li>
+                  <li><a routerLink="/edit-ip-recording">Edit IP Recording</a></li>
+              </ul>
 
-            <ul>
-                <li><a routerLink="/add-ip-recording">Add IP Recording</a></li>
-                <li><a routerLink="/consult-ip-recording">Consult IP Recording</a></li>
-                <li><a routerLink="/edit-ip-recording">Edit IP Recording</a></li>
-            </ul>
+              <ul>
+                  <li><a routerLink="/add-analog-recording">Add Analog Recording</a></li>
+                  <li><a routerLink="/consult-analog-recording">Consult Analog Recording</a></li>
+                  <li><a routerLink="/edit-analog-recording">Edit Analog Recording</a></li>
+              </ul>
+          </div>
 
-            <ul>
-                <li><a routerLink="/add-analog-recording">Add Analog Recording</a></li>
-                <li><a routerLink="/consult-analog-recording">Consult Analog Recording</a></li>
-                <li><a routerLink="/edit-analog-recording">Edit Analog Recording</a></li>
-            </ul>
-        </div>
-    </main>
-</body>
+
+     <select class="form-control" id="productType" name="productType" [(ngModel)]="productType"  required>
+       <option value="ip_camera">IP Camera</option>
+       <option value="ip_recording">IP Recording</option>
+       <option value="analog_camera">Analog Camera</option>
+     </select>
+     <input type="file" name="file" id="file"(change)="selectFile($event)" required>
+     <button class="btn btn-default" id="register-button" name="register-button"  (click)="uploadFile()">Upload</button>
+
+
+   </main>
