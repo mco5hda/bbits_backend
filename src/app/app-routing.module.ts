@@ -8,6 +8,8 @@ import { MainComponent } from './main/main/main.component';
 import { AddAnalogCameraComponent } from './video/analog-cameras/add-analog-camera/add-analog-camera.component';
 import { AddIpRecordingComponent } from './video/ip-recordings/add-ip-recording/add-ip-recording.component';
 import { AddAnalogRecordingComponent } from './video/analog-recordings/add-analog-recording/add-analog-recording.component';
+import { ViewIpCameraComponent } from './video/ip-cameras/view-ip-camera/view-ip-camera.component';
+
 import { AddWorkstationComponent } from './video/workstations/add-workstation/add-workstation.component';
 import { ConsultIpCamerasComponent } from './video/ip-cameras/consult-ip-cameras/consult-ip-cameras.component';
 import { DetailsIpCameraComponent } from './video/ip-cameras/details-ip-camera/details-ip-camera.component';
@@ -35,6 +37,7 @@ const routes: Routes = [
   { path: "add-analog-camera", component: AddAnalogCameraComponent},
   { path: "add-ip-recording", component: AddIpRecordingComponent},
   { path: "add-analog-recording", component: AddAnalogRecordingComponent},
+  { path: "view-ip-camera", component : ViewIpCameraComponent },
   { path: "add-workstation", component: AddWorkstationComponent},
   { path: "consult-ip-cameras", component: ConsultIpCamerasComponent},
   { path: "details-ip-camera", component: DetailsIpCameraComponent},

@@ -1,33 +1,30 @@
-<body>
-    <div class="modAuth">
-        <div class="signup">
-            <div class="form">
-                <a class="logo" href="#">
-                    <img src="../../../assets/login/logo.png" alt="Logo" height="40">
-                </a>
+<a target="_blank"></a>
+<div class="skinLayoutAuth">
+  <div class="modAuth">
+    <div class="signup">
+        <div class="form">
+            <a class="logo" href="#">
+                <img src="../../../assets/login/logo.png" alt="Logo" height="40">
+            </a>
+            <h2 class="title_forms">Login</h2>
+            <form method="post" action="#">
+                <div class="msg-error">Invalid username or password</div>
 
-                <h2 class="title_forms">Login</h2>
-                <form method="post" action="#">
-                    <div class="msg-error">Invalid username or password</div>              
-                                            
-                    <div class="external-login">
-                        <input class="fld email" name="email" type="text" placeholder="Email">
-                        <div class="row-password">
-                            <input class="fld password" name="password" type="password" placeholder="Password">
-                        </div>
-                        <a (click)="login()" class="btn-signin">Login</a>
+                <div class="external-login">
+                    <input class="fld email" name="email" type="text" placeholder="Email">
+                    <div class="row-password">
+                        <input class="fld password" name="password" type="password" placeholder="Password">
                     </div>
-                </form>
-                
-
-                <div>
-                    <br>
-                    <a routerLink="/request-access" class="lnk-style">Request access</a>
-                    <br>
-                    <a routerLink="/reset-password" class="lnk-style">Lost your password?</a>
+                    <a (click)="login()" class="btn-signin">Login</a>
                 </div>
-
+            </form>
+            <div>
+                <br>
+                <a routerLink="/request-access" class="lnk-style">Request access</a>
+                <br>
+                <a routerLink="/reset-password" class="lnk-style">Lost your password?</a>
             </div>
         </div>
     </div>
-</body>
+  </div>
+</div>

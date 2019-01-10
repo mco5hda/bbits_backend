@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 //Pagination
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
@@ -40,6 +41,11 @@ import { DetailsWorkstationComponent } from './video/workstations/details-workst
 
 import { MainSubmenuComponent } from './header/header/header-submenus/main-submenu';
 import { VideoDesktopSubmenuComponent } from  './header/header/header-submenus/desktop-submenu/video-desktop-submenu';
+import { ViewIpCameraComponent } from './video/ip-cameras/view-ip-camera/view-ip-camera.component';
+
+import  { MainService } from './main/main/main.service';
+
+
 
 @NgModule({
   declarations: [
@@ -70,7 +76,8 @@ import { VideoDesktopSubmenuComponent } from  './header/header/header-submenus/d
     EditWorkstationComponent,
     DetailsWorkstationComponent,
     MainSubmenuComponent,
-    VideoDesktopSubmenuComponent
+    VideoDesktopSubmenuComponent,
+    ViewIpCameraComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -81,9 +88,10 @@ import { VideoDesktopSubmenuComponent } from  './header/header/header-submenus/d
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxPaginationModule,
+    HttpClientModule,
+    NgxPaginationModule
   ],
-  providers: [],
+  providers: [MainService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,5 @@
 import {Component, HostListener} from '@angular/core';
 import { HeaderComponent} from '../header.component';
-import {__await} from 'tslib';
-import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'main-submenu',
@@ -12,9 +10,11 @@ import {delay} from 'rxjs/operators';
           <li id="main-list" *ngFor="let item of MENU_ITEMS; first as isFirst" class="M-Navigation__item M-Navigation-Main__item" (mouseover)="item.mouseover()" (click)="item.click()" (mouseleave)="item.mouseexit()">
             <a *ngIf="isFirst" class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub M-Navigation__link--active M-Navigation-Main__link--active">
               <span>{{ item.name }}</span>
+              <img src="./assets/ico/bosch-ic-forward-right.svg" alt="Forward" width="25" height="25" class="A-Icon A-Icon--forward-right">
             </a>
             <a *ngIf="!isFirst" class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
               <span>{{ item.name }}</span>
+              <img src="./assets/ico/bosch-ic-forward-right.svg" alt="Forward" width="25" height="25" class="A-Icon A-Icon--forward-right">
             </a>
           </li>
           </div>
@@ -50,7 +50,7 @@ export class MainSubmenuComponent {
         this.mouseClick('Video');
       },
       subOptions: [
-        {name: this.IP_CAMERA, link: '#'},
+        {name: this.IP_CAMERA, link: '/view-ip-camera'},
         {name: this.IP_RECORDING, link: '#'},
         {name: this.ANALOG_CAMERA, link: '#'},
         {name: this.ANALOG_RECORDING, link: '#'},
@@ -117,9 +117,9 @@ export class MainSubmenuComponent {
       }];
 
 
-
   public mainMenu : boolean = true;
   public name : String = '';
+  isOpen = true;
 
   constructor(private headerComponent: HeaderComponent) {}
 
@@ -127,28 +127,27 @@ export class MainSubmenuComponent {
   *  Mouse click when is a cellphone view
   * */
 
-  async mouseClick(name) {
+  mouseClick(name) {
     if (HeaderComponent.isAMobileView()) {
       let subElements = ``;
+      document.getElementById('list-content').style.animation = 'fpSlideRight 0.2s';
+
+      setTimeout(()=> {
+        document.getElementById('mobile-subOptions').style.animation = 'fpSlideLeft 0.2s';
+      }, 200);
+
       this.MENU_ITEMS.forEach(element => {
         if (element.name === name) {
           element.subOptions.forEach(option => {
             subElements +=
               `<li class="M-Navigation__item M-Navigation-Main__item">
-                   <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
-                      <span> ${option.name} </span>
+                   <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub" onclick="submenuClick()">
+                      <span> ${option.name}</span>
                    </a>
                 </li>`;
           });
-/*
-          for(let i = 0; i <= 100; i++){
-              document.getElementById('main-list').style.transform = `translate3d(${-i}%,0,0)` ;
-               delay(100);
-          }
-*/
           this.mainMenu = false;
           this.name = name;
-
           let mobileOptions =  document.getElementById('mobile-subOptions');
           mobileOptions.innerHTML = subElements;
           return;
@@ -157,10 +156,19 @@ export class MainSubmenuComponent {
     }
   }/* mouse click */
 
+  submenuClick(){
+       console.log('Click');
+  }
+
   onClickBackButton(){
     if (HeaderComponent.isAMobileView()) {
-      this.mainMenu = true;
-      document.getElementById('mobile-subOptions').innerHTML = '';
+      document.getElementById('mobile-subOptions').style.animation = 'fpSlideRight 0.2s';
+      setTimeout(()=> {
+        this.mainMenu = true;
+        document.getElementById('mobile-subOptions').innerHTML = '';
+        document.getElementById('list-content').style.animation = 'fpSlideLeft 0.2s';
+      }, 200);
+
     }
   }
 
