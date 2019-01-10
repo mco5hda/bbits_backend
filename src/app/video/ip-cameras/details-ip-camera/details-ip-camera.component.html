@@ -1,3 +1,597 @@
-<p>
-  details-ip-camera works!
-</p>
+<app-header></app-header>
+
+<main class="vhHeight">
+
+  <!--Image and info in the right side-->
+  <div class="O-ExtendedCarousel">
+    <div class="container-fluid">
+      
+      <!--Title and subtitle-->
+      <h1 class="O-ExtendedCarousel__headline">{{ipCamera.name}}</h1>
+      <div class="O-ExtendedCarousel__copy">{{ipCamera.ctnClassFull}}</div>
+      
+      <div class="row">
+        <!--Image-->
+        <div class="O-ExtendedCarousel__imagesContainer col-xs-12 col-sm-6 col-md-8">
+          <section class="M-CarouselSimple__container M-CarouselSimple__container--fullBleed">
+            <div class="M-CarouselSimple " style="height: 421px;">
+              <div class="M-CarouselSimple__slideContainer">
+                <div data-m-carousel-simple-slide="" class="M-CarouselSimple__slide M-CarouselSimple__slide--active">
+                  <figure class="A-Image__figure">
+                    <picture class="A-Image__picture">
+                      <img class="A-Image " src="./../../../../assets/login/supergraphic.png" alt="{{ipCamera.name}}">
+                    </picture>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        
+        <!--Content in the right side-->
+        <div class="O-ExtendedCarousel__dataContainer col-xs-12 col-sm-6 col-md-4">
+          <!--Info in the right side of image-->
+          <div class="A-Text-RichText">
+            <ul class="A-List A-List--unordered">
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Category: </span>
+                <span class="A-List__itemText">{{ipCamera.category}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Family: </span>
+                <span class="A-List__itemText">{{ipCamera.family}}</span>                
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Price: </span>
+                <span class="A-List__itemText">{{ipCamera.price}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Category: </span>
+                <span class="A-List__itemText">{{ipCamera.name}}</span>
+              </li>
+            </ul>
+            
+          </div>
+
+          <!--Buttons-->
+          <div class="O-ExtendedCarousel__buttonContainer">        
+            <div class="A-Link A-Link--button  A-Link--button--filled ">
+              <a class="A-Link__link A-Link__link--button" (click)="editIPCamera(ipCamera.id)">
+                <span class="A-Link__linkText">Edit</span>
+              </a>
+            </div>
+            
+            <div class="A-Link A-Link--button  ">
+              <a class="A-Link__link A-Link__link--button" (click)="deleteIPCamera(ipCamera.id)">
+                <span class="A-Link__linkText">Delete</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Table sections-->
+  <div class="M-NavigationTabs">
+    <!--Header of tabs-->
+    <div class="container">
+      <div class="M-TabLinks">
+        <div class="M-TabLinks__scrollContainer">
+          <ul class="M-TabLinks__links M-TabLinks__links--alignLeft">
+              <li class="M-TabLinks__link M-TabLinks__link--active">
+                <button class="M-TabLinks__trigger" (click)="changeTab(0)">
+                  <span>Basic Features</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link">
+                <button class="M-TabLinks__trigger" (click)="changeTab(1)">
+                  <span>Adavanced Features</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link">
+                <button class="M-TabLinks__trigger" (click)="changeTab(2)">
+                  <span>Alarm Triggering & Sensitivity</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link">
+                <button class="M-TabLinks__trigger" (click)="changeTab(3)">
+                  <span>Lens</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link">
+                <button class="M-TabLinks__trigger" (click)="changeTab(4)">
+                  <span>DCRI & Storage</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link">
+                <button class="M-TabLinks__trigger" (click)="changeTab(5)">
+                  <span>Connections & Housing & Electrical</span>
+                </button>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="M-NavigationTabs__tabLinksSeparator"></div>
+    
+    <div class="container-fluid">
+      <div class="row">
+
+        <!--Tab 1-->
+        <div class="M-NavigationTabs__tabContent M-NavigationTabs__tabContent--active visible" tabindex="0">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Resolution</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.basicFeatures.maxResolution}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Image sensor type</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.basicFeatures.sensorType}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Max. frames per second (FPS)</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.basicFeatures.maxFPS}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Indoor/Outdoor </div>
+                    <div class="A-DescriptionList__value">{{ipCamera.basicFeatures.indoorOutdoor}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Day/Night</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.basicFeatures.dayNight}}</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Wide Dynamic Range</div>
+                  <div class="A-DescriptionList__value">{{ipCamera.basicFeatures.wideDinamicRange}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">ONVIF conformant</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.basicFeatures.onvif">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.basicFeatures.onvif">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Built-in microphone</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.basicFeatures.microphone">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.basicFeatures.microphone">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Power over Ethernet (PoE)</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.basicFeatures.poe">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.basicFeatures.poe">No</div>                
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">IR Sensitive</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.basicFeatures.irSensitive">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.basicFeatures.irSensitive">No</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Tab 2-->
+        <div class="M-NavigationTabs__tabContent" tabindex="1">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Compression</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.advancedFeatures.compression}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Multi-streaming</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.advancedFeatures.multiStreaming}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Intelligent Dynamic Noise Reduction</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.advancedFeatures.idnr">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.advancedFeatures.idnr">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Intelligent Auto Exposure </div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.advancedFeatures.iae">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.advancedFeatures.iae">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Region of Interest (ROI) & E-PTZ</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.advancedFeatures.regionOfInterest">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.advancedFeatures.regionOfInterest">No</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Region of Interest Tracking</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.advancedFeatures.interestTracking">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.advancedFeatures.interestTracking">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">No. of pressets/ guard tours</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.advancedFeatures.noPresets">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.advancedFeatures.noPresets">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Wiper</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.advancedFeatures.wiper">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.advancedFeatures.wiper">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Thermal</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.advancedFeatures.thermal">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.advancedFeatures.thermal">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Privacy Masking</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.advancedFeatures.privacyMasking">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.advancedFeatures.privacyMasking">No</div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <!--Tab 3-->
+        <div class="M-NavigationTabs__tabContent" tabindex="2">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Alarm Triggering</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Tamper Detection</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.alarmTriggering.tamperDetection">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.alarmTriggering.tamperDetection">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Video Motion Detection</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.alarmTriggering.videoMotionDetection">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.alarmTriggering.videoMotionDetection">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Audio Detection</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.alarmTriggering.audioDetection">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.alarmTriggering.audioDetection">No</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Face Detection</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.alarmTriggering.faceDetection">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.alarmTriggering.faceDetection">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">PTZ Intelligent Tracking</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.alarmTriggering.intelligentTracking">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.alarmTriggering.intelligentTracking">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Sensitivity</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Min illumination day mode (Color)</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.sensitivity.minIluminationDayMode}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Min illumination night mode (B/W)</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.sensitivity.minIlluminationNightMode}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Integrated IR-lighting</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.sensitivity.integratedIr">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.sensitivity.integratedIr">No</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Starlight (extreme low-light)</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.sensitivity.startLight">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.sensitivity.startLight">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Optional IR-lighting</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.sensitivity.optionalIr">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.sensitivity.optionalIr">No</div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <!--Tab 4-->
+        <div class="M-NavigationTabs__tabContent" tabindex="3">
+            <!--Colums of table-->
+            <div class="col-xs-12">
+              <!--data row-->
+              <div class="A-DescriptionList row" >
+                <!-- First column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Focal Length From</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.lens.focalLengthFrom}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Focal Length Till</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.lens.focalLengthTill}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Min. view angle(H)</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.lens.minAngleH}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Max. view angle(H)</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.lens.maxAngleH}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Min. view angle(V)</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.lens.minAngleV}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Max. view angle(V)</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.lens.maxAngleV}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Tilt angle</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.lens.tiltAngle}}</div>
+                    </div>
+                </div>
+  
+                <!--Second column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Video Analytics at the edge</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.lens.iva}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Automatic Back Focus (ABF)</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.lens.automaticBackFocus">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.lens.automaticBackFocus">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Varifocal</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.lens.varifocal">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.lens.varifocal">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Automatic Varifocal (AVF)</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.lens.autoVarifocal">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.lens.autoVarifocal">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Super Resolution Lens</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.lens.superResolutionLens">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.lens.superResolutionLens">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">PTZ Digital Zoom</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.lens.ptzZoomDigital">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.lens.ptzZoomDigital">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">PTZ Optical Zoom</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.lens.ptzOpticalZoom">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.lens.ptzOpticalZoom">No</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!--Tab 5-->
+        <div class="M-NavigationTabs__tabContent" tabindex="4">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">DCRI</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Detection</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.dcri.detection}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Clasification</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.dcri.clasification}}</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Recognition</div>
+                  <div class="A-DescriptionList__value">{{ipCamera.dcri.recognition}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Identification</div>
+                  <div class="A-DescriptionList__value">{{ipCamera.dcri.identification}}</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Storage</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Built-in storage</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.storage.builtInStorage">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.storage.builtInStorage">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Direct-to-iSCSI</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.storage.directToIscsi">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.storage.directToIscsi">No</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Cloud storage</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipCamera.storage.cloudStorage">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipCamera.storage.cloudStorage">No</div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <!--Tab 6-->
+        <div class="M-NavigationTabs__tabContent" tabindex="5">
+            <!--Colums of table-->
+            <div class="col-xs-12">
+              <!--Headers row column-->
+              <div class="A-InformationBlock">
+                <h4 class="A-InformationBlock__headline h4">Connections</h4>
+              </div>
+              <!--data row-->
+              <div class="A-DescriptionList row" >
+                <!-- First column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Alarm input/output</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.connections.alarmInputOutput">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.connections.alarmInputOutput">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Audio in/out</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.connections.audioInOut">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.connections.audioInOut">No</div>
+                  </div>
+                </div>
+  
+                <!--Second column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Hybrid</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.connections.hybrid">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.connections.hybrid">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Confrontation monitor</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.connections.confrontationMonitor">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.connections.confrontationMonitor">No</div>
+                  </div>
+                </div>
+              </div>
+  
+              <!--Headers row column-->
+              <div class="A-InformationBlock">
+                <h4 class="A-InformationBlock__headline h4">Housing</h4>
+              </div>
+              <!--data row-->
+              <div class="A-DescriptionList row" >
+                <!-- First column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Weather Rating</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.housing.weatherRating}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Vandal Resistant</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.housing.vandalResistant}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Operating temperature</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.housing.operatingTemperature}}</div>
+                    </div>
+                </div>
+  
+                <!--Second column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Corrosion Proof</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.housing.corrosionProof">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.housing.corrosionProof">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Explosion Proof</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipCamera.housing.explosionProof">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipCamera.housing.explosionProof">No</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!--Headers row column-->
+              <div class="A-InformationBlock">
+                <h4 class="A-InformationBlock__headline h4">Storage</h4>
+              </div>
+              <!--data row-->
+              <div class="A-DescriptionList row" >
+                <!-- First column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Input voltage</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.electricalData.inputVoltage}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Normal version</div>
+                      <div class="A-DescriptionList__value">{{ipCamera.electricalData.normalVersion}}</div>
+                    </div>
+                </div>
+  
+                <!--Second column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">IR version</div>
+                    <div class="A-DescriptionList__value">{{ipCamera.electricalData.irVersion}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>
