@@ -1,3 +1,333 @@
-<p>
-  details-analog-camera works!
-</p>
+<app-header></app-header>
+
+<main class="vhHeight">
+
+  <!--Image and info in the right side-->
+  <div class="O-ExtendedCarousel">
+    <div class="container-fluid">
+      
+      <!--Title and subtitle-->
+      <h1 class="O-ExtendedCarousel__headline">{{analogCamera.name}}</h1>
+      <div class="O-ExtendedCarousel__copy">{{analogCamera.ctnClassFull}}</div>
+      
+      <div class="row">
+        <!--Image-->
+        <div class="O-ExtendedCarousel__imagesContainer col-xs-12 col-sm-6 col-md-8">
+          <section class="M-CarouselSimple__container M-CarouselSimple__container--fullBleed">
+            <div class="M-CarouselSimple " style="height: 421px;">
+              <div class="M-CarouselSimple__slideContainer">
+                <div data-m-carousel-simple-slide="" class="M-CarouselSimple__slide M-CarouselSimple__slide--active">
+                  <figure class="A-Image__figure">
+                    <picture class="A-Image__picture">
+                      <img class="A-Image " src="./../../../../assets/login/supergraphic.png" alt="{{analogCamera.name}}">
+                    </picture>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        
+        <!--Content in the right side-->
+        <div class="O-ExtendedCarousel__dataContainer col-xs-12 col-sm-6 col-md-4">
+          <!--Info in the right side of image-->
+          <div class="A-Text-RichText">
+            <ul class="A-List A-List--unordered">
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Category: </span>
+                <span class="A-List__itemText">{{analogCamera.category}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Family: </span>
+                <span class="A-List__itemText">{{analogCamera.family}}</span>                
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Price: </span>
+                <span class="A-List__itemText">{{analogCamera.price}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Category: </span>
+                <span class="A-List__itemText">{{analogCamera.name}}</span>
+              </li>
+            </ul>
+            
+          </div>
+
+          <!--Buttons-->
+          <div class="O-ExtendedCarousel__buttonContainer">        
+            <div class="A-Link A-Link--button  A-Link--button--filled ">
+              <a class="A-Link__link A-Link__link--button" (click)="editAnalogCamera(analogCamera.id)">
+                <span class="A-Link__linkText">Edit</span>
+              </a>
+            </div>
+            
+            <div class="A-Link A-Link--button  ">
+              <a class="A-Link__link A-Link__link--button" (click)="deleteAnalogCamera(analogCamera.id)">
+                <span class="A-Link__linkText">Delete</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Table sections-->
+  <div class="M-NavigationTabs">
+    <!--Header of tabs-->
+    <div class="container">
+      <div class="M-TabLinks">
+        <div class="M-TabLinks__scrollContainer">
+          <ul class="M-TabLinks__links M-TabLinks__links--alignLeft">
+              <li class="M-TabLinks__link M-TabLinks__link--active" tabindex="0">
+                <button class="M-TabLinks__trigger" (click)="changeTab(0)">
+                  <span>Basic Features</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link" tabindex="1">
+                <button class="M-TabLinks__trigger" (click)="changeTab(1)">
+                  <span>Alarm Triggering & Sensitivity</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link" tabindex="2">
+                <button class="M-TabLinks__trigger" (click)="changeTab(2)">
+                  <span>Lens</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link" tabindex="3">
+                <button class="M-TabLinks__trigger" (click)="changeTab(3)">
+                  <span>Housing & Electrical</span>
+                </button>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="M-NavigationTabs__tabLinksSeparator"></div>
+    
+    <div class="container-fluid">
+      <div class="row">
+
+        <!--Tab 1-->
+        <div class="M-NavigationTabs__tabContent M-NavigationTabs__tabContent--active visible" tabindex="0">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Resolution</div>
+                    <div class="A-DescriptionList__value">{{analogCamera.basicFeatures.maxResolution}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Image sensor type</div>
+                    <div class="A-DescriptionList__value">{{analogCamera.basicFeatures.sensorType}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Indoor/Outdoor </div>
+                    <div class="A-DescriptionList__value">{{analogCamera.basicFeatures.indoorOutdoor}}</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Day/Night</div>
+                  <div class="A-DescriptionList__value">{{analogCamera.basicFeatures.dayNight}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Wide Dynamic Range</div>
+                  <div class="A-DescriptionList__value">{{analogCamera.basicFeatures.wideDinamicRange}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">IR Sensitive</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogCamera.basicFeatures.irSensitive">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogCamera.basicFeatures.irSensitive">No</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Tab 2-->
+        <div class="M-NavigationTabs__tabContent" tabindex="1">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Alarm Triggering</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Tamper Detection</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogCamera.alarmTriggering.tamperDetection">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogCamera.alarmTriggering.tamperDetection">No</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Video Motion Detection</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogCamera.alarmTriggering.videoMotionDetection">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogCamera.alarmTriggering.videoMotionDetection">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Sensitivity</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Min illumination day mode (Color)</div>
+                    <div class="A-DescriptionList__value">{{analogCamera.sensitivity.minIluminationDayMode}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Min illumination night mode (B/W)</div>
+                    <div class="A-DescriptionList__value">{{analogCamera.sensitivity.minIlluminationNightMode}}</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Max range at night</div>
+                  <div class="A-DescriptionList__value">{{analogCamera.sensitivity.maxRangeAtNight}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Integrated IR-lighting</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogCamera.sensitivity.nightVision">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogCamera.sensitivity.nightVision">No</div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <!--Tab 3-->
+        <div class="M-NavigationTabs__tabContent" tabindex="2">
+            <!--Colums of table-->
+            <div class="col-xs-12">
+              <!--data row-->
+              <div class="A-DescriptionList row" >
+                <!-- First column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Focal Length From</div>
+                      <div class="A-DescriptionList__value">{{analogCamera.lens.focalLengthFrom}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Focal Length Till</div>
+                      <div class="A-DescriptionList__value">{{analogCamera.lens.focalLengthTill}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Min. view angle(H)</div>
+                      <div class="A-DescriptionList__value">{{analogCamera.lens.minAngleH}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Max. view angle(H)</div>
+                      <div class="A-DescriptionList__value">{{analogCamera.lens.maxAngleH}}</div>
+                    </div>
+                </div>
+  
+                <!--Second column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Tilt angle</div>
+                    <div class="A-DescriptionList__value">{{analogCamera.lens.tiltAngle}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">PTZ Digital Zoom</div>
+                    <div class="A-DescriptionList__value" *ngIf="analogCamera.lens.ptzZoomDigital">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!analogCamera.lens.ptzZoomDigital">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">PTZ Optical Zoom</div>
+                    <div class="A-DescriptionList__value" *ngIf="analogCamera.lens.ptzOpticalZoom">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!analogCamera.lens.ptzOpticalZoom">No</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!--Tab 4-->
+        <div class="M-NavigationTabs__tabContent" tabindex="3">
+            <!--Colums of table-->
+            <div class="col-xs-12">
+              <!--Headers row column-->
+              <div class="A-InformationBlock">
+                <h4 class="A-InformationBlock__headline h4">Housing</h4>
+              </div>
+              <!--data row-->
+              <div class="A-DescriptionList row" >
+                <!-- First column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Weather Rating</div>
+                      <div class="A-DescriptionList__value">{{analogCamera.housing.weatherRating}}</div>
+                    </div>
+                    <div class="A-DescriptionList__item">
+                      <div class="A-DescriptionList__label">Vandal Resistant</div>
+                      <div class="A-DescriptionList__value">{{analogCamera.housing.vandalResistant}}</div>
+                    </div>
+                </div>
+  
+                <!--Second column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Corrosion Proof</div>
+                    <div class="A-DescriptionList__label">Operating temperature</div>
+                    <div class="A-DescriptionList__value">{{analogCamera.housing.operatingTemperature}}</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!--Headers row column-->
+              <div class="A-InformationBlock">
+                <h4 class="A-InformationBlock__headline h4">Electrical Information</h4>
+              </div>
+              <!--data row-->
+              <div class="A-DescriptionList row" >
+                <!-- First column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Input voltage</div>
+                    <div class="A-DescriptionList__value">{{analogCamera.electricalData.inputVoltage}}</div>
+                  </div>
+                </div>
+  
+                <!--Second column-->
+                <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Normal version</div>
+                    <div class="A-DescriptionList__value">{{analogCamera.electricalData.normalVersion}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>

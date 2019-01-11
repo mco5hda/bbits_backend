@@ -14,6 +14,7 @@ export class AddIpRecordingComponent implements OnInit {
 
   currentTab = 0;
   ipRecording: IPRecording = new IPRecording();
+  loading: boolean = false;
 
   selectedFiles: FileList;
   currentFileUpload: File;
@@ -150,11 +151,7 @@ export class AddIpRecordingComponent implements OnInit {
       AND ADD THE RESPONSE TO THE INPUTS
     */
     if(this.currentTab == 0){
-      document.getElementById('addProductForm').className += 'spinner-collapsed';
-      document.getElementById('spinner').classList.remove('spinner-collapsed');
-
       this.fillInputs();
-      //setTimeout(this.fillInputs, 3000);
     }
 
     // Increase or decrease the current tab by 1:
@@ -218,190 +215,196 @@ export class AddIpRecordingComponent implements OnInit {
   * Metodos para precargar al momento de subir el datasheet cada uno de los input
   */
   fillInputs(): void {
-    document.getElementById('spinner').className += ' spinner-collapsed';
-    document.getElementById('addProductForm').classList.remove('spinner-collapsed');
+    this.loading = true;
 
     this.currentFileUpload = this.selectedFiles.item(0);
 
     this.datasheetService.getDatasheetInformation(this.currentFileUpload, this.productType)
-      .subscribe((data) => {
-        let info = data['body']
-        for(let key in info){
-          if(key === 'name'){
-            this.ipRecording.name = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'family'){
-            this.ipRecording.family = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'category'){
-            this.ipRecording.category = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'ctnClass'){
-            this.ipRecording.ctnClass = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'ctnClassFull'){
-            this.ipRecording.ctnClassFull = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'price'){
-            this.ipRecording.price = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'dataFormat'){
-            this.ipRecording.dataFormat = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'basicFeaturesRecording'){
-            for(let index in info[key]){
-              if(index === 'systemSize'){
-                this.ipRecording.basicFeatures.systemSize = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'videoCompression'){
-                this.ipRecording.basicFeatures.videoCompression = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'ipChannels'){
-                this.ipRecording.basicFeatures.ipChannels = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'integratedVideoManagement'){
-                this.ipRecording.basicFeatures.integratedVideoManagement = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'bandwidth'){
-                this.ipRecording.basicFeatures.bandwidth = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'supportedResolution'){
-                this.ipRecording.basicFeatures.supportedResolution = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'onBoardTranscoding'){
-                this.ipRecording.basicFeatures.onBoardTranscoding = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'onvif'){
-                this.ipRecording.basicFeatures.onvif = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'psr'){
-                this.ipRecording.basicFeatures.psr = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'hotSwappablwHDD'){
-                this.ipRecording.basicFeatures.hotSwappablwHDD = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'monitorOutput'){
-                this.ipRecording.basicFeatures.monitorOutput = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'raid'){
-                this.ipRecording.basicFeatures.raid = this.validateUndefinedValue(index, info[key][index]);
+      .subscribe(
+        (data) => {
+          let info = data['body']
+          for(let key in info){
+            if(key === 'name'){
+              this.ipRecording.name = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'family'){
+              this.ipRecording.family = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'category'){
+              this.ipRecording.category = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'ctnClass'){
+              this.ipRecording.ctnClass = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'ctnClassFull'){
+              this.ipRecording.ctnClassFull = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'price'){
+              this.ipRecording.price = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'dataFormat'){
+              this.ipRecording.dataFormat = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'basicFeaturesRecording'){
+              for(let index in info[key]){
+                if(index === 'systemSize'){
+                  this.ipRecording.basicFeatures.systemSize = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'videoCompression'){
+                  this.ipRecording.basicFeatures.videoCompression = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'ipChannels'){
+                  this.ipRecording.basicFeatures.ipChannels = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'integratedVideoManagement'){
+                  this.ipRecording.basicFeatures.integratedVideoManagement = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'bandwidth'){
+                  this.ipRecording.basicFeatures.bandwidth = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'supportedResolution'){
+                  this.ipRecording.basicFeatures.supportedResolution = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'onBoardTranscoding'){
+                  this.ipRecording.basicFeatures.onBoardTranscoding = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'onvif'){
+                  this.ipRecording.basicFeatures.onvif = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'psr'){
+                  this.ipRecording.basicFeatures.psr = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'hotSwappablwHDD'){
+                  this.ipRecording.basicFeatures.hotSwappablwHDD = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'monitorOutput'){
+                  this.ipRecording.basicFeatures.monitorOutput = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'raid'){
+                  this.ipRecording.basicFeatures.raid = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'advancedFeaturesRecording'){
-            for(let index in info[key]){
-              if(index === 'forensicSearchSupport'){
-                this.ipRecording.advancedFeatures.forensicSearchSupport = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'supportWebClient'){
-                this.ipRecording.advancedFeatures.supportWebClient = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'advancedFeaturesRecording'){
+              for(let index in info[key]){
+                if(index === 'forensicSearchSupport'){
+                  this.ipRecording.advancedFeatures.forensicSearchSupport = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'supportWebClient'){
+                  this.ipRecording.advancedFeatures.supportWebClient = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'aioFunctionsRecording'){
-            for(let index in info[key]){
-              if(index === 'ptzControls'){
-                this.ipRecording.aioFunctions.ptzControls = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'adminControl'){
-                this.ipRecording.aioFunctions.adminControl = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'exportOptions'){
-                this.ipRecording.aioFunctions.exportOptions = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'cctvKeyboardSupport'){
-                this.ipRecording.aioFunctions.cctvKeyboardSupport = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'aioFunctionsRecording'){
+              for(let index in info[key]){
+                if(index === 'ptzControls'){
+                  this.ipRecording.aioFunctions.ptzControls = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'adminControl'){
+                  this.ipRecording.aioFunctions.adminControl = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'exportOptions'){
+                  this.ipRecording.aioFunctions.exportOptions = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'cctvKeyboardSupport'){
+                  this.ipRecording.aioFunctions.cctvKeyboardSupport = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'audioRecording'){
-            for(let index in info[key]){
-              if(index === 'inOutChanels'){
-                this.ipRecording.audio.inOutChanels = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'compressionType'){
-                this.ipRecording.audio.compressionType = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'synchronousType'){
-                this.ipRecording.audio.synchronousType = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'amcta'){
-                this.ipRecording.audio.amcta = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'audioRecording'){
+              for(let index in info[key]){
+                if(index === 'inOutChanels'){
+                  this.ipRecording.audio.inOutChanels = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'compressionType'){
+                  this.ipRecording.audio.compressionType = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'synchronousType'){
+                  this.ipRecording.audio.synchronousType = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'amcta'){
+                  this.ipRecording.audio.amcta = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'backUpRecoding'){
-            for(let index in info[key]){
-              if(index === 'dvdWritter'){
-                this.ipRecording.backUp.dvdWritter = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'supportedDevices'){
-                this.ipRecording.backUp.supportedDevices = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'backUpMode'){
-                this.ipRecording.backUp.backUpMode = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'backUpRecoding'){
+              for(let index in info[key]){
+                if(index === 'dvdWritter'){
+                  this.ipRecording.backUp.dvdWritter = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'supportedDevices'){
+                  this.ipRecording.backUp.supportedDevices = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'backUpMode'){
+                  this.ipRecording.backUp.backUpMode = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'integrationRecording'){
-            for(let index in info[key]){
-              if(index === 'optionalAtpmPos'){
-                this.ipRecording.integration.optionalAtpmPos = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'integrationToolsSDK'){
-                this.ipRecording.integration.integrationToolsSDK = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'integrationRecording'){
+              for(let index in info[key]){
+                if(index === 'optionalAtpmPos'){
+                  this.ipRecording.integration.optionalAtpmPos = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'integrationToolsSDK'){
+                  this.ipRecording.integration.integrationToolsSDK = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'localRemoteViewingRecording'){
-            for(let index in info[key]){
-              if(index === 'videoSecurityApp'){
-                this.ipRecording.larViewing.videoSecurityApp = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'webBrowserAccess'){
-                this.ipRecording.larViewing.webBrowserAccess = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'simultaneousUsers'){
-                this.ipRecording.larViewing.simultaneousUsers = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'viewingBVC'){
-                this.ipRecording.larViewing.viewingBVC = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'bvms'){
-                this.ipRecording.larViewing.bvms = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'localRemoteViewingRecording'){
+              for(let index in info[key]){
+                if(index === 'videoSecurityApp'){
+                  this.ipRecording.larViewing.videoSecurityApp = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'webBrowserAccess'){
+                  this.ipRecording.larViewing.webBrowserAccess = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'simultaneousUsers'){
+                  this.ipRecording.larViewing.simultaneousUsers = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'viewingBVC'){
+                  this.ipRecording.larViewing.viewingBVC = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'bvms'){
+                  this.ipRecording.larViewing.bvms = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'mechanicalRecording'){
-            for(let index in info[key]){
-              if(index === 'formFactor'){
-                this.ipRecording.mechanical.formFactor = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'networkConnection'){
-                this.ipRecording.mechanical.networkConnection = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'usbPorts'){
-                this.ipRecording.mechanical.usbPorts = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'numberOfPowerSupplies'){
-                this.ipRecording.mechanical.numberOfPowerSupplies = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'powerSuppliesHS'){
-                this.ipRecording.mechanical.powerSuppliesHS = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'mechanicalRecording'){
+              for(let index in info[key]){
+                if(index === 'formFactor'){
+                  this.ipRecording.mechanical.formFactor = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'networkConnection'){
+                  this.ipRecording.mechanical.networkConnection = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'usbPorts'){
+                  this.ipRecording.mechanical.usbPorts = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'numberOfPowerSupplies'){
+                  this.ipRecording.mechanical.numberOfPowerSupplies = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'powerSuppliesHS'){
+                  this.ipRecording.mechanical.powerSuppliesHS = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'recording'){
-            for(let index in info[key]){
-              if(index === 'videoRecordingManager'){
-                this.ipRecording.recording.videoRecordingManager = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'scheduleRecording'){
-                this.ipRecording.recording.scheduleRecording = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'recording'){
+              for(let index in info[key]){
+                if(index === 'videoRecordingManager'){
+                  this.ipRecording.recording.videoRecordingManager = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'scheduleRecording'){
+                  this.ipRecording.recording.scheduleRecording = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'storageOptionsExtensionsRecording'){
-            for(let index in info[key]){
-              if(index === 'maxNumberOfUnits'){
-                this.ipRecording.storageExtensions.maxNumberOfUnits = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'maximumDrievesSupported'){
-                this.ipRecording.storageExtensions.maximumDrievesSupported = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'availableCapacitiesPerDriveExtensions'){
-                this.ipRecording.storageExtensions.availableCapacitiesPerDriveExtensions = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'hotSwappable'){
-                this.ipRecording.storageExtensions.hotSwappable = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'storageOptionsExtensionsRecording'){
+              for(let index in info[key]){
+                if(index === 'maxNumberOfUnits'){
+                  this.ipRecording.storageExtensions.maxNumberOfUnits = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'maximumDrievesSupported'){
+                  this.ipRecording.storageExtensions.maximumDrievesSupported = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'availableCapacitiesPerDriveExtensions'){
+                  this.ipRecording.storageExtensions.availableCapacitiesPerDriveExtensions = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'hotSwappable'){
+                  this.ipRecording.storageExtensions.hotSwappable = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'storageOptionsRecording'){
-            for(let index in info[key]){
-              if(index === 'maxDrivesSupported'){
-                this.ipRecording.storageOptions.maxDrivesSupported = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'baseSystemCapacity'){
-                this.ipRecording.storageOptions.baseSystemCapacity = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'maxBaseSystemCapacity'){
-                this.ipRecording.storageOptions.maxBaseSystemCapacity = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'fullSystemCapacity'){
-                this.ipRecording.storageOptions.fullSystemCapacity = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'availableCapacitiesPerDrive'){
-                this.ipRecording.storageOptions.availableCapacitiesPerDrive = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'storageOptionsRecording'){
+              for(let index in info[key]){
+                if(index === 'maxDrivesSupported'){
+                  this.ipRecording.storageOptions.maxDrivesSupported = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'baseSystemCapacity'){
+                  this.ipRecording.storageOptions.baseSystemCapacity = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'maxBaseSystemCapacity'){
+                  this.ipRecording.storageOptions.maxBaseSystemCapacity = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'fullSystemCapacity'){
+                  this.ipRecording.storageOptions.fullSystemCapacity = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'availableCapacitiesPerDrive'){
+                  this.ipRecording.storageOptions.availableCapacitiesPerDrive = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'videoOutputRecording'){
-            for(let index in info[key]){
-              if(index === 'connectorType'){
-                this.ipRecording.videoOutput.connectorType = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'spotMonitor'){
-                this.ipRecording.videoOutput.spotMonitor = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'videoOutputRecording'){
+              for(let index in info[key]){
+                if(index === 'connectorType'){
+                  this.ipRecording.videoOutput.connectorType = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'spotMonitor'){
+                  this.ipRecording.videoOutput.spotMonitor = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'electricalData'){
-            for(let index in info[key]){
-              if(index === 'inputVoltage'){
-                this.ipRecording.electricalData.inputVoltage = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'normalVersion'){
-                this.ipRecording.electricalData.normalVersion = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'irVersion'){
-                this.ipRecording.electricalData.irVersion = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'electricalData'){
+              for(let index in info[key]){
+                if(index === 'inputVoltage'){
+                  this.ipRecording.electricalData.inputVoltage = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'normalVersion'){
+                  this.ipRecording.electricalData.normalVersion = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'irVersion'){
+                  this.ipRecording.electricalData.irVersion = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
             }
           }
+
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
         }
-      });
+      );
   }
 
   validateUndefinedValue(key, value){

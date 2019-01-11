@@ -1,3 +1,602 @@
-<p>
-  details-ip-recording works!
-</p>
+<app-header></app-header>
+
+<main class="vhHeight">
+
+  <!--Image and info in the right side-->
+  <div class="O-ExtendedCarousel">
+    <div class="container-fluid">
+      
+      <!--Title and subtitle-->
+      <h1 class="O-ExtendedCarousel__headline">{{ipRecording.name}}</h1>
+      <div class="O-ExtendedCarousel__copy">{{ipRecording.ctnClassFull}}</div>
+      
+      <div class="row">
+        <!--Image-->
+        <div class="O-ExtendedCarousel__imagesContainer col-xs-12 col-sm-6 col-md-8">
+          <section class="M-CarouselSimple__container M-CarouselSimple__container--fullBleed">
+            <div class="M-CarouselSimple " style="height: 421px;">
+              <div class="M-CarouselSimple__slideContainer">
+                <div data-m-carousel-simple-slide="" class="M-CarouselSimple__slide M-CarouselSimple__slide--active">
+                  <figure class="A-Image__figure">
+                    <picture class="A-Image__picture">
+                      <img class="A-Image " src="./../../../../assets/login/supergraphic.png" alt="{{ipRecording.name}}">
+                    </picture>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        
+        <!--Content in the right side-->
+        <div class="O-ExtendedCarousel__dataContainer col-xs-12 col-sm-6 col-md-4">
+          <!--Info in the right side of image-->
+          <div class="A-Text-RichText">
+            <ul class="A-List A-List--unordered">
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Category: </span>
+                <span class="A-List__itemText">{{ipRecording.category}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Family: </span>
+                <span class="A-List__itemText">{{ipRecording.family}}</span>                
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Price: </span>
+                <span class="A-List__itemText">{{ipRecording.price}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Dateformat: </span>
+                <span class="A-List__itemText">{{ipRecording.dataFormat}}</span>
+              </li>
+            </ul>
+            
+          </div>
+
+          <!--Buttons-->
+          <div class="O-ExtendedCarousel__buttonContainer">        
+            <div class="A-Link A-Link--button  A-Link--button--filled ">
+              <a class="A-Link__link A-Link__link--button" (click)="editIPRecording(ipRecording.id)">
+                <span class="A-Link__linkText">Edit</span>
+              </a>
+            </div>
+            
+            <div class="A-Link A-Link--button  ">
+              <a class="A-Link__link A-Link__link--button" (click)="deleteIPRecording(ipRecording.id)">
+                <span class="A-Link__linkText">Delete</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Table sections-->
+  <div class="M-NavigationTabs">
+    <!--Header of tabs-->
+    <div class="container">
+      <div class="M-TabLinks">
+        <div class="M-TabLinks__scrollContainer">
+          <ul class="M-TabLinks__links M-TabLinks__links--alignLeft">
+            <li class="M-TabLinks__link M-TabLinks__link--active" tabindex="0">
+              <button class="M-TabLinks__trigger" (click)="changeTab(0)">
+                <span>Features</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="1">
+              <button class="M-TabLinks__trigger" (click)="changeTab(1)">
+                <span>All in one & Audio</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="2">
+              <button class="M-TabLinks__trigger" (click)="changeTab(2)">
+                <span>LAR Viewing & Recording</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="3">
+              <button class="M-TabLinks__trigger" (click)="changeTab(3)">
+                <span>Back-up & Mechanical</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="4">
+              <button class="M-TabLinks__trigger" (click)="changeTab(4)">
+                <span>Storage</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="5">
+              <button class="M-TabLinks__trigger" (click)="changeTab(5)">
+                <span>Integration & Video & Electrical</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="M-NavigationTabs__tabLinksSeparator"></div>
+    
+    <div class="container-fluid">
+      <div class="row">
+
+        <!--Tab 1-->
+        <div class="M-NavigationTabs__tabContent M-NavigationTabs__tabContent--active visible" tabindex="0">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Basic Features</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Default system size</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.basicFeatures.systemSize}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Video compression</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.basicFeatures.videoCompression}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">IP Channels</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.basicFeatures.ipChannels}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Bandwidth</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.basicFeatures.bandwidth}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Supported resolutions</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.basicFeatures.supportedResolution}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">RAID level</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.basicFeatures.raid}}</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Integrated Video Management</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.basicFeatures.integratedVideoManagement">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.basicFeatures.integratedVideoManagement">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">ONVIF</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.basicFeatures.onvif">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.basicFeatures.onvif">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">On-board transcoding</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.basicFeatures.onBoardTranscoding">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.basicFeatures.onBoardTranscoding">No</div>                
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Power Supply Redundancy</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.basicFeatures.psr">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.basicFeatures.psr">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Hot swappable HDD</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.basicFeatures.hotSwappablwHDD">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.basicFeatures.hotSwappablwHDD">No</div>
+                </div>                
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Monitor output</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.basicFeatures.monitorOutput">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.basicFeatures.monitorOutput">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Advanced Features</h4>
+            </div>
+
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Forensic Search Support</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.advancedFeatures.forensicSearchSupport">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.advancedFeatures.forensicSearchSupport">No</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Support Web Client</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.advancedFeatures.supportWebClient">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.advancedFeatures.supportWebClient">No</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Tab 2-->
+        <div class="M-NavigationTabs__tabContent" tabindex="1">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">All in one functions</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">PTZ control</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.aioFunctions.ptzControls">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.aioFunctions.ptzControls">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">CCTV Keyboard support</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.aioFunctions.cctvKeyboardSupport">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.aioFunctions.cctvKeyboardSupport">No</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Admin control</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.aioFunctions.adminControl">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.aioFunctions.adminControl">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Export options</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.aioFunctions.exportOptions">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.aioFunctions.exportOptions">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Audio</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">In/out channels</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipRecording.audio.inOutChanels">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipRecording.audio.inOutChanels">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Associate multiple cameras to audio</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipRecording.audio.amcta">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipRecording.audio.amcta">No</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Compression</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.audio.compressionType">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.audio.compressionType">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Synchronous audio</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.audio.synchronousType">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.audio.synchronousType">No</div>
+                </div>
+              </div>
+            </div>            
+          </div>
+        </div>
+
+        <!--Tab 3-->
+        <div class="M-NavigationTabs__tabContent" tabindex="2">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Local and Remote Viewing Support</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Simultaneous accessible users</div>
+                    <div class="A-DescriptionList__value">{{ipRecording.larViewing.simultaneousUsers}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Video Security App</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipRecording.larViewing.videoSecurityApp">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipRecording.larViewing.videoSecurityApp">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Web browser access</div>
+                    <div class="A-DescriptionList__value" *ngIf="ipRecording.larViewing.webBrowserAccess">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!ipRecording.larViewing.webBrowserAccess">No</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Bosch Video Client</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.larViewing.viewingBVC">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.larViewing.viewingBVC">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Bosch Video Management System</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.larViewing.bvms">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.larViewing.bvms">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Recording</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Video Recording Manager</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.recording.videoRecordingManager">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.recording.videoRecordingManager">No</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Schedule Recording Modes</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.recording.scheduleRecording">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.recording.scheduleRecording">No</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Tab 4-->
+        <div class="M-NavigationTabs__tabContent" tabindex="3">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Export/Back-up data</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Supported devices</div>
+                    <div class="A-DescriptionList__value">{{ipRecording.backUp.supportedDevices}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Back-up mode</div>
+                    <div class="A-DescriptionList__value">{{ipRecording.backUp.backUpMode}}</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Built-in DVD writter</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.backUp.dvdWritter">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.backUp.dvdWritter">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Mechanical</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Form factor</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.mechanical.formFactor}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Network connections(LAN)</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.mechanical.networkConnection}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">USB ports</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.mechanical.usbPorts}}</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Number of power supplies</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.mechanical.numberOfPowerSupplies}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Power supplies hot swappable</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.mechanical.powerSuppliesHS">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.mechanical.powerSuppliesHS">No</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Tab 5-->
+        <div class="M-NavigationTabs__tabContent" tabindex="4">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Storage Options</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Max drives supported</div>
+                    <div class="A-DescriptionList__value">{{ipRecording.storageOptions.maxDrivesSupported}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Base system capacity (TB)</div>
+                    <div class="A-DescriptionList__value">{{ipRecording.storageOptions.baseSystemCapacity}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Max base system capacity (TB)</div>
+                    <div class="A-DescriptionList__value">{{ipRecording.storageOptions.maxBaseSystemCapacity}}</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Full system capacity (TB)</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.storageOptions.fullSystemCapacity}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Available capacities per drive</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.storageOptions.availableCapacitiesPerDrive}}</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Storage Extensions</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Max number of units</div>
+                    <div class="A-DescriptionList__value">{{ipRecording.storageExtensions.maxNumberOfUnits}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Max drives supported</div>
+                    <div class="A-DescriptionList__value">{{ipRecording.storageExtensions.maximumDrievesSupported}}</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Available capacities per drive</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.storageExtensions.availableCapacitiesPerDriveExtensions}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Hot swappable</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.storageExtensions.hotSwappable">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.storageExtensions.hotSwappable">No</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Tab 6-->
+        <div class="M-NavigationTabs__tabContent" tabindex="5">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Integration tools</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Optional ATM/POS integration</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.integration.optionalAtpmPos">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.integration.optionalAtpmPos">No</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">SDK IPP</div>
+                  <div class="A-DescriptionList__value" *ngIf="ipRecording.integration.integrationToolsSDK">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.integration.integrationToolsSDK">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Video Output</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Connector type</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.videoOutput.connectorType}}</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Spot monitor</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.videoOutput.spotMonitor}}</div>
+                </div>
+              </div>
+            </div>
+              
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Electrical Information</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Input voltage</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.electricalData.inputVoltage}}</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Normal version</div>
+                  <div class="A-DescriptionList__value">{{ipRecording.electricalData.normalVersion}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>

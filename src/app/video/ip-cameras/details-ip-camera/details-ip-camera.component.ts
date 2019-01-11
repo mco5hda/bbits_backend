@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { IPCamera } from '../../models/cameras/ip-cameras.model';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-details-ip-camera',
   templateUrl: './details-ip-camera.component.html',
-  styleUrls: ['./details-ip-camera.component.css']
+  styleUrls: ['./details-ip-camera.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DetailsIpCameraComponent implements OnInit {
   ipCamera: IPCamera;
@@ -29,6 +30,21 @@ export class DetailsIpCameraComponent implements OnInit {
     for (let i = 0; i < x.length; i++) {
       if(x[i].tabIndex === id){
         x[i].className += ' M-NavigationTabs__tabContent--active visible'
+        break;
+      }
+    }
+
+    //Changes the color of the li in the current step
+    let li = document.getElementsByClassName('M-TabLinks__link') as HTMLCollectionOf<HTMLElement>;
+
+    for (let i = 0; i < li.length; i++) {
+      li[i].classList.remove('M-TabLinks__link--active')
+    }
+
+    for (let i = 0; i < li.length; i++) {
+      if(li[i].tabIndex === id){
+        li[i].className += ' M-TabLinks__link--active'
+        break;
       }
     }
   }

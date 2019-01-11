@@ -12,6 +12,7 @@ export class EditIpCameraComponent implements OnInit {
   ipCamera: IPCamera;
   currentTab: number = 0; // Current tab is set to be the first tab (0)
 
+  families = ["2000", "4000", "5000", "6000", "7000", "8000", "9000"]
   categories = ["Fixed IP Cameras","Fixed IP Domes","Panoramic cameras","PTZ IP Cameras","Specialty Cameras"];
   indoorOutdoorArray = ["Indoor", "Outdoor"];
   dayNightArray = ["Day/Night","E-Day/Night","Thermal"];

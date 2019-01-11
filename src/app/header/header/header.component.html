@@ -1,7 +1,7 @@
 <header class="O-Header">
   <div class="O-Header__logoRow">
     <div class="container-fluid">
-      <a class="O-Header__brandLogo" href="https://www.bosch.com/" itemprop="url" aria-label="Logo">
+      <a class="O-Header__brandLogo" routerLink="/home" itemprop="url" aria-label="Logo">
         <figure class="A-Image__figure">
           <div class="A-Image__preloadWrapper A-Image__preloadWrapper--ratio113to37">
             <div itemprop="logo" itemscope="" itemtype="https://schema.org/ImageObject">
@@ -58,28 +58,38 @@
       <div class="M-Navigation-Main__itemsWrapper is-hidden">
         <ul  class="M-Navigation-Main__items" role="menubar">
           <li class="M-Navigation__item M-Navigation-Main__item">
-            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub M-Navigation__link--active" routerLink="/view-ip-camera">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub M-Navigation__link--active" routerLink="/consult-ip-cameras">
               <span>IP Cameras</span>
             </a>
           </li>
           <li class="M-Navigation__item M-Navigation-Main__item">
-            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub" routerLink="/consult-analog-cameras">
               <span>Analog Cameras</span>
             </a>
           </li>
           <li class="M-Navigation__item M-Navigation-Main__item">
-            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
-              <span>IP Recording</span>
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub" routerLink="/consult-ip-recordings">
+              <span>IP Recordings</span>
             </a>
           </li>
           <li class="M-Navigation__item M-Navigation-Main__item">
-            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
-              <span>Analog Recording</span>
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub" routerLink="/consult-analog-recordings">
+              <span>Analog Recordings</span>
             </a>
           </li>
           <li class="M-Navigation__item M-Navigation-Main__item">
             <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
               <span>Accessories</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub" routerLink="/consult-workstations">
+              <span>Workstations</span>
+            </a>
+          </li>
+          <li class="M-Navigation__item M-Navigation-Main__item">
+            <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+              <span>Licenses</span>
             </a>
           </li>
         </ul>

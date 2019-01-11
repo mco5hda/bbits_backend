@@ -12,7 +12,8 @@ export class EditAnalogCameraComponent implements OnInit {
 
   analogCamera: AnalogCamera; 
   currentTab = 0; // Current tab is set to be the first tab (0)
-
+  
+  families = ["1000", "2000", "4000", "5000"]
   categories = ["Fixed AN cameras","Fixed AN Domes","PTZ AN Cameras","Specialty AN Cameras"];
   indoorOutdoorArray = ["Indoor", "Indoor/Outdoor", "Outdoor"];
   dayNightArray = ["Day", "Day/Night","E-Day/Night"];

@@ -43,7 +43,9 @@
               Family
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="family" name="family" [(ngModel)]="ipCamera.family" #family="ngModel" (change)="validateInput($event)" type="text">
+              <select class="mwf-select mwf-multiple" id="family" name="family" [(ngModel)]="ipCamera.family" #family="ngModel">
+                <option class="mwf-select-option" *ngFor="let family of families" value="{{family}}">{{family}}</option>
+              </select>
             </div>
           </li>
 

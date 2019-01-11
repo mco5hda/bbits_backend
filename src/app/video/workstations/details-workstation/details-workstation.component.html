@@ -1,3 +1,150 @@
-<p>
-  details-workstation works!
-</p>
+<app-header></app-header>
+
+<main class="vhHeight">
+
+  <!--Image and info in the right side-->
+  <div class="O-ExtendedCarousel">
+    <div class="container-fluid">
+      
+      <!--Title and subtitle-->
+      <h1 class="O-ExtendedCarousel__headline">{{workStation.model}}</h1>
+
+      <div class="row">
+        <!--Image-->
+        <div class="O-ExtendedCarousel__imagesContainer col-xs-12 col-sm-6 col-md-8">
+          <section class="M-CarouselSimple__container M-CarouselSimple__container--fullBleed">
+            <div class="M-CarouselSimple " style="height: 421px;">
+              <div class="M-CarouselSimple__slideContainer">
+                <div data-m-carousel-simple-slide="" class="M-CarouselSimple__slide M-CarouselSimple__slide--active">
+                  <figure class="A-Image__figure">
+                    <picture class="A-Image__picture">
+                      <img class="A-Image " src="./../../../../assets/login/supergraphic.png" alt="{{workStation.name}}">
+                    </picture>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        
+        <!--Content in the right side-->
+        <div class="O-ExtendedCarousel__dataContainer col-xs-12 col-sm-6 col-md-4">
+          <!--Info in the right side of image-->
+          <div class="A-Text-RichText">
+            <ul class="A-List A-List--unordered">
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Processor: </span>
+                <span class="A-List__itemText">{{workStation.processor}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Memory: </span>
+                <span class="A-List__itemText">{{workStation.memory}}</span>                
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Operative system: </span>
+                <span class="A-List__itemText">{{workStation.operativeSystem}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Price: </span>
+                <span class="A-List__itemText">{{workStation.price}}</span>
+              </li>
+            </ul>
+            
+          </div>
+
+          <!--Buttons-->
+          <div class="O-ExtendedCarousel__buttonContainer">        
+            <div class="A-Link A-Link--button  A-Link--button--filled ">
+              <a class="A-Link__link A-Link__link--button" (click)="editWorkStation(workStation.id)">
+                <span class="A-Link__linkText">Edit</span>
+              </a>
+            </div>
+            
+            <div class="A-Link A-Link--button  ">
+              <a class="A-Link__link A-Link__link--button" (click)="deleteWorkStation(workStation.id)">
+                <span class="A-Link__linkText">Delete</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Table sections-->
+  <div class="M-NavigationTabs">
+    <div class="M-NavigationTabs__tabLinksSeparator"></div>
+    
+    <div class="container-fluid">
+      <div class="row">
+
+        <!--Tab 1-->
+        <div class="M-NavigationTabs__tabContent M-NavigationTabs__tabContent--active visible">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Base Unit</div>
+                  <div class="A-DescriptionList__value">{{workStation.baseUnit}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">HDD</div>
+                  <div class="A-DescriptionList__value">{{workStation.hdd}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">DVD drive</div>
+                  <div class="A-DescriptionList__value">{{workStation.dvdDrive}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Graphics card</div>
+                  <div class="A-DescriptionList__value">{{workStation.graphicsCard}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Application</div>
+                  <div class="A-DescriptionList__value">{{workStation.application}}</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Description</div>
+                  <div class="A-DescriptionList__value">{{workStation.description}}</div>
+                </div>                
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">No of card supported</div>
+                  <div class="A-DescriptionList__value">{{workStation.cardsSupported}}</div>
+                </div>                
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Max monitors per card</div>
+                  <div class="A-DescriptionList__value">{{workStation.maxMonitorsPerCard}}</div>
+                </div>                
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Max monitors per workstation</div>
+                  <div class="A-DescriptionList__value">{{workStation.maxMonitorPerWorkstation}}</div>
+                </div>              
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">GPU Decoding supported</div>
+                  <div class="A-DescriptionList__value" *ngIf="workStation.gpuDecoding">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!workStation.gpuDecoding">No</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>

@@ -546,7 +546,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="scheduleRecordingModes" name="scheduleRecordingModes" [(ngModel)]="analogRecording.storageOptions.scheduleRecordingModes" (change)="validateInput($event)" #scheduleRecordingModes="ngModel" type="text">
+              <input class="mwf-text" id="scheduleRecordingModes" name="scheduleRecordingModes" [(ngModel)]="analogRecording.recording.scheduleRecordingModes" (change)="validateInput($event)" #scheduleRecordingModes="ngModel" type="text">
             </div>
           </li>
           <li class="mwf-field mwf-m">
@@ -555,7 +555,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="recordingResolution" name="recordingResolution" [(ngModel)]="analogRecording.storageOptions.recordingResolution" (change)="validateInput($event)" #recordingResolution="ngModel" type="text">
+              <input class="mwf-text" id="recordingResolution" name="recordingResolution" [(ngModel)]="analogRecording.recording.recordingResolution" (change)="validateInput($event)" #recordingResolution="ngModel" type="text">
             </div>
           </li>
           <!-- Checkboxes -->

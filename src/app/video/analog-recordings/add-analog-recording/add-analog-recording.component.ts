@@ -14,6 +14,7 @@ export class AddAnalogRecordingComponent implements OnInit {
 
   currentTab = 0;
   analogRecording: AnalogRecording = new AnalogRecording();
+  loading: boolean = false;
 
   selectedFiles: FileList;
   currentFileUpload: File;
@@ -150,11 +151,7 @@ export class AddAnalogRecordingComponent implements OnInit {
       AND ADD THE RESPONSE TO THE INPUTS
     */
     if(this.currentTab == 0){
-      document.getElementById('addProductForm').className += 'spinner-collapsed';
-      document.getElementById('spinner').classList.remove('spinner-collapsed');
-
       this.fillInputs();
-      //setTimeout(this.fillInputs, 3000);
     }
 
     // Increase or decrease the current tab by 1:
@@ -218,15 +215,15 @@ export class AddAnalogRecordingComponent implements OnInit {
   * Metodos para precargar al momento de subir el datasheet cada uno de los input
   */
   fillInputs(): void {
-    document.getElementById('spinner').className += ' spinner-collapsed';
-    document.getElementById('addProductForm').classList.remove('spinner-collapsed');
+    this.loading = true;
 
     this.currentFileUpload = this.selectedFiles.item(0);
 
     this.datasheetService.getDatasheetInformation(this.currentFileUpload, this.productType)
-      .subscribe((data) => {
-        let info = data['body']
-        for(let key in info){
+      .subscribe(
+        (data) => {
+          let info = data['body']
+          for(let key in info){
           if(key === 'name'){
             this.analogRecording.name = this.validateUndefinedValue(key, info[key]);
           }else if(key === 'family'){
@@ -392,8 +389,14 @@ export class AddAnalogRecordingComponent implements OnInit {
               }
             }
           }
+          }
+
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
         }
-      });
+      );
   }
 
   validateUndefinedValue(key, value){

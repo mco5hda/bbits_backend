@@ -26,11 +26,11 @@ export class ConsultIpCamerasComponent implements OnInit {
     //Send the request to the  server and get the json with the ip cameras elements array
 
     let data = {
-      "name": 'Prueba',
-      "family": 'Prueba',
-      "category": 'Prueba',
-      "ctnClass": 'Prueba',
-      "ctnClassFull": 'Prueba',
+      "name": "DINION IP 4000i IR",
+      "family": "4000",
+      "category": "Fixed IP Cameras",
+      "ctnClass": "NBE4502AL",
+      "ctnClassFull": "NBE-4502-AL",
       "basicFeatures":{
         "maxResolution" : "2MP",
         "sensorType" : "1/2.8‑inch CMOS",
@@ -63,8 +63,8 @@ export class ConsultIpCamerasComponent implements OnInit {
         "intelligentTracking" : true
       },
       "sensitivity":{
-        "minIluminationDayMode" : undefined,
-        "minIlluminationNightMode" : undefined,
+        "minIluminationDayMode" : "0.0520",
+        "minIlluminationNightMode" : "0.0080",
         "startLight" :true,
         "integratedIr" : false,
         "optionalIr" : true
@@ -81,15 +81,15 @@ export class ConsultIpCamerasComponent implements OnInit {
         "minAngleV" : "21",
         "ptzZoomDigital" : false,
         "ptzOpticalZoom" : false,
-        "tiltAngle" : undefined,
+        "tiltAngle" : "90 to 0",
         "autoVarifocal" : true,
         "iva" : "IVA"
       },
       "dcri":{
-        "detection" : undefined,
-        "clasification" : undefined,
-        "recognition" : undefined,
-        "identification" : undefined
+        "detection" : "40 m",
+        "clasification" : "25 m",
+        "recognition" : "20 m",
+        "identification" : "10 m"
       },
       "storage":{
         "builtInStorage" : true,
@@ -111,9 +111,9 @@ export class ConsultIpCamerasComponent implements OnInit {
       },
       "price" : "1.0",
       "electricalData":{
-        "inputVoltage" : undefined,
+        "inputVoltage" : "12",
         "normalVersion" : "7.2 w max.",
-        "irVersion" : undefined
+        "irVersion" : "0"
       }
     }
 
@@ -122,7 +122,7 @@ export class ConsultIpCamerasComponent implements OnInit {
       ipCamera.id = index;
       for(let key in data){
         if(key === 'name'){
-          ipCamera.name = 'Prueba: '+index;
+          ipCamera.name = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'family'){
           ipCamera.family = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'category'){

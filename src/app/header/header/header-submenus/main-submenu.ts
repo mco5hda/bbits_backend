@@ -50,12 +50,12 @@ export class MainSubmenuComponent {
         this.mouseClick('Video');
       },
       subOptions: [
-        {name: this.IP_CAMERA, link: '/view-ip-camera'},
-        {name: this.IP_RECORDING, link: '#'},
-        {name: this.ANALOG_CAMERA, link: '#'},
-        {name: this.ANALOG_RECORDING, link: '#'},
-        {name: this.ACCESSORIES, link: '#'},
-        {name: this.WORKSTATIONS, link: '#'},
+        {name: this.IP_CAMERA, link: '/consult-ip-cameras'},
+        {name: this.IP_RECORDING, link: '/consult-ip-recordings'},
+        {name: this.ANALOG_CAMERA, link: '/consult-analog-cameras'},
+        {name: this.ANALOG_RECORDING, link: '/consult-analog-recordings'},
+        {name: this.ACCESSORIES, link: ''},
+        {name: this.WORKSTATIONS, link: '/consult-workstations'},
         {name: this.LICENSES, link: '#'}
       ]
     },

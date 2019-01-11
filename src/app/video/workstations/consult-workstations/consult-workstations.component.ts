@@ -24,25 +24,25 @@ export class ConsultWorkstationsComponent implements OnInit {
 
   getAllWorkStations(){
     //Send the request to the  server and get the json with the ip cameras elements array
-    for (let index = 0; index < 10; index++) {
+    for (let index = 1; index <= 10; index++) {
       let workStation: WorkStation = new WorkStation();
 
       workStation.id = index;
-      workStation.model = 'prueba'+index;
-      workStation.baseUnit = 'prueba';
-      workStation.hdd = 'prueba';
-      workStation.dvdDrive = 'prueba';
-      workStation.processor = 'prueba';
-      workStation.memory = 'prueba';
-      workStation.operativeSystem = 'prueba';
-      workStation.graphicsCard = 'prueba';
-      workStation.application = 'prueba';
-      workStation.description = 'prueba';
-      workStation.cardsSupported = 'prueba';
-      workStation.maxMonitorsPerCard = '85';
-      workStation.maxMonitorPerWorkstation = '70';
-      workStation.gpuDecoding = false;
-      workStation.price = 'prueba';
+      workStation.model = 'Z240 SFF';
+      workStation.baseUnit = 'ho z240 240W 925 efficent chassis';
+      workStation.hdd = '500 GB  7200 RPM SATA';
+      workStation.dvdDrive = 'Super Multi DVD RW SATA';
+      workStation.processor = 'Intel Core i7-6700 3.40 GHz';
+      workStation.memory = '8GB DDR4';
+      workStation.operativeSystem = 'Microsoft Windows 10 Pro Edition';
+      workStation.graphicsCard = 'MHW-AWGC-K620';
+      workStation.application = 'Entry 3D Graphics Card';
+      workStation.description = 'NVIDIA Quadro K620';
+      workStation.cardsSupported = 'No 2nd card supported';
+      workStation.maxMonitorsPerCard = '2';
+      workStation.maxMonitorPerWorkstation = '2';
+      workStation.gpuDecoding = true;
+      workStation.price = '1.0';
 
 
       this.workStations.push(workStation)

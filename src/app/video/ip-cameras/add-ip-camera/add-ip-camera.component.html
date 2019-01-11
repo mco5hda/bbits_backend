@@ -1,12 +1,11 @@
 <app-header></app-header>
 
 <main class="vhHeight">
-  <div class="container">
-    <img class="spinner spinner-collapsed" id="spinner" src="../../../../assets/spinner.gif">
+  <div class="loader" *ngIf="loading"></div>
 
+  <div class="container">
     <form id="addProductForm" class="mwf-form" #formControl="ngForm">
 
-      
       <!-- progressbar -->
       <ul id="progressbar" class="col-xs-12 col-sm-8 col-sm-push-2">
         <li class="step active"></li>
@@ -64,7 +63,9 @@
               Family
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="family" name="family" [(ngModel)]="ipCamera.family" #family="ngModel" (change)="validateInput($event)" type="text">
+              <select class="mwf-select mwf-multiple" id="family" name="family" [(ngModel)]="ipCamera.family" #family="ngModel">
+                <option class="mwf-select-option" *ngFor="let family of families" value="{{family}}">{{family}}</option>
+              </select>
             </div>
           </li>
 

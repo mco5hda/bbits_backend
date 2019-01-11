@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { Environment } from '../app.environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class DatasheetService {
   constructor(private http: HttpClient) { }
 
   //CONTROLLER METHOD
-  private requestMapping = "http://localhost:3000/datasheet/manager";
+  private requestMapping = Environment.nodeServerURL;
 
   //INDICATES TO HTTP HEADERS TO WORK WITH JSON CONTENT
   httpOptions = {

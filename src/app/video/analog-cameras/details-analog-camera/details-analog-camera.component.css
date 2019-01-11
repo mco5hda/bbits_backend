@@ -1,0 +1,11 @@
+.M-NavigationTabs__tabContent{
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.O-ExtendedCarousel__buttonContainer{
+    margin-top: 40px;
+}

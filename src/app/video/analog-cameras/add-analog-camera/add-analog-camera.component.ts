@@ -14,9 +14,11 @@ export class AddAnalogCameraComponent implements OnInit {
   analogCamera: AnalogCamera = new AnalogCamera(); 
   currentTab = 0; // Current tab is set to be the first tab (0)
 
+  families = ["1000", "2000", "4000", "5000"]
   categories = ["Fixed AN cameras","Fixed AN Domes","PTZ AN Cameras","Specialty AN Cameras"];
   indoorOutdoorArray = ["Indoor", "Indoor/Outdoor", "Outdoor"];
   dayNightArray = ["Day", "Day/Night","E-Day/Night"];
+  loading: boolean = false;
 
   selectedFiles: FileList;
   currentFileUpload: File;
@@ -153,11 +155,7 @@ export class AddAnalogCameraComponent implements OnInit {
       AND ADD THE RESPONSE TO THE INPUTS
     */
     if(this.currentTab == 0){
-      document.getElementById('addProductForm').className += 'spinner-collapsed';
-      document.getElementById('spinner').classList.remove('spinner-collapsed');
-
       this.fillInputs();
-      //setTimeout(this.fillInputs, 3000);
     }
 
     // Increase or decrease the current tab by 1:
@@ -221,116 +219,122 @@ export class AddAnalogCameraComponent implements OnInit {
  * Metodos para precargar al momento de subir el datasheet cada uno de los input
  */
   fillInputs(): void {
-    document.getElementById('spinner').className += ' spinner-collapsed';
-    document.getElementById('addProductForm').classList.remove('spinner-collapsed');
+    this.loading = true;
 
     this.currentFileUpload = this.selectedFiles.item(0);
 
     this.datasheetService.getDatasheetInformation(this.currentFileUpload, this.productType)
-      .subscribe((data) => {
-        let info = data['body']
-        for(let key in info){
-          if(key === 'name'){
-            this.analogCamera.name = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'family'){
-            this.analogCamera.family = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'category'){
-            this.analogCamera.category = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'ctnClass'){
-            this.analogCamera.ctnClass = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'ctnClassFull'){
-            this.analogCamera.ctnClassFull = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'price'){
-            this.analogCamera.price = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'basicFeatures'){
-            for(let index in info[key]){
-              if(index === 'maxResolution'){
-                this.analogCamera.basicFeatures.maxResolution = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'sensorType'){
-                this.analogCamera.basicFeatures.sensorType = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'indoorOutdoor'){
-                this.analogCamera.basicFeatures.indoorOutdoor = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'dayNight'){
-                this.analogCamera.basicFeatures.dayNight = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'wideDinamicRange'){
-                this.analogCamera.basicFeatures.wideDinamicRange = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'irSensitive'){
-                this.analogCamera.basicFeatures.irSensitive = this.validateUndefinedValue(index, info[key][index]);
+      .subscribe(
+        (data) => {
+          let info = data['body']
+          for(let key in info){
+            if(key === 'name'){
+              this.analogCamera.name = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'family'){
+              this.analogCamera.family = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'category'){
+              this.analogCamera.category = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'ctnClass'){
+              this.analogCamera.ctnClass = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'ctnClassFull'){
+              this.analogCamera.ctnClassFull = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'price'){
+              this.analogCamera.price = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'basicFeatures'){
+              for(let index in info[key]){
+                if(index === 'maxResolution'){
+                  this.analogCamera.basicFeatures.maxResolution = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'sensorType'){
+                  this.analogCamera.basicFeatures.sensorType = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'indoorOutdoor'){
+                  this.analogCamera.basicFeatures.indoorOutdoor = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'dayNight'){
+                  this.analogCamera.basicFeatures.dayNight = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'wideDinamicRange'){
+                  this.analogCamera.basicFeatures.wideDinamicRange = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'irSensitive'){
+                  this.analogCamera.basicFeatures.irSensitive = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'advancedFeatures'){
-            for(let index in info[key]){
-              if(index === 'privacyMasking'){
-                this.analogCamera.advancedFeatures.privacyMasking = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'advancedFeatures'){
+              for(let index in info[key]){
+                if(index === 'privacyMasking'){
+                  this.analogCamera.advancedFeatures.privacyMasking = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'alarmTriggering'){
-            for(let index in info[key]){
-              if(index === 'tamperDetection'){
-                this.analogCamera.alarmTriggering.tamperDetection = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'videoMotionDetection'){
-                this.analogCamera.alarmTriggering.videoMotionDetection = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'alarmTriggering'){
+              for(let index in info[key]){
+                if(index === 'tamperDetection'){
+                  this.analogCamera.alarmTriggering.tamperDetection = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'videoMotionDetection'){
+                  this.analogCamera.alarmTriggering.videoMotionDetection = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'sensitivity'){
-            for(let index in info[key]){
-              if(index === 'minIluminationDayMode'){
-                this.analogCamera.sensitivity.minIluminationDayMode = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'minIlluminationNightMode'){
-                this.analogCamera.sensitivity.minIlluminationNightMode = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'nightVision'){
-                this.analogCamera.sensitivity.nightVision = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'maxRangeAtNight'){
-                this.analogCamera.sensitivity.maxRangeAtNight = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'sensitivity'){
+              for(let index in info[key]){
+                if(index === 'minIluminationDayMode'){
+                  this.analogCamera.sensitivity.minIluminationDayMode = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'minIlluminationNightMode'){
+                  this.analogCamera.sensitivity.minIlluminationNightMode = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'nightVision'){
+                  this.analogCamera.sensitivity.nightVision = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'maxRangeAtNight'){
+                  this.analogCamera.sensitivity.maxRangeAtNight = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'lens'){
-            for(let index in info[key]){
-              if(index === 'focalLengthFrom'){
-                this.analogCamera.lens.focalLengthFrom = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'focalLengthTill'){
-                this.analogCamera.lens.focalLengthTill = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'maxAngleH'){
-                this.analogCamera.lens.maxAngleH = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'minAngleH'){
-                this.analogCamera.lens.minAngleH = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'ptzZoomDigital'){
-                this.analogCamera.lens.ptzZoomDigital = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'ptzOpticalZoom'){
-                this.analogCamera.lens.ptzOpticalZoom = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'tiltAngle'){
-                this.analogCamera.lens.tiltAngle = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'lens'){
+              for(let index in info[key]){
+                if(index === 'focalLengthFrom'){
+                  this.analogCamera.lens.focalLengthFrom = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'focalLengthTill'){
+                  this.analogCamera.lens.focalLengthTill = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'maxAngleH'){
+                  this.analogCamera.lens.maxAngleH = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'minAngleH'){
+                  this.analogCamera.lens.minAngleH = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'ptzZoomDigital'){
+                  this.analogCamera.lens.ptzZoomDigital = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'ptzOpticalZoom'){
+                  this.analogCamera.lens.ptzOpticalZoom = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'tiltAngle'){
+                  this.analogCamera.lens.tiltAngle = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'connections'){
-            for(let index in info[key]){
-              if(index === 'alarmInputOutput'){
-                this.analogCamera.connections.alarmInputOutput = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'connections'){
+              for(let index in info[key]){
+                if(index === 'alarmInputOutput'){
+                  this.analogCamera.connections.alarmInputOutput = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'housing'){
-            for(let index in info[key]){
-              if(index === 'weatherRating'){
-                this.analogCamera.housing.weatherRating = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'vandalResistant'){
-                this.analogCamera.housing.vandalResistant = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'operatingTemperature'){
-                this.analogCamera.housing.operatingTemperature = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'housing'){
+              for(let index in info[key]){
+                if(index === 'weatherRating'){
+                  this.analogCamera.housing.weatherRating = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'vandalResistant'){
+                  this.analogCamera.housing.vandalResistant = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'operatingTemperature'){
+                  this.analogCamera.housing.operatingTemperature = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
-            }
-          }else if(key === 'electricalData'){
-            for(let index in info[key]){
-              if(index === 'inputVoltage'){
-                this.analogCamera.electricalData.inputVoltage = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'normalVersion'){
-                this.analogCamera.electricalData.normalVersion = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'irVersion'){
-                this.analogCamera.electricalData.irVersion = this.validateUndefinedValue(index, info[key][index]);
+            }else if(key === 'electricalData'){
+              for(let index in info[key]){
+                if(index === 'inputVoltage'){
+                  this.analogCamera.electricalData.inputVoltage = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'normalVersion'){
+                  this.analogCamera.electricalData.normalVersion = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'irVersion'){
+                  this.analogCamera.electricalData.irVersion = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
             }
           }
+
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
         }
-      });
+      );
   }
 
   validateUndefinedValue(key, value){

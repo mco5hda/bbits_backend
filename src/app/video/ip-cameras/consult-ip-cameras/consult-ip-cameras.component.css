@@ -104,3 +104,8 @@
 .actions-buttons{
     text-align: center;
 }
+
+.A-Link__link {
+    font-size: 16px;
+    margin-bottom: 20px;
+}

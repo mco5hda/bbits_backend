@@ -28,20 +28,20 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
 
     let data = {
       "id": "",
-      "name": undefined,
-      "family": undefined,
-      "category": undefined,
+      "name": "DIVAR AN 3000",
+      "category": "AN Recording",
+      "family": "",
       "accessories" : "DVR-XS-DVD,DVR-XS050-A,DVR-XS100-A,DVR-XS200-A,DVR-XS300-A,DVR-XS400-A",
-      "image": undefined,
-      "thumbnail": undefined,
-      "datasheet": undefined,
-      "ctnClass": undefined,
-      "ctnClassFull": undefined,
-      "dataFormat": undefined,
-      "inputRelayOutputs": undefined,
-      "targetSystemSize": undefined,
-      "timeLine": false,
-      "userLevels": undefined,
+      "image": "undefined",
+      "thumbnail": "undefined",
+      "datasheet": "undefined",
+      "ctnClass": "DVR300004Axxx",
+      "ctnClassFull": "DVR-3000-04Axxx",
+      "dataFormat": "Native, AVI",
+      "inputRelayOutputs": "16 / 3",
+      "targetSystemSize": "up to 4 Cameras",
+      "timeLine": true,
+      "userLevels": "3",
       "subTypes": [
         {"name": "DVR-5000-16A000","description": "DIVAR AN 5000"},
         {"name": "DVR-5000-16A001","description": "DIVAR AN 5000"},
@@ -52,11 +52,11 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
         {"name": "DVR-5000-16A401","description": "DIVAR AN 5000"}
       ],
       "basicFeaturesRecording":{
-        "channels" : undefined,
-        "frameRateIPS" : undefined,
+        "channels" : "4",
+        "frameRateIPS" : "120",
         "ipsPerCamera" : "30",
         "liveResolution" : "960H",
-        "systemSize" : undefined,
+        "systemSize" : "up to 4 cameras",
         "loopinVideo" : true,
         "preAlarm" : true,
         "motionDetection": true,
@@ -70,7 +70,7 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
       "advancedFeaturesRecording":{
         "smartMotionSearch" : true,
         "instantPlayBack" : true,
-        "searchMode" : "Time, channel, type, smart",
+        "searchMode" : "Date/Time, Channel, Event Type, Motion",
         "callUpPrepositionOnDome" : true,
         "cameraLockoutsByUser" : true,
         "dataIntegrityCheck" : true,
@@ -97,21 +97,21 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
         "mobileClientAccess" : true,
         "webBrowserAccess" : true,
         "setViewingPermissions" : false,
-        "simultaneousAccessibleUser" : undefined
+        "simultaneousAccessibleUser" : "4"
       },
       "recording":{
-        "scheduleRecordingModes" : undefined,
+        "scheduleRecordingModes" : "Day / Week / >32 Exception days",
         "screenDivisionMultiScreen" : true,
-        "recordingResolution" : "CVBS(PAL):704x576CVBS(NTSC):704x480VGA:1920x10801280x10241280x7201024x768HDMI:1920x10801280x10241280x7201024x768960Hcamera:960x576(PAL)960x480(NTSC)720Hcamera:704x576(PAL)704x480(NTSC)",
+        "recordingResolution" : "QCIF / CIF / 2CIF / 4CIF / 960H",
         "digitalZoomLive" : true
       },
       "storageOptionsRecording":{
-        "supportDevices" : undefined,
+        "supportDevices" : "Internal DVD writer, USB, BVC, Web Client",
         "expandable" : true,
         "externalStorage" : true,
         "onBoardRaid" : false,
         "numberHD" : "4",
-        "exportOptionsStorage" : undefined,
+        "exportOptionsStorage" : "Native, AVI",
         "backUpMode" : "Manual"
       },
       "videoOutputRecording":{
@@ -120,8 +120,8 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
       },
       "price" : "1.0",
       "electricalData":{
-        "inputVoltage" : undefined,
-        "normalVersion" : undefined
+        "inputVoltage" : "240",
+        "normalVersion" : "408"
       }
     }
 
@@ -131,27 +131,27 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
       
       for(let key in data){
         if(key === 'name'){
-          analogRecording.name = 'Prueba'+index;
+          analogRecording.name = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'family'){
-          analogRecording.family = 'Prueba';
+          analogRecording.family = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'category'){
-          analogRecording.category = 'Prueba';
+          analogRecording.category = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'ctnClass'){
-          analogRecording.ctnClass = 'Prueba';
+          analogRecording.ctnClass = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'ctnClassFull'){
-          analogRecording.ctnClassFull = 'Prueba';
+          analogRecording.ctnClassFull = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'price'){
-          analogRecording.price = 'Prueba';
+          analogRecording.price = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'dataFormat'){
-          analogRecording.dataFormat = 'Prueba';
+          analogRecording.dataFormat = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'inputRelayOutputs'){
-          analogRecording.inputRelayOutputs = 'Prueba';
+          analogRecording.inputRelayOutputs = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'targetSystemSize'){
-          analogRecording.targetSystemSize = 'Prueba';
+          analogRecording.targetSystemSize = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'timeLine'){
-          analogRecording.timeLine = false;
+          analogRecording.timeLine = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'userLevels'){
-          analogRecording.userLevels = 'Prueba';
+          analogRecording.userLevels = this.validateUndefinedValue(key, data[key]);;
         }else if(key === 'basicFeaturesRecording'){
           for(let index in data[key]){
             if(index === 'channels'){
@@ -302,7 +302,7 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
   }
 
   validateUndefinedValue(key, value){
-    if(value === undefined){
+    if(value === "undefined"){
       return '';
     }else{
       return value;

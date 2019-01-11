@@ -28,16 +28,16 @@ export class ConsultIpRecordingsComponent implements OnInit {
 
     let data = {
       "id": "",
-      "name": undefined,
-      "family": undefined,
-      "category": undefined,
+      "name": "DIVAR 2000 network with 2TB",
+      "category": "All-in-One",
+      "family": "2000",
       "accessories" : "DIP-6703-HDD,DIP-6704-HDD,DIP-6706-HDD,DIP-6708-HDD,DLA-XVRM-064",
       "image": undefined,
       "thumbnail": undefined,
       "datasheet": undefined,
-      "ctnClass": undefined,
-      "ctnClassFull": undefined,
-      "dataFormat": undefined,
+      "ctnClass": "DDN2516212N00",
+      "ctnClassFull": "DDN-2516-212N00",
+      "dataFormat": "native, ASF",
       "subTypes": [
         {"name": "DIP-6183-4HD","description": "DIVAR IP 6000 2U, 4 x 3 TB HDD"},
         {"name": "DIP-6183-8HD","description": "DIVAR IP 6000 2U, 8 x 3 TB HDD"},
@@ -48,12 +48,12 @@ export class ConsultIpRecordingsComponent implements OnInit {
         {"name": "DIP-6180-00N","description": "DIVAR IP 6000 2U, w/o HDD"}
       ],
       "basicFeaturesRecording":{
-        "systemSize" : undefined,
-        "videoCompression" : undefined,
-        "ipChannels" : undefined,
+        "systemSize" : "16",
+        "videoCompression" : "H264, MPEG-4",
+        "ipChannels" : "16",
         "integratedVideoManagement" : true,
-        "bandwidth" : undefined,
-        "supportedResolution" : undefined,
+        "bandwidth" : "192",
+        "supportedResolution" : "4K, 5MP, 1080p, 720p, 4CIF, 2CIF, CIF",
         "onBoardTranscoding" : false,
         "onvif" : false,
         "psr" : false,
@@ -79,7 +79,7 @@ export class ConsultIpRecordingsComponent implements OnInit {
       },
       "backUpRecoding":{
         "dvdWritter" : false,
-        "supportedDevices" : undefined,
+        "supportedDevices" : "USB 2.0, USB 3.0, eSata, internal DVD writer",
         "backUpMode" : "Manual"
       },
       "integrationRecording":{
@@ -89,7 +89,7 @@ export class ConsultIpRecordingsComponent implements OnInit {
       "localRemoteViewingRecording":{
         "videoSecurityApp" : false,
         "webBrowserAccess" : false,
-        "simultaneousUsers" : undefined,
+        "simultaneousUsers" : "128",
         "viewingBVC" : true,
         "bvms" : false
       },
@@ -111,20 +111,20 @@ export class ConsultIpRecordingsComponent implements OnInit {
         "hotSwappable" : true
       },
       "storageOptionsRecording":{
-        "maxDrivesSupported" : undefined,
-        "baseSystemCapacity" : undefined,
-        "maxBaseSystemCapacity" : undefined,
-        "fullSystemCapacity" : undefined,
-        "availableCapacitiesPerDrive" : undefined
+        "maxDrivesSupported" : "2",
+        "baseSystemCapacity" : "2",
+        "maxBaseSystemCapacity" : "12",
+        "fullSystemCapacity" : "12",
+        "availableCapacitiesPerDrive" : "1, 2, 3, 4 or 6 TB"
       },
       "videoOutputRecording":{
-        "connectorType" : undefined,
+        "connectorType" : "VGA, HDMI",
         "spotMonitor" : undefined
       },
       "price" : "1.0",
       "electricalData":{
-        "inputVoltage" : "140",
-        "normalVersion" : "4hd: 200.5"
+        "inputVoltage" : "12",
+        "normalVersion" : "200.5"
       }
     }
 
@@ -134,19 +134,19 @@ export class ConsultIpRecordingsComponent implements OnInit {
       ipRecording.id = index;
       for(let key in data){
         if(key === 'name'){
-          ipRecording.name = 'Prueba'+index;
+          ipRecording.name = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'family'){
-          ipRecording.family = 'Prueba'
+          ipRecording.family = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'category'){
-          ipRecording.category = 'Prueba'
+          ipRecording.category = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'ctnClass'){
-          ipRecording.ctnClass = 'Prueba'
+          ipRecording.ctnClass = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'ctnClassFull'){
-          ipRecording.ctnClassFull = 'Prueba'
+          ipRecording.ctnClassFull = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'price'){
-          ipRecording.price = 'Prueba'
+          ipRecording.price = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'dataFormat'){
-          ipRecording.dataFormat = 'Prueba'
+          ipRecording.dataFormat = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'basicFeaturesRecording'){
           for(let index in data[key]){
             if(index === 'systemSize'){

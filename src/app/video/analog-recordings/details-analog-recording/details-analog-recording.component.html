@@ -1,3 +1,537 @@
-<p>
-  details-analog-recording works!
-</p>
+<app-header></app-header>
+
+<main class="vhHeight">
+
+  <!--Image and info in the right side-->
+  <div class="O-ExtendedCarousel">
+    <div class="container-fluid">
+      
+      <!--Title and subtitle-->
+      <h1 class="O-ExtendedCarousel__headline">{{analogRecording.name}}</h1>
+      <div class="O-ExtendedCarousel__copy">{{analogRecording.ctnClassFull}}</div>
+      
+      <div class="row">
+        <!--Image-->
+        <div class="O-ExtendedCarousel__imagesContainer col-xs-12 col-sm-6 col-md-8">
+          <section class="M-CarouselSimple__container M-CarouselSimple__container--fullBleed">
+            <div class="M-CarouselSimple " style="height: 421px;">
+              <div class="M-CarouselSimple__slideContainer">
+                <div data-m-carousel-simple-slide="" class="M-CarouselSimple__slide M-CarouselSimple__slide--active">
+                  <figure class="A-Image__figure">
+                    <picture class="A-Image__picture">
+                      <img class="A-Image " src="./../../../../assets/login/supergraphic.png" alt="{{analogRecording.name}}">
+                    </picture>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        
+        <!--Content in the right side-->
+        <div class="O-ExtendedCarousel__dataContainer col-xs-12 col-sm-6 col-md-4">
+          <!--Info in the right side of image-->
+          <div class="A-Text-RichText">
+            <ul class="A-List A-List--unordered">
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Category: </span>
+                <span class="A-List__itemText">{{analogRecording.category}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Family: </span>
+                <span class="A-List__itemText">{{analogRecording.family}}</span>                
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Price: </span>
+                <span class="A-List__itemText">{{analogRecording.price}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Dateformat: </span>
+                <span class="A-List__itemText">{{analogRecording.dataFormat}}</span>
+              </li>
+            </ul>
+            
+          </div>
+
+          <!--Buttons-->
+          <div class="O-ExtendedCarousel__buttonContainer">        
+            <div class="A-Link A-Link--button  A-Link--button--filled ">
+              <a class="A-Link__link A-Link__link--button" (click)="editAnalogRecording(analogRecording.id)">
+                <span class="A-Link__linkText">Edit</span>
+              </a>
+            </div>
+            
+            <div class="A-Link A-Link--button  ">
+              <a class="A-Link__link A-Link__link--button" (click)="deleteAnalogRecording(analogRecording.id)">
+                <span class="A-Link__linkText">Delete</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Table sections-->
+  <div class="M-NavigationTabs">
+    <!--Header of tabs-->
+    <div class="container">
+      <div class="M-TabLinks">
+        <div class="M-TabLinks__scrollContainer">
+          <ul class="M-TabLinks__links M-TabLinks__links--alignLeft">
+              <li class="M-TabLinks__link M-TabLinks__link--active" tabindex="0">
+                <button class="M-TabLinks__trigger" (click)="changeTab(0)">
+                  <span>Basic Features</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link" tabindex="1">
+                <button class="M-TabLinks__trigger" (click)="changeTab(1)">
+                  <span>Adavanced Features</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link" tabindex="2">
+                <button class="M-TabLinks__trigger" (click)="changeTab(2)">
+                  <span>All in one & Audio & Integration</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link" tabindex="3">
+                <button class="M-TabLinks__trigger" (click)="changeTab(3)">
+                  <span>LAR Viewing & Recording</span>
+                </button>
+              </li>
+              <li class="M-TabLinks__link" tabindex="4">
+                <button class="M-TabLinks__trigger" (click)="changeTab(4)">
+                  <span>Storage & Video & Electrical</span>
+                </button>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="M-NavigationTabs__tabLinksSeparator"></div>
+    
+    <div class="container-fluid">
+      <div class="row">
+
+        <!--Tab 1-->
+        <div class="M-NavigationTabs__tabContent M-NavigationTabs__tabContent--active visible" tabindex="0">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Channels</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.basicFeatures.channels}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Framerate IPS</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.basicFeatures.frameRateIPS}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">IPS per camera</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.basicFeatures.ipsPerCamera}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Live resolution</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.basicFeatures.liveResolution}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">System size</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.basicFeatures.systemSize}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Video compression</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.basicFeatures.videoCompression}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Network</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.basicFeatures.network}}</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Operating system</div>
+                  <div class="A-DescriptionList__value">{{analogRecording.basicFeatures.operativeSystem}}</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Looping video</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.basicFeatures.loopinVideo">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.basicFeatures.loopinVideo">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Prealarm</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.basicFeatures.preAlarm">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.basicFeatures.preAlarm">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Motion detection</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.basicFeatures.motionDetection">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.basicFeatures.motionDetection">No</div>                
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Mountable rack</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.basicFeatures.mountableRack">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.basicFeatures.mountableRack">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Multiple camera</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.basicFeatures.multipleCamera">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.basicFeatures.multipleCamera">No</div>
+                </div>                
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">H Resolution</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.basicFeatures.hResolution">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.basicFeatures.hResolution">No</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Tab 2-->
+        <div class="M-NavigationTabs__tabContent" tabindex="1">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Search mode</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.advancedFeatures.searchMode}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Smart Motion Search</div>
+                    <div class="A-DescriptionList__value" *ngIf="analogRecording.advancedFeatures.smartMotionSearch">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!analogRecording.advancedFeatures.smartMotionSearch">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Call up preposition on dome</div>
+                    <div class="A-DescriptionList__value" *ngIf="analogRecording.advancedFeatures.callUpPrepositionOnDome">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!analogRecording.advancedFeatures.callUpPrepositionOnDome">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Instant playback</div>
+                    <div class="A-DescriptionList__value" *ngIf="analogRecording.advancedFeatures.instantPlayBack">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!analogRecording.advancedFeatures.instantPlayBack">No</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Camera lockouts by user</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.advancedFeatures.cameraLockoutsByUser">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.advancedFeatures.cameraLockoutsByUser">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Data integrity check</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.advancedFeatures.dataIntegrityCheck">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.advancedFeatures.dataIntegrityCheck">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Increase framerate on alarm</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.advancedFeatures.increaseFrameRateOnAlarm">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.advancedFeatures.increaseFrameRateOnAlarm">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Individual camera adjustment</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.advancedFeatures.individualCameraAdjustment">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.advancedFeatures.individualCameraAdjustment">No</div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <!--Tab 3-->
+        <div class="M-NavigationTabs__tabContent" tabindex="2">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">All in one functions</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">PTZ control</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.aioFunctions.ptzControls">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.aioFunctions.ptzControls">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">PTZ joystick control</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.aioFunctions.ptzJoystickControl">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.aioFunctions.ptzJoystickControl">No</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Admin control</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.aioFunctions.adminControl">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.aioFunctions.adminControl">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Export options</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.aioFunctions.exportOptions">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.aioFunctions.exportOptions">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Audio</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">In/out channels</div>
+                    <div class="A-DescriptionList__value" *ngIf="analogRecording.audio.inOutChanels">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!analogRecording.audio.inOutChanels">No</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Associate camera to audio</div>
+                    <div class="A-DescriptionList__value" *ngIf="analogRecording.audio.associateCameraToAudio">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!analogRecording.audio.associateCameraToAudio">No</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Bidirectional audio</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.audio.biDirectionalAudio">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.audio.biDirectionalAudio">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Synchronous audio</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.audio.synchronousAudio">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.audio.synchronousAudio">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Integration tools</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Optional ATM/POS integration</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.integration.optionalAtpmPos">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.integration.optionalAtpmPos">No</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">SDK</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.integration.sdk">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.integration.sdk">No</div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <!--Tab 4-->
+        <div class="M-NavigationTabs__tabContent" tabindex="3">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Local and Remote Viewing Support</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Simultaneous accessible users</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.larViewing.simultaneousAccessibleUser}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Mobile client access</div>
+                    <div class="A-DescriptionList__value" *ngIf="analogRecording.larViewing.mobileClientAccess">Yes</div>
+                    <div class="A-DescriptionList__value" *ngIf="!analogRecording.larViewing.mobileClientAccess">No</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Web browser access</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.larViewing.webBrowserAccess">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.larViewing.webBrowserAccess">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Set viewing permissions</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.larViewing.setViewingPermissions">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.larViewing.setViewingPermissions">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Recording</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Schedule recording modes</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.recording.scheduleRecordingModes}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Recording resolution</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.recording.recordingResolution}}</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Screen division in multiscreen</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.recording.screenDivisionMultiScreen">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.recording.screenDivisionMultiScreen">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Digital zoom live</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.recording.digitalZoomLive">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.recording.digitalZoomLive">No</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Tab 5-->
+        <div class="M-NavigationTabs__tabContent" tabindex="4">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Storage Options</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Support devices</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.storageOptions.supportDevices}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Number of HD</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.storageOptions.numberHD}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Export options</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.storageOptions.exportOptionsStorage}}</div>
+                  </div>
+                  <div class="A-DescriptionList__item">
+                    <div class="A-DescriptionList__label">Back-up mode</div>
+                    <div class="A-DescriptionList__value">{{analogRecording.storageOptions.backUpMode}}</div>
+                  </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Expandable</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.storageOptions.expandable">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.storageOptions.expandable">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">External storage</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.storageOptions.externalStorage">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.storageOptions.externalStorage">No</div>
+                </div>
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">OnBoard RAID</div>
+                  <div class="A-DescriptionList__value" *ngIf="analogRecording.storageOptions.onBoardRaid">Yes</div>
+                  <div class="A-DescriptionList__value" *ngIf="!analogRecording.storageOptions.onBoardRaid">No</div>
+                </div>
+              </div>
+            </div>
+
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Video Output</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Connector type</div>
+                  <div class="A-DescriptionList__value">{{analogRecording.videoOutput.connectorType}}</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Spot monitor</div>
+                  <div class="A-DescriptionList__value">{{analogRecording.videoOutput.spotMonitor}}</div>
+                </div>
+              </div>
+            </div>
+              
+            <!--Headers row column-->
+            <div class="A-InformationBlock">
+              <h4 class="A-InformationBlock__headline h4">Electrical Information</h4>
+            </div>
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Input voltage</div>
+                  <div class="A-DescriptionList__value">{{analogRecording.electricalData.inputVoltage}}</div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item">
+                  <div class="A-DescriptionList__label">Normal version</div>
+                  <div class="A-DescriptionList__value">{{analogRecording.electricalData.normalVersion}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>

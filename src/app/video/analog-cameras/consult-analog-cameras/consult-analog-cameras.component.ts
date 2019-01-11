@@ -28,15 +28,15 @@ export class ConsultAnalogCamerasComponent implements OnInit {
 
     let data = {
       "id": "",
-      "name": undefined,
-      "family": undefined,
-      "category": undefined,
+      "name": "TINYON AN 1000",
+      "family": "1000",
+      "category": "Fixed AN cameras",
       "accessories" : "LVF-5000C-D2811,LVF-5000C-D0550,LTC 3664/31,EX12LED-3BD-8M,EX12LED-3BD-8W,EX12LED-3BD-9M,EX12LED-3BD-9W,TC8235GIT,UPA-2430-60,UPA-2420-50,UPA-2450-50,UPA-2450-60,S1374,VP-CFGSFT",
       "image": undefined,
       "thumbnail": undefined,
       "datasheet": undefined,
-      "ctnClass": undefined,
-      "ctnClassFull": undefined,
+      "ctnClass": "VPC1055",
+      "ctnClassFull": "VPC-1055",
       "subTypes": [
         {"name": "VBN-5085-C11","description": "DINION AN 5000"},
         {"name": "VBN-5085-C21","description": "DINION AN 5000"},
@@ -52,33 +52,38 @@ export class ConsultAnalogCamerasComponent implements OnInit {
       },
       "advancedFeatures":{
         "privacyMasking" : true
-      },"alarmTriggering":{
+      },
+      "alarmTriggering":{
         "tamperDetection" : false,
         "videoMotionDetection" : true
-      },"sensitivity":{
+      },
+      "sensitivity":{
         "minIluminationDayMode" : "0.5",
-        "minIlluminationNightMode" : "chrome0.2",
+        "minIlluminationNightMode" : "0.2",
         "nightVision" : true,
-        "maxRangeAtNight" : undefined
-      },"lens":{
-        "focalLengthFrom" : undefined,
-        "focalLengthTill" : undefined,
-        "maxAngleH" : undefined,
-        "minAngleH" : undefined,
+        "maxRangeAtNight" : 0
+      },
+      "lens":{
+        "focalLengthFrom" : "2.50",
+        "focalLengthTill" : "2.5",
+        "maxAngleH" : "85.0",
+        "minAngleH" : "65.0",
         "ptzZoomDigital" : false,
         "ptzOpticalZoom" : false,
         "tiltAngle" : false
-      },"connections":{
+      },
+      "connections":{
         "alarmInputOutput" : true
-      },"housing":{
-        "weatherRating" : undefined,
-        "vandalResistant" : undefined,
+      },
+      "housing":{
+        "weatherRating" : "IP65",
+        "vandalResistant" : "IK9",
         "operatingTemperature" : "-20°C TO +55°C (-4°F TO 131°F)"
       },
       "price" : "1.0",
       "electricalData":{
-        "inputVoltage" : " for camera. 120, 60 hz; 24",
-        "normalVersion" : "36 ma (12 vdc)"
+        "inputVoltage" : "12",
+        "normalVersion" : "1.20"
       }
     }
 
@@ -88,17 +93,17 @@ export class ConsultAnalogCamerasComponent implements OnInit {
       
       for(let key in data){
         if(key === 'name'){
-          analogCamera.name = 'Prueba'+index;
+          analogCamera.name = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'family'){
-          analogCamera.family = 'Prueba';
+          analogCamera.family = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'category'){
-          analogCamera.category = 'Prueba';
+          analogCamera.category = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'ctnClass'){
-          analogCamera.ctnClass = 'Prueba';
+          analogCamera.ctnClass = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'ctnClassFull'){
-          analogCamera.ctnClassFull = 'Prueba';
+          analogCamera.ctnClassFull = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'price'){
-          analogCamera.price = 'Prueba';
+          analogCamera.price = this.validateUndefinedValue(key, data[key]);
         }else if(key === 'basicFeatures'){
           for(let index in data[key]){
             if(index === 'maxResolution'){
