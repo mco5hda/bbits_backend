@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WorkStation } from '../../models/workstation.model';
 import { Router } from '@angular/router';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-details-workstation',
@@ -41,7 +42,8 @@ export class DetailsWorkstationComponent implements OnInit {
   }
 
   deleteWorkStation(id: number){
-    alert('Delete');
+    CallOut.deleted = true;
+    this.router.navigate(["/consult-workstations"]);
   }
 
 }

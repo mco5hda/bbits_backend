@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { IPCamera } from '../../models/cameras/ip-cameras.model';
 import { Router } from '@angular/router';
 import { Environment } from 'src/app/app.environment';
+import { IpCameraService } from '../ip-camera.service';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-consult-ip-cameras',
@@ -12,19 +14,34 @@ import { Environment } from 'src/app/app.environment';
 export class ConsultIpCamerasComponent implements OnInit {
 
   ipCameras: IPCamera[] = new Array();
+  ipCamera: IPCamera;
   currentPage: number = 1;
   elementsPerPage: number = Environment.defaultPaginationElements;
 
+
   constructor(
-    private router: Router) { }
+    private router: Router,
+    private ipCameraService: IpCameraService,
+  ) { }
 
   ngOnInit() {
     this.getAllIPCameras();
+
+    if(CallOut.added){
+      CallOut.addCallOut('success', 'IP Camera added successfully', 5000);
+      CallOut.added = false;
+    }else if(CallOut.updated){
+      CallOut.addCallOut('success', 'IP Camera updated successfully', 5000);
+      CallOut.updated = false;
+    }else if(CallOut.deleted){
+      CallOut.addCallOut('success', 'IP Camera deleted successfully', 5000);
+      CallOut.deleted = false;
+    }
+
   }
 
   getAllIPCameras(){
     //Send the request to the  server and get the json with the ip cameras elements array
-
     let data = {
       "name": "DINION IP 4000i IR",
       "family": "4000",
@@ -325,6 +342,23 @@ export class ConsultIpCamerasComponent implements OnInit {
   }
 
   deleteIPCamera(id: number){
-    alert('Delete');
+    //this.loading = true;
+    // this.ipCameras.forEach(element => {
+    //   if(element.id === id){
+    //     this.ipCamera = element;
+    //   }
+    // });
+
+    // this.ipCameraService.deleteIPCamera(this.ipCamera).subscribe(
+    //   (data: IPCamera[]) => {
+    //     this.ipCameras = this.ipCameras.filter(c => c !== this.ipCamera);
+    //     //this.loading = false;
+
+    //   },
+    //   error =>{
+    //     // this.loading = false;
+    //   } 
+    // );
+    CallOut.addCallOut('success', 'IP Camera deleted succesfully.', 5000);
   }
 }

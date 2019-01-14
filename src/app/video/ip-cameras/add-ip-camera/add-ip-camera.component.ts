@@ -2,7 +2,8 @@ import { Component, OnInit, ViewEncapsulation, Directive } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPCamera } from '../../models/cameras/ip-cameras.model';
 import { DatasheetService } from '../../datasheet.service';
-
+import { IpCameraService } from '../ip-camera.service';
+import { CallOut } from './../../../utilities/callout';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class AddIpCameraComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private datasheetService: DatasheetService
+    private datasheetService: DatasheetService,
+    private ipCameraService: IpCameraService,
   ) { }
 
   ngOnInit() {    
@@ -149,7 +151,11 @@ export class AddIpCameraComponent implements OnInit {
     let x = document.getElementsByClassName("tab") as HTMLCollectionOf<HTMLElement>;
     // Exit the function if any field in the current tab is invalid:
     
-    if (n == 1 && !this.validateForm()) return;
+    if (n == 1 && !this.validateForm()) {
+      window.scrollTo(0,0);
+      CallOut.addCallOut('warning','Some inputs have no value. Please complete them before forward', 5000);
+      return;
+    }
 
     // Hide the current tab:
     x[this.currentTab].style.display = "none";
@@ -446,11 +452,31 @@ export class AddIpCameraComponent implements OnInit {
       event.target.className += " error-validation"
     }
   }
+
+  
+
   /*
   * Metodo para crear registrar una nueva camara
   */
   addIPCamera(){
-    alert('Added');
+    this.loading = true;
+    this.loading = false;
+    CallOut.added = true;
     this.router.navigate(["/consult-ip-cameras"])
+    // this.ipCameraService.createIPCamera(this.ipCamera)
+    // .subscribe(
+    //   data => {
+    //     if(data["headers"] != undefined){
+    //       this.loading = false;
+    //       CallOut.addCallOut('success', 'IP Camera added succesfully', 5000)
+    //       this.router.navigate(["/consult-ip-cameras"])
+    //     }
+    //   },
+    //   error => {
+    //     this.loading = false;
+    //     CallOut.addCallOut('error', 'The IP Camera has not added.', 5000)
+        
+    //   }
+    // )
   }
 }

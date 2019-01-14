@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AnalogRecording } from '../../models/recordings/analog-recordings.model';
 import { Router } from '@angular/router';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-details-analog-recording',
@@ -56,7 +57,8 @@ export class DetailsAnalogRecordingComponent implements OnInit {
   }
 
   deleteAnalogRecording(id: number){
-    alert('Delete');
+    CallOut.deleted = true;
+    this.router.navigate(["/consult-analog-recordings"]);
   }
 
 }

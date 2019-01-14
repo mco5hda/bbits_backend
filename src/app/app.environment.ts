@@ -1,4 +1,4 @@
 export const Environment = {
     defaultPaginationElements: 5,
-    nodeServerURL: 'http://localhost:3000/datasheet/manager'
+    nodeServerURL: 'http://localhost:3000/'
 }

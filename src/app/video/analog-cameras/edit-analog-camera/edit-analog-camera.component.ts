@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AnalogCamera } from '../../models/cameras/analog-cameras.model';
 import { Router } from '@angular/router';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-edit-analog-camera',
@@ -17,7 +18,7 @@ export class EditAnalogCameraComponent implements OnInit {
   categories = ["Fixed AN cameras","Fixed AN Domes","PTZ AN Cameras","Specialty AN Cameras"];
   indoorOutdoorArray = ["Indoor", "Indoor/Outdoor", "Outdoor"];
   dayNightArray = ["Day", "Day/Night","E-Day/Night"];
-
+  loading: boolean = false;
   constructor(
     private router: Router
   ) { }
@@ -139,8 +140,11 @@ export class EditAnalogCameraComponent implements OnInit {
     let x = document.getElementsByClassName("tab") as HTMLCollectionOf<HTMLElement>;
     // Exit the function if any field in the current tab is invalid:
     
-    if (n == 1 && !this.validateForm()) return;
-
+    if (n == 1 && !this.validateForm()) {
+      window.scrollTo(0,0);
+      CallOut.addCallOut('warning','Some inputs have no value. Please complete them before forward', 5000);
+      return;
+    }
     // Hide the current tab:
     x[this.currentTab].style.display = "none";
 
@@ -217,7 +221,7 @@ export class EditAnalogCameraComponent implements OnInit {
   * Metodo para crear registrar una nueva camara
   */
   updateAnalogCamera(){
-    alert('Updated');
+    CallOut.updated = true;
     this.router.navigate(["/consult-analog-cameras"])
   }
 }

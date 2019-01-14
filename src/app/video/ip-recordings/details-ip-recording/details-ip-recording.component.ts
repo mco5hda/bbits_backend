@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPRecording } from '../../models/recordings/ip-recordings.model';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-details-ip-recording',
@@ -56,7 +57,8 @@ export class DetailsIpRecordingComponent implements OnInit {
   }
 
   deleteIPRecording(id: number){
-    alert('Delete');
+    CallOut.deleted = true;
+    this.router.navigate(["/consult-ip-recordings"]);
   }
 
 }

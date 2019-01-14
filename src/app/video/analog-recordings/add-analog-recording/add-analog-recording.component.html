@@ -4,6 +4,9 @@
   <div class="loader" *ngIf="loading"></div>
   
   <div class="container">
+
+    <div class="col-xs-12 col-sm-8 col-sm-push-2" id="callOut"></div>
+
     <form id="addProductForm" class="mwf-form" #formControl="ngForm">
 
       <!-- progressbar -->
@@ -108,7 +111,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="price" name="price" [(ngModel)]="analogRecording.price" (change)="validateInput($event)" #price="ngModel" type="text">
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="analogRecording.price" (change)="validateInput($event)" #price="ngModel" type="number">
             </div>
           </li>
 
@@ -154,7 +157,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="userLevels" name="userLevels" [(ngModel)]="analogRecording.userLevels" (change)="validateInput($event)" #userLevels="ngModel" type="text">
+              <input class="mwf-text" id="userLevels" name="userLevels" [(ngModel)]="analogRecording.userLevels" (change)="validateInput($event)" #userLevels="ngModel" type="number">
             </div>
           </li>
 
@@ -210,7 +213,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="channels" name="channels" [(ngModel)]="analogRecording.basicFeatures.channels" (change)="validateInput($event)" #channels="ngModel" type="text">
+              <input class="mwf-text" id="channels" name="channels" [(ngModel)]="analogRecording.basicFeatures.channels" (change)="validateInput($event)" #channels="ngModel" type="number">
             </div>
           </li>
 
@@ -221,7 +224,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="frameRateIPS" name="frameRateIPS" [(ngModel)]="analogRecording.basicFeatures.frameRateIPS" (change)="validateInput($event)" #frameRateIPS="ngModel" type="text">
+              <input class="mwf-text" id="frameRateIPS" name="frameRateIPS" [(ngModel)]="analogRecording.basicFeatures.frameRateIPS" (change)="validateInput($event)" #frameRateIPS="ngModel" type="number">
             </div>
           </li>
 
@@ -232,7 +235,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="ipsPerCamera" name="ipsPerCamera" [(ngModel)]="analogRecording.basicFeatures.ipsPerCamera" (change)="validateInput($event)" #ipsPerCamera="ngModel" type="text">
+              <input class="mwf-text" id="ipsPerCamera" name="ipsPerCamera" [(ngModel)]="analogRecording.basicFeatures.ipsPerCamera" (change)="validateInput($event)" #ipsPerCamera="ngModel" type="number">
             </div>
           </li>
 
@@ -254,7 +257,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="systemSize" name="systemSize" [(ngModel)]="analogRecording.basicFeatures.systemSize" (change)="validateInput($event)" #systemSize="ngModel" type="text">
+              <input class="mwf-text" id="systemSize" name="systemSize" [(ngModel)]="analogRecording.basicFeatures.systemSize" (change)="validateInput($event)" #systemSize="ngModel" type="number">
             </div>
           </li>
 
@@ -504,7 +507,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="simultaneousAccessibleUser" name="simultaneousAccessibleUser"  type="text" [(ngModel)]="analogRecording.larViewing.simultaneousAccessibleUser" (change)="validateInput($event)" #simultaneousAccessibleUser="ngModel">
+              <input class="mwf-text" id="simultaneousAccessibleUser" name="simultaneousAccessibleUser"  type="number" [(ngModel)]="analogRecording.larViewing.simultaneousAccessibleUser" (change)="validateInput($event)" #simultaneousAccessibleUser="ngModel">
             </div>
           </li>
 
@@ -607,7 +610,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="numberHD" name="numberHD" [(ngModel)]="analogRecording.storageOptions.numberHD" (change)="validateInput($event)" #numberHD="ngModel" type="text">
+                <input class="mwf-text" id="numberHD" name="numberHD" [(ngModel)]="analogRecording.storageOptions.numberHD" (change)="validateInput($event)" #numberHD="ngModel" type="number">
               </div>
             </li>
   
@@ -701,7 +704,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="analogRecording.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="text">
+              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="analogRecording.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="number">
             </div>
           </li>
 
@@ -712,7 +715,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="analogRecording.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="text">
+              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="analogRecording.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="number">
             </div>
           </li>
         </ul>

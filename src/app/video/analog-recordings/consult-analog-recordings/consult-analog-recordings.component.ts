@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AnalogRecording } from '../../models/recordings/analog-recordings.model';
 import { Router } from '@angular/router';
 import { Environment } from 'src/app/app.environment';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-consult-analog-recordings',
@@ -21,6 +22,17 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllAnalogRecordings();
+
+    if(CallOut.added){
+      CallOut.addCallOut('success', 'Analog Recording Camera added successfully', 5000);
+      CallOut.added = false;
+    }else if(CallOut.updated){
+      CallOut.addCallOut('success', 'Analog Recording updated successfully', 5000);
+      CallOut.updated = false;
+    }else if(CallOut.deleted){
+      CallOut.addCallOut('success', 'Analog Recording deleted successfully', 5000);
+      CallOut.deleted = false;
+    }
   }
 
   getAllAnalogRecordings(){
@@ -320,7 +332,7 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
   }
 
   deleteAnalogRecording(id: number){
-    alert('Delete');
+    CallOut.addCallOut('success', 'Analog Recording deleted succesfully.', 5000);
   }
 
 }

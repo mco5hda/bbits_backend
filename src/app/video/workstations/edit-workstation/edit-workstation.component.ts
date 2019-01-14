@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WorkStation } from '../../models/workstation.model';
 import { Router } from '@angular/router';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-edit-workstation',
@@ -52,7 +53,7 @@ export class EditWorkstationComponent implements OnInit {
   * Metodo para crear registrar una nueva camara
   */
   updateWorkStation(){
-    alert('Updated')
+    CallOut.updated = true;
     this.router.navigate(["/consult-workstations"])
   }
 

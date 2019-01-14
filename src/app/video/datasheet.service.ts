@@ -10,8 +10,9 @@ export class DatasheetService {
   constructor(private http: HttpClient) { }
 
   //CONTROLLER METHOD
-  private requestMapping = Environment.nodeServerURL;
+  private requestMapping = "datasheet/manager";
 
+  private url = Environment.nodeServerURL + this.requestMapping; 
   //INDICATES TO HTTP HEADERS TO WORK WITH JSON CONTENT
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -26,7 +27,7 @@ export class DatasheetService {
     formdata.append("datasheet", datasheet);
     formdata.append("productType", productType);
 
-    const req = new HttpRequest("POST", this.requestMapping, formdata, {
+    const req = new HttpRequest("POST", this.url, formdata, {
       responseType: "json"
     });
     return this.http.request(req);

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Environment } from 'src/app/app.environment';
 import { IPRecording } from '../../models/recordings/ip-recordings.model';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-consult-ip-recordings',
@@ -21,6 +22,17 @@ export class ConsultIpRecordingsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllIPRecordings();
+
+    if(CallOut.added){
+      CallOut.addCallOut('success', 'IP Recording added successfully', 5000);
+      CallOut.added = false;
+    }else if(CallOut.updated){
+      CallOut.addCallOut('success', 'IP Recording updated successfully', 5000);
+      CallOut.updated = false;
+    }else if(CallOut.deleted){
+      CallOut.addCallOut('success', 'IP Recording deleted successfully', 5000);
+      CallOut.deleted = false;
+    }
   }
 
   getAllIPRecordings(){
@@ -332,6 +344,6 @@ export class ConsultIpRecordingsComponent implements OnInit {
   }
 
   deleteIPRecording(id: number){
-    alert('Delete');
+    CallOut.addCallOut('success', 'IP Recording deleted succesfully.', 5000);
   }
 }

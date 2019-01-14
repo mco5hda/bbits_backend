@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AnalogCamera } from '../../models/cameras/analog-cameras.model';
 import { Router } from '@angular/router';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-details-analog-camera',
@@ -57,7 +58,8 @@ export class DetailsAnalogCameraComponent implements OnInit {
   }
 
   deleteAnalogCamera(id: number){
-    alert('Delete');
+    CallOut.deleted = true;
+    this.router.navigate(["/consult-analog-cameras"]);
   }
 
 }

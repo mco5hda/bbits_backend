@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { WorkStation } from '../../models/workstation.model';
+import { CallOut} from './../../../utilities/callout';
 
 @Component({
   selector: 'app-add-workstation',
@@ -11,6 +12,7 @@ import { WorkStation } from '../../models/workstation.model';
 export class AddWorkstationComponent implements OnInit {
   workstation: WorkStation = new WorkStation();
   formValid = false;
+  loading: boolean = false;
 
   constructor(
     private router: Router
@@ -50,7 +52,7 @@ export class AddWorkstationComponent implements OnInit {
   * Metodo para crear registrar una nueva camara
   */
   addWorkStation(){
-    alert('Added')
+    CallOut.added = true;
     this.router.navigate(["/consult-workstations"])
   }
 }

@@ -41,7 +41,8 @@
 }
 
 .details{
-    background-image: url('./../../../../assets/ico/bosch-ic-summary-black.svg')
+    background-image: url('./../../../../assets/ico/bosch-ic-summary-black.svg');
+    border: 0;
 }
 
 .edit{

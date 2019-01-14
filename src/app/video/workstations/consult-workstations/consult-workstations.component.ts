@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WorkStation } from '../../models/workstation.model';
 import { Environment } from 'src/app/app.environment';
 import { Router } from '@angular/router';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-consult-workstations',
@@ -20,6 +21,17 @@ export class ConsultWorkstationsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllWorkStations();
+
+    if(CallOut.added){
+      CallOut.addCallOut('success', 'Workstation added successfully', 5000);
+      CallOut.added = false;
+    }else if(CallOut.updated){
+      CallOut.addCallOut('success', 'Workstation updated successfully', 5000);
+      CallOut.updated = false;
+    }else if(CallOut.deleted){
+      CallOut.addCallOut('success', 'Workstation deleted successfully', 5000);
+      CallOut.deleted = false;
+    }
   }
 
   getAllWorkStations(){
@@ -60,6 +72,6 @@ export class ConsultWorkstationsComponent implements OnInit {
   }
 
   deleteWorkStation(id: number){
-    alert('Delete');
+    CallOut.addCallOut('success', 'Workstation deleted succesfully.', 5000);
   }
 }

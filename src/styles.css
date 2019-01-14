@@ -2392,6 +2392,10 @@ html:not(.is-touch) .A-Button .A-Icon:hover {
     color: #e20015;
     background-color: rgba(226, 0, 21, .15);
 }
+.A-Callout--success {
+    color: #78BE20;
+    background-color: rgba(120, 190, 32, .15);
+}
 .A-Callout--warning {
     color: #fbaf16;
     background-color: rgba(251, 175, 22, .15);
@@ -16949,4 +16953,45 @@ main {
 .O-WebsiteFinder__listItem {
     margin-bottom: 0;
 }
+}
+
+#callOut {
+    margin-top: 15px;
+    display: none;
+}
+
+.A-Icon--success{
+    background: url('./assets/ico/bosch-ic-alert-success-filled.svg');
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+
+.A-Icon--warning{
+    background: url('./assets/ico/bosch-ic-alert-warning-filled.svg');
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+
+.A-Icon--error{
+    background: url('./assets/ico/bosch-ic-alert-error-filled.svg');
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+
+.A-CallOut .image {
+    float: left;
+}
+
+.A-CallOut span {
+    display: inline;
+    margin-left: 10px;
+    font-size: 10px;
+}
+
+.CallOut-Message {
+    text-align: center;
+    vertical-align: middle;
 }

@@ -2,8 +2,10 @@
 
 <main class="vhHeight">
   <div class="loader" *ngIf="loading"></div>
-
+  
   <div class="container">
+    <div class="col-xs-12 col-sm-8 col-sm-push-2" id="callOut"></div>
+
     <form id="addProductForm" class="mwf-form" #formControl="ngForm">
 
       <!-- progressbar -->
@@ -111,7 +113,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="price" name="price" [(ngModel)]="ipCamera.price" (change)="validateInput($event)" #price="ngModel" type="text">
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="ipCamera.price" (change)="validateInput($event)" #price="ngModel" type="number">
             </div>
           </li>
 
@@ -393,7 +395,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="minIluminationDayMode" name="minIluminationDayMode"  type="text" [(ngModel)]="ipCamera.sensitivity.minIluminationDayMode" (change)="validateInput($event)" #minIluminationDayMode="ngModel">
+              <input class="mwf-text" id="minIluminationDayMode" name="minIluminationDayMode"  type="number" [(ngModel)]="ipCamera.sensitivity.minIluminationDayMode" (change)="validateInput($event)" #minIluminationDayMode="ngModel">
             </div>
           </li>
 
@@ -404,7 +406,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="minIlluminationNightMode" name="minIlluminationNightMode"  type="text" [(ngModel)]="ipCamera.sensitivity.minIlluminationNightMode" (change)="validateInput($event)" #minIlluminationNightMode="ngModel">
+              <input class="mwf-text" id="minIlluminationNightMode" name="minIlluminationNightMode"  type="number" [(ngModel)]="ipCamera.sensitivity.minIlluminationNightMode" (change)="validateInput($event)" #minIlluminationNightMode="ngModel">
             </div>
           </li>
 
@@ -448,7 +450,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="detection" name="detection" [(ngModel)]="ipCamera.dcri.detection" (change)="validateInput($event)" #detection="ngModel" type="text">
+              <input class="mwf-text" id="detection" name="detection" [(ngModel)]="ipCamera.dcri.detection" (change)="validateInput($event)" #detection="ngModel" type="number">
             </div>
           </li>
 
@@ -459,7 +461,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="clasification" name="clasification" [(ngModel)]="ipCamera.dcri.clasification" (change)="validateInput($event)" #clasification="ngModel" type="text">
+              <input class="mwf-text" id="clasification" name="clasification" [(ngModel)]="ipCamera.dcri.clasification" (change)="validateInput($event)" #clasification="ngModel" type="number">
             </div>
           </li>
 
@@ -470,7 +472,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="recognition" name="recognition" [(ngModel)]="ipCamera.dcri.recognition" (change)="validateInput($event)" #recognition="ngModel" type="text">
+              <input class="mwf-text" id="recognition" name="recognition" [(ngModel)]="ipCamera.dcri.recognition" (change)="validateInput($event)" #recognition="ngModel" type="number">
             </div>
           </li>
 
@@ -481,7 +483,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="identification" name="identification" [(ngModel)]="ipCamera.dcri.identification" (change)="validateInput($event)" #identification="ngModel" type="text">
+              <input class="mwf-text" id="identification" name="identification" [(ngModel)]="ipCamera.dcri.identification" (change)="validateInput($event)" #identification="ngModel" type="number">
             </div>
           </li>
         </ul>
@@ -506,7 +508,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="focalLengthFrom" name="focalLengthFrom" [(ngModel)]="ipCamera.lens.focalLengthFrom" (change)="validateInput($event)" #focalLengthFrom="ngModel" type="text">
+              <input class="mwf-text" id="focalLengthFrom" name="focalLengthFrom" [(ngModel)]="ipCamera.lens.focalLengthFrom" (change)="validateInput($event)" #focalLengthFrom="ngModel" type="number">
             </div>
           </li>
 
@@ -517,7 +519,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="focalLengthTill" name="focalLengthTill" [(ngModel)]="ipCamera.lens.focalLengthTill" (change)="validateInput($event)" #focalLengthTill="ngModel" type="text">
+              <input class="mwf-text" id="focalLengthTill" name="focalLengthTill" [(ngModel)]="ipCamera.lens.focalLengthTill" (change)="validateInput($event)" #focalLengthTill="ngModel" type="number">
             </div>
           </li>
 
@@ -528,7 +530,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="minAngleH" name="minAngleH" [(ngModel)]="ipCamera.lens.minAngleH" (change)="validateInput($event)" #minAngleH="ngModel" type="text">
+              <input class="mwf-text" id="minAngleH" name="minAngleH" [(ngModel)]="ipCamera.lens.minAngleH" (change)="validateInput($event)" #minAngleH="ngModel" type="number">
             </div>
           </li>
 
@@ -539,7 +541,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="maxAngleH" name="maxAngleH" [(ngModel)]="ipCamera.lens.maxAngleH" (change)="validateInput($event)" #maxAngleH="ngModel" type="text">
+              <input class="mwf-text" id="maxAngleH" name="maxAngleH" [(ngModel)]="ipCamera.lens.maxAngleH" (change)="validateInput($event)" #maxAngleH="ngModel" type="number">
             </div>
           </li>
 
@@ -550,7 +552,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="minAngleV" name="minAngleV" [(ngModel)]="ipCamera.lens.minAngleV" (change)="validateInput($event)" #minAngleV="ngModel" type="text">
+              <input class="mwf-text" id="minAngleV" name="minAngleV" [(ngModel)]="ipCamera.lens.minAngleV" (change)="validateInput($event)" #minAngleV="ngModel" type="number">
             </div>
           </li>
 
@@ -561,7 +563,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="maxAngleV" name="maxAngleV" [(ngModel)]="ipCamera.lens.maxAngleV" (change)="validateInput($event)" #maxAngleV="ngModel" type="text">
+              <input class="mwf-text" id="maxAngleV" name="maxAngleV" [(ngModel)]="ipCamera.lens.maxAngleV" (change)="validateInput($event)" #maxAngleV="ngModel" type="number">
             </div>
           </li>
 
@@ -572,7 +574,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="tiltAngle" name="tiltAngle" [(ngModel)]="ipCamera.lens.tiltAngle" (change)="validateInput($event)" #tiltAngle="ngModel" type="text">
+              <input class="mwf-text" id="tiltAngle" name="tiltAngle" [(ngModel)]="ipCamera.lens.tiltAngle" (change)="validateInput($event)" #tiltAngle="ngModel" type="number">
             </div>
           </li>
 
@@ -771,11 +773,11 @@
           <!-- input voltage Input -->
           <li class="mwf-field mwf-m">
             <label class="mwf-label mwf-label-input">
-              Input voltage
+              Input voltage (V)
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="ipCamera.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="text">
+              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="ipCamera.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="number">
             </div>
           </li>
 
@@ -786,7 +788,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="ipCamera.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="text">
+              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="ipCamera.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="number">
             </div>
           </li>
 
@@ -797,7 +799,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="irVersion" name="irVersion" [(ngModel)]="ipCamera.electricalData.irVersion" (change)="validateInput($event)" #irVersion="ngModel" type="text">
+              <input class="mwf-text" id="irVersion" name="irVersion" [(ngModel)]="ipCamera.electricalData.irVersion" (change)="validateInput($event)" #irVersion="ngModel" type="number">
             </div>
           </li>
         </ul>

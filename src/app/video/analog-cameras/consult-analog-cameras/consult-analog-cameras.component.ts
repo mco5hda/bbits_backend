@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Environment } from 'src/app/app.environment';
 import { AnalogCamera } from '../../models/cameras/analog-cameras.model';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-consult-analog-cameras',
@@ -21,6 +22,17 @@ export class ConsultAnalogCamerasComponent implements OnInit {
 
   ngOnInit() {
     this.getAllAnalogCameras();
+
+    if(CallOut.added){
+      CallOut.addCallOut('success', 'Analog Camera added successfully', 5000);
+      CallOut.added = false;
+    }else if(CallOut.updated){
+      CallOut.addCallOut('success', 'Analog Camera updated successfully', 5000);
+      CallOut.updated = false;
+    }else if(CallOut.deleted){
+      CallOut.addCallOut('success', 'Analog Camera deleted successfully', 5000);
+      CallOut.deleted = false;
+    }
   }
 
   getAllAnalogCameras(){
@@ -216,7 +228,7 @@ export class ConsultAnalogCamerasComponent implements OnInit {
   }
 
   deleteAnalogCamera(id: number){
-    alert('Delete');
+    CallOut.addCallOut('success', 'Analog Camera deleted succesfully.', 5000);
   }
 
 }

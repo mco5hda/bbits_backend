@@ -4,6 +4,8 @@
   <div class="loader" *ngIf="loading"></div>
   
   <div class="container">
+    <div class="col-xs-12 col-sm-8 col-sm-push-2" id="callOut"></div>
+
     <form id="addProductForm" class="mwf-form" #formControl="ngForm">
 
       <!-- progressbar -->
@@ -109,7 +111,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="price" name="price" [(ngModel)]="ipRecording.price" (change)="validateInput($event)" #price="ngModel" type="text">
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="ipRecording.price" (change)="validateInput($event)" #price="ngModel" type="number">
             </div>
           </li>
 
@@ -164,7 +166,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="systemSize" name="systemSize" [(ngModel)]="ipRecording.basicFeatures.systemSize" (change)="validateInput($event)" #systemSize="ngModel" type="text">
+              <input class="mwf-text" id="systemSize" name="systemSize" [(ngModel)]="ipRecording.basicFeatures.systemSize" (change)="validateInput($event)" #systemSize="ngModel" type="number">
             </div>
           </li>
 
@@ -186,7 +188,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="ipChannels" name="ipChannels" [(ngModel)]="ipRecording.basicFeatures.ipChannels" (change)="validateInput($event)" #ipChannels="ngModel" type="text">
+              <input class="mwf-text" id="ipChannels" name="ipChannels" [(ngModel)]="ipRecording.basicFeatures.ipChannels" (change)="validateInput($event)" #ipChannels="ngModel" type="number">
             </div>
           </li>
 
@@ -197,7 +199,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="bandwidth" name="bandwidth" [(ngModel)]="ipRecording.basicFeatures.bandwidth" (change)="validateInput($event)" #bandwidth="ngModel" type="text">
+              <input class="mwf-text" id="bandwidth" name="bandwidth" [(ngModel)]="ipRecording.basicFeatures.bandwidth" (change)="validateInput($event)" #bandwidth="ngModel" type="number">
             </div>
           </li>
 
@@ -444,7 +446,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="simultaneousUsers" name="simultaneousUsers"  type="text" [(ngModel)]="ipRecording.larViewing.simultaneousUsers" (change)="validateInput($event)" #simultaneousUsers="ngModel">
+              <input class="mwf-text" id="simultaneousUsers" name="simultaneousUsers"  type="number" [(ngModel)]="ipRecording.larViewing.simultaneousUsers" (change)="validateInput($event)" #simultaneousUsers="ngModel">
             </div>
           </li>
           <!-- Checkboxes -->
@@ -587,7 +589,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="maxDrivesSupported" name="maxDrivesSupported" [(ngModel)]="ipRecording.storageOptions.maxDrivesSupported" (change)="validateInput($event)" #maxDrivesSupported="ngModel" type="text">
+                <input class="mwf-text" id="maxDrivesSupported" name="maxDrivesSupported" [(ngModel)]="ipRecording.storageOptions.maxDrivesSupported" (change)="validateInput($event)" #maxDrivesSupported="ngModel" type="number">
               </div>
             </li>
   
@@ -598,7 +600,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="baseSystemCapacity" name="baseSystemCapacity" [(ngModel)]="ipRecording.storageOptions.baseSystemCapacity" (change)="validateInput($event)" #baseSystemCapacity="ngModel" type="text">
+                <input class="mwf-text" id="baseSystemCapacity" name="baseSystemCapacity" [(ngModel)]="ipRecording.storageOptions.baseSystemCapacity" (change)="validateInput($event)" #baseSystemCapacity="ngModel" type="number">
               </div>
             </li>
   
@@ -609,7 +611,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="maxBaseSystemCapacity" name="maxBaseSystemCapacity" [(ngModel)]="ipRecording.storageOptions.maxBaseSystemCapacity" (change)="validateInput($event)" #maxBaseSystemCapacity="ngModel" type="text">
+                <input class="mwf-text" id="maxBaseSystemCapacity" name="maxBaseSystemCapacity" [(ngModel)]="ipRecording.storageOptions.maxBaseSystemCapacity" (change)="validateInput($event)" #maxBaseSystemCapacity="ngModel" type="number">
               </div>
             </li>
   
@@ -620,7 +622,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="fullSystemCapacity" name="fullSystemCapacity" [(ngModel)]="ipRecording.storageOptions.fullSystemCapacity" (change)="validateInput($event)" #fullSystemCapacity="ngModel" type="text">
+                <input class="mwf-text" id="fullSystemCapacity" name="fullSystemCapacity" [(ngModel)]="ipRecording.storageOptions.fullSystemCapacity" (change)="validateInput($event)" #fullSystemCapacity="ngModel" type="number">
               </div>
             </li>
   
@@ -659,7 +661,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="maxNumberOfUnits" name="maxNumberOfUnits" [(ngModel)]="ipRecording.storageExtensions.maxNumberOfUnits" (change)="validateInput($event)" #maxNumberOfUnits="ngModel" type="text">
+                <input class="mwf-text" id="maxNumberOfUnits" name="maxNumberOfUnits" [(ngModel)]="ipRecording.storageExtensions.maxNumberOfUnits" (change)="validateInput($event)" #maxNumberOfUnits="ngModel" type="number">
               </div>
             </li>
   
@@ -670,7 +672,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="maximumDrievesSupported" name="maximumDrievesSupported" [(ngModel)]="ipRecording.storageExtensions.maximumDrievesSupported" (change)="validateInput($event)" #maximumDrievesSupported="ngModel" type="text">
+                <input class="mwf-text" id="maximumDrievesSupported" name="maximumDrievesSupported" [(ngModel)]="ipRecording.storageExtensions.maximumDrievesSupported" (change)="validateInput($event)" #maximumDrievesSupported="ngModel" type="number">
               </div>
             </li>
   
@@ -691,7 +693,7 @@
                 <fieldset>
                   <!--Automatic Back Focus (ABF) INPUT-->
                   <span class="mwf-option">
-                    <input type="checkbox" class="mwf-checkbox" id="hotSwappable" name="hotSwappable" [(ngModel)]="ipRecording.storageExtensions.hotSwappable" (change)="validateInput($event)" #hotSwappable="ngModel">
+                    <input type="checkbox" class="mwf-checkbox" id="hotSwappable" name="hotSwappable" [(ngModel)]="ipRecording.storageExtensions.hotSwappable" (change)="validateInput($event)" #hotSwappablea="ngModel">
                     <label for="hotSwappable">Hot swapplable</label>
                   </span>
                 </fieldset>
@@ -743,7 +745,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="ipRecording.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="text">
+              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="ipRecording.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="number">
             </div>
           </li>
 
@@ -754,7 +756,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="ipRecording.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="text">
+              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="ipRecording.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="number">
             </div>
           </li>
 

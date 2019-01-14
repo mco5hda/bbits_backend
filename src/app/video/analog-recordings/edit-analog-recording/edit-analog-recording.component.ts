@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnalogRecording } from '../../models/recordings/analog-recordings.model';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-edit-analog-recording',
@@ -138,7 +139,11 @@ export class EditAnalogRecordingComponent implements OnInit {
     let x = document.getElementsByClassName("tab") as HTMLCollectionOf<HTMLElement>;
     // Exit the function if any field in the current tab is invalid:
     
-    if (n == 1 && !this.validateForm()) return;
+    if (n == 1 && !this.validateForm()) {
+      window.scrollTo(0,0);
+      CallOut.addCallOut('warning','Some inputs have no value. Please complete them before forward', 5000);
+      return;
+    }
 
     // Hide the current tab:
     x[this.currentTab].style.display = "none";
@@ -216,7 +221,7 @@ export class EditAnalogRecordingComponent implements OnInit {
   * Metodo para crear registrar una nueva camara
   */
   updateAnalogRecording(){
-    alert('Updated');
+    CallOut.updated = true;
     this.router.navigate(["/consult-analog-recordings"])
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { IPCamera } from '../../models/cameras/ip-cameras.model';
 import { Router } from '@angular/router';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-details-ip-camera',
@@ -55,7 +56,8 @@ export class DetailsIpCameraComponent implements OnInit {
   }
 
   deleteIPCamera(id: number){
-    alert('Delete');
+    CallOut.deleted = true;
+    this.router.navigate(["/consult-ip-cameras"]);
   }
 
 }

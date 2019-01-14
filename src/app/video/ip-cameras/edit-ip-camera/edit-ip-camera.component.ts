@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { IPCamera } from '../../models/cameras/ip-cameras.model';
 import { Router } from '@angular/router';
+import { CallOut } from './../../../utilities/callout';
 
 @Component({
   selector: 'app-edit-ip-camera',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 export class EditIpCameraComponent implements OnInit {
   ipCamera: IPCamera;
   currentTab: number = 0; // Current tab is set to be the first tab (0)
+  loading: boolean = false;
 
   families = ["2000", "4000", "5000", "6000", "7000", "8000", "9000"]
   categories = ["Fixed IP Cameras","Fixed IP Domes","Panoramic cameras","PTZ IP Cameras","Specialty Cameras"];
@@ -139,7 +141,11 @@ export class EditIpCameraComponent implements OnInit {
     let x = document.getElementsByClassName("tab") as HTMLCollectionOf<HTMLElement>;
     // Exit the function if any field in the current tab is invalid:
     
-    if (n == 1 && !this.validateForm()) return;
+    if (n == 1 && !this.validateForm()) {
+      window.scrollTo(0,0);
+      CallOut.addCallOut('warning','Some inputs have no value. Please complete them before forward', 5000);
+      return;
+    }
 
     // Hide the current tab:
     x[this.currentTab].style.display = "none"
@@ -217,7 +223,9 @@ export class EditIpCameraComponent implements OnInit {
   * Metodo para crear registrar una nueva camara
   */
   updateIPCamera(){
-    alert('Updated');
+    this.loading = true;
+    this.loading = false;
+    CallOut.updated = true;
     this.router.navigate(["/consult-ip-cameras"])
   }
 }
