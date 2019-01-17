@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Environment } from 'src/app/app.environment';
 import { AnalogCamera } from '../../models/cameras/analog-cameras.model';
 import { CallOut } from './../../../utilities/callout';
+import { AnalogCameraService } from '../analog-camera.service';
 
 @Component({
   selector: 'app-consult-analog-cameras',
@@ -11,13 +12,14 @@ import { CallOut } from './../../../utilities/callout';
   encapsulation: ViewEncapsulation.None,
 })
 export class ConsultAnalogCamerasComponent implements OnInit {
-
+  loading = false;
   analogCameras: AnalogCamera[] = new Array();
   currentPage: number = 1;
   elementsPerPage: number = Environment.defaultPaginationElements;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private analogCameraService: AnalogCameraService,
   ) { }
 
   ngOnInit() {
@@ -36,199 +38,142 @@ export class ConsultAnalogCamerasComponent implements OnInit {
   }
 
   getAllAnalogCameras(){
-    //Send the request to the  server and get the json with the ip cameras elements array
+    //Send the request to the  server and get the json with the analog cameras elements array
 
-    let data = {
-      "id": "",
-      "name": "TINYON AN 1000",
-      "family": "1000",
-      "category": "Fixed AN cameras",
-      "accessories" : "LVF-5000C-D2811,LVF-5000C-D0550,LTC 3664/31,EX12LED-3BD-8M,EX12LED-3BD-8W,EX12LED-3BD-9M,EX12LED-3BD-9W,TC8235GIT,UPA-2430-60,UPA-2420-50,UPA-2450-50,UPA-2450-60,S1374,VP-CFGSFT",
-      "image": undefined,
-      "thumbnail": undefined,
-      "datasheet": undefined,
-      "ctnClass": "VPC1055",
-      "ctnClassFull": "VPC-1055",
-      "subTypes": [
-        {"name": "VBN-5085-C11","description": "DINION AN 5000"},
-        {"name": "VBN-5085-C21","description": "DINION AN 5000"},
-        {"name": "VBN-5085-C51","description": "DINION AN 5000"}
-      ],
-      "basicFeatures":{
-        "maxResolution" : "720 TVL",
-        "sensorType" : "9-POE,UPA-1220-60,S1460,VDA-455SMB-IP,VDA-PMT-DO60H, 1/3 DS CCD",
-        "indoorOutdoor" : "Outdoor",
-        "dayNight" : "Day",
-        "wideDinamicRange" : "94 DB (WDR)",
-        "irSensitive" : true
+    this.analogCameraService.getAnalogCameras().subscribe(
+      data => {
+        this.fillList(data[0]);
+        this.loading = false;
       },
-      "advancedFeatures":{
-        "privacyMasking" : true
-      },
-      "alarmTriggering":{
-        "tamperDetection" : false,
-        "videoMotionDetection" : true
-      },
-      "sensitivity":{
-        "minIluminationDayMode" : "0.5",
-        "minIlluminationNightMode" : "0.2",
-        "nightVision" : true,
-        "maxRangeAtNight" : 0
-      },
-      "lens":{
-        "focalLengthFrom" : "2.50",
-        "focalLengthTill" : "2.5",
-        "maxAngleH" : "85.0",
-        "minAngleH" : "65.0",
-        "ptzZoomDigital" : false,
-        "ptzOpticalZoom" : false,
-        "tiltAngle" : false
-      },
-      "connections":{
-        "alarmInputOutput" : true
-      },
-      "housing":{
-        "weatherRating" : "IP65",
-        "vandalResistant" : "IK9",
-        "operatingTemperature" : "-20°C TO +55°C (-4°F TO 131°F)"
-      },
-      "price" : "1.0",
-      "electricalData":{
-        "inputVoltage" : "12",
-        "normalVersion" : "1.20"
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'Not found elements. Retry again.', 5000)     
       }
-    }
-
-    for (let index = 0; index < 10; index++) {
-      let analogCamera: AnalogCamera = new AnalogCamera();
-      analogCamera.id = index;
-      
-      for(let key in data){
-        if(key === 'name'){
-          analogCamera.name = this.validateUndefinedValue(key, data[key]);
-        }else if(key === 'family'){
-          analogCamera.family = this.validateUndefinedValue(key, data[key]);
-        }else if(key === 'category'){
-          analogCamera.category = this.validateUndefinedValue(key, data[key]);
-        }else if(key === 'ctnClass'){
-          analogCamera.ctnClass = this.validateUndefinedValue(key, data[key]);
-        }else if(key === 'ctnClassFull'){
-          analogCamera.ctnClassFull = this.validateUndefinedValue(key, data[key]);
-        }else if(key === 'price'){
-          analogCamera.price = this.validateUndefinedValue(key, data[key]);
-        }else if(key === 'basicFeatures'){
-          for(let index in data[key]){
-            if(index === 'maxResolution'){
-              analogCamera.basicFeatures.maxResolution = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'sensorType'){
-              analogCamera.basicFeatures.sensorType = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'indoorOutdoor'){
-              analogCamera.basicFeatures.indoorOutdoor = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'dayNight'){
-              analogCamera.basicFeatures.dayNight = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'wideDinamicRange'){
-              analogCamera.basicFeatures.wideDinamicRange = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'irSensitive'){
-              analogCamera.basicFeatures.irSensitive = this.validateUndefinedValue(index, data[key][index]);
-            }
-          }
-        }else if(key === 'advancedFeatures'){
-          for(let index in data[key]){
-            if(index === 'privacyMasking'){
-              analogCamera.advancedFeatures.privacyMasking = this.validateUndefinedValue(index, data[key][index]);
-            }
-          }
-        }else if(key === 'alarmTriggering'){
-          for(let index in data[key]){
-            if(index === 'tamperDetection'){
-              analogCamera.alarmTriggering.tamperDetection = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'videoMotionDetection'){
-              analogCamera.alarmTriggering.videoMotionDetection = this.validateUndefinedValue(index, data[key][index]);
-            }
-          }
-        }else if(key === 'sensitivity'){
-          for(let index in data[key]){
-            if(index === 'minIluminationDayMode'){
-              analogCamera.sensitivity.minIluminationDayMode = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'minIlluminationNightMode'){
-              analogCamera.sensitivity.minIlluminationNightMode = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'nightVision'){
-              analogCamera.sensitivity.nightVision = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'maxRangeAtNight'){
-              analogCamera.sensitivity.maxRangeAtNight = this.validateUndefinedValue(index, data[key][index]);
-            }
-          }
-        }else if(key === 'lens'){
-          for(let index in data[key]){
-            if(index === 'focalLengthFrom'){
-              analogCamera.lens.focalLengthFrom = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'focalLengthTill'){
-              analogCamera.lens.focalLengthTill = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'maxAngleH'){
-              analogCamera.lens.maxAngleH = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'minAngleH'){
-              analogCamera.lens.minAngleH = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'ptzZoomDigital'){
-              analogCamera.lens.ptzZoomDigital = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'ptzOpticalZoom'){
-              analogCamera.lens.ptzOpticalZoom = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'tiltAngle'){
-              analogCamera.lens.tiltAngle = this.validateUndefinedValue(index, data[key][index]);
-            }
-          }
-        }else if(key === 'connections'){
-          for(let index in data[key]){
-            if(index === 'alarmInputOutput'){
-              analogCamera.connections.alarmInputOutput = this.validateUndefinedValue(index, data[key][index]);
-            }
-          }
-        }else if(key === 'housing'){
-          for(let index in data[key]){
-            if(index === 'weatherRating'){
-              analogCamera.housing.weatherRating = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'vandalResistant'){
-              analogCamera.housing.vandalResistant = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'operatingTemperature'){
-              analogCamera.housing.operatingTemperature = this.validateUndefinedValue(index, data[key][index]);
-            }
-          }
-        }else if(key === 'electricalData'){
-          for(let index in data[key]){
-            if(index === 'inputVoltage'){
-              analogCamera.electricalData.inputVoltage = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'normalVersion'){
-              analogCamera.electricalData.normalVersion = this.validateUndefinedValue(index, data[key][index]);
-            }else if(index === 'irVersion'){
-              analogCamera.electricalData.irVersion = this.validateUndefinedValue(index, data[key][index]);
-            }
-          }
-        }
-      }
-      
-      this.analogCameras.push(analogCamera)
-    }
+    );
   }
 
-  validateUndefinedValue(key, value){
-    if(value === undefined){
-      return '';
-    }else{
-      return value;
-    }
+  fillList(data){
+    data.forEach(element => {
+      let analogCamera: AnalogCamera = new AnalogCamera();
+
+      for(let key in element){
+        if(key === 'ID'){
+          analogCamera.id = element[key];
+        }else if(key === 'NAME'){
+          analogCamera.name = element[key];
+        }else if(key === 'FAMILY'){
+          analogCamera.family = element[key];
+        }else if(key === 'CATEGORY'){
+          analogCamera.category = element[key];
+        }else if(key === 'CTN_CLASS'){
+          analogCamera.ctnClass = element[key];
+        }else if(key === 'CTN_CLASS_FULL'){
+          analogCamera.ctnClassFull = element[key];
+        }else if(key === 'PRICE'){
+          analogCamera.price = element[key];
+        }else if(key === 'MAX_RESOLUTION'){
+          analogCamera.basicFeatures.maxResolution = element[key];
+        }else if(key === 'SENSOR_TYPE'){
+          analogCamera.basicFeatures.sensorType = element[key];
+        }else if(key === 'INDOOR_OUTDOOR'){
+          analogCamera.basicFeatures.indoorOutdoor = element[key];
+        }else if(key === 'DAY_NIGHT'){
+          analogCamera.basicFeatures.dayNight = element[key];
+        }else if(key === 'WIDE_DYNAMIC_RANGE'){
+          analogCamera.basicFeatures.wideDinamicRange = element[key];
+        }else if(key === 'IR_SENSITIVE'){
+          analogCamera.basicFeatures.irSensitive = element[key];
+        }else if(key === 'PRIVACY_MASKING'){
+          analogCamera.advancedFeatures.privacyMasking = element[key];
+        }else if(key === 'TAMPER_DETECTION'){
+          analogCamera.alarmTriggering.tamperDetection = element[key];
+        }else if(key === 'MOTION_DETECTION'){
+          analogCamera.alarmTriggering.videoMotionDetection = element[key];
+        }else if(key === 'MIN_ILLUMINATION_DAY_MODE'){
+          analogCamera.sensitivity.minIluminationDayMode = element[key];
+        }else if(key === 'MIN_ILLUMINATION_NIGHT_MODE'){
+          analogCamera.sensitivity.minIlluminationNightMode = element[key];
+        }else if(key === 'MAX_RANGE_AT_NIGHT'){
+          analogCamera.sensitivity.startLight = element[key];
+        }else if(key === 'NIGHT_VISION'){
+          analogCamera.sensitivity.integratedIr = element[key];
+        }else if(key === 'FOCAL_LENGTH_FROM'){
+          analogCamera.lens.focalLengthFrom = element[key];
+        }else if(key === 'FOCAL_LENGTH_TILL'){
+          analogCamera.lens.focalLengthTill = element[key];
+        }else if(key === 'MAX_ANGLE_H'){
+          analogCamera.lens.maxAngleH = element[key];
+        }else if(key === 'MIN_ANGLE_H'){
+          analogCamera.lens.minAngleH = element[key];;
+        }else if(key === 'PTZ_ZOOM_DIGITAL'){
+          analogCamera.lens.ptzZoomDigital = element[key];
+        }else if(key === 'PTZ_OPTICAL_ZOOM'){
+          analogCamera.lens.ptzOpticalZoom = element[key];
+        }else if(key === 'TILT_ANGLE'){
+          analogCamera.lens.tiltAngle = element[key];
+        }else if(key === 'ALARM_INPUT_OUTPUT'){
+          analogCamera.connections.alarmInputOutput = element[key];
+        }else if(key === 'WEATHER_RATING'){
+          analogCamera.housing.weatherRating = element[key];
+        }else if(key === 'VANDAL_RESISTANT'){
+          analogCamera.housing.vandalResistant = element[key];
+        }else if(key === 'OPERATING_TEMPERATURE'){
+          analogCamera.housing.operatingTemperature = element[key];
+        }
+      }
+      this.analogCameras.push(analogCamera)
+    });
+      
+    
   }
 
   detailsAnalogCamera(id: number){
-    sessionStorage.setItem("analogCameraElement", JSON.stringify(this.analogCameras[id]));
+    let analogCamera: AnalogCamera;
+
+    this.analogCameras.forEach(element => {
+      if(element.id === id){
+        analogCamera = element;
+      }
+    });
+
+    sessionStorage.setItem("analogCameraElement", JSON.stringify(analogCamera));
     this.router.navigate(["/details-analog-camera"]);
   }
 
   editAnalogCamera(id: number){
-    sessionStorage.setItem("analogCameraElement", JSON.stringify(this.analogCameras[id]));
+    let analogCamera: AnalogCamera;
+
+    this.analogCameras.forEach(element => {
+      if(element.id === id){
+        analogCamera = element;
+      }
+    });
+
+    sessionStorage.setItem("analogCameraElement", JSON.stringify(analogCamera));
     this.router.navigate(["/edit-analog-camera"]);
   }
 
   deleteAnalogCamera(id: number){
-    CallOut.addCallOut('success', 'Analog Camera deleted succesfully.', 5000);
+    this.loading = true;
+
+    this.analogCameraService.deleteAnalogCamera(id).subscribe(
+      (data) => {
+        try {
+          console.log(data['status']);
+          if(data['status'] === 'Analog Camera deleted'){
+            this.loading = false;
+            this.analogCameras = this.analogCameras.filter(c => c.id !== id);
+            CallOut.addCallOut('success', 'Analog Camera deleted.', 5000);
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The Analog Camera has not deleted.', 5000)     
+      }
+    );
   }
 
 }

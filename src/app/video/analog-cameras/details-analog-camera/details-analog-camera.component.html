@@ -1,6 +1,7 @@
 <app-header></app-header>
 
 <main class="vhHeight">
+  <div class="loader" *ngIf="loading"></div>
 
   <!--Image and info in the right side-->
   <div class="O-ExtendedCarousel">
@@ -47,11 +48,6 @@
                 <span class="A-List__icon A-List__icon--noIcon"></span>
                 <span class="A-List__itemText">Price: </span>
                 <span class="A-List__itemText">{{analogCamera.price}}</span>
-              </li>
-              <li class="A-List__item">
-                <span class="A-List__icon A-List__icon--noIcon"></span>
-                <span class="A-List__itemText">Category: </span>
-                <span class="A-List__itemText">{{analogCamera.name}}</span>
               </li>
             </ul>
             
@@ -102,7 +98,7 @@
               </li>
               <li class="M-TabLinks__link" tabindex="3">
                 <button class="M-TabLinks__trigger" (click)="changeTab(3)">
-                  <span>Housing & Electrical</span>
+                  <span>Housing</span>
                 </button>
               </li>
           </ul>
@@ -297,29 +293,6 @@
                     <div class="A-DescriptionList__label">Corrosion Proof</div>
                     <div class="A-DescriptionList__label">Operating temperature</div>
                     <div class="A-DescriptionList__value">{{analogCamera.housing.operatingTemperature}}</div>
-                  </div>
-                </div>
-              </div>
-              
-              <!--Headers row column-->
-              <div class="A-InformationBlock">
-                <h4 class="A-InformationBlock__headline h4">Electrical Information</h4>
-              </div>
-              <!--data row-->
-              <div class="A-DescriptionList row" >
-                <!-- First column-->
-                <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                  <div class="A-DescriptionList__item">
-                    <div class="A-DescriptionList__label">Input voltage</div>
-                    <div class="A-DescriptionList__value">{{analogCamera.electricalData.inputVoltage}}</div>
-                  </div>
-                </div>
-  
-                <!--Second column-->
-                <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                  <div class="A-DescriptionList__item">
-                    <div class="A-DescriptionList__label">Normal version</div>
-                    <div class="A-DescriptionList__value">{{analogCamera.electricalData.normalVersion}}</div>
                   </div>
                 </div>
               </div>

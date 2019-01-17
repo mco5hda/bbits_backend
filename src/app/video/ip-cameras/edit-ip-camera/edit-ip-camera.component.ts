@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { IPCamera } from '../../models/cameras/ip-cameras.model';
 import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
+import { IpCameraService } from '../ip-camera.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-ip-camera',
@@ -19,8 +21,14 @@ export class EditIpCameraComponent implements OnInit {
   indoorOutdoorArray = ["Indoor", "Outdoor"];
   dayNightArray = ["Day/Night","E-Day/Night","Thermal"];
 
+  datasheetSelectedFiles: FileList;
+  imageSelectedFiles: FileList;
+  datasheetFile: File;
+  imageFile: File;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private ipCameraService: IpCameraService,
   ) { }
 
   ngOnInit() {
@@ -35,7 +43,7 @@ export class EditIpCameraComponent implements OnInit {
   onLoadDataSheet(){
     let e = this;
     let uploader = (<HTMLInputElement>document.getElementById('file1')).files;
-
+    this.datasheetSelectedFiles = uploader;
     this.ipCamera.datasheet = (<HTMLInputElement>document.getElementById('file1')).value;
 
     if(uploader[0] !== undefined){
@@ -83,7 +91,8 @@ export class EditIpCameraComponent implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
 
     this.ipCamera.image = (<HTMLInputElement>document.getElementById('uploaderImage')).value;
-
+    let uploader = (<HTMLInputElement>document.getElementById('uploaderImage')).files;
+    this.imageSelectedFiles = uploader;
     document.getElementById('image-list').classList.remove("image-list")
 
     document.getElementById('btn-delete-preview-image').addEventListener("click", (event: Event) => {
@@ -224,8 +233,26 @@ export class EditIpCameraComponent implements OnInit {
   */
   updateIPCamera(){
     this.loading = true;
-    this.loading = false;
-    CallOut.updated = true;
-    this.router.navigate(["/consult-ip-cameras"])
+    this.imageFile = this.imageSelectedFiles.item(0);
+    this.datasheetFile = this.datasheetSelectedFiles.item(0);
+
+    this.ipCameraService.updateIPCamera(this.ipCamera, this.datasheetFile, this.imageFile)
+    .subscribe(
+      (data: HttpResponse< { status :  string }> ) => {
+        try {
+          if(data.body.status === 'IP Camera updated'){
+            this.loading = false;
+            CallOut.updated = true;
+            this.router.navigate(["/consult-ip-cameras"])
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The IP Camera has not updated.', 5000)     
+      }
+    );
   }
 }

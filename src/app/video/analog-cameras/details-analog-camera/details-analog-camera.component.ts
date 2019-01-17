@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AnalogCamera } from '../../models/cameras/analog-cameras.model';
 import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
+import { AnalogCameraService } from '../analog-camera.service';
 
 @Component({
   selector: 'app-details-analog-camera',
@@ -12,14 +13,15 @@ import { CallOut } from './../../../utilities/callout';
 export class DetailsAnalogCameraComponent implements OnInit {
 
   analogCamera: AnalogCamera;
+  loading: boolean = false;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private analogCameraService: AnalogCameraService,
   ) { }
 
   ngOnInit() {
     this.analogCamera = JSON.parse(sessionStorage.getItem("analogCameraElement"));
-    console.log(this.analogCamera)
   }
 
   changeTab(id: number){
@@ -58,8 +60,25 @@ export class DetailsAnalogCameraComponent implements OnInit {
   }
 
   deleteAnalogCamera(id: number){
-    CallOut.deleted = true;
-    this.router.navigate(["/consult-analog-cameras"]);
+    this.loading = true;
+
+    this.analogCameraService.deleteAnalogCamera(id).subscribe(
+      (data) => {
+        try {
+          if(data['status'] === 'Analog Camera deleted'){
+            this.loading = false;
+            CallOut.deleted = true;
+            this.router.navigate(["/consult-analog-cameras"]);
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The Analog Camera has not deleted.', 5000)     
+      }
+    );
   }
 
 }

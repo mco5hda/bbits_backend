@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AnalogCamera } from '../../models/cameras/analog-cameras.model';
 import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
+import { AnalogCameraService } from '../analog-camera.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-analog-camera',
@@ -19,8 +21,15 @@ export class EditAnalogCameraComponent implements OnInit {
   indoorOutdoorArray = ["Indoor", "Indoor/Outdoor", "Outdoor"];
   dayNightArray = ["Day", "Day/Night","E-Day/Night"];
   loading: boolean = false;
+  datasheetSelectedFiles: FileList;
+  imageSelectedFiles: FileList;
+  datasheetFile: File;
+  imageFile: File;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private analogCameraService: AnalogCameraService,
+
   ) { }
 
   ngOnInit() {
@@ -34,7 +43,7 @@ export class EditAnalogCameraComponent implements OnInit {
   onLoadDataSheet(){
     let e = this;
     let uploader = (<HTMLInputElement>document.getElementById('file1')).files;
-
+    this.datasheetSelectedFiles = uploader;
     this.analogCamera.datasheet = (<HTMLInputElement>document.getElementById('file1')).value;
 
     if(uploader[0] !== undefined){
@@ -82,7 +91,8 @@ export class EditAnalogCameraComponent implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
 
     this.analogCamera.image = (<HTMLInputElement>document.getElementById('uploaderImage')).value;
-
+    let uploader = (<HTMLInputElement>document.getElementById('uploaderImage')).files;
+    this.imageSelectedFiles = uploader;
     document.getElementById('image-list').classList.remove("image-list")
 
     document.getElementById('btn-delete-preview-image').addEventListener("click", (event: Event) => {
@@ -221,7 +231,27 @@ export class EditAnalogCameraComponent implements OnInit {
   * Metodo para crear registrar una nueva camara
   */
   updateAnalogCamera(){
-    CallOut.updated = true;
-    this.router.navigate(["/consult-analog-cameras"])
+    this.loading = true;
+    this.imageFile = this.imageSelectedFiles.item(0);
+    this.datasheetFile = this.datasheetSelectedFiles.item(0);
+
+    this.analogCameraService.updateAnalogCamera(this.analogCamera, this.datasheetFile, this.imageFile)
+    .subscribe(
+      (data: HttpResponse< { status :  string }> ) => {
+        try {
+          if(data.body.status === 'Analog Camera updated'){
+            this.loading = false;
+            CallOut.updated = true;
+            this.router.navigate(["/consult-analog-cameras"])
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The Analog Camera has not updated.', 5000)     
+      }
+    );
   }
 }

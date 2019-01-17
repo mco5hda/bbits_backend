@@ -1,6 +1,8 @@
+
 <app-header></app-header>
 
 <main class="vhHeight">
+  <div class="loader" *ngIf="loading"></div>
 
   <!--Image and info in the right side-->
   <div class="O-ExtendedCarousel">
@@ -48,11 +50,6 @@
                 <span class="A-List__itemText">Price: </span>
                 <span class="A-List__itemText">{{ipCamera.price}}</span>
               </li>
-              <li class="A-List__item">
-                <span class="A-List__icon A-List__icon--noIcon"></span>
-                <span class="A-List__itemText">Category: </span>
-                <span class="A-List__itemText">{{ipCamera.name}}</span>
-              </li>
             </ul>
             
           </div>
@@ -87,12 +84,12 @@
           <ul class="M-TabLinks__links M-TabLinks__links--alignLeft">
               <li class="M-TabLinks__link M-TabLinks__link--active" tabindex="0">
                 <button class="M-TabLinks__trigger" (click)="changeTab(0)">
-                  <span>Basic</span>
+                  <span>Basic Features</span>
                 </button>
               </li>
               <li class="M-TabLinks__link" tabindex="1">
                 <button class="M-TabLinks__trigger" (click)="changeTab(1)">
-                  <span>Advanced</span>
+                  <span>Advanced Features</span>
                 </button>
               </li>
               <li class="M-TabLinks__link" tabindex="2">
@@ -112,7 +109,7 @@
               </li>
               <li class="M-TabLinks__link" tabindex="5">
                 <button class="M-TabLinks__trigger" (click)="changeTab(5)">
-                  <span>Connections & Housing & Electrical</span>
+                  <span>Connections & Housing</span>
                 </button>
               </li>
           </ul>
@@ -557,33 +554,6 @@
                     <div class="A-DescriptionList__label">Explosion Proof</div>
                     <div class="A-DescriptionList__value" *ngIf="ipCamera.housing.explosionProof">Yes</div>
                     <div class="A-DescriptionList__value" *ngIf="!ipCamera.housing.explosionProof">No</div>
-                  </div>
-                </div>
-              </div>
-              
-              <!--Headers row column-->
-              <div class="A-InformationBlock">
-                <h4 class="A-InformationBlock__headline h4">Electrical Information</h4>
-              </div>
-              <!--data row-->
-              <div class="A-DescriptionList row" >
-                <!-- First column-->
-                <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                    <div class="A-DescriptionList__item">
-                      <div class="A-DescriptionList__label">Input voltage</div>
-                      <div class="A-DescriptionList__value">{{ipCamera.electricalData.inputVoltage}}</div>
-                    </div>
-                    <div class="A-DescriptionList__item">
-                      <div class="A-DescriptionList__label">Normal version</div>
-                      <div class="A-DescriptionList__value">{{ipCamera.electricalData.normalVersion}}</div>
-                    </div>
-                </div>
-  
-                <!--Second column-->
-                <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                  <div class="A-DescriptionList__item">
-                    <div class="A-DescriptionList__label">IR version</div>
-                    <div class="A-DescriptionList__value">{{ipCamera.electricalData.irVersion}}</div>
                   </div>
                 </div>
               </div>

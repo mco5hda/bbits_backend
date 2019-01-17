@@ -389,7 +389,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="tiltAngle" name="tiltAngle" [(ngModel)]="analogCamera.lens.tiltAngle" (change)="validateInput($event)" #tiltAngle="ngModel" type="number">
+              <input class="mwf-text" id="tiltAngle" name="tiltAngle" [(ngModel)]="analogCamera.lens.tiltAngle" (change)="validateInput($event)" #tiltAngle="ngModel" type="text">
             </div>
           </li>
 
@@ -432,14 +432,8 @@
             </div>
           </li>
         </ul>
-      </div>
 
-      <!--
-      Sixth section of form
-      Housing and Electrical
-      -->
-      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">          
-        <!--Housing area-->
+            <!--Housing area-->
         <ul>      
           <li class="mwf-field">
             <h3>Housing</h3>
@@ -479,37 +473,9 @@
             </div>
           </li>
         </ul>
-
-        <!--Electrical area-->
-        <ul>      
-          <li class="mwf-field">
-            <h3>Electrical Information</h3>
-            <hr>
-          </li>
-
-          <!-- input voltage Input -->
-          <li class="mwf-field mwf-m">
-            <label class="mwf-label mwf-label-input">
-              Input voltage
-              <span class="mwf-required">*</span>
-            </label>
-            <div class="mwf-input">
-              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="analogCamera.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="number">
-            </div>
-          </li>
-
-          <!-- normalVersion Input -->
-          <li class="mwf-field mwf-m">
-            <label class="mwf-label mwf-label-input">
-              Normal version
-              <span class="mwf-required">*</span>
-            </label>
-            <div class="mwf-input">
-              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="analogCamera.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="number">
-            </div>
-          </li>
-        </ul>
       </div>
+
+
 
       <!--Buttons-->
       <div class="col-xs-12 col-sm-8 col-sm-push-2 forms-buttons col-xs-12">

@@ -757,47 +757,6 @@
             </div>
           </li>
         </ul>
-
-        <!--Electrical area-->
-        <ul>      
-          <li class="mwf-field">
-            <h3>Electrical Information</h3>
-            <hr>
-          </li>
-
-          <!-- input voltage Input -->
-          <li class="mwf-field mwf-m">
-            <label class="mwf-label mwf-label-input">
-              Input voltage
-              <span class="mwf-required">*</span>
-            </label>
-            <div class="mwf-input">
-              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="ipCamera.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="number">
-            </div>
-          </li>
-
-          <!-- normalVersion Input -->
-          <li class="mwf-field mwf-m">
-            <label class="mwf-label mwf-label-input">
-              Normal version
-              <span class="mwf-required">*</span>
-            </label>
-            <div class="mwf-input">
-              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="ipCamera.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="number">
-            </div>
-          </li>
-
-          <!-- irVersion Input -->
-          <li class="mwf-field">
-            <label class="mwf-label mwf-label-input">
-              IR version
-              <span class="mwf-required">*</span>
-            </label>
-            <div class="mwf-input">
-              <input class="mwf-text" id="irVersion" name="irVersion" [(ngModel)]="ipCamera.electricalData.irVersion" (change)="validateInput($event)" #irVersion="ngModel" type="number">
-            </div>
-          </li>
-        </ul>
       </div>
 
       <!--Buttons-->

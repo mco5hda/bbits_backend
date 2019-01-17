@@ -4,7 +4,7 @@ import { IPCamera } from '../../models/cameras/ip-cameras.model';
 import { DatasheetService } from '../../datasheet.service';
 import { IpCameraService } from '../ip-camera.service';
 import { CallOut } from './../../../utilities/callout';
-
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-ip-camera',
@@ -24,14 +24,16 @@ export class AddIpCameraComponent implements OnInit {
   dayNightArray = ["Day/Night","E-Day/Night","Thermal"];
 
   loading: boolean = false;
-  selectedFiles: FileList;
-  currentFileUpload: File;
+  datasheetSelectedFiles: FileList;
+  imageSelectedFiles: FileList;
+  datasheetFile: File;
+  imageFile: File;
   productType : string = 'ip_camera';
 
   constructor(
     private router: Router,
     private datasheetService: DatasheetService,
-    private ipCameraService: IpCameraService,
+    private ipCameraService: IpCameraService
   ) { }
 
   ngOnInit() {    
@@ -44,7 +46,7 @@ export class AddIpCameraComponent implements OnInit {
   onLoadDataSheet(){
     let e = this;
     let uploader = (<HTMLInputElement>document.getElementById('file1')).files;
-    this.selectedFiles = uploader;
+    this.datasheetSelectedFiles = uploader;
     this.ipCamera.datasheet = (<HTMLInputElement>document.getElementById('file1')).value;
 
     if(uploader[0] !== undefined){
@@ -92,12 +94,14 @@ export class AddIpCameraComponent implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
 
     this.ipCamera.image = (<HTMLInputElement>document.getElementById('uploaderImage')).value;
-
+    let uploader = (<HTMLInputElement>document.getElementById('uploaderImage')).files;
+    this.imageSelectedFiles = uploader;
     document.getElementById('image-list').classList.remove("image-list")
 
     document.getElementById('btn-delete-preview-image').addEventListener("click", (event: Event) => {
       this.deletePreviewImage();
     });
+
   }
 
   //Delete the files with uploader in the uploader
@@ -231,11 +235,10 @@ export class AddIpCameraComponent implements OnInit {
  */
   fillInputs(): void {
     this.loading = true;
-
-    this.currentFileUpload = this.selectedFiles.item(0);
+    this.datasheetFile = this.datasheetSelectedFiles.item(0);
 
     this.datasheetService
-      .getDatasheetInformation(this.currentFileUpload, this.productType)
+      .getDatasheetInformation(this.datasheetFile, this.productType)
       .subscribe(
         (data) => {
           let info = data['body']
@@ -408,16 +411,6 @@ export class AddIpCameraComponent implements OnInit {
                   this.ipCamera.housing.operatingTemperature = this.validateUndefinedValue(index, info[key][index]);
                 }
               }
-            }else if(key === 'electricalData'){
-              for(let index in info[key]){
-                if(index === 'inputVoltage'){
-                  this.ipCamera.electricalData.inputVoltage = this.validateUndefinedValue(index, info[key][index]);
-                }else if(index === 'normalVersion'){
-                  this.ipCamera.electricalData.normalVersion = this.validateUndefinedValue(index, info[key][index]);
-                }else if(index === 'irVersion'){
-                  this.ipCamera.electricalData.irVersion = this.validateUndefinedValue(index, info[key][index]);
-                }
-              }
             }
           }
           this.loading = false;
@@ -453,30 +446,30 @@ export class AddIpCameraComponent implements OnInit {
     }
   }
 
-  
-
   /*
   * Metodo para crear registrar una nueva camara
   */
   addIPCamera(){
     this.loading = true;
-    this.loading = false;
-    CallOut.added = true;
-    this.router.navigate(["/consult-ip-cameras"])
-    // this.ipCameraService.createIPCamera(this.ipCamera)
-    // .subscribe(
-    //   data => {
-    //     if(data["headers"] != undefined){
-    //       this.loading = false;
-    //       CallOut.addCallOut('success', 'IP Camera added succesfully', 5000)
-    //       this.router.navigate(["/consult-ip-cameras"])
-    //     }
-    //   },
-    //   error => {
-    //     this.loading = false;
-    //     CallOut.addCallOut('error', 'The IP Camera has not added.', 5000)
-        
-    //   }
-    // )
+    this.imageFile = this.imageSelectedFiles.item(0);
+
+    this.ipCameraService.createIPCamera(this.ipCamera, this.datasheetFile, this.imageFile)
+    .subscribe(
+      (data: HttpResponse< { status :  string }> ) => {
+        try {
+          if(data.body.status === 'IP Camera added'){
+            this.loading = false;
+            CallOut.added = true;
+            this.router.navigate(["/consult-ip-cameras"])
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The IP Camera has not added.', 5000)     
+      }
+    );
   }
 }

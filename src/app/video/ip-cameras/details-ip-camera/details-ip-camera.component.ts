@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { IPCamera } from '../../models/cameras/ip-cameras.model';
 import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
+import { IpCameraService } from '../ip-camera.service';
 
 @Component({
   selector: 'app-details-ip-camera',
@@ -11,9 +12,11 @@ import { CallOut } from './../../../utilities/callout';
 })
 export class DetailsIpCameraComponent implements OnInit {
   ipCamera: IPCamera;
+  loading: boolean = false;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private ipCameraService: IpCameraService,
   ) { }
 
   ngOnInit() {
@@ -56,8 +59,25 @@ export class DetailsIpCameraComponent implements OnInit {
   }
 
   deleteIPCamera(id: number){
-    CallOut.deleted = true;
-    this.router.navigate(["/consult-ip-cameras"]);
+    this.loading = true;
+
+    this.ipCameraService.deleteIPCamera(id).subscribe(
+      (data) => {
+        try {
+          if(data['status'] === 'IP Camera deleted'){
+            this.loading = false;
+            CallOut.deleted = true;
+            this.router.navigate(["/consult-ip-cameras"]);
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The IP Camera has not deleted.', 5000)     
+      }
+    );
   }
 
 }
