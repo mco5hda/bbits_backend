@@ -12,13 +12,18 @@ import { CallOut } from './../../../utilities/callout';
 export class DetailsIpRecordingComponent implements OnInit {
 
   ipRecording: IPRecording;
-
+  image: string = '';
   constructor(
     private router: Router
   ) { }
 
   ngOnInit() {
     this.ipRecording = JSON.parse(sessionStorage.getItem("ipRecordingElement"));
+    if(this.ipRecording.id > 56){
+      this.image = 'http://localhost:3000/static/assets/video/ip-recording/images/'+this.ipRecording.id+'-'+this.ipRecording.image;
+    }else{
+      this.image = 'http://www.videoselector.boschsecurity.com/'+this.ipRecording.image
+    }
   }
 
   changeTab(id: number){

@@ -65,6 +65,10 @@ export class ConsultAnalogCamerasComponent implements OnInit {
           analogCamera.family = element[key];
         }else if(key === 'CATEGORY'){
           analogCamera.category = element[key];
+        }else if(key === 'IMAGE'){
+          analogCamera.image = element[key];
+        }else if(key === 'DATASHEET'){
+          analogCamera.datasheet = element[key];
         }else if(key === 'CTN_CLASS'){
           analogCamera.ctnClass = element[key];
         }else if(key === 'CTN_CLASS_FULL'){

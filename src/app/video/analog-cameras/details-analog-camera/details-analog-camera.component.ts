@@ -14,6 +14,7 @@ export class DetailsAnalogCameraComponent implements OnInit {
 
   analogCamera: AnalogCamera;
   loading: boolean = false;
+  image: string = '';
 
   constructor(
     private router: Router,
@@ -22,6 +23,12 @@ export class DetailsAnalogCameraComponent implements OnInit {
 
   ngOnInit() {
     this.analogCamera = JSON.parse(sessionStorage.getItem("analogCameraElement"));
+
+    if(this.analogCamera.id > 48){
+      this.image = 'http://localhost:3000/static/assets/video/analog-cameras/images/'+this.analogCamera.id+'-'+this.analogCamera.image;
+    }else{
+      this.image = 'http://www.videoselector.boschsecurity.com/'+this.analogCamera.image
+    }
   }
 
   changeTab(id: number){

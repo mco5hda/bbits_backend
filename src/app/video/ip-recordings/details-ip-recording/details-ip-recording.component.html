@@ -19,7 +19,7 @@
                 <div data-m-carousel-simple-slide="" class="M-CarouselSimple__slide M-CarouselSimple__slide--active">
                   <figure class="A-Image__figure">
                     <picture class="A-Image__picture">
-                      <img class="A-Image " src="./../../../../assets/login/supergraphic.png" alt="{{ipRecording.name}}">
+                      <img class="A-Image center-image" src="{{image}}" alt="{{ipRecording.name}}">
                     </picture>
                   </figure>
                 </div>
@@ -112,7 +112,7 @@
             </li>
             <li class="M-TabLinks__link" tabindex="5">
               <button class="M-TabLinks__trigger" (click)="changeTab(5)">
-                <span>Integration & Video & Electrical</span>
+                <span>Integration & Video Output</span>
               </button>
             </li>
           </ul>
@@ -570,28 +570,6 @@
               </div>
             </div>
               
-            <!--Headers row column-->
-            <div class="A-InformationBlock">
-              <h4 class="A-InformationBlock__headline h4">Electrical Information</h4>
-            </div>
-            <!--data row-->
-            <div class="A-DescriptionList row" >
-              <!-- First column-->
-              <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                <div class="A-DescriptionList__item">
-                  <div class="A-DescriptionList__label">Input voltage</div>
-                  <div class="A-DescriptionList__value">{{ipRecording.electricalData.inputVoltage}}</div>
-                </div>
-              </div>
-
-              <!--Second column-->
-              <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                <div class="A-DescriptionList__item">
-                  <div class="A-DescriptionList__label">Normal version</div>
-                  <div class="A-DescriptionList__value">{{ipRecording.electricalData.normalVersion}}</div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 

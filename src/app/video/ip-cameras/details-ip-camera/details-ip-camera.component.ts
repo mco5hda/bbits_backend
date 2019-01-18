@@ -13,6 +13,7 @@ import { IpCameraService } from '../ip-camera.service';
 export class DetailsIpCameraComponent implements OnInit {
   ipCamera: IPCamera;
   loading: boolean = false;
+  image: string = '';
 
   constructor(
     private router: Router,
@@ -21,6 +22,12 @@ export class DetailsIpCameraComponent implements OnInit {
 
   ngOnInit() {
     this.ipCamera = JSON.parse(sessionStorage.getItem("ipCameraElement"));
+    if(this.ipCamera.id > 103){
+      console.log('http://localhost:3000/static/assets/video/ip-cameras/images/'+this.ipCamera.id+'-'+this.ipCamera.image);
+      this.image = 'http://localhost:3000/static/assets/video/ip-cameras/images/'+this.ipCamera.id+'-'+this.ipCamera.image;
+    }else{
+      this.image = 'http://www.videoselector.boschsecurity.com/'+this.ipCamera.image
+    }
   }
 
   changeTab(id: number){

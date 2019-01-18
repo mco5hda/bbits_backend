@@ -326,22 +326,29 @@
             <hr>
           </li>
 
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+                In/out channels
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="inOutChanels" name="inOutChanels"  type="text" [(ngModel)]="ipRecording.backUp.inOutChanels" (change)="validateInput($event)" #inOutChanels="ngModel">
+            </div>
+          </li>
+
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+                In/out channels
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="compressionType" name="compressionType"  type="text" [(ngModel)]="ipRecording.backUp.compressionType" (change)="validateInput($event)" #compressionType="ngModel">
+            </div>
+          </li>
           <!-- Checkboxes -->
           <li class="mwf-field">              
             <div class="mwf-input">
               <fieldset>
-                <!--Tamper input-->
-                <span class="mwf-option">
-                  <input type="checkbox" class="mwf-checkbox" id="inOutChanels" name="inOutChanels" [(ngModel)]="ipRecording.audio.inOutChanels" (change)="validateInput($event)" #inOutChanels="ngModel">
-                  <label for="inOutChanels">In/out channels</label>
-                </span>
-
-                <!--Motion detection input-->
-                <span class="mwf-option">
-                  <input type="checkbox" class="mwf-checkbox" id="compressionType" name="compressionType" [(ngModel)]="ipRecording.audio.compressionType" (change)="validateInput($event)" #compressionType="ngModel">
-                  <label for="compressionType">Compression</label>
-                </span>
-
                 <!--Audio detection input-->
                 <span class="mwf-option">
                   <input type="checkbox" class="mwf-checkbox" id="synchronousType" name="synchronousType" [(ngModel)]="ipRecording.audio.synchronousType" (change)="validateInput($event)" #synchronousType="ngModel">
@@ -527,7 +534,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="numberOfPowerSupplies" name="numberOfPowerSupplies" [(ngModel)]="ipRecording.mechanical.numberOfPowerSupplies" (change)="validateInput($event)" #numberOfPowerSupplies="ngModel" type="text">
+              <input class="mwf-text" id="numberOfPowerSupplies" name="numberOfPowerSupplies" [(ngModel)]="ipRecording.mechanical.numberOfPowerSupplies" (change)="validateInput($event)" #numberOfPowerSupplies="ngModel" type="number">
             </div>
           </li>
 
@@ -725,37 +732,6 @@
               <input class="mwf-text" id="spotMonitor" name="spotMonitor" [(ngModel)]="ipRecording.videoOutput.spotMonitor" (change)="validateInput($event)" #spotMonitor="ngModel" type="text">
             </div>
           </li>
-        </ul>
-
-        <!--Electrical area-->
-        <ul>      
-          <li class="mwf-field">
-            <h3>Electrical Information</h3>
-            <hr>
-          </li>
-
-          <!-- input voltage Input -->
-          <li class="mwf-field mwf-m">
-            <label class="mwf-label mwf-label-input">
-              Input voltage
-              <span class="mwf-required">*</span>
-            </label>
-            <div class="mwf-input">
-              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="ipRecording.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="number">
-            </div>
-          </li>
-
-          <!-- normalVersion Input -->
-          <li class="mwf-field mwf-m">
-            <label class="mwf-label mwf-label-input">
-              Normal version
-              <span class="mwf-required">*</span>
-            </label>
-            <div class="mwf-input">
-              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="ipRecording.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="number">
-            </div>
-          </li>
-
         </ul>
       </div>
 

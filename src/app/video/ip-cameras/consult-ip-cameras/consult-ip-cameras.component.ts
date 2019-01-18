@@ -66,6 +66,10 @@ export class ConsultIpCamerasComponent implements OnInit {
           ipCamera.family = element[key];
         }else if(key === 'CATEGORY'){
           ipCamera.category = element[key];
+        }else if(key === 'IMAGE'){
+          ipCamera.image = element[key];
+        }else if(key === 'DATASHEET'){
+          ipCamera.datasheet = element[key];
         }else if(key === 'CTN_CLASS'){
           ipCamera.ctnClass = element[key];
         }else if(key === 'CTN_CLASS_FULL'){
