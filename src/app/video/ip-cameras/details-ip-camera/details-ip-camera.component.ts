@@ -3,6 +3,7 @@ import { IPCamera } from '../../models/cameras/ip-cameras.model';
 import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
 import { IpCameraService } from '../ip-camera.service';
+import { Environment } from 'src/app/app.environment';
 
 @Component({
   selector: 'app-details-ip-camera',
@@ -23,8 +24,7 @@ export class DetailsIpCameraComponent implements OnInit {
   ngOnInit() {
     this.ipCamera = JSON.parse(sessionStorage.getItem("ipCameraElement"));
     if(this.ipCamera.id > 103){
-      console.log('http://localhost:3000/static/assets/video/ip-cameras/images/'+this.ipCamera.id+'-'+this.ipCamera.image);
-      this.image = 'http://localhost:3000/static/assets/video/ip-cameras/images/'+this.ipCamera.id+'-'+this.ipCamera.image;
+      this.image = Environment.nodeServerURL+'static/assets/video/ip-cameras/images/'+this.ipCamera.id+'-'+this.ipCamera.image;
     }else{
       this.image = 'http://www.videoselector.boschsecurity.com/'+this.ipCamera.image
     }

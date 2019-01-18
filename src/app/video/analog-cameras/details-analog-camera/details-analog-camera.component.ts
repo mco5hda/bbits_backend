@@ -3,6 +3,7 @@ import { AnalogCamera } from '../../models/cameras/analog-cameras.model';
 import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
 import { AnalogCameraService } from '../analog-camera.service';
+import { Environment } from 'src/app/app.environment';
 
 @Component({
   selector: 'app-details-analog-camera',
@@ -25,7 +26,7 @@ export class DetailsAnalogCameraComponent implements OnInit {
     this.analogCamera = JSON.parse(sessionStorage.getItem("analogCameraElement"));
 
     if(this.analogCamera.id > 48){
-      this.image = 'http://localhost:3000/static/assets/video/analog-cameras/images/'+this.analogCamera.id+'-'+this.analogCamera.image;
+      this.image = Environment.nodeServerURL+'static/assets/video/analog-cameras/images/'+this.analogCamera.id+'-'+this.analogCamera.image;
     }else{
       this.image = 'http://www.videoselector.boschsecurity.com/'+this.analogCamera.image
     }

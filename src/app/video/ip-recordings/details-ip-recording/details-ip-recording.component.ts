@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPRecording } from '../../models/recordings/ip-recordings.model';
 import { CallOut } from './../../../utilities/callout';
+import { Environment } from 'src/app/app.environment';
 
 @Component({
   selector: 'app-details-ip-recording',
@@ -20,7 +21,7 @@ export class DetailsIpRecordingComponent implements OnInit {
   ngOnInit() {
     this.ipRecording = JSON.parse(sessionStorage.getItem("ipRecordingElement"));
     if(this.ipRecording.id > 56){
-      this.image = 'http://localhost:3000/static/assets/video/ip-recording/images/'+this.ipRecording.id+'-'+this.ipRecording.image;
+      this.image = Environment.nodeServerURL+'static/assets/video/ip-recording/images/'+this.ipRecording.id+'-'+this.ipRecording.image;
     }else{
       this.image = 'http://www.videoselector.boschsecurity.com/'+this.ipRecording.image
     }
