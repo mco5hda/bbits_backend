@@ -6,6 +6,7 @@ export class WorkStation {
     dvdDrive: string;
     processor: string;
     memory: string;
+    image: string;
     operativeSystem: string;
     graphicsCard: string;
     application: string;

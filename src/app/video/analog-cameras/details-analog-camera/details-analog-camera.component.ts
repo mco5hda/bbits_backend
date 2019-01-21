@@ -16,6 +16,7 @@ export class DetailsAnalogCameraComponent implements OnInit {
   analogCamera: AnalogCamera;
   loading: boolean = false;
   image: string = '';
+  datasheet: string = '';
 
   constructor(
     private router: Router,
@@ -25,10 +26,16 @@ export class DetailsAnalogCameraComponent implements OnInit {
   ngOnInit() {
     this.analogCamera = JSON.parse(sessionStorage.getItem("analogCameraElement"));
 
-    if(this.analogCamera.id > 48){
-      this.image = Environment.nodeServerURL+'static/assets/video/analog-cameras/images/'+this.analogCamera.id+'-'+this.analogCamera.image;
+    if(this.analogCamera.image.includes('imagecache')){
+      this.image = Environment.imageSelectorURL+this.analogCamera.image
     }else{
-      this.image = 'http://www.videoselector.boschsecurity.com/'+this.analogCamera.image
+      this.image = Environment.nodeServerURL+'static/assets/video/analog-cameras/images/'+this.analogCamera.id+'-'+this.analogCamera.image;
+    }
+
+    if(this.analogCamera.datasheet.includes('http://')){
+      this.datasheet = this.analogCamera.datasheet;
+    }else{
+      this.datasheet = Environment.nodeServerURL+'static/assets/video/analog-cameras/datasheets/'+this.analogCamera.id+'-'+this.analogCamera.datasheet;
     }
   }
 

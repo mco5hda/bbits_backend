@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AnalogRecording } from '../../models/recordings/analog-recordings.model';
 import { DatasheetService } from '../../datasheet.service';
 import { CallOut } from './../../../utilities/callout';
+import { AnalogRecordingService } from '../analog-recording.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-analog-recording',
@@ -15,15 +17,18 @@ export class AddAnalogRecordingComponent implements OnInit {
 
   currentTab = 0;
   analogRecording: AnalogRecording = new AnalogRecording();
+  
   loading: boolean = false;
-
-  selectedFiles: FileList;
-  currentFileUpload: File;
+  datasheetSelectedFiles: FileList;
+  imageSelectedFiles: FileList;
+  datasheetFile: File;
+  imageFile: File;
   productType : string = 'analog_recording';
 
   constructor(
     private router: Router,
-    private datasheetService: DatasheetService
+    private datasheetService: DatasheetService,
+    private analogRecordingService: AnalogRecordingService,
   ) { }
 
   ngOnInit() {
@@ -36,7 +41,7 @@ export class AddAnalogRecordingComponent implements OnInit {
   onLoadDataSheet(){
     let e = this;
     let uploader = (<HTMLInputElement>document.getElementById('file1')).files;
-    this.selectedFiles = uploader;
+    this.datasheetSelectedFiles = uploader;
     this.analogRecording.datasheet = (<HTMLInputElement>document.getElementById('file1')).value;
 
     if(uploader[0] !== undefined){
@@ -84,7 +89,8 @@ export class AddAnalogRecordingComponent implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
 
     this.analogRecording.image = (<HTMLInputElement>document.getElementById('uploaderImage')).value;
-
+    let uploader = (<HTMLInputElement>document.getElementById('uploaderImage')).files;
+    this.imageSelectedFiles = uploader;
     document.getElementById('image-list').classList.remove("image-list")
 
     document.getElementById('btn-delete-preview-image').addEventListener("click", (event: Event) => {
@@ -222,178 +228,170 @@ export class AddAnalogRecordingComponent implements OnInit {
   fillInputs(): void {
     this.loading = true;
 
-    this.currentFileUpload = this.selectedFiles.item(0);
+    this.datasheetFile = this.datasheetSelectedFiles.item(0);
 
-    this.datasheetService.getDatasheetInformation(this.currentFileUpload, this.productType)
+    this.datasheetService.getDatasheetInformation(this.datasheetFile, this.productType)
       .subscribe(
         (data) => {
           let info = data['body']
           for(let key in info){
-          if(key === 'name'){
-            this.analogRecording.name = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'family'){
-            this.analogRecording.family = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'category'){
-            this.analogRecording.category = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'ctnClass'){
-            this.analogRecording.ctnClass = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'ctnClassFull'){
-            this.analogRecording.ctnClassFull = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'price'){
-            this.analogRecording.price = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'dataFormat'){
-            this.analogRecording.dataFormat = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'inputRelayOutputs'){
-            this.analogRecording.inputRelayOutputs = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'targetSystemSize'){
-            this.analogRecording.targetSystemSize = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'timeLine'){
-            this.analogRecording.timeLine = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'userLevels'){
-            this.analogRecording.userLevels = this.validateUndefinedValue(key, info[key]);
-          }else if(key === 'basicFeaturesRecording'){
-            for(let index in info[key]){
-              if(index === 'channels'){
-                this.analogRecording.basicFeatures.channels = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'frameRateIPS'){
-                this.analogRecording.basicFeatures.frameRateIPS = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'ipsPerCamera'){
-                this.analogRecording.basicFeatures.ipsPerCamera = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'liveResolution'){
-                this.analogRecording.basicFeatures.liveResolution = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'systemSize'){
-                this.analogRecording.basicFeatures.systemSize = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'loopinVideo'){
-                this.analogRecording.basicFeatures.loopinVideo = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'preAlarm'){
-                this.analogRecording.basicFeatures.preAlarm = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'motionDetection'){
-                this.analogRecording.basicFeatures.motionDetection = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'mountableRack'){
-                this.analogRecording.basicFeatures.mountableRack = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'multipleCamera'){
-                this.analogRecording.basicFeatures.multipleCamera = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'videoCompression'){
-                this.analogRecording.basicFeatures.videoCompression = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'hResolution'){
-                this.analogRecording.basicFeatures.hResolution = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'network'){
-                this.analogRecording.basicFeatures.network = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'operativeSystem'){
-                this.analogRecording.basicFeatures.operativeSystem = this.validateUndefinedValue(index, info[key][index]);
+            if(key === 'name'){
+              this.analogRecording.name = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'family'){
+              this.analogRecording.family = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'category'){
+              this.analogRecording.category = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'ctnClass'){
+              this.analogRecording.ctnClass = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'ctnClassFull'){
+              this.analogRecording.ctnClassFull = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'price'){
+              this.analogRecording.price = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'dataFormat'){
+              this.analogRecording.dataFormat = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'inputRelayOutputs'){
+              this.analogRecording.inputRelayOutputs = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'targetSystemSize'){
+              this.analogRecording.targetSystemSize = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'timeLine'){
+              this.analogRecording.timeLine = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'userLevels'){
+              this.analogRecording.userLevels = this.validateUndefinedValue(key, info[key]);
+            }else if(key === 'basicFeaturesRecording'){
+              for(let index in info[key]){
+                if(index === 'channels'){
+                  this.analogRecording.basicFeatures.channels = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'frameRateIPS'){
+                  this.analogRecording.basicFeatures.frameRateIPS = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'ipsPerCamera'){
+                  this.analogRecording.basicFeatures.ipsPerCamera = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'liveResolution'){
+                  this.analogRecording.basicFeatures.liveResolution = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'systemSize'){
+                  this.analogRecording.basicFeatures.systemSize = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'loopinVideo'){
+                  this.analogRecording.basicFeatures.loopinVideo = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'preAlarm'){
+                  this.analogRecording.basicFeatures.preAlarm = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'motionDetection'){
+                  this.analogRecording.basicFeatures.motionDetection = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'mountableRack'){
+                  this.analogRecording.basicFeatures.mountableRack = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'multipleCamera'){
+                  this.analogRecording.basicFeatures.multipleCamera = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'videoCompression'){
+                  this.analogRecording.basicFeatures.videoCompression = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'hResolution'){
+                  this.analogRecording.basicFeatures.hResolution = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'network'){
+                  this.analogRecording.basicFeatures.network = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'operativeSystem'){
+                  this.analogRecording.basicFeatures.operativeSystem = this.validateUndefinedValue(index, info[key][index]);
+                }
+              }
+            }else if(key === 'advancedFeaturesRecording'){
+              for(let index in info[key]){
+                if(index === 'smartMotionSearch'){
+                  this.analogRecording.advancedFeatures.smartMotionSearch = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'instantPlayBack'){
+                  this.analogRecording.advancedFeatures.instantPlayBack = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'searchMode'){
+                  this.analogRecording.advancedFeatures.searchMode = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'callUpPrepositionOnDome'){
+                  this.analogRecording.advancedFeatures.callUpPrepositionOnDome = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'cameraLockoutsByUser'){
+                  this.analogRecording.advancedFeatures.cameraLockoutsByUser = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'dataIntegrityCheck'){
+                  this.analogRecording.advancedFeatures.dataIntegrityCheck = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'increaseFrameRateOnAlarm'){
+                  this.analogRecording.advancedFeatures.increaseFrameRateOnAlarm = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'individualCameraAdjustment'){
+                  this.analogRecording.advancedFeatures.individualCameraAdjustment = this.validateUndefinedValue(index, info[key][index]);
+                }
+              }
+            }else if(key === 'aioFunctionsRecording'){
+              for(let index in info[key]){
+                if(index === 'ptzControls'){
+                  this.analogRecording.aioFunctions.ptzControls = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'adminControl'){
+                  this.analogRecording.aioFunctions.adminControl = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'exportOptions'){
+                  this.analogRecording.aioFunctions.exportOptions = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'ptzJoystickControl'){
+                  this.analogRecording.aioFunctions.ptzJoystickControl = this.validateUndefinedValue(index, info[key][index]);
+                }
+              }
+            }else if(key === 'audioRecording'){
+              for(let index in info[key]){
+                if(index === 'inOutChanels'){
+                  this.analogRecording.audio.inOutChanels = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'associateCameraToAudio'){
+                  this.analogRecording.audio.associateCameraToAudio = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'biDirectionalAudio'){
+                  this.analogRecording.audio.biDirectionalAudio = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'synchronousAudio'){
+                  this.analogRecording.audio.synchronousAudio = this.validateUndefinedValue(index, info[key][index]);
+                }
+              }
+            }else if(key === 'integrationRecording'){
+              for(let index in info[key]){
+                if(index === 'optionalAtpmPos'){
+                  this.analogRecording.integration.optionalAtpmPos = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'sdk'){
+                  this.analogRecording.integration.sdk = this.validateUndefinedValue(index, info[key][index]);
+                }
+              }
+            }else if(key === 'localRemoteViewingRecording'){
+              for(let index in info[key]){
+                if(index === 'mobileClientAccess'){
+                  this.analogRecording.larViewing.mobileClientAccess = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'webBrowserAccess'){
+                  this.analogRecording.larViewing.webBrowserAccess = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'setViewingPermissions'){
+                  this.analogRecording.larViewing.setViewingPermissions = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'simultaneousAccessibleUser'){
+                  this.analogRecording.larViewing.simultaneousAccessibleUser = this.validateUndefinedValue(index, info[key][index]);
+                }
+              }
+            }else if(key === 'recording'){
+              for(let index in info[key]){
+                if(index === 'scheduleRecordingModes'){
+                  this.analogRecording.recording.scheduleRecordingModes = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'screenDivisionMultiScreen'){
+                  this.analogRecording.recording.screenDivisionMultiScreen = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'recordingResolution'){
+                  this.analogRecording.recording.recordingResolution = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'digitalZoomLive'){
+                  this.analogRecording.recording.digitalZoomLive = this.validateUndefinedValue(index, info[key][index]);
+                }
+              }
+            }else if(key === 'storageOptionsRecording'){
+              for(let index in info[key]){
+                if(index === 'supportDevices'){
+                  this.analogRecording.storageOptions.supportDevices = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'expandable'){
+                  this.analogRecording.storageOptions.expandable = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'externalStorage'){
+                  this.analogRecording.storageOptions.externalStorage = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'onBoardRaid'){
+                  this.analogRecording.storageOptions.onBoardRaid = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'numberHD'){
+                  this.analogRecording.storageOptions.numberHD = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'exportOptionsStorage'){
+                  this.analogRecording.storageOptions.exportOptionsStorage = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'backUpMode'){
+                  this.analogRecording.storageOptions.backUpMode = this.validateUndefinedValue(index, info[key][index]);
+                }
+              }
+            }else if(key === 'videoOutputRecording'){
+              for(let index in info[key]){
+                if(index === 'connectorType'){
+                  this.analogRecording.videoOutput.connectorType = this.validateUndefinedValue(index, info[key][index]);
+                }else if(index === 'spotMonitor'){
+                  this.analogRecording.videoOutput.spotMonitor = this.validateUndefinedValue(index, info[key][index]);
+                }
               }
             }
-          }else if(key === 'advancedFeaturesRecording'){
-            for(let index in info[key]){
-              if(index === 'smartMotionSearch'){
-                this.analogRecording.advancedFeatures.smartMotionSearch = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'instantPlayBack'){
-                this.analogRecording.advancedFeatures.instantPlayBack = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'searchMode'){
-                this.analogRecording.advancedFeatures.searchMode = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'callUpPrepositionOnDome'){
-                this.analogRecording.advancedFeatures.callUpPrepositionOnDome = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'cameraLockoutsByUser'){
-                this.analogRecording.advancedFeatures.cameraLockoutsByUser = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'dataIntegrityCheck'){
-                this.analogRecording.advancedFeatures.dataIntegrityCheck = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'increaseFrameRateOnAlarm'){
-                this.analogRecording.advancedFeatures.increaseFrameRateOnAlarm = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'individualCameraAdjustment'){
-                this.analogRecording.advancedFeatures.individualCameraAdjustment = this.validateUndefinedValue(index, info[key][index]);
-              }
-            }
-          }else if(key === 'aioFunctionsRecording'){
-            for(let index in info[key]){
-              if(index === 'ptzControls'){
-                this.analogRecording.aioFunctions.ptzControls = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'adminControl'){
-                this.analogRecording.aioFunctions.adminControl = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'exportOptions'){
-                this.analogRecording.aioFunctions.exportOptions = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'ptzJoystickControl'){
-                this.analogRecording.aioFunctions.ptzJoystickControl = this.validateUndefinedValue(index, info[key][index]);
-              }
-            }
-          }else if(key === 'audioRecording'){
-            for(let index in info[key]){
-              if(index === 'inOutChanels'){
-                this.analogRecording.audio.inOutChanels = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'associateCameraToAudio'){
-                this.analogRecording.audio.associateCameraToAudio = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'biDirectionalAudio'){
-                this.analogRecording.audio.biDirectionalAudio = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'synchronousAudio'){
-                this.analogRecording.audio.synchronousAudio = this.validateUndefinedValue(index, info[key][index]);
-              }
-            }
-          }else if(key === 'integrationRecording'){
-            for(let index in info[key]){
-              if(index === 'optionalAtpmPos'){
-                this.analogRecording.integration.optionalAtpmPos = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'sdk'){
-                this.analogRecording.integration.sdk = this.validateUndefinedValue(index, info[key][index]);
-              }
-            }
-          }else if(key === 'localRemoteViewingRecording'){
-            for(let index in info[key]){
-              if(index === 'mobileClientAccess'){
-                this.analogRecording.larViewing.mobileClientAccess = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'webBrowserAccess'){
-                this.analogRecording.larViewing.webBrowserAccess = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'setViewingPermissions'){
-                this.analogRecording.larViewing.setViewingPermissions = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'simultaneousAccessibleUser'){
-                this.analogRecording.larViewing.simultaneousAccessibleUser = this.validateUndefinedValue(index, info[key][index]);
-              }
-            }
-          }else if(key === 'recording'){
-            for(let index in info[key]){
-              if(index === 'scheduleRecordingModes'){
-                this.analogRecording.recording.scheduleRecordingModes = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'screenDivisionMultiScreen'){
-                this.analogRecording.recording.screenDivisionMultiScreen = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'recordingResolution'){
-                this.analogRecording.recording.recordingResolution = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'digitalZoomLive'){
-                this.analogRecording.recording.digitalZoomLive = this.validateUndefinedValue(index, info[key][index]);
-              }
-            }
-          }else if(key === 'storageOptionsRecording'){
-            for(let index in info[key]){
-              if(index === 'supportDevices'){
-                this.analogRecording.storageOptions.supportDevices = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'expandable'){
-                this.analogRecording.storageOptions.expandable = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'externalStorage'){
-                this.analogRecording.storageOptions.externalStorage = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'onBoardRaid'){
-                this.analogRecording.storageOptions.onBoardRaid = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'numberHD'){
-                this.analogRecording.storageOptions.numberHD = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'exportOptionsStorage'){
-                this.analogRecording.storageOptions.exportOptionsStorage = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'backUpMode'){
-                this.analogRecording.storageOptions.backUpMode = this.validateUndefinedValue(index, info[key][index]);
-              }
-            }
-          }else if(key === 'videoOutputRecording'){
-            for(let index in info[key]){
-              if(index === 'connectorType'){
-                this.analogRecording.videoOutput.connectorType = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'spotMonitor'){
-                this.analogRecording.videoOutput.spotMonitor = this.validateUndefinedValue(index, info[key][index]);
-              }
-            }
-          }else if(key === 'electricalData'){
-            for(let index in info[key]){
-              if(index === 'inputVoltage'){
-                this.analogRecording.electricalData.inputVoltage = this.validateUndefinedValue(index, info[key][index]);
-              }else if(index === 'normalVersion'){
-                this.analogRecording.electricalData.normalVersion = this.validateUndefinedValue(index, info[key][index]);
-              }
-            }
-          }
           }
 
           this.loading = false;
@@ -432,7 +430,26 @@ export class AddAnalogRecordingComponent implements OnInit {
   * Metodo para crear registrar una nueva camara
   */
   addAnalogRecording(){
-    CallOut.added = true;
-    this.router.navigate(["/consult-analog-recordings"]);
+    this.loading = true;
+    this.imageFile = this.imageSelectedFiles.item(0);
+
+    this.analogRecordingService.createAnalogRecording(this.analogRecording, this.datasheetFile, this.imageFile)
+    .subscribe(
+      (data: HttpResponse< { status :  string }> ) => {
+        try {
+          if(data.body.status === 'Analog Recording added'){
+            this.loading = false;
+            CallOut.added = true;
+            this.router.navigate(["/consult-analog-recordings"]);
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The Analog Recording has not added.', 5000)     
+      }
+    );
   } 
 }

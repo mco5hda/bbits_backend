@@ -236,7 +236,6 @@ export class ConsultIpCamerasComponent implements OnInit {
     this.ipCameraService.deleteIPCamera(id).subscribe(
       (data) => {
         try {
-          console.log(data['status']);
           if(data['status'] === 'IP Camera deleted'){
             this.loading = false;
             this.ipCameras = this.ipCameras.filter(c => c.id !== id);

@@ -28,5 +28,4 @@ export class IPCamera {
     storage: Storage = new Storage;
     connections: Connections = new Connections;
     housing: Housing = new Housing();
-    electricalData: ElectricalData = new ElectricalData();
 }

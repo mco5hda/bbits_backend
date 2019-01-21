@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WorkStation } from '../../models/workstation.model';
 import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
+import { WorkstationService } from '../workstation.service';
+import { Environment } from 'src/app/app.environment';
 
 @Component({
   selector: 'app-details-workstation',
@@ -12,28 +14,23 @@ import { CallOut } from './../../../utilities/callout';
 export class DetailsWorkstationComponent implements OnInit {
 
   workStation: WorkStation;
+  image: string = '';
+  loading: boolean = false;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private workStationService: WorkstationService,
   ) { }
 
   ngOnInit() {
     this.workStation = JSON.parse(sessionStorage.getItem("workStationElement"));
-  }
 
-  changeTab(id: number){
-    let x = document.getElementsByClassName('M-NavigationTabs__tabContent') as HTMLCollectionOf<HTMLElement>;
-
-    for (let i = 0; i < x.length; i++) {
-      x[i].classList.remove('M-NavigationTabs__tabContent--active')
-      x[i].classList.remove('visible')
+    if(this.workStation.image.includes('imagecache')){
+      this.image = Environment.imageSelectorURL + this.workStation.image;
+    }else{
+      this.image = Environment.nodeServerURL+'static/assets/video/workstations/images/'+this.workStation.id+'-'+this.workStation.image;
     }
 
-    for (let i = 0; i < x.length; i++) {
-      if(x[i].tabIndex === id){
-        x[i].className += ' M-NavigationTabs__tabContent--active visible'
-      }
-    }
   }
 
   editWorkStation(id: number){
@@ -42,8 +39,25 @@ export class DetailsWorkstationComponent implements OnInit {
   }
 
   deleteWorkStation(id: number){
-    CallOut.deleted = true;
-    this.router.navigate(["/consult-workstations"]);
+    this.loading = true;
+
+    this.workStationService.deleteWorkStation(id).subscribe(
+      (data) => {
+        try {
+          if(data['status'] === 'Workstation deleted'){
+            this.loading = false;
+            CallOut.deleted = true;
+            this.router.navigate(["/consult-workstations"]);
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The Workstation has not deleted.', 5000)     
+      }
+    );
   }
 
 }

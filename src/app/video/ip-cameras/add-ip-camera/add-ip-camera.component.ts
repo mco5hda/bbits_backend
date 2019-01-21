@@ -33,7 +33,7 @@ export class AddIpCameraComponent implements OnInit {
   constructor(
     private router: Router,
     private datasheetService: DatasheetService,
-    private ipCameraService: IpCameraService
+    private ipCameraService: IpCameraService,
   ) { }
 
   ngOnInit() {    

@@ -1,22 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WorkStation } from '../../models/workstation.model';
 import { Environment } from 'src/app/app.environment';
 import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
+import { WorkstationService } from '../workstation.service';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-consult-workstations',
   templateUrl: './consult-workstations.component.html',
-  styleUrls: ['./consult-workstations.component.css']
+  styleUrls: ['./consult-workstations.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ConsultWorkstationsComponent implements OnInit {
-
+  loading = false;
   workStations: WorkStation[] = new Array();
   currentPage: number = 1;
   elementsPerPage: number = Environment.defaultPaginationElements;
 
-  constructor(
-    private router: Router
+  constructor( 
+    private router: Router,
+    private workStationService: WorkstationService,
   ) { }
 
   ngOnInit() {
@@ -36,42 +40,108 @@ export class ConsultWorkstationsComponent implements OnInit {
 
   getAllWorkStations(){
     //Send the request to the  server and get the json with the ip cameras elements array
-    for (let index = 1; index <= 10; index++) {
+    this.workStationService.getWorkStations().subscribe(
+      data => {
+        this.fillList(data[0]);
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'Not found elements. Retry again.', 5000)     
+      }
+    );  
+  }
+
+  fillList(data){
+    data.forEach(element => {
       let workStation: WorkStation = new WorkStation();
 
-      workStation.id = index;
-      workStation.model = 'Z240 SFF';
-      workStation.baseUnit = 'ho z240 240W 925 efficent chassis';
-      workStation.hdd = '500 GB  7200 RPM SATA';
-      workStation.dvdDrive = 'Super Multi DVD RW SATA';
-      workStation.processor = 'Intel Core i7-6700 3.40 GHz';
-      workStation.memory = '8GB DDR4';
-      workStation.operativeSystem = 'Microsoft Windows 10 Pro Edition';
-      workStation.graphicsCard = 'MHW-AWGC-K620';
-      workStation.application = 'Entry 3D Graphics Card';
-      workStation.description = 'NVIDIA Quadro K620';
-      workStation.cardsSupported = 'No 2nd card supported';
-      workStation.maxMonitorsPerCard = '2';
-      workStation.maxMonitorPerWorkstation = '2';
-      workStation.gpuDecoding = true;
-      workStation.price = '1.0';
-
-
+      for(let key in element){
+        if(key === 'ID'){
+          workStation.id = element[key];
+        }else if(key === 'MODEL'){
+          workStation.model = element[key];
+        }else if(key === 'BASE_UNIT'){
+          workStation.baseUnit = element[key];
+        }else if(key === 'HDD'){
+          workStation.hdd = element[key];
+        }else if(key === 'DVD_DRIVE'){
+          workStation.dvdDrive = element[key];
+        }else if(key === 'PROCESSOR'){
+          workStation.processor = element[key];
+        }else if(key === 'MEMORY'){
+          workStation.memory = element[key];
+        }else if(key === 'OPERATIVE_SYSTEM'){
+          workStation.operativeSystem = element[key];
+        }else if(key === 'IMAGE'){
+          workStation.image = element[key];
+        }else if(key === 'PRICE'){
+          workStation.price = element[key];
+        }else if(key === 'GRAPHICS_CARD'){
+          workStation.graphicsCard = element[key];
+        }else if(key === 'APPLICATION'){
+          workStation.application = element[key];
+        }else if(key === 'DESCRIPTION'){
+          workStation.description = element[key];
+        }else if(key === 'NUMBER_OF_CARD_SUPPORTED'){
+          workStation.cardsSupported = element[key];
+        }else if(key === 'MAXIMUM_MONITORS_PER_CARD'){
+          workStation.maxMonitorsPerCard = element[key];
+        }else if(key === 'MAX_MONITORS_PER_WS'){
+          workStation.maxMonitorPerWorkstation = element[key];
+        }else if(key === 'GPU_DECODING'){
+          workStation.gpuDecoding = element[key];
+        }
+      }
       this.workStations.push(workStation)
-    }  
+    });
   }
 
   detailsWorkStation(id: number){
-    sessionStorage.setItem("workStationElement", JSON.stringify(this.workStations[id]));
+    let workstation: WorkStation;
+
+    this.workStations.forEach(element => {
+      if(element.id === id){
+        workstation = element;
+      }
+    });
+
+    sessionStorage.setItem("workStationElement", JSON.stringify(workstation));
     this.router.navigate(["/details-workstation"]);
   }
 
   editWorkStation(id: number){
-    sessionStorage.setItem("workStationElement", JSON.stringify(this.workStations[id]));
+    let workstation: WorkStation;
+
+    this.workStations.forEach(element => {
+      if(element.id === id){
+        workstation = element;
+      }
+    });
+
+    sessionStorage.setItem("workStationElement", JSON.stringify(workstation));
     this.router.navigate(["/edit-workstation"]);
   }
 
   deleteWorkStation(id: number){
-    CallOut.addCallOut('success', 'Workstation deleted succesfully.', 5000);
+    this.loading = true;
+
+    this.workStationService.deleteWorkStation(id).subscribe(
+      (data) => {
+        try {
+          if(data['status'] === 'Workstation deleted'){
+            this.loading = false;
+            this.workStations = this.workStations.filter(c => c.id !== id);
+            CallOut.addCallOut('success', 'Workstation deleted succesfully.', 5000);
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The Workstation has not deleted.', 5000)     
+      }
+    );
   }
 }

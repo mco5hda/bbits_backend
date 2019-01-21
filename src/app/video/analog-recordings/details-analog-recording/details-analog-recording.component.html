@@ -19,7 +19,7 @@
                 <div data-m-carousel-simple-slide="" class="M-CarouselSimple__slide M-CarouselSimple__slide--active">
                   <figure class="A-Image__figure">
                     <picture class="A-Image__picture">
-                      <img class="A-Image " src="./../../../../assets/details-picture.jpg" alt="{{analogRecording.name}}">
+                      <img class="A-Image " src="{{image}}" alt="{{analogRecording.name}}">
                     </picture>
                   </figure>
                 </div>
@@ -52,6 +52,13 @@
                 <span class="A-List__icon A-List__icon--noIcon"></span>
                 <span class="A-List__itemText">Dateformat: </span>
                 <span class="A-List__itemText">{{analogRecording.dataFormat}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <a class="A-Link__link A-Link__link--primary" href="{{datasheet}}" target="_blank" rel="noopener noreferrer">
+                  <span class="A-Link__linkText">Datasheet</span>
+                  <img class="A-Link__Icon" height="15" width="15" src="./../../../../assets/ico/bosch-ic-forward-right.svg" />
+                </a>
               </li>
             </ul>
             
@@ -107,7 +114,7 @@
               </li>
               <li class="M-TabLinks__link" tabindex="4">
                 <button class="M-TabLinks__trigger" (click)="changeTab(4)">
-                  <span>Storage & Video & Electrical</span>
+                  <span>Storage & Video Output</span>
                 </button>
               </li>
           </ul>
@@ -501,29 +508,6 @@
                 <div class="A-DescriptionList__item">
                   <div class="A-DescriptionList__label">Spot monitor</div>
                   <div class="A-DescriptionList__value">{{analogRecording.videoOutput.spotMonitor}}</div>
-                </div>
-              </div>
-            </div>
-              
-            <!--Headers row column-->
-            <div class="A-InformationBlock">
-              <h4 class="A-InformationBlock__headline h4">Electrical Information</h4>
-            </div>
-            <!--data row-->
-            <div class="A-DescriptionList row" >
-              <!-- First column-->
-              <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                <div class="A-DescriptionList__item">
-                  <div class="A-DescriptionList__label">Input voltage</div>
-                  <div class="A-DescriptionList__value">{{analogRecording.electricalData.inputVoltage}}</div>
-                </div>
-              </div>
-
-              <!--Second column-->
-              <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                <div class="A-DescriptionList__item">
-                  <div class="A-DescriptionList__label">Normal version</div>
-                  <div class="A-DescriptionList__value">{{analogRecording.electricalData.normalVersion}}</div>
                 </div>
               </div>
             </div>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IPRecording } from '../../models/recordings/ip-recordings.model';
 import { CallOut } from './../../../utilities/callout';
 import { Environment } from 'src/app/app.environment';
+import { IpRecordingService } from '../ip-recording.service';
 
 @Component({
   selector: 'app-details-ip-recording',
@@ -13,17 +14,29 @@ import { Environment } from 'src/app/app.environment';
 export class DetailsIpRecordingComponent implements OnInit {
 
   ipRecording: IPRecording;
+  loading: boolean = false;
   image: string = '';
+  datasheet: string = '';
+
+
   constructor(
-    private router: Router
+    private router: Router,
+    private ipRecordingService: IpRecordingService,
   ) { }
 
   ngOnInit() {
     this.ipRecording = JSON.parse(sessionStorage.getItem("ipRecordingElement"));
-    if(this.ipRecording.id > 56){
-      this.image = Environment.nodeServerURL+'static/assets/video/ip-recording/images/'+this.ipRecording.id+'-'+this.ipRecording.image;
+    
+    if(this.ipRecording.image.includes('imagecache')){
+      this.image = Environment.imageSelectorURL+this.ipRecording.image
     }else{
-      this.image = 'http://www.videoselector.boschsecurity.com/'+this.ipRecording.image
+      this.image = Environment.nodeServerURL+'static/assets/video/ip-recordings/images/'+this.ipRecording.id+'-'+this.ipRecording.image;
+    }
+
+    if(this.ipRecording.datasheet.includes('http://')){
+      this.datasheet = this.ipRecording.datasheet;
+    }else{
+      this.datasheet = Environment.nodeServerURL+'static/assets/video/ip-recordings/datasheets/'+this.ipRecording.id+'-'+this.ipRecording.datasheet;
     }
   }
 
@@ -63,8 +76,25 @@ export class DetailsIpRecordingComponent implements OnInit {
   }
 
   deleteIPRecording(id: number){
-    CallOut.deleted = true;
-    this.router.navigate(["/consult-ip-recordings"]);
+    this.loading = true;
+
+    this.ipRecordingService.deleteIPRecording(id).subscribe(
+      (data) => {
+        try {
+          if(data['status'] === 'IP Recording deleted'){
+            this.loading = false;
+            CallOut.deleted = true;
+            this.router.navigate(["/consult-ip-recordings"]);
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The IP Recording has not deleted.', 5000)     
+      }
+    );
   }
 
 }

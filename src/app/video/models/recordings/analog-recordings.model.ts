@@ -23,7 +23,7 @@ export class AnalogRecording {
     inputRelayOutputs:string;
     targetSystemSize:string;
     userLevels:string;
-    timeLine:boolean;
+    timeLine: boolean;
     basicFeatures: BasicFeaturesRecording = new BasicFeaturesRecording();
     advancedFeatures: AdvancedFeaturesRecording = new AdvancedFeaturesRecording();
     aioFunctions: AIOFunctionsRecording = new AIOFunctionsRecording();
@@ -33,5 +33,4 @@ export class AnalogRecording {
     recording: RecordingRecording = new RecordingRecording();
     storageOptions: StorageOptionsRecording = new StorageOptionsRecording();
     videoOutput: VideoOutputRecording = new VideoOutputRecording();
-    electricalData: ElectricalData = new ElectricalData();
 }

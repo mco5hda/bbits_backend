@@ -22,7 +22,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="model" name="model" [(ngModel)]="workstation.model" (change)="validateInput($event)" #model="ngModel" type="text" required>
+              <input class="mwf-text" id="model" name="model" [(ngModel)]="workstation.model" (change)="validateInput($event)" #model="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -32,7 +32,7 @@
               Base unit
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="baseUnit" name="baseUnit" [(ngModel)]="workstation.baseUnit" (change)="validateInput($event)" #baseUnit="ngModel" type="text" required>
+              <input class="mwf-text" id="baseUnit" name="baseUnit" [(ngModel)]="workstation.baseUnit" (change)="validateInput($event)" #baseUnit="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -43,7 +43,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="hdd" name="hdd" [(ngModel)]="workstation.hdd" (change)="validateInput($event)" #hdd="ngModel" type="text" required>
+              <input class="mwf-text" id="hdd" name="hdd" [(ngModel)]="workstation.hdd" (change)="validateInput($event)" #hdd="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -54,7 +54,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="dvdDrive" name="dvdDrive" [(ngModel)]="workstation.dvdDrive" (change)="validateInput($event)" #dvdDrive="ngModel" type="text" required>
+              <input class="mwf-text" id="dvdDrive" name="dvdDrive" [(ngModel)]="workstation.dvdDrive" (change)="validateInput($event)" #dvdDrive="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -65,7 +65,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="processor" name="processor" [(ngModel)]="workstation.processor" (change)="validateInput($event)" #processor="ngModel" type="text" required>
+              <input class="mwf-text" id="processor" name="processor" [(ngModel)]="workstation.processor" (change)="validateInput($event)" #processor="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -76,7 +76,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="memory" name="memory" [(ngModel)]="workstation.memory" (change)="validateInput($event)" #memory="ngModel" type="text" required>
+              <input class="mwf-text" id="memory" name="memory" [(ngModel)]="workstation.memory" (change)="validateInput($event)" #memory="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -87,7 +87,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="operativeSystem" name="operativeSystem" [(ngModel)]="workstation.operativeSystem" (change)="validateInput($event)" #operativeSystem="ngModel" type="text" required>
+              <input class="mwf-text" id="operativeSystem" name="operativeSystem" [(ngModel)]="workstation.operativeSystem" (change)="validateInput($event)" #operativeSystem="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -98,7 +98,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="price" name="price" [(ngModel)]="workstation.price" (change)="validateInput($event)" #price="ngModel" type="text" required>
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="workstation.price" (change)="validateInput($event)" #price="ngModel" type="number" min="0" max="99999" step="0.00000" required>
             </div>
           </li>
         </ul>
@@ -117,7 +117,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="graphicsCard" name="graphicsCard" [(ngModel)]="workstation.graphicsCard" (change)="validateInput($event)" #graphicsCard="ngModel" type="text" required>
+              <input class="mwf-text" id="graphicsCard" name="graphicsCard" [(ngModel)]="workstation.graphicsCard" (change)="validateInput($event)" #graphicsCard="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -127,7 +127,7 @@
               Application
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="application" name="application" [(ngModel)]="workstation.application" (change)="validateInput($event)" #application="ngModel" type="text" required>
+              <input class="mwf-text" id="application" name="application" [(ngModel)]="workstation.application" (change)="validateInput($event)" #application="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -138,7 +138,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="description" name="description" [(ngModel)]="workstation.description" (change)="validateInput($event)" #description="ngModel" type="text" required>
+              <input class="mwf-text" id="description" name="description" [(ngModel)]="workstation.description" (change)="validateInput($event)" #description="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -149,7 +149,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="cardsSupported" name="cardsSupported" [(ngModel)]="workstation.cardsSupported" (change)="validateInput($event)" #cardsSupported="ngModel" type="text" required>
+              <input class="mwf-text" id="cardsSupported" name="cardsSupported" [(ngModel)]="workstation.cardsSupported" (change)="validateInput($event)" #cardsSupported="ngModel" type="text" maxlength="255" required>
             </div>
           </li>
 
@@ -160,7 +160,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="maxMonitorsPerCard" name="maxMonitorsPerCard" [(ngModel)]="workstation.maxMonitorsPerCard" (change)="validateInput($event)" #maxMonitorsPerCard="ngModel" type="number" min="0" required>
+              <input class="mwf-text" id="maxMonitorsPerCard" name="maxMonitorsPerCard" [(ngModel)]="workstation.maxMonitorsPerCard" (change)="validateInput($event)" #maxMonitorsPerCard="ngModel" type="number" min="0" max="99999" step="0.00000" min="0" required>
             </div>
           </li>
 
@@ -171,7 +171,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="maxMonitorPerWorkstation" name="maxMonitorPerWorkstation" [(ngModel)]="workstation.maxMonitorPerWorkstation" (change)="validateInput($event)" #maxMonitorPerWorkstation="ngModel" type="number" min="0" required>
+              <input class="mwf-text" id="maxMonitorPerWorkstation" name="maxMonitorPerWorkstation" [(ngModel)]="workstation.maxMonitorPerWorkstation" (change)="validateInput($event)" #maxMonitorPerWorkstation="ngModel" type="number" min="0" max="99999" step="0.00000" min="0" required>
             </div>
           </li>
 
@@ -185,7 +185,26 @@
                 </span>
               </fieldset>
             </div>
-            </li>
+          </li>
+
+          <!--Image uploader-->
+          <div class="mwf-field fileUploader">
+            <span>Please upload the product image.</span>
+            <br />
+            <br />
+            <div class="fileUploader-dropzone">
+              <input type="file" name="image" id="uploaderImage" (change)="preview_image($event)" accept="image/*">
+              <label for="file1" class="fileUploader-label">Drop files here to attach them</label>
+              <button class="btn-Uploader" type="">
+                Select image
+              </button>
+            </div>
+
+            <!--Div to load the files selected and the button to delete-->
+            <div  id="image-list" class="image-list">
+
+            </div>
+          </div>
         </ul>
       </div>
 

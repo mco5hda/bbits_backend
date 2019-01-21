@@ -211,6 +211,24 @@ export class ConsultIpRecordingsComponent implements OnInit {
   }
 
   deleteIPRecording(id: number){
-    CallOut.addCallOut('success', 'IP Recording deleted succesfully.', 5000);
+    this.loading = true;
+
+    this.ipRecordingService.deleteIPRecording(id).subscribe(
+      (data) => {
+        try {
+          if(data['status'] === 'IP Recording deleted'){
+            this.loading = false;
+            this.ipRecordings = this.ipRecordings.filter(c => c.id !== id);
+            CallOut.addCallOut('success', 'IP Recording deleted.', 5000);
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The IP Recording has not deleted.', 5000)     
+      }
+    );
   }
 }

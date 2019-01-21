@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnalogRecording } from '../../models/recordings/analog-recordings.model';
 import { CallOut } from './../../../utilities/callout';
+import { AnalogRecordingService } from '../analog-recording.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-analog-recording',
@@ -17,9 +19,16 @@ export class EditAnalogRecordingComponent implements OnInit {
   categories = ["Fixed AN cameras","Fixed AN Domes","PTZ AN Cameras","Specialty AN Cameras"];
   indoorOutdoorArray = ["Indoor", "Indoor/Outdoor", "Outdoor"];
   dayNightArray = ["Day", "Day/Night","E-Day/Night"];
+  loading: boolean = false;
+
+  datasheetSelectedFiles: FileList;
+  imageSelectedFiles: FileList;
+  datasheetFile: File;
+  imageFile: File;
 
   constructor(
-    private router: Router 
+    private router: Router,
+    private analogRecordingService: AnalogRecordingService,
   ) { }
 
   ngOnInit() {
@@ -33,6 +42,7 @@ export class EditAnalogRecordingComponent implements OnInit {
   onLoadDataSheet(){
     let e = this;
     let uploader = (<HTMLInputElement>document.getElementById('file1')).files;
+    this.datasheetSelectedFiles = uploader;
 
     this.analogRecording.datasheet = (<HTMLInputElement>document.getElementById('file1')).value;
 
@@ -83,7 +93,8 @@ export class EditAnalogRecordingComponent implements OnInit {
     this.analogRecording.image = (<HTMLInputElement>document.getElementById('uploaderImage')).value;
 
     document.getElementById('image-list').classList.remove("image-list")
-
+    let uploader = (<HTMLInputElement>document.getElementById('uploaderImage')).files;
+    this.imageSelectedFiles = uploader;
     document.getElementById('btn-delete-preview-image').addEventListener("click", (event: Event) => {
       this.deletePreviewImage();
     });
@@ -221,8 +232,28 @@ export class EditAnalogRecordingComponent implements OnInit {
   * Metodo para crear registrar una nueva camara
   */
   updateAnalogRecording(){
-    CallOut.updated = true;
-    this.router.navigate(["/consult-analog-recordings"])
+    this.loading = true;
+    this.imageFile = this.imageSelectedFiles.item(0);
+    this.datasheetFile = this.datasheetSelectedFiles.item(0);
+
+    this.analogRecordingService.updateAnalogRecording(this.analogRecording, this.datasheetFile, this.imageFile)
+    .subscribe(
+      (data: HttpResponse< { status :  string }> ) => {
+        try {
+          if(data.body.status === 'Analog Recording updated'){
+            this.loading = false;
+            CallOut.updated = true;
+            this.router.navigate(["/consult-analog-recordings"])
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The Analog Recording has not updated.', 5000)     
+      }
+    );
   }
 
 }

@@ -325,16 +325,6 @@ export class AddAnalogCameraComponent implements OnInit {
                   this.analogCamera.housing.operatingTemperature = this.validateUndefinedValue(index, info[key][index]);
                 }
               }
-            }else if(key === 'electricalData'){
-              for(let index in info[key]){
-                if(index === 'inputVoltage'){
-                  this.analogCamera.electricalData.inputVoltage = this.validateUndefinedValue(index, info[key][index]);
-                }else if(index === 'normalVersion'){
-                  this.analogCamera.electricalData.normalVersion = this.validateUndefinedValue(index, info[key][index]);
-                }else if(index === 'irVersion'){
-                  this.analogCamera.electricalData.irVersion = this.validateUndefinedValue(index, info[key][index]);
-                }
-              }
             }
           }
 

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPRecording } from '../../models/recordings/ip-recordings.model';
 import { CallOut } from './../../../utilities/callout';
+import { IpRecordingService } from '../ip-recording.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-ip-recording',
@@ -16,9 +18,15 @@ export class EditIpRecordingComponent implements OnInit {
   currentTab: number = 0; // Current tab is set to be the first tab (0)
 
   categories = ["All in one","Storage only"];
+  datasheetSelectedFiles: FileList;
+  imageSelectedFiles: FileList;
+  datasheetFile: File;
+  imageFile: File;
+  loading: boolean = false;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private ipRecordingService: IpRecordingService,
   ) { }
 
   ngOnInit() {
@@ -33,7 +41,7 @@ export class EditIpRecordingComponent implements OnInit {
   onLoadDataSheet(){
     let e = this;
     let uploader = (<HTMLInputElement>document.getElementById('file1')).files;
-
+    this.datasheetSelectedFiles = uploader;
     this.ipRecording.datasheet = (<HTMLInputElement>document.getElementById('file1')).value;
 
     if(uploader[0] !== undefined){
@@ -81,7 +89,8 @@ export class EditIpRecordingComponent implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
 
     this.ipRecording.image = (<HTMLInputElement>document.getElementById('uploaderImage')).value;
-
+    let uploader = (<HTMLInputElement>document.getElementById('uploaderImage')).files;
+    this.imageSelectedFiles = uploader;
     document.getElementById('image-list').classList.remove("image-list")
 
     document.getElementById('btn-delete-preview-image').addEventListener("click", (event: Event) => {
@@ -221,6 +230,28 @@ export class EditIpRecordingComponent implements OnInit {
   * Metodo para crear registrar una nueva camara
   */
   updateIPRecording(){
+    this.loading = true;
+    this.imageFile = this.imageSelectedFiles.item(0);
+    this.datasheetFile = this.datasheetSelectedFiles.item(0);
+
+    this.ipRecordingService.updateIPRecording(this.ipRecording, this.datasheetFile, this.imageFile)
+    .subscribe(
+      (data: HttpResponse< { status :  string }> ) => {
+        try {
+          if(data.body.status === 'IP Recording updated'){
+            this.loading = false;
+            CallOut.updated = true;
+            this.router.navigate(["/consult-ip-recordings"])
+          }
+        } catch (error) {
+          console.log('No logrado')
+        }  
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The IP Recording has not updated.', 5000)     
+      }
+    );
     CallOut.updated = true;
     this.router.navigate(["/consult-ip-recordings"])
   }

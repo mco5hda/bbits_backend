@@ -49,6 +49,13 @@
                 <span class="A-List__itemText">Price: </span>
                 <span class="A-List__itemText">{{analogCamera.price}}</span>
               </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <a class="A-Link__link A-Link__link--primary" href="{{datasheet}}" target="_blank" rel="noopener noreferrer">
+                  <span class="A-Link__linkText">Datasheet</span>
+                  <img class="A-Link__Icon" height="15" width="15" src="./../../../../assets/ico/bosch-ic-forward-right.svg" />
+                </a>
+              </li>
             </ul>
             
           </div>
@@ -269,10 +276,6 @@
         <div class="M-NavigationTabs__tabContent" tabindex="3">
             <!--Colums of table-->
             <div class="col-xs-12">
-              <!--Headers row column-->
-              <div class="A-InformationBlock">
-                <h4 class="A-InformationBlock__headline h4">Housing</h4>
-              </div>
               <!--data row-->
               <div class="A-DescriptionList row" >
                 <!-- First column-->
@@ -290,7 +293,6 @@
                 <!--Second column-->
                 <div class="A-DescriptionList__list col-xs-12 col-md-6">
                   <div class="A-DescriptionList__item">
-                    <div class="A-DescriptionList__label">Corrosion Proof</div>
                     <div class="A-DescriptionList__label">Operating temperature</div>
                     <div class="A-DescriptionList__value">{{analogCamera.housing.operatingTemperature}}</div>
                   </div>

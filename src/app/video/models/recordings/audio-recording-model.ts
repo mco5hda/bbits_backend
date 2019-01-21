@@ -1,6 +1,6 @@
 export class AudioRecording{
-    inOutChanels: boolean;
-    compressionType: boolean;
+    inOutChanels: string;
+    compressionType: string;
     synchronousType: boolean;
     amcta: boolean;
 

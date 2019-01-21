@@ -54,7 +54,7 @@
                 <span class="mwf-required">*</span>
               </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="name" name="name" [(ngModel)]="analogCamera.name" (change)="validateInput($event)" #name="ngModel" type="text">
+              <input class="mwf-text" id="name" name="name" [(ngModel)]="analogCamera.name" (change)="validateInput($event)" #name="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -90,7 +90,7 @@
                   <span class="mwf-required">*</span>
                 </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="ctnClass" name="ctnClass" [(ngModel)]="analogCamera.ctnClass" (change)="validateInput($event)" #ctnClass="ngModel" type="text">
+              <input class="mwf-text" id="ctnClass" name="ctnClass" [(ngModel)]="analogCamera.ctnClass" (change)="validateInput($event)" #ctnClass="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -101,7 +101,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="ctnClassFull" name="ctnClassFull" [(ngModel)]="analogCamera.ctnClassFull" (change)="validateInput($event)" #ctnClassFull="ngModel" type="text">
+              <input class="mwf-text" id="ctnClassFull" name="ctnClassFull" [(ngModel)]="analogCamera.ctnClassFull" (change)="validateInput($event)" #ctnClassFull="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -112,7 +112,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="price" name="price" [(ngModel)]="analogCamera.price" #price="ngModel" (change)="validateInput($event)" type="number">
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="analogCamera.price" #price="ngModel" (change)="validateInput($event)" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -156,7 +156,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="maxResolution" name="maxResolution" [(ngModel)]="analogCamera.basicFeatures.maxResolution" (change)="validateInput($event)" #maxResolution="ngModel" type="text">
+              <input class="mwf-text" id="maxResolution" name="maxResolution" [(ngModel)]="analogCamera.basicFeatures.maxResolution" (change)="validateInput($event)" #maxResolution="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -167,7 +167,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="sensorType" name="sensorType" [(ngModel)]="analogCamera.basicFeatures.sensorType" (change)="validateInput($event)" #sensorType="ngModel" type="text">
+              <input class="mwf-text" id="sensorType" name="sensorType" [(ngModel)]="analogCamera.basicFeatures.sensorType" (change)="validateInput($event)" #sensorType="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -204,7 +204,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="wideDinamicRange" name="wideDinamicRange" [(ngModel)]="analogCamera.basicFeatures.wideDinamicRange" (change)="validateInput($event)" #wideDinamicRange="ngModel" type="text">
+              <input class="mwf-text" id="wideDinamicRange" name="wideDinamicRange" [(ngModel)]="analogCamera.basicFeatures.wideDinamicRange" (change)="validateInput($event)" #wideDinamicRange="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -289,7 +289,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="minIluminationDayMode" name="minIluminationDayMode"  type="number" [(ngModel)]="analogCamera.sensitivity.minIluminationDayMode" (change)="validateInput($event)" #minIluminationDayMode="ngModel">
+              <input class="mwf-text" id="minIluminationDayMode" name="minIluminationDayMode"  type="number" min="0" max="99999" step="0.00000" [(ngModel)]="analogCamera.sensitivity.minIluminationDayMode" (change)="validateInput($event)" #minIluminationDayMode="ngModel">
             </div>
           </li>
 
@@ -300,7 +300,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="minIlluminationNightMode" name="minIlluminationNightMode"  type="number" [(ngModel)]="analogCamera.sensitivity.minIlluminationNightMode" (change)="validateInput($event)" #minIlluminationNightMode="ngModel">
+              <input class="mwf-text" id="minIlluminationNightMode" name="minIlluminationNightMode"  type="number" min="0" max="99999" step="0.00000" [(ngModel)]="analogCamera.sensitivity.minIlluminationNightMode" (change)="validateInput($event)" #minIlluminationNightMode="ngModel">
             </div>
           </li>
 
@@ -311,7 +311,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="maxRangeAtNight" name="maxRangeAtNight"  type="number" [(ngModel)]="analogCamera.sensitivity.maxRangeAtNight" (change)="validateInput($event)" #maxRangeAtNight="ngModel">
+              <input class="mwf-text" id="maxRangeAtNight" name="maxRangeAtNight"  type="number" min="0" max="99999" step="0.00000" [(ngModel)]="analogCamera.sensitivity.maxRangeAtNight" (change)="validateInput($event)" #maxRangeAtNight="ngModel">
             </div>
           </li>
 
@@ -349,7 +349,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="focalLengthFrom" name="focalLengthFrom" [(ngModel)]="analogCamera.lens.focalLengthFrom" (change)="validateInput($event)" #focalLengthFrom="ngModel" type="number">
+              <input class="mwf-text" id="focalLengthFrom" name="focalLengthFrom" [(ngModel)]="analogCamera.lens.focalLengthFrom" (change)="validateInput($event)" #focalLengthFrom="ngModel" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -360,7 +360,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="focalLengthTill" name="focalLengthTill" [(ngModel)]="analogCamera.lens.focalLengthTill" (change)="validateInput($event)" #focalLengthTill="ngModel" type="number">
+              <input class="mwf-text" id="focalLengthTill" name="focalLengthTill" [(ngModel)]="analogCamera.lens.focalLengthTill" (change)="validateInput($event)" #focalLengthTill="ngModel" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -371,7 +371,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="minAngleH" name="minAngleH" [(ngModel)]="analogCamera.lens.minAngleH" (change)="validateInput($event)" #minAngleH="ngModel" type="number">
+              <input class="mwf-text" id="minAngleH" name="minAngleH" [(ngModel)]="analogCamera.lens.minAngleH" (change)="validateInput($event)" #minAngleH="ngModel" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -382,7 +382,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="maxAngleH" name="maxAngleH" [(ngModel)]="analogCamera.lens.maxAngleH" (change)="validateInput($event)" #maxAngleH="ngModel" type="number">
+              <input class="mwf-text" id="maxAngleH" name="maxAngleH" [(ngModel)]="analogCamera.lens.maxAngleH" (change)="validateInput($event)" #maxAngleH="ngModel" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -393,7 +393,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="tiltAngle" name="tiltAngle" [(ngModel)]="analogCamera.lens.tiltAngle" (change)="validateInput($event)" #tiltAngle="ngModel" type="text">
+              <input class="mwf-text" id="tiltAngle" name="tiltAngle" [(ngModel)]="analogCamera.lens.tiltAngle" (change)="validateInput($event)" #tiltAngle="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -451,7 +451,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="weatherRating" name="weatherRating" [(ngModel)]="analogCamera.housing.weatherRating" (change)="validateInput($event)" #weatherRating="ngModel" type="text">
+              <input class="mwf-text" id="weatherRating" name="weatherRating" [(ngModel)]="analogCamera.housing.weatherRating" (change)="validateInput($event)" #weatherRating="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -462,7 +462,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="vandalResistant" name="vandalResistant" [(ngModel)]="analogCamera.housing.vandalResistant" (change)="validateInput($event)" #vandalResistant="ngModel" type="text">
+              <input class="mwf-text" id="vandalResistant" name="vandalResistant" [(ngModel)]="analogCamera.housing.vandalResistant" (change)="validateInput($event)" #vandalResistant="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -473,7 +473,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="operatingTemperature" name="operatingTemperature" [(ngModel)]="analogCamera.housing.operatingTemperature" (change)="validateInput($event)" #operatingTemperature="ngModel" type="text">
+              <input class="mwf-text" id="operatingTemperature" name="operatingTemperature" [(ngModel)]="analogCamera.housing.operatingTemperature" (change)="validateInput($event)" #operatingTemperature="ngModel" type="text" maxlength="255">
             </div>
           </li>
         </ul>

@@ -55,7 +55,7 @@
                 <span class="mwf-required">*</span>
               </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="name" name="name" [(ngModel)]="analogRecording.name" (change)="validateInput($event)" #name="ngModel" type="text">
+              <input class="mwf-text" id="name" name="name" [(ngModel)]="analogRecording.name" (change)="validateInput($event)" #name="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -65,7 +65,7 @@
               Family
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="family" name="family" [(ngModel)]="analogRecording.family" (change)="validateInput($event)" #family="ngModel" type="text">
+              <input class="mwf-text" id="family" name="family" [(ngModel)]="analogRecording.family" (change)="validateInput($event)" #family="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -89,7 +89,7 @@
                   <span class="mwf-required">*</span>
                 </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="ctnClass" name="ctnClass" [(ngModel)]="analogRecording.ctnClass" (change)="validateInput($event)" #ctnClass="ngModel" type="text">
+              <input class="mwf-text" id="ctnClass" name="ctnClass" [(ngModel)]="analogRecording.ctnClass" (change)="validateInput($event)" #ctnClass="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -100,7 +100,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="ctnClassFull" name="ctnClassFull" [(ngModel)]="analogRecording.ctnClassFull" (change)="validateInput($event)" #ctnClassFull="ngModel" type="text">
+              <input class="mwf-text" id="ctnClassFull" name="ctnClassFull" [(ngModel)]="analogRecording.ctnClassFull" (change)="validateInput($event)" #ctnClassFull="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -111,7 +111,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="price" name="price" [(ngModel)]="analogRecording.price" (change)="validateInput($event)" #price="ngModel" type="number">
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="analogRecording.price" (change)="validateInput($event)" #price="ngModel" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -122,7 +122,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="dataFormat" name="dataFormat" [(ngModel)]="analogRecording.dataFormat" (change)="validateInput($event)" #dataFormat="ngModel" type="text">
+              <input class="mwf-text" id="dataFormat" name="dataFormat" [(ngModel)]="analogRecording.dataFormat" (change)="validateInput($event)" #dataFormat="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -134,7 +134,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="inputRelayOutputs" name="inputRelayOutputs" [(ngModel)]="analogRecording.inputRelayOutputs" (change)="validateInput($event)" #inputRelayOutputs="ngModel" type="text">
+              <input class="mwf-text" id="inputRelayOutputs" name="inputRelayOutputs" [(ngModel)]="analogRecording.inputRelayOutputs" (change)="validateInput($event)" #inputRelayOutputs="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -146,7 +146,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="targetSystemSize" name="targetSystemSize" [(ngModel)]="analogRecording.targetSystemSize" (change)="validateInput($event)" #targetSystemSize="ngModel" type="text">
+              <input class="mwf-text" id="targetSystemSize" name="targetSystemSize" [(ngModel)]="analogRecording.targetSystemSize" (change)="validateInput($event)" #targetSystemSize="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -157,7 +157,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="userLevels" name="userLevels" [(ngModel)]="analogRecording.userLevels" (change)="validateInput($event)" #userLevels="ngModel" type="number">
+              <input class="mwf-text" id="userLevels" name="userLevels" [(ngModel)]="analogRecording.userLevels" (change)="validateInput($event)" #userLevels="ngModel" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -213,7 +213,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="channels" name="channels" [(ngModel)]="analogRecording.basicFeatures.channels" (change)="validateInput($event)" #channels="ngModel" type="number">
+              <input class="mwf-text" id="channels" name="channels" [(ngModel)]="analogRecording.basicFeatures.channels" (change)="validateInput($event)" #channels="ngModel" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -224,7 +224,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="frameRateIPS" name="frameRateIPS" [(ngModel)]="analogRecording.basicFeatures.frameRateIPS" (change)="validateInput($event)" #frameRateIPS="ngModel" type="number">
+              <input class="mwf-text" id="frameRateIPS" name="frameRateIPS" [(ngModel)]="analogRecording.basicFeatures.frameRateIPS" (change)="validateInput($event)" #frameRateIPS="ngModel" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -235,7 +235,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="ipsPerCamera" name="ipsPerCamera" [(ngModel)]="analogRecording.basicFeatures.ipsPerCamera" (change)="validateInput($event)" #ipsPerCamera="ngModel" type="number">
+              <input class="mwf-text" id="ipsPerCamera" name="ipsPerCamera" [(ngModel)]="analogRecording.basicFeatures.ipsPerCamera" (change)="validateInput($event)" #ipsPerCamera="ngModel" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -246,7 +246,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="liveResolution" name="liveResolution" [(ngModel)]="analogRecording.basicFeatures.liveResolution" (change)="validateInput($event)" #liveResolution="ngModel" type="text">
+              <input class="mwf-text" id="liveResolution" name="liveResolution" [(ngModel)]="analogRecording.basicFeatures.liveResolution" (change)="validateInput($event)" #liveResolution="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -257,7 +257,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="systemSize" name="systemSize" [(ngModel)]="analogRecording.basicFeatures.systemSize" (change)="validateInput($event)" #systemSize="ngModel" type="number">
+              <input class="mwf-text" id="systemSize" name="systemSize" [(ngModel)]="analogRecording.basicFeatures.systemSize" (change)="validateInput($event)" #systemSize="ngModel" type="number" min="0" max="99999" step="0.00000">
             </div>
           </li>
 
@@ -268,7 +268,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="videoCompression" name="videoCompression" [(ngModel)]="analogRecording.basicFeatures.videoCompression" (change)="validateInput($event)" #videoCompression="ngModel" type="text">
+              <input class="mwf-text" id="videoCompression" name="videoCompression" [(ngModel)]="analogRecording.basicFeatures.videoCompression" (change)="validateInput($event)" #videoCompression="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -279,7 +279,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="network" name="network" [(ngModel)]="analogRecording.basicFeatures.network" (change)="validateInput($event)" #network="ngModel" type="text">
+              <input class="mwf-text" id="network" name="network" [(ngModel)]="analogRecording.basicFeatures.network" (change)="validateInput($event)" #network="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -290,7 +290,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="operativeSystem" name="operativeSystem" [(ngModel)]="analogRecording.basicFeatures.operativeSystem" (change)="validateInput($event)" #operativeSystem="ngModel" type="text">
+              <input class="mwf-text" id="operativeSystem" name="operativeSystem" [(ngModel)]="analogRecording.basicFeatures.operativeSystem" (change)="validateInput($event)" #operativeSystem="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -341,7 +341,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="searchMode" name="searchMode" [(ngModel)]="analogRecording.advancedFeatures.searchMode" (change)="validateInput($event)" #searchMode="ngModel" type="text">
+              <input class="mwf-text" id="searchMode" name="searchMode" [(ngModel)]="analogRecording.advancedFeatures.searchMode" (change)="validateInput($event)" #searchMode="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -507,7 +507,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="simultaneousAccessibleUser" name="simultaneousAccessibleUser"  type="number" [(ngModel)]="analogRecording.larViewing.simultaneousAccessibleUser" (change)="validateInput($event)" #simultaneousAccessibleUser="ngModel">
+              <input class="mwf-text" id="simultaneousAccessibleUser" name="simultaneousAccessibleUser"  type="number" min="0" max="99999" step="0.00000" [(ngModel)]="analogRecording.larViewing.simultaneousAccessibleUser" (change)="validateInput($event)" #simultaneousAccessibleUser="ngModel">
             </div>
           </li>
 
@@ -554,7 +554,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="scheduleRecordingModes" name="scheduleRecordingModes" [(ngModel)]="analogRecording.recording.scheduleRecordingModes" (change)="validateInput($event)" #scheduleRecordingModes="ngModel" type="text">
+              <input class="mwf-text" id="scheduleRecordingModes" name="scheduleRecordingModes" [(ngModel)]="analogRecording.recording.scheduleRecordingModes" (change)="validateInput($event)" #scheduleRecordingModes="ngModel" type="text" maxlength="255">
             </div>
           </li>
           <li class="mwf-field mwf-m">
@@ -563,7 +563,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="recordingResolution" name="recordingResolution" [(ngModel)]="analogRecording.recording.recordingResolution" (change)="validateInput($event)" #recordingResolution="ngModel" type="text">
+              <input class="mwf-text" id="recordingResolution" name="recordingResolution" [(ngModel)]="analogRecording.recording.recordingResolution" (change)="validateInput($event)" #recordingResolution="ngModel" type="text" maxlength="255">
             </div>
           </li>
           <!-- Checkboxes -->
@@ -599,7 +599,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="supportDevices" name="supportDevices" [(ngModel)]="analogRecording.storageOptions.supportDevices" (change)="validateInput($event)" #supportDevices="ngModel" type="text">
+                <input class="mwf-text" id="supportDevices" name="supportDevices" [(ngModel)]="analogRecording.storageOptions.supportDevices" (change)="validateInput($event)" #supportDevices="ngModel" type="text" maxlength="255">
               </div>
             </li>
   
@@ -610,7 +610,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="numberHD" name="numberHD" [(ngModel)]="analogRecording.storageOptions.numberHD" (change)="validateInput($event)" #numberHD="ngModel" type="number">
+                <input class="mwf-text" id="numberHD" name="numberHD" [(ngModel)]="analogRecording.storageOptions.numberHD" (change)="validateInput($event)" #numberHD="ngModel" type="number" min="0" max="99999" step="0.00000">
               </div>
             </li>
   
@@ -621,7 +621,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="exportOptionsStorage" name="exportOptionsStorage" [(ngModel)]="analogRecording.storageOptions.exportOptionsStorage" (change)="validateInput($event)" #exportOptionsStorage="ngModel" type="text">
+                <input class="mwf-text" id="exportOptionsStorage" name="exportOptionsStorage" [(ngModel)]="analogRecording.storageOptions.exportOptionsStorage" (change)="validateInput($event)" #exportOptionsStorage="ngModel" type="text" maxlength="255">
               </div>
             </li>
   
@@ -632,7 +632,7 @@
                 <span class="mwf-required">*</span>
               </label>
               <div class="mwf-input">
-                <input class="mwf-text" id="backUpMode" name="backUpMode" [(ngModel)]="analogRecording.storageOptions.backUpMode" (change)="validateInput($event)" #backUpMode="ngModel" type="text">
+                <input class="mwf-text" id="backUpMode" name="backUpMode" [(ngModel)]="analogRecording.storageOptions.backUpMode" (change)="validateInput($event)" #backUpMode="ngModel" type="text" maxlength="255">
               </div>
             </li>
 
@@ -674,7 +674,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="connectorType" name="connectorType" [(ngModel)]="analogRecording.videoOutput.connectorType" (change)="validateInput($event)" #connectorType="ngModel" type="text">
+              <input class="mwf-text" id="connectorType" name="connectorType" [(ngModel)]="analogRecording.videoOutput.connectorType" (change)="validateInput($event)" #connectorType="ngModel" type="text" maxlength="255">
             </div>
           </li>
 
@@ -685,40 +685,11 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="spotMonitor" name="spotMonitor" [(ngModel)]="analogRecording.videoOutput.spotMonitor" (change)="validateInput($event)" #spotMonitor="ngModel" type="text">
+              <input class="mwf-text" id="spotMonitor" name="spotMonitor" [(ngModel)]="analogRecording.videoOutput.spotMonitor" (change)="validateInput($event)" #spotMonitor="ngModel" type="text" maxlength="255">
             </div>
           </li>
         </ul>
 
-        <!--Electrical area-->
-        <ul>      
-          <li class="mwf-field">
-            <h3>Electrical Information</h3>
-            <hr>
-          </li>
-
-          <!-- input voltage Input -->
-          <li class="mwf-field mwf-m">
-            <label class="mwf-label mwf-label-input">
-              Input voltage
-              <span class="mwf-required">*</span>
-            </label>
-            <div class="mwf-input">
-              <input class="mwf-text" id="inputVoltage" name="inputVoltage" [(ngModel)]="analogRecording.electricalData.inputVoltage" (change)="validateInput($event)" #inputVoltage="ngModel" type="number">
-            </div>
-          </li>
-
-          <!-- normalVersion Input -->
-          <li class="mwf-field mwf-m">
-            <label class="mwf-label mwf-label-input">
-              Normal version
-              <span class="mwf-required">*</span>
-            </label>
-            <div class="mwf-input">
-              <input class="mwf-text" id="normalVersion" name="normalVersion" [(ngModel)]="analogRecording.electricalData.normalVersion" (change)="validateInput($event)" #normalVersion="ngModel" type="number">
-            </div>
-          </li>
-        </ul>
       </div>
 
       <!--Buttons-->
