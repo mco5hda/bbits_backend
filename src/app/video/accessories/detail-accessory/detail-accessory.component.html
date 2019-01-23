@@ -1,0 +1,81 @@
+<app-header></app-header>
+
+<main class="vhHeight">
+
+  <!--Image and info in the right side-->
+  <div class="O-ExtendedCarousel">
+    <div class="container-fluid">
+      
+      <!--Title and subtitle-->
+      <h1 class="O-ExtendedCarousel__headline">{{accessory.name}}</h1>
+      <div class="O-ExtendedCarousel__copy">{{accessory.ctnClassFull}}</div>
+
+      <div class="row">
+        <!--Image-->
+        <div class="O-ExtendedCarousel__imagesContainer col-xs-12 col-sm-6 col-md-8">
+          <section class="M-CarouselSimple__container M-CarouselSimple__container--fullBleed">
+            <div class="M-CarouselSimple " style="height: 421px;">
+              <div class="M-CarouselSimple__slideContainer">
+                <div data-m-carousel-simple-slide="" class="M-CarouselSimple__slide M-CarouselSimple__slide--active">
+                  <figure class="A-Image__figure">
+                    <picture class="A-Image__picture">
+                      <img class="A-Image center-image" src="{{image}}" alt="{{accessory.model}}">
+                    </picture>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        
+        <!--Content in the right side-->
+        <div class="O-ExtendedCarousel__dataContainer col-xs-12 col-sm-6 col-md-4">
+          <!--Info in the right side of image-->
+          <div class="A-Text-RichText">
+            <ul class="A-List A-List--unordered">
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Category: </span>
+                <span class="A-List__itemText">{{accessory.category}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Subcategory: </span>
+                <span class="A-List__itemText">{{accessory.subCategory}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Description: </span>
+                <span class="A-List__itemText">{{accessory.description}}</span>
+              </li>
+              <li class="A-List__item">
+                <span class="A-List__icon A-List__icon--noIcon"></span>
+                <span class="A-List__itemText">Price: </span>
+                <span class="A-List__itemText">{{accessory.price}}</span>
+              </li>
+            </ul>
+            
+          </div>
+
+          <!--Buttons-->
+          <div class="O-ExtendedCarousel__buttonContainer">        
+            <div class="A-Link A-Link--button  A-Link--button--filled ">
+              <a class="A-Link__link A-Link__link--button" (click)="editAccessory(accessory.id)">
+                <span class="A-Link__linkText">Edit</span>
+              </a>
+            </div>
+            
+            <div class="A-Link A-Link--button  ">
+              <a class="A-Link__link A-Link__link--button" (click)="deleteAccessory(accessory.id)">
+                <span class="A-Link__linkText">Delete</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>

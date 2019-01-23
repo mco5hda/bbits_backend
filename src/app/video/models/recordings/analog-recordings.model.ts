@@ -7,7 +7,6 @@ import { LARRecording } from './lar-recording.model';
 import { RecordingRecording } from './recording-recording.model';
 import { StorageOptionsRecording } from './storage-options-recording.model';
 import { VideoOutputRecording } from './video-output-recording.model';
-import { ElectricalData } from '../electrical-data.model';
 
 export class AnalogRecording {
     id:number;

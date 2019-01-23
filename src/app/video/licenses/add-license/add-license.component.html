@@ -1,0 +1,114 @@
+<app-header></app-header>
+
+<main class="vhHeight">
+  <div class="loader" *ngIf="loading"></div>
+  
+  <div class="container">
+    <div class="col-xs-12 col-sm-8 col-sm-push-2" id="callOut"></div>
+
+    <form id="addProductForm" class="mwf-form" #formControl="ngForm">
+      <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <!--General information-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>General information</h3>
+            <hr>
+          </li>
+
+          <!-- NAME Input -->
+          <li class="mwf-field">
+            <label class="mwf-label mwf-label-input">
+              Name
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="name" name="name" [(ngModel)]="license.name" (change)="validateInput($event)" #name="ngModel" type="text" maxlength="255" required>
+            </div>
+          </li>
+
+          <!-- CTN CLASS FULL Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              CtnClassFull
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="ctnClassFull" name="ctnClassFull" [(ngModel)]="license.ctnClassFull" (change)="validateInput($event)" #ctnClassFull="ngModel" type="text" maxlength="255" required>
+            </div>
+          </li>
+
+          <!-- Price Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Price
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="license.price" (change)="validateInput($event)" #price="ngModel" type="number" min="0" max="99999" step="0.00000" required>
+            </div>
+          </li>
+
+          <!-- Processor Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Type
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <select class="mwf-select mwf-multiple" id="type" name="type" [(ngModel)]="license.type" #type="ngModel">
+                <option class="mwf-select-option" *ngFor="let type of types" value="{{type}}">{{type}}</option>
+              </select>            
+            </div>
+          </li>
+
+          <!-- Memory Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              License Type
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <select class="mwf-select mwf-multiple" id="licenseType" name="licenseType" [(ngModel)]="license.licenseType" #licenseType="ngModel">
+                <option class="mwf-select-option" *ngFor="let licenseType of licenseTypes" value="{{licenseType}}">{{licenseType}}</option>
+              </select>  
+            </div>
+          </li>
+
+          <!-- OS Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Channels include
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="channelsIncluded" name="channelsIncluded" [(ngModel)]="license.channelsIncluded" (change)="validateInput($event)" #channelsIncluded="ngModel" type="number" min="0" max="99999" step="0.00000" required>
+            </div>
+          </li>
+
+          <!-- OS Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Max. channels
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="maxChannels" name="maxChannels" [(ngModel)]="license.maxChannels" (change)="validateInput($event)" #maxChannels="ngModel" type="number" min="0" max="99999" step="0.00000" required>
+            </div>
+          </li>
+
+          
+        </ul>
+      </div>
+
+      <!--Buttons-->
+      <div class="col-xs-12 col-sm-8 col-sm-push-2 forms-buttons col-xs-12">
+        <div class="form-next-button">
+          <button class="btn-Secondary" routerLink="/consult-licenses" type="button" style="margin-right: 5px;">Cancel</button>
+          <button class="btn-Primary" type="button" [disabled]="!formValid" id="submitBtn" (click)="addLicense()">Submit</button>            
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</main>

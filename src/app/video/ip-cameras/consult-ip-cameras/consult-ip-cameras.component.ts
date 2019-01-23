@@ -36,7 +36,6 @@ export class ConsultIpCamerasComponent implements OnInit {
       CallOut.addCallOut('success', 'IP Camera deleted successfully', 5000);
       CallOut.deleted = false;
     }
-
   }
 
   getAllIPCameras(){

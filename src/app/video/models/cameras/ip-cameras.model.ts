@@ -6,7 +6,6 @@ import { Lens } from './lens.model';
 import { DCRI } from './dcri.model';
 import { Connections } from './connections.model';
 import { Housing } from './housing.model';
-import { ElectricalData } from '../electrical-data.model';
 import { Storage } from './storage.model';
 
 export class IPCamera {

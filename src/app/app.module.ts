@@ -41,10 +41,16 @@ import { DetailsWorkstationComponent } from './video/workstations/details-workst
 
 import { MainSubmenuComponent } from './header/header/header-submenus/main-submenu';
 import { VideoDesktopSubmenuComponent } from  './header/header/header-submenus/desktop-submenu/video-desktop-submenu';
-import { ViewIpCameraComponent } from './video/ip-cameras/view-ip-camera/view-ip-camera.component';
 
 import  { MainService } from './main/main/main.service';
 import { DatasheetService } from './video/datasheet.service';
+import { AddLicenseComponent } from './video/licenses/add-license/add-license.component';
+import { ConsultLicensesComponent } from './video/licenses/consult-licenses/consult-licenses.component';
+import { EditLicenseComponent } from './video/licenses/edit-license/edit-license.component';
+import { AddAccessoryComponent } from './video/accessories/add-accessory/add-accessory.component';
+import { ConsultAccessoriesComponent } from './video/accessories/consult-accessories/consult-accessories.component';
+import { DetailAccessoryComponent } from './video/accessories/detail-accessory/detail-accessory.component';
+import { EditAccessoryComponent } from './video/accessories/edit-accessory/edit-accessory.component';
 
 
 
@@ -78,7 +84,13 @@ import { DatasheetService } from './video/datasheet.service';
     DetailsWorkstationComponent,
     MainSubmenuComponent,
     VideoDesktopSubmenuComponent,
-    ViewIpCameraComponent
+    AddLicenseComponent,
+    ConsultLicensesComponent,
+    EditLicenseComponent,
+    AddAccessoryComponent,
+    ConsultAccessoriesComponent,
+    DetailAccessoryComponent,
+    EditAccessoryComponent,
   ],
   imports: [
     BrowserAnimationsModule,

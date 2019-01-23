@@ -8,8 +8,6 @@ import { MainComponent } from './main/main/main.component';
 import { AddAnalogCameraComponent } from './video/analog-cameras/add-analog-camera/add-analog-camera.component';
 import { AddIpRecordingComponent } from './video/ip-recordings/add-ip-recording/add-ip-recording.component';
 import { AddAnalogRecordingComponent } from './video/analog-recordings/add-analog-recording/add-analog-recording.component';
-import { ViewIpCameraComponent } from './video/ip-cameras/view-ip-camera/view-ip-camera.component';
-
 import { AddWorkstationComponent } from './video/workstations/add-workstation/add-workstation.component';
 import { ConsultIpCamerasComponent } from './video/ip-cameras/consult-ip-cameras/consult-ip-cameras.component';
 import { DetailsIpCameraComponent } from './video/ip-cameras/details-ip-camera/details-ip-camera.component';
@@ -26,6 +24,13 @@ import { ConsultIpRecordingsComponent } from './video/ip-recordings/consult-ip-r
 import { EditWorkstationComponent } from './video/workstations/edit-workstation/edit-workstation.component';
 import { DetailsWorkstationComponent } from './video/workstations/details-workstation/details-workstation.component';
 import { ConsultWorkstationsComponent } from './video/workstations/consult-workstations/consult-workstations.component';
+import { AddLicenseComponent } from './video/licenses/add-license/add-license.component';
+import { ConsultLicensesComponent } from './video/licenses/consult-licenses/consult-licenses.component';
+import { EditLicenseComponent } from './video/licenses/edit-license/edit-license.component';
+import { DetailAccessoryComponent } from './video/accessories/detail-accessory/detail-accessory.component';
+import { EditAccessoryComponent } from './video/accessories/edit-accessory/edit-accessory.component';
+import { ConsultAccessoriesComponent } from './video/accessories/consult-accessories/consult-accessories.component';
+import { AddAccessoryComponent } from './video/accessories/add-accessory/add-accessory.component';
 
 const routes: Routes = [
   { path: "", component: SignInComponent },
@@ -37,7 +42,6 @@ const routes: Routes = [
   { path: "add-analog-camera", component: AddAnalogCameraComponent},
   { path: "add-ip-recording", component: AddIpRecordingComponent},
   { path: "add-analog-recording", component: AddAnalogRecordingComponent},
-  { path: "view-ip-camera", component : ViewIpCameraComponent },
   { path: "add-workstation", component: AddWorkstationComponent},
   { path: "consult-ip-cameras", component: ConsultIpCamerasComponent},
   { path: "details-ip-camera", component: DetailsIpCameraComponent},
@@ -54,6 +58,13 @@ const routes: Routes = [
   { path: "consult-workstations", component: ConsultWorkstationsComponent},
   { path: "details-workstation", component: DetailsWorkstationComponent},
   { path: "edit-workstation", component: EditWorkstationComponent},
+  { path: "add-license", component: AddLicenseComponent},
+  { path: "consult-licenses", component: ConsultLicensesComponent},
+  { path: "edit-license", component: EditLicenseComponent},
+  { path: "add-accessory", component: AddAccessoryComponent},
+  { path: "consult-accessories", component: ConsultAccessoriesComponent},
+  { path: "edit-accessory", component: EditAccessoryComponent},
+  { path: "details-accessory", component: DetailAccessoryComponent},
 ];
 
 @NgModule({

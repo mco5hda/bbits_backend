@@ -9,7 +9,7 @@ import { AnalogCamera } from '../models/cameras/analog-cameras.model';
 export class AnalogCameraService {
 
   httpOptions = {
-    headera: new HttpHeaders({ "Content-Type": "application/json"})
+    headers: new HttpHeaders({ "Content-Type": "application/json"})
   };
 
   constructor(

@@ -1,0 +1,130 @@
+<app-header></app-header>
+
+<main class="vhHeight">
+  <div class="loader" *ngIf="loading"></div>
+  
+  <div class="container">
+    <div class="col-xs-12 col-sm-8 col-sm-push-2" id="callOut"></div>
+
+    <form id="addProductForm" class="mwf-form" #formControl="ngForm">
+      <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <!--General information-->
+        <ul>      
+          <li class="mwf-field">
+            <h3>General information</h3>
+            <hr>
+          </li>
+
+          <!-- Model Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Name
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="name" name="name" [(ngModel)]="accessory.name" (change)="validateInput($event)" #name="ngModel" type="text" maxlength="255" required>
+            </div>
+          </li>
+
+          <!-- Price Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Price
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="price" name="price" [(ngModel)]="accessory.price" (change)="validateInput($event)" #price="ngModel" type="number" min="0" max="99999" step="0.00000" required>
+            </div>
+          </li>
+
+          <!-- CtnClass Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              CtnClass
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="ctnClass" name="ctnClass" [(ngModel)]="accessory.ctnClass" (change)="validateInput($event)" #ctnClass="ngModel" type="text" maxlength="255" required>
+            </div>
+          </li>
+
+          <!-- CtnClassFull Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              CtnClassFull
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="ctnClassFull" name="ctnClassFull" [(ngModel)]="accessory.ctnClassFull" (change)="validateInput($event)" #ctnClassFull="ngModel" type="text" maxlength="255" required>
+            </div>
+          </li>
+
+          <!-- Category Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Category
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <select class="mwf-select mwf-multiple" id="category" name="category" [(ngModel)]="accessory.category" #category="ngModel" (change)="validateInput($event)">
+                <option class="mwf-select-option" *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+              </select>
+            </div>
+          </li>
+
+          <!-- SubCategory Input -->
+          <li class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              Subcategory
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <select class="mwf-select mwf-multiple" id="subCategory" name="subCategory" [(ngModel)]="accessory.subCategory" #subCategory="ngModel" (change)="validateInput($event)">
+                <option class="mwf-select-option" *ngFor="let subCategory of subCategories" value="{{subCategory}}">{{subCategory}}</option>
+              </select>
+            </div>
+          </li>
+
+          <!-- SubCategory Input -->
+          <li class="mwf-field">
+            <label class="mwf-label mwf-label-input">
+              Description
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <textarea class="mwf-text" id="description" name="description" [(ngModel)]="accessory.description" (change)="validateInput($event)" #description="ngModel" maxlength="3000" required></textarea>
+            </div>
+          </li>
+
+          <!--Image uploader-->
+          <div class="mwf-field fileUploader">
+            <span>Please upload the product image.</span>
+            <br />
+            <br />
+            <div class="fileUploader-dropzone">
+              <input type="file" name="image" id="uploaderImage" (change)="preview_image($event)" accept="image/*">
+              <label for="file1" class="fileUploader-label">Drop files here to attach them</label>
+              <button class="btn-Uploader" type="">
+                Select image
+              </button>
+            </div>
+
+            <!--Div to load the files selected and the button to delete-->
+            <div  id="image-list" class="image-list">
+
+            </div>
+          </div>
+        </ul>
+      </div>
+
+      <!--Buttons-->
+      <div class="col-xs-12 col-sm-8 col-sm-push-2 forms-buttons col-xs-12">
+        <div class="form-next-button">
+          <button class="btn-Secondary" routerLink="/consult-accessories" type="button" style="margin-right: 5px;">Cancel</button>
+          <button class="btn-Primary" type="button" [disabled]="!formValid" id="submitBtn" (click)="addAccessory()">Submit</button>            
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</main>

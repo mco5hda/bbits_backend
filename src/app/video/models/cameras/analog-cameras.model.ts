@@ -5,7 +5,6 @@ import { Sensitivity } from './sensitivity.model';
 import { Lens } from './lens.model';
 import { Connections } from './connections.model';
 import { Housing } from './housing.model';
-import { ElectricalData } from '../electrical-data.model';
 
 export class AnalogCamera{
     id:number;

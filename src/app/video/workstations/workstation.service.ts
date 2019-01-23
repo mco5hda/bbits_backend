@@ -9,7 +9,7 @@ import { Environment } from 'src/app/app.environment';
 export class WorkstationService {
 
   httpOptions = {
-    headera: new HttpHeaders({ "Content-Type": "application/json"})
+    headers: new HttpHeaders({ "Content-Type": "application/json"})
   };
 
   constructor(

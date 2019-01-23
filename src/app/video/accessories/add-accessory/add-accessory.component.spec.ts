@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewIpCameraComponent } from './view-ip-camera.component';
+import { AddAccessoryComponent } from './add-accessory.component';
 
-describe('ViewIpCameraComponent', () => {
-  let component: ViewIpCameraComponent;
-  let fixture: ComponentFixture<ViewIpCameraComponent>;
+describe('AddAccessoryComponent', () => {
+  let component: AddAccessoryComponent;
+  let fixture: ComponentFixture<AddAccessoryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewIpCameraComponent ]
+      declarations: [ AddAccessoryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewIpCameraComponent);
+    fixture = TestBed.createComponent(AddAccessoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

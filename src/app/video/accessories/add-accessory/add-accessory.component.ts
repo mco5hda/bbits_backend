@@ -1,31 +1,32 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { WorkStation } from '../../models/workstation.model';
+import { Accessory } from '../../models/accessory.model';
+import { AccessoryService } from '../accessory.service';
 import { Router } from '@angular/router';
-import { CallOut } from './../../../utilities/callout';
-import { WorkstationService } from '../workstation.service';
 import { HttpResponse } from '@angular/common/http';
+import { CallOut } from 'src/app/utilities/callout';
 
 @Component({
-  selector: 'app-edit-workstation',
-  templateUrl: './edit-workstation.component.html',
-  styleUrls: ['./edit-workstation.component.css'],
+  selector: 'app-add-accessory',
+  templateUrl: './add-accessory.component.html',
+  styleUrls: ['./add-accessory.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class EditWorkstationComponent implements OnInit {
-
-  workstation: WorkStation;
-  formValid = true;
+export class AddAccessoryComponent implements OnInit {
+  accessory: Accessory = new Accessory();
+  formValid = false;
   loading: boolean = false;
   imageSelectedFiles: FileList;
   imageFile: File;
 
+  categories = ['Mounting', 'Other accessories']
+  subCategories = ['Bubble', 'Housings', 'Lenses', 'Mounting brackets', 'Others', 'PSU']
+
   constructor(
     private router: Router,
-    private workStationService: WorkstationService,
+    private accessoryService: AccessoryService,
   ) { }
 
   ngOnInit() {
-    this.workstation = JSON.parse(sessionStorage.getItem("workStationElement"));
   }
 
   preview_image(event):void  {
@@ -47,7 +48,7 @@ export class EditWorkstationComponent implements OnInit {
     }
     reader.readAsDataURL(event.target.files[0]);
 
-    this.workstation.image = (<HTMLInputElement>document.getElementById('uploaderImage')).value;
+    this.accessory.image = (<HTMLInputElement>document.getElementById('uploaderImage')).value;
     let uploader = (<HTMLInputElement>document.getElementById('uploaderImage')).files;
     this.imageSelectedFiles = uploader;
     document.getElementById('image-list').classList.remove("image-list")
@@ -56,15 +57,15 @@ export class EditWorkstationComponent implements OnInit {
       this.deletePreviewImage();
     });
 
-    this.validateInput(event)
+    this.validateInput(event);
   }
 
   //Delete the files with uploader in the uploader
   deletePreviewImage():void{
-    (<HTMLInputElement>document.getElementById('uploaderImage')).value = '';
+    let uploader = (<HTMLInputElement>document.getElementById('uploaderImage')).value = '';
     document.getElementById('image-list').innerHTML = '';
-    this.workstation.image = '';
-
+    this.accessory.image = '';
+    
     this.formValid = false;
   }
 
@@ -81,11 +82,23 @@ export class EditWorkstationComponent implements OnInit {
 
     let emptyValues = false;
     let elements = document.getElementsByTagName("input");
-    
+    let selects = document.getElementsByTagName("select")
+    let textArea = <HTMLTextAreaElement>document.getElementById('description');
+
     for (let i = 0; i < elements.length; i++) {
       if(elements[i].value === undefined || elements[i].value === ''){
         emptyValues = true;
       }
+    }
+
+    for (let i = 0; i < selects.length; i++) {
+      if(selects[i].value === undefined || selects[i].value === ''){
+        emptyValues = true;
+      }
+    }
+
+    if(textArea.value === undefined || textArea.value === ''){
+      emptyValues = true;
     }
 
     if(!emptyValues){
@@ -95,31 +108,26 @@ export class EditWorkstationComponent implements OnInit {
     }
   }
 
-  /*
-  * Metodo para crear registrar una nueva camara
-  */
-  updateWorkStation(){
+  addAccessory(){
     this.loading = true;
     this.imageFile = this.imageSelectedFiles.item(0);
 
-    this.workStationService.updateWorkStation(this.workstation, this.imageFile)
-    .subscribe(
-      (data: HttpResponse< { status :  string }> ) => {
-        try {
-          if(data.body.status === 'Workstation updated'){
+    this.accessoryService.createAccessory(this.accessory, this.imageFile).subscribe(
+      (data: HttpResponse< { status: string }> ) => {
+        try{
+          if(data.body.status === 'Accessory added'){
             this.loading = false;
-            CallOut.updated = true;
-            this.router.navigate(["/consult-workstations"])
+            CallOut.added = true;
+            this.router.navigate(["/consult-accessories"])
           }
-        } catch (error) {
+        }catch (error) {
           console.log('No logrado')
-        }  
+        }
       },
       error => {
         this.loading = false;
-        CallOut.addCallOut('error', 'The workstation has not updated.', 5000)     
+        CallOut.addCallOut('error', 'The accessory has not added.', 5000) 
       }
     );
   }
-
 }

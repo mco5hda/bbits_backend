@@ -9,7 +9,7 @@ import { IPRecording } from '../models/recordings/ip-recordings.model';
 export class IpRecordingService {
 
   httpOptions = {
-    headera: new HttpHeaders({ "Content-Type": "application/json"})
+    headers: new HttpHeaders({ "Content-Type": "application/json"})
   };
 
   constructor(

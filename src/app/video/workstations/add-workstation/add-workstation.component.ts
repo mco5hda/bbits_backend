@@ -53,6 +53,8 @@ export class AddWorkstationComponent implements OnInit {
     document.getElementById('btn-delete-preview-image').addEventListener("click", (event: Event) => {
       this.deletePreviewImage();
     });
+
+    this.validateInput(event)
   }
 
   //Delete the files with uploader in the uploader
@@ -60,6 +62,8 @@ export class AddWorkstationComponent implements OnInit {
     (<HTMLInputElement>document.getElementById('uploaderImage')).value = '';
     document.getElementById('image-list').innerHTML = '';
     this.workstation.image = '';
+
+    this.formValid = false;
   }
 
   validateInput(event){
@@ -105,9 +109,12 @@ export class AddWorkstationComponent implements OnInit {
             this.router.navigate(["/consult-workstations"])
           }
         }catch (error) {
-          this.loading = false;
-          CallOut.addCallOut('error', 'The Workstation has not added.', 5000)     
+          console.log('No logrado')
         }
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'The Workstation has not added.', 5000) 
       }
     );
   }
