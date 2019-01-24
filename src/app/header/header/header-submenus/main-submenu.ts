@@ -1,5 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import { HeaderComponent} from '../header.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'main-submenu',
@@ -50,13 +51,37 @@ export class MainSubmenuComponent {
         this.mouseClick('Video');
       },
       subOptions: [
-        {name: this.IP_CAMERA, link: '/consult-ip-cameras'},
-        {name: this.IP_RECORDING, link: '/consult-ip-recordings'},
-        {name: this.ANALOG_CAMERA, link: '/consult-analog-cameras'},
-        {name: this.ANALOG_RECORDING, link: '/consult-analog-recordings'},
-        {name: this.ACCESSORIES, link: ''},
-        {name: this.WORKSTATIONS, link: '/consult-workstations'},
-        {name: this.LICENSES, link: '#'}
+        {
+          name: this.IP_CAMERA, 
+          link: '/consult-ip-cameras',
+          click: () => {
+            this.submenuClick();
+          },
+        },
+        {
+          name: this.IP_RECORDING,
+          link: '/consult-ip-recordings'
+        },
+        {
+          name: this.ANALOG_CAMERA, 
+          link: '/consult-analog-cameras'
+        },
+        {
+          name: this.ANALOG_RECORDING,
+          link: '/consult-analog-recordings'
+        },
+        {
+          name: this.ACCESSORIES,
+          link: '/consult-accessories'
+        },
+        {
+          name: this.WORKSTATIONS,
+          link: '/consult-workstations'
+        },
+        {
+          name: this.LICENSES,
+          link: '/consult-licenses'
+        }
       ]
     },
       {
@@ -121,7 +146,10 @@ export class MainSubmenuComponent {
   public name : String = '';
   isOpen = true;
 
-  constructor(private headerComponent: HeaderComponent) {}
+  constructor(
+    private headerComponent: HeaderComponent,
+    private router: Router, 
+  ) {}
 
   /*
   *  Mouse click when is a cellphone view
@@ -140,11 +168,11 @@ export class MainSubmenuComponent {
         if (element.name === name) {
           element.subOptions.forEach(option => {
             subElements +=
-              `<li class="M-Navigation__item M-Navigation-Main__item">
-                   <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub" onclick="submenuClick()">
-                      <span> ${option.name}</span>
-                   </a>
-                </li>`;
+              `<li class="M-Navigation__item M-Navigation-Main__item" (click)="option.click()">
+                <a class="M-Navigation__link M-Navigation-Main__link M-Navigation-Main__linkWithSub">
+                  <span> ${option.name}</span>
+                </a>
+              </li>`;
           });
           this.mainMenu = false;
           this.name = name;
@@ -157,7 +185,7 @@ export class MainSubmenuComponent {
   }/* mouse click */
 
   submenuClick(){
-       console.log('Click');
+    alert('link')
   }
 
   onClickBackButton(){

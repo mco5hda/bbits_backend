@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { Accessory } from '../../models/accessory.model';
 import { Environment } from 'src/app/app.environment';
 import { Router } from '@angular/router';
 import { AccessoryService } from '../accessory.service';
 import { CallOut } from 'src/app/utilities/callout';
+
 
 @Component({
   selector: 'app-consult-accessories',
@@ -18,6 +19,7 @@ export class ConsultAccessoriesComponent implements OnInit {
   currentPage: number = 1;
   elementsPerPage: number = Environment.defaultPaginationElements;
   
+
   constructor(
     private router: Router,
     private accessoryService: AccessoryService,

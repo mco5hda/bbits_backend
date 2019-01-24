@@ -7,9 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 //Angular material
-import { MatSnackBarModule, MatDialogModule, MatMenuModule } from '@angular/material';
+import { MatSnackBarModule, MatDialogModule, MatMenuModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -53,7 +52,6 @@ import { DetailAccessoryComponent } from './video/accessories/detail-accessory/d
 import { EditAccessoryComponent } from './video/accessories/edit-accessory/edit-accessory.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +92,6 @@ import { EditAccessoryComponent } from './video/accessories/edit-accessory/edit-
   ],
   imports: [
     BrowserAnimationsModule,
-    NoopAnimationsModule,
     MatSnackBarModule,
     MatDialogModule,
     MatMenuModule,
@@ -102,7 +99,11 @@ import { EditAccessoryComponent } from './video/accessories/edit-accessory/edit-
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatDialogModule,
+    MatButtonModule,
+  ],
+  entryComponents: [
   ],
   providers: [MainService, DatasheetService],
   bootstrap: [AppComponent]

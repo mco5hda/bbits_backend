@@ -17139,3 +17139,4 @@ main {
     max-height: 500px;
     object-fit: contain; 
 }
+body { margin: 0; }
