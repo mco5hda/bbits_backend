@@ -15,7 +15,6 @@ import { AppComponent } from './app.component';
 import { AddIpCameraComponent } from './video/ip-cameras/add-ip-camera/add-ip-camera.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
-import { RequestAccessComponent } from './login/request-access/request-access.component';
 import { HeaderComponent } from './header/header/header.component';
 import { MainComponent } from './main/main/main.component';
 import { AddAnalogCameraComponent } from './video/analog-cameras/add-analog-camera/add-analog-camera.component';
@@ -60,7 +59,6 @@ import { RegisterComponent } from './login/register/register.component';
     AddIpCameraComponent,
     SignInComponent,
     ResetPasswordComponent,
-    RequestAccessComponent,
     HeaderComponent,
     MainComponent,
     AddAnalogCameraComponent,
