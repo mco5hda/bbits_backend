@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
 import { WorkstationService } from '../workstation.service';
 import { Environment } from 'src/app/app.environment';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
 @Component({
   selector: 'app-details-workstation',
@@ -20,6 +21,7 @@ export class DetailsWorkstationComponent implements OnInit {
   constructor(
     private router: Router,
     private workStationService: WorkstationService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -39,23 +41,29 @@ export class DetailsWorkstationComponent implements OnInit {
   }
 
   deleteWorkStation(id: number){
-    this.loading = true;
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if ( res ){
+          this.loading = true;
 
-    this.workStationService.deleteWorkStation(id).subscribe(
-      (data) => {
-        try {
-          if(data['status'] === 'Workstation deleted'){
-            this.loading = false;
-            CallOut.deleted = true;
-            this.router.navigate(["/consult-workstations"]);
-          }
-        } catch (error) {
-          console.log('No logrado')
-        }  
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The Workstation has not deleted.', 5000)     
+          this.workStationService.deleteWorkStation(id).subscribe(
+            (data) => {
+              try {
+                if(data['status'] === 'Workstation deleted'){
+                  this.loading = false;
+                  CallOut.deleted = true;
+                  this.router.navigate(["/consult-workstations"]);
+                }
+              } catch (error) {
+                console.log('No logrado')
+              }  
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The Workstation has not deleted.', 5000)     
+            }
+          );
+        }
       }
     );
   }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Environment } from 'src/app/app.environment';
 import { CallOut } from './../../../utilities/callout';
 import { AnalogRecordingService } from '../analog-recording.service';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
 @Component({
   selector: 'app-consult-analog-recordings',
@@ -22,6 +23,7 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
   constructor(
     private router: Router, 
     private analogRecordingService: AnalogRecordingService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -220,23 +222,29 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
   }
 
   deleteAnalogRecording(id: number){
-    this.loading = true;
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if ( res ){
+          this.loading = true;
 
-    this.analogRecordingService.deleteAnalogRecording(id).subscribe(
-      (data) => {
-        try {
-          if(data['status'] === 'Analog Recording deleted'){
-            this.loading = false;
-            this.analogRecordings = this.analogRecordings.filter(c => c.id !== id);
-            CallOut.addCallOut('success', 'Analog Recording deleted.', 5000);
-          }
-        } catch (error) {
-          console.log('No logrado')
-        }  
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The Analog Recording has not deleted.', 5000)     
+          this.analogRecordingService.deleteAnalogRecording(id).subscribe(
+            (data) => {
+              try {
+                if(data['status'] === 'Analog Recording deleted'){
+                  this.loading = false;
+                  this.analogRecordings = this.analogRecordings.filter(c => c.id !== id);
+                  CallOut.addCallOut('success', 'Analog Recording deleted.', 5000);
+                }
+              } catch (error) {
+                console.log('No logrado')
+              }  
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The Analog Recording has not deleted.', 5000)     
+            }
+          );
+        }
       }
     );
   }

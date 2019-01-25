@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
 import { WorkstationService } from '../workstation.service';
 import { element } from '@angular/core/src/render3';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
 @Component({
   selector: 'app-consult-workstations',
@@ -21,6 +22,7 @@ export class ConsultWorkstationsComponent implements OnInit {
   constructor( 
     private router: Router,
     private workStationService: WorkstationService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -124,23 +126,29 @@ export class ConsultWorkstationsComponent implements OnInit {
   }
 
   deleteWorkStation(id: number){
-    this.loading = true;
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if ( res ){
+          this.loading = true;
 
-    this.workStationService.deleteWorkStation(id).subscribe(
-      (data) => {
-        try {
-          if(data['status'] === 'Workstation deleted'){
-            this.loading = false;
-            this.workStations = this.workStations.filter(c => c.id !== id);
-            CallOut.addCallOut('success', 'Workstation deleted succesfully.', 5000);
-          }
-        } catch (error) {
-          console.log('No logrado')
-        }  
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The Workstation has not deleted.', 5000)     
+          this.workStationService.deleteWorkStation(id).subscribe(
+            (data) => {
+              try {
+                if(data['status'] === 'Workstation deleted'){
+                  this.loading = false;
+                  this.workStations = this.workStations.filter(c => c.id !== id);
+                  CallOut.addCallOut('success', 'Workstation deleted succesfully.', 5000);
+                }
+              } catch (error) {
+                console.log('No logrado')
+              }  
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The Workstation has not deleted.', 5000)     
+            }
+          );
+        }
       }
     );
   }

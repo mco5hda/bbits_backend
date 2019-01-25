@@ -4,6 +4,7 @@ import { IPRecording } from '../../models/recordings/ip-recordings.model';
 import { CallOut } from './../../../utilities/callout';
 import { Environment } from 'src/app/app.environment';
 import { IpRecordingService } from '../ip-recording.service';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
 @Component({
   selector: 'app-details-ip-recording',
@@ -22,6 +23,7 @@ export class DetailsIpRecordingComponent implements OnInit {
   constructor(
     private router: Router,
     private ipRecordingService: IpRecordingService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -76,25 +78,32 @@ export class DetailsIpRecordingComponent implements OnInit {
   }
 
   deleteIPRecording(id: number){
-    this.loading = true;
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if ( res ){
+          this.loading = true;
 
-    this.ipRecordingService.deleteIPRecording(id).subscribe(
-      (data) => {
-        try {
-          if(data['status'] === 'IP Recording deleted'){
-            this.loading = false;
-            CallOut.deleted = true;
-            this.router.navigate(["/consult-ip-recordings"]);
-          }
-        } catch (error) {
-          console.log('No logrado')
-        }  
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The IP Recording has not deleted.', 5000)     
+          this.ipRecordingService.deleteIPRecording(id).subscribe(
+            (data) => {
+              try {
+                if(data['status'] === 'IP Recording deleted'){
+                  this.loading = false;
+                  CallOut.deleted = true;
+                  this.router.navigate(["/consult-ip-recordings"]);
+                }
+              } catch (error) {
+                console.log('No logrado')
+              }  
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The IP Recording has not deleted.', 5000)     
+            }
+          );
+        }
       }
     );
+    
   }
 
 }

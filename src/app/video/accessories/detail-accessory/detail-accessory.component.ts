@@ -4,6 +4,7 @@ import { AccessoryService } from '../accessory.service';
 import { Router } from '@angular/router';
 import { Environment } from 'src/app/app.environment';
 import { CallOut } from 'src/app/utilities/callout';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
 @Component({
   selector: 'app-detail-accessory',
@@ -20,6 +21,7 @@ export class DetailAccessoryComponent implements OnInit {
   constructor(
     private router: Router,
     private accessoryService: AccessoryService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -38,23 +40,29 @@ export class DetailAccessoryComponent implements OnInit {
   }
 
   deleteAccessory(id: number){
-    this.loading = true;
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if ( res ){
+          this.loading = true;
 
-    this.accessoryService.deleteAccessory(id).subscribe(
-      (data) => {
-        try{
-          if(data['status'] === 'Accessory deleted'){
-            this.loading = false;
-            CallOut.deleted = true;
-            this.router.navigate(['/consult-accessories']);
-          }
-        }catch (error) {
-          console.log('No logrado')
-        }  
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The accessory has not deleted.', 5000)     
+          this.accessoryService.deleteAccessory(id).subscribe(
+            (data) => {
+              try{
+                if(data['status'] === 'Accessory deleted'){
+                  this.loading = false;
+                  CallOut.deleted = true;
+                  this.router.navigate(['/consult-accessories']);
+                }
+              }catch (error) {
+                console.log('No logrado')
+              }  
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The accessory has not deleted.', 5000)     
+            }
+          )
+        }
       }
     )
   }

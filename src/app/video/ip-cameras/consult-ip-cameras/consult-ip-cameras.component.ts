@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Environment } from 'src/app/app.environment';
 import { IpCameraService } from '../ip-camera.service';
 import { CallOut } from './../../../utilities/callout';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
 @Component({
   selector: 'app-consult-ip-cameras',
@@ -21,6 +22,7 @@ export class ConsultIpCamerasComponent implements OnInit {
   constructor(
     private router: Router,
     private ipCameraService: IpCameraService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -230,23 +232,29 @@ export class ConsultIpCamerasComponent implements OnInit {
   }
 
   deleteIPCamera(id: number){
-    this.loading = true;
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if ( res ){
+          this.loading = true;
 
-    this.ipCameraService.deleteIPCamera(id).subscribe(
-      (data) => {
-        try {
-          if(data['status'] === 'IP Camera deleted'){
-            this.loading = false;
-            this.ipCameras = this.ipCameras.filter(c => c.id !== id);
-            CallOut.addCallOut('success', 'IP Camera deleted.', 5000);
-          }
-        } catch (error) {
-          console.log('No logrado')
-        }  
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The IP Camera has not deleted.', 5000)     
+          this.ipCameraService.deleteIPCamera(id).subscribe(
+            (data) => {
+              try {
+                if(data['status'] === 'IP Camera deleted'){
+                  this.loading = false;
+                  this.ipCameras = this.ipCameras.filter(c => c.id !== id);
+                  CallOut.addCallOut('success', 'IP Camera deleted.', 5000);
+                }
+              } catch (error) {
+                console.log('No logrado')
+              }  
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The IP Camera has not deleted.', 5000)     
+            }
+          );
+        }
       }
     );
   }

@@ -4,6 +4,7 @@ import { Environment } from 'src/app/app.environment';
 import { IPRecording } from '../../models/recordings/ip-recordings.model';
 import { CallOut } from './../../../utilities/callout';
 import { IpRecordingService } from '../ip-recording.service';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
 @Component({
   selector: 'app-consult-ip-recordings',
@@ -22,6 +23,7 @@ export class ConsultIpRecordingsComponent implements OnInit {
   constructor( 
     private router: Router,
     private ipRecordingService: IpRecordingService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -211,24 +213,31 @@ export class ConsultIpRecordingsComponent implements OnInit {
   }
 
   deleteIPRecording(id: number){
-    this.loading = true;
-
-    this.ipRecordingService.deleteIPRecording(id).subscribe(
-      (data) => {
-        try {
-          if(data['status'] === 'IP Recording deleted'){
-            this.loading = false;
-            this.ipRecordings = this.ipRecordings.filter(c => c.id !== id);
-            CallOut.addCallOut('success', 'IP Recording deleted.', 5000);
-          }
-        } catch (error) {
-          console.log('No logrado')
-        }  
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The IP Recording has not deleted.', 5000)     
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if ( res ){
+          this.ipRecordingService.deleteIPRecording(id).subscribe(
+            (data) => {
+              try {
+                if(data['status'] === 'IP Recording deleted'){
+                  this.loading = false;
+                  this.ipRecordings = this.ipRecordings.filter(c => c.id !== id);
+                  CallOut.addCallOut('success', 'IP Recording deleted.', 5000);
+                }
+              } catch (error) {
+                console.log('No logrado')
+              }  
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The IP Recording has not deleted.', 5000)     
+            }
+          );
+        }
       }
     );
+    this.loading = true;
+
+    
   }
 }

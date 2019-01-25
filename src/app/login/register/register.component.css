@@ -9937,21 +9937,6 @@ body.state-cm-modal-visible {
     z-index: 0
 }
 
-.cm-personcard__shadow {
-    border-radius: 3px 3px 0 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .1)), to(rgba(255, 255, 255, 0)));
-    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0));
-    background-image: -moz-linear-gradient(top, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0));
-    background-image: -o-linear-gradient(top, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0));
-    background-image: -ms-linear-gradient(top, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0));
-    background-image: linear-gradient(top, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0));
-    filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#ffffff', EndColorStr='#ffffff')
-}
 
 .cm-personcard__avatar {
     position: relative;
@@ -15580,18 +15565,6 @@ span.cm-setting-tree__link:hover {
     color: rgba(255, 255, 255, .7)
 }
 
-.co-mediachooser__asset-item:hover .co-mediachooser__image-overlay {
-    opacity: 1;
-    bottom: 0;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)));
-    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-    background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-    filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#000000', EndColorStr='#000000')
-}
-
 .co-payment__content {
     font-size: 15px;
     min-width: 320px;
@@ -16349,28 +16322,6 @@ body.state-bg-visible {
     line-height: 8px;
     padding: 2px;
     border: 0
-}
-
-.co-powerbar__bubble--red {
-    background-color: #D0021B;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#fd3b00), to(#e8222c));
-    background-image: -webkit-linear-gradient(top, #fd3b00, #e8222c);
-    background-image: -moz-linear-gradient(top, #fd3b00, #e8222c);
-    background-image: -o-linear-gradient(top, #fd3b00, #e8222c);
-    background-image: -ms-linear-gradient(top, #fd3b00, #e8222c);
-    background-image: linear-gradient(top, #fd3b00, #e8222c);
-    color: #fff
-}
-
-.co-powerbar__bubble--orange {
-    background-color: rgba(250, 177, 23, 1);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#fab117), to(#efa036));
-    background-image: -webkit-linear-gradient(top, #fab117, #efa036);
-    background-image: -moz-linear-gradient(top, #fab117, #efa036);
-    background-image: -o-linear-gradient(top, #fab117, #efa036);
-    background-image: -ms-linear-gradient(top, #fab117, #efa036);
-    background-image: linear-gradient(top, #fab117, #efa036);
-    color: #fff
 }
 
 .co-powerbar__bubble--simple {

@@ -4,7 +4,14 @@ import { Environment } from 'src/app/app.environment';
 import { Router } from '@angular/router';
 import { AccessoryService } from '../accessory.service';
 import { CallOut } from 'src/app/utilities/callout';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { ConfirmDialogComponent } from 'src/app/confirm-dialog/confirm-dialog.component';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-consult-accessories',
@@ -19,10 +26,12 @@ export class ConsultAccessoriesComponent implements OnInit {
   currentPage: number = 1;
   elementsPerPage: number = Environment.defaultPaginationElements;
   
-
+  animal: string;
+  name: string;
   constructor(
     private router: Router,
     private accessoryService: AccessoryService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -112,24 +121,30 @@ export class ConsultAccessoriesComponent implements OnInit {
   }
 
   deleteAccessory(id: number){
-    this.loading = true;
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if( res ) {
+          this.loading = true;
 
-    this.accessoryService.deleteAccessory(id).subscribe(
-      (data) => {
-        try{
-          if(data['status'] === 'Accessory deleted'){
-            this.loading = false;
-            this.accessories = this.accessories.filter( c => c.id !== id);
-            CallOut.addCallOut('success', 'Accessory deleted succesfully.', 5000);
-          }
-        }catch(error){
-          console.log('No logrado')
+          this.accessoryService.deleteAccessory(id).subscribe(
+            (data) => {
+              try{
+                if(data['status'] === 'Accessory deleted'){
+                  this.loading = false;
+                  this.accessories = this.accessories.filter( c => c.id !== id);
+                  CallOut.addCallOut('success', 'Accessory deleted succesfully.', 5000);
+                }
+              }catch(error){
+                console.log('No logrado')
+              }
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The accessory has not deleted', 5000);
+            }
+          );
         }
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The accessory has not deleted', 5000);
       }
-    )
+    );
   }
 }

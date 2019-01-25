@@ -1776,7 +1776,6 @@ td.visible-print, th.visible-print {
     color: #b90276;
 }
 .backgroundcliptext .u-Text__gradient--fuchsia-violet {
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-color: #b90276;
     background-image: linear-gradient(to right, #b90276 10%, #50237f 90%);
@@ -1787,7 +1786,6 @@ td.visible-print, th.visible-print {
     color: #e20015;
 }
 .backgroundcliptext .u-Text__gradient--darkBlue-lightBlue, .backgroundcliptext .u-Text__gradient--red-fuchsia, .backgroundcliptext .u-Text__gradient--violet-darkBlue {
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-color: #e20015;
     background-image: linear-gradient(to right, #e20015 10%, #b90276 90%);
@@ -1812,7 +1810,6 @@ td.visible-print, th.visible-print {
     color: #008ecf;
 }
 .backgroundcliptext .u-Text__gradient--lightBlue-turquoise, .backgroundcliptext .u-Text__gradient--lightGreen-darkGreen, .backgroundcliptext .u-Text__gradient--turquoise-lightGreen {
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-color: #008ecf;
     background-image: linear-gradient(to right, #008ecf 10%, #00a8b0 90%);
@@ -2056,7 +2053,6 @@ html:not(.is-touch) .A-Button-BackToTop__clicktarget:hover {
     border-radius: 50%;
     cursor: pointer;
     display: inline-block;
-    float: left;
     height: 41px;
     position: relative;
     transition: all 600ms cubic-bezier(.38, .04, .35, .96);
@@ -3023,7 +3019,6 @@ span.flatpickr-weekday {
 }
 .flatpickr-weekwrapper {
     display: inline-block;
-    float: left;
 }
 .flatpickr-weekwrapper .flatpickr-weeks {
     padding: 0 12px;
@@ -3117,7 +3112,6 @@ span.flatpickr-weekday {
 .flatpickr-time .flatpickr-am-pm, .flatpickr-time .flatpickr-time-separator {
     height: inherit;
     display: inline-block;
-    float: left;
     line-height: inherit;
     color: #393939;
     font-weight: 700;
@@ -3986,7 +3980,6 @@ html:not(.is-touch) .A-Link__coverLink:hover .A-Link__link--inverted {
     transition: transform 400ms cubic-bezier(.38, .04, .35, .96);
     transition: transform 400ms cubic-bezier(.38, .04, .35, .96), -webkit-transform 400ms cubic-bezier(.38, .04, .35, .96);
     -webkit-font-smoothing: antialiased;
-    speak: none;
     display: -webkit-inline-flex;
     display: -ms-inline-flexbox;
     display: inline-flex;
@@ -7789,7 +7782,6 @@ html:not(.is-touch) .M-LanguageSelector__icon .A-Icon:hover, html:not(.is-touch)
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
-    -webkit-backface-visibility: hidden;
 }
 .M-AnchorNavigation-Navigation__text {
     position: absolute;

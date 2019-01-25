@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
 import { IpCameraService } from '../ip-camera.service';
 import { Environment } from 'src/app/app.environment';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
 @Component({
   selector: 'app-details-ip-camera',
@@ -20,6 +21,7 @@ export class DetailsIpCameraComponent implements OnInit {
   constructor(
     private router: Router,
     private ipCameraService: IpCameraService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -74,23 +76,29 @@ export class DetailsIpCameraComponent implements OnInit {
   }
 
   deleteIPCamera(id: number){
-    this.loading = true;
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if ( res ){
+          this.loading = true;
 
-    this.ipCameraService.deleteIPCamera(id).subscribe(
-      (data) => {
-        try {
-          if(data['status'] === 'IP Camera deleted'){
-            this.loading = false;
-            CallOut.deleted = true;
-            this.router.navigate(["/consult-ip-cameras"]);
-          }
-        } catch (error) {
-          console.log('No logrado')
-        }  
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The IP Camera has not deleted.', 5000)     
+          this.ipCameraService.deleteIPCamera(id).subscribe(
+            (data) => {
+              try {
+                if(data['status'] === 'IP Camera deleted'){
+                  this.loading = false;
+                  CallOut.deleted = true;
+                  this.router.navigate(["/consult-ip-cameras"]);
+                }
+              } catch (error) {
+                console.log('No logrado')
+              }  
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The IP Camera has not deleted.', 5000)     
+            }
+          );
+        }
       }
     );
   }

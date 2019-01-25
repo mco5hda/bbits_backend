@@ -4,6 +4,7 @@ import { Environment } from 'src/app/app.environment';
 import { AnalogCamera } from '../../models/cameras/analog-cameras.model';
 import { CallOut } from './../../../utilities/callout';
 import { AnalogCameraService } from '../analog-camera.service';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
 @Component({
   selector: 'app-consult-analog-cameras',
@@ -20,6 +21,7 @@ export class ConsultAnalogCamerasComponent implements OnInit {
   constructor(
     private router: Router,
     private analogCameraService: AnalogCameraService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -158,24 +160,30 @@ export class ConsultAnalogCamerasComponent implements OnInit {
   }
 
   deleteAnalogCamera(id: number){
-    this.loading = true;
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if ( res ){
+          this.loading = true;
 
-    this.analogCameraService.deleteAnalogCamera(id).subscribe(
-      (data) => {
-        try {
-          console.log(data['status']);
-          if(data['status'] === 'Analog Camera deleted'){
-            this.loading = false;
-            this.analogCameras = this.analogCameras.filter(c => c.id !== id);
-            CallOut.addCallOut('success', 'Analog Camera deleted.', 5000);
-          }
-        } catch (error) {
-          console.log('No logrado')
-        }  
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The Analog Camera has not deleted.', 5000)     
+          this.analogCameraService.deleteAnalogCamera(id).subscribe(
+            (data) => {
+              try {
+                console.log(data['status']);
+                if(data['status'] === 'Analog Camera deleted'){
+                  this.loading = false;
+                  this.analogCameras = this.analogCameras.filter(c => c.id !== id);
+                  CallOut.addCallOut('success', 'Analog Camera deleted.', 5000);
+                }
+              } catch (error) {
+                console.log('No logrado')
+              }  
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The Analog Camera has not deleted.', 5000)     
+            }
+          );
+        }
       }
     );
   }

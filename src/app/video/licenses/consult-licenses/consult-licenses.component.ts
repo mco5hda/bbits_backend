@@ -4,6 +4,7 @@ import { Environment } from 'src/app/app.environment';
 import { Router } from '@angular/router';
 import { LicenseService } from '../license.service';
 import { CallOut } from 'src/app/utilities/callout';
+import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 
 @Component({
   selector: 'app-consult-licenses',
@@ -21,6 +22,7 @@ export class ConsultLicensesComponent implements OnInit {
   constructor(
     private router: Router,
     private licenseService: LicenseService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -94,24 +96,30 @@ export class ConsultLicensesComponent implements OnInit {
   }
 
   deleteLicense(id: number){
-    this.loading = true;
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(
+      res => {
+        if ( res ){
+          this.loading = true;
 
-    this.licenseService.deleteLicense(id).subscribe(
-      (data) => {
-        try{
-          if(data['status'] === 'License deleted'){
-            this.loading = false;
-            this.licenses = this.licenses.filter(c => c.id !== id);
-            CallOut.addCallOut('success', 'License deleted', 5000);
-          }
-        }catch (error) {
-          console.log('No logrado')
-        } 
-      },
-      error => {
-        this.loading = false;
-        CallOut.addCallOut('error', 'The License has not deleted.', 5000)     
+          this.licenseService.deleteLicense(id).subscribe(
+            (data) => {
+              try{
+                if(data['status'] === 'License deleted'){
+                  this.loading = false;
+                  this.licenses = this.licenses.filter(c => c.id !== id);
+                  CallOut.addCallOut('success', 'License deleted', 5000);
+                }
+              }catch (error) {
+                console.log('No logrado')
+              } 
+            },
+            error => {
+              this.loading = false;
+              CallOut.addCallOut('error', 'The License has not deleted.', 5000)     
+            }
+          );
+        }
       }
-    );
+    );    
   }
 }

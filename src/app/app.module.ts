@@ -50,6 +50,8 @@ import { AddAccessoryComponent } from './video/accessories/add-accessory/add-acc
 import { ConsultAccessoriesComponent } from './video/accessories/consult-accessories/consult-accessories.component';
 import { DetailAccessoryComponent } from './video/accessories/detail-accessory/detail-accessory.component';
 import { EditAccessoryComponent } from './video/accessories/edit-accessory/edit-accessory.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { RegisterComponent } from './login/register/register.component';
 
 
 @NgModule({
@@ -89,6 +91,8 @@ import { EditAccessoryComponent } from './video/accessories/edit-accessory/edit-
     ConsultAccessoriesComponent,
     DetailAccessoryComponent,
     EditAccessoryComponent,
+    ConfirmDialogComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -104,6 +108,7 @@ import { EditAccessoryComponent } from './video/accessories/edit-accessory/edit-
     MatButtonModule,
   ],
   entryComponents: [
+    ConfirmDialogComponent
   ],
   providers: [MainService, DatasheetService],
   bootstrap: [AppComponent]
