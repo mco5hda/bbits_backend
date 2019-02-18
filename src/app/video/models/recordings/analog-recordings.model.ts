@@ -7,6 +7,7 @@ import { LARRecording } from './lar-recording.model';
 import { RecordingRecording } from './recording-recording.model';
 import { StorageOptionsRecording } from './storage-options-recording.model';
 import { VideoOutputRecording } from './video-output-recording.model';
+import { Accessory } from './../accessory.model';
 
 export class AnalogRecording {
     id:number;
@@ -23,6 +24,7 @@ export class AnalogRecording {
     targetSystemSize:string;
     userLevels:string;
     timeLine: boolean;
+    accessories: Accessory[];
     basicFeatures: BasicFeaturesRecording = new BasicFeaturesRecording();
     advancedFeatures: AdvancedFeaturesRecording = new AdvancedFeaturesRecording();
     aioFunctions: AIOFunctionsRecording = new AIOFunctionsRecording();

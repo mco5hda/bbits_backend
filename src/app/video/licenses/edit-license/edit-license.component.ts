@@ -20,6 +20,7 @@ export class EditLicenseComponent implements OnInit {
   //Selects data
   types = ['BVMS Viewer', 'Bosch Video Client', 'BVMS']
   licenseTypes = ['Base', 'Expansion', 'Maintenance', 'Optional']
+  bvmsVersions = ['9.0', '8.0', '7.5', '7.0', '6.5', '6.0']
 
   constructor(
     private router: Router,
@@ -28,6 +29,18 @@ export class EditLicenseComponent implements OnInit {
 
   ngOnInit() {
     this.license = JSON.parse(sessionStorage.getItem('licenseElement'));
+
+    if(this.license.type === 'BVMS'){
+      document.getElementById('bvms-version').classList.remove('bvms-version')
+    }
+  }
+
+  licenseTypeChange(event) {
+    if( event.target.value === 'BVMS'){
+      document.getElementById('bvms-version').classList.remove('bvms-version')
+    }else{
+      document.getElementById('bvms-version').classList.add('bvms-version')
+    }
   }
 
   validateInput(event){
@@ -60,6 +73,14 @@ export class EditLicenseComponent implements OnInit {
   updateLicense(){
     this.loading = true;
     
+    let selectValue = (<HTMLInputElement>document.getElementById('type')).value;
+    
+    if(selectValue === 'BVMS'){
+      this.license.version = (<HTMLInputElement>document.getElementById('version')).value;
+    }else {
+      this.license.version = '0';
+    }
+
     this.licenseService.updateLicense(this.license).subscribe(
       (data: HttpResponse< {status: string } >) => {
         try{

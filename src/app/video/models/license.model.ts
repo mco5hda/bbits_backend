@@ -7,4 +7,5 @@ export class License {
     channelsIncluded: number;
     maxChannels: number;
     price: string;
+    version: string;
 }

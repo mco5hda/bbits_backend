@@ -44,7 +44,7 @@ export class ConsultWorkstationsComponent implements OnInit {
     //Send the request to the  server and get the json with the ip cameras elements array
     this.workStationService.getWorkStations().subscribe(
       data => {
-        this.fillList(data[0]);
+        this.fillList(data);
         this.loading = false;
       },
       error => {
@@ -59,39 +59,39 @@ export class ConsultWorkstationsComponent implements OnInit {
       let workStation: WorkStation = new WorkStation();
 
       for(let key in element){
-        if(key === 'ID'){
+        if(key === 'id'){
           workStation.id = element[key];
-        }else if(key === 'MODEL'){
+        }else if(key === 'model'){
           workStation.model = element[key];
-        }else if(key === 'BASE_UNIT'){
+        }else if(key === 'baseUnit'){
           workStation.baseUnit = element[key];
-        }else if(key === 'HDD'){
+        }else if(key === 'hdd'){
           workStation.hdd = element[key];
-        }else if(key === 'DVD_DRIVE'){
+        }else if(key === 'dvdDrive'){
           workStation.dvdDrive = element[key];
-        }else if(key === 'PROCESSOR'){
+        }else if(key === 'processor'){
           workStation.processor = element[key];
-        }else if(key === 'MEMORY'){
+        }else if(key === 'memory'){
           workStation.memory = element[key];
-        }else if(key === 'OPERATIVE_SYSTEM'){
+        }else if(key === 'operativeSystem'){
           workStation.operativeSystem = element[key];
-        }else if(key === 'IMAGE'){
+        }else if(key === 'image'){
           workStation.image = element[key];
-        }else if(key === 'PRICE'){
+        }else if(key === 'price'){
           workStation.price = element[key];
-        }else if(key === 'GRAPHICS_CARD'){
+        }else if(key === 'graphicsCards'){
           workStation.graphicsCard = element[key];
-        }else if(key === 'APPLICATION'){
+        }else if(key === 'aplication'){
           workStation.application = element[key];
-        }else if(key === 'DESCRIPTION'){
+        }else if(key === 'description'){
           workStation.description = element[key];
-        }else if(key === 'NUMBER_OF_CARD_SUPPORTED'){
+        }else if(key === 'numberOfCardsSupported'){
           workStation.cardsSupported = element[key];
-        }else if(key === 'MAXIMUM_MONITORS_PER_CARD'){
+        }else if(key === 'maximumMonitorPerCard'){
           workStation.maxMonitorsPerCard = element[key];
-        }else if(key === 'MAX_MONITORS_PER_WS'){
+        }else if(key === 'maxMonitorPerWs'){
           workStation.maxMonitorPerWorkstation = element[key];
-        }else if(key === 'GPU_DECODING'){
+        }else if(key === 'gpuDecoding'){
           workStation.gpuDecoding = element[key];
         }
       }

@@ -1,3 +1,4 @@
+<div class="loader" *ngIf="loading"></div>
 
 <div class="mod mod-c-accessrequest co-accessrequest">
   <a class="logo" href="#">
@@ -9,55 +10,55 @@
       
       <p class="ca-p">
           To activate your access to the Bosch Building Installation Technologies System you have to register. 
-          With a click on the 'Request Access' button,  you agree that your personal data will be processed. 
+          With a click on the 'Register' button, you agree that your personal data will be processed. 
       </p> 
   </div> 
   
-  <form class="co-accessrequest__settings js-co-accessrequest__settings">          
+  <form class="co-accessrequest__settings js-co-accessrequest__settings" #formControl="ngForm">          
       <div class="js-co-settings__elem cm-setting__elem">  
           <div class="cm-setting__preview cm-setting__bar js-cm-setting__bar">  
-              <label for="email" class="cm-setting__label">Your email *</label> 
+              <label for="email" class="cm-setting__label">Last Name *</label> 
               <div class="cm-setting__group">    
                   <div class="cm-setting__group-wrap">  
-                      <input class="cm-setting__input js-cm-setting__input" placeholder="Please insert your email" value="" id="email" type="email" name="email" required="">  
+                      <input class="cm-setting__input js-cm-setting__input" placeholder="Please insert your last name" id="lastName" type="text" name="lastName" [(ngModel)]="user.lastName" (change)="validateInput($event)" #lastName="ngModel" required="">  
                   </div>
               </div>    
           </div>
       </div>
       <div class="js-co-settings__elem cm-setting__elem">  
           <div class="cm-setting__preview cm-setting__bar js-cm-setting__bar">  
-              <label for="email" class="cm-setting__label">Your email *</label> 
+              <label for="email" class="cm-setting__label">First Name *</label> 
               <div class="cm-setting__group">    
                   <div class="cm-setting__group-wrap">  
-                      <input class="cm-setting__input js-cm-setting__input" placeholder="Please insert your email" value="" id="email" type="email" name="email" required="">  
+                      <input class="cm-setting__input js-cm-setting__input" placeholder="Please insert your first name" id="firstName" type="text" name="firstName"  [(ngModel)]="user.firstName" (change)="validateInput($event)" #firstName="ngModel" required="">  
                   </div>
               </div>    
           </div>
       </div>
       <div class="js-co-settings__elem cm-setting__elem">  
           <div class="cm-setting__preview cm-setting__bar js-cm-setting__bar">  
-              <label for="email" class="cm-setting__label">Your email *</label> 
+              <label for="email" class="cm-setting__label">Email *</label> 
               <div class="cm-setting__group">    
                   <div class="cm-setting__group-wrap">  
-                      <input class="cm-setting__input js-cm-setting__input" placeholder="Please insert your email" value="" id="email" type="email" name="email" required="">  
+                      <input class="cm-setting__input js-cm-setting__input" placeholder="Please insert your email" id="email" type="email" name="email" [(ngModel)]="user.email" (change)="validateInput($event)" #email="ngModel" required="">  
                   </div>
               </div>    
           </div>
       </div>
       <div class="js-co-settings__elem cm-setting__elem">  
           <div class="cm-setting__preview cm-setting__bar js-cm-setting__bar">  
-              <label for="email" class="cm-setting__label">Your email *</label> 
+              <label for="email" class="cm-setting__label">Password *</label> 
               <div class="cm-setting__group">    
                   <div class="cm-setting__group-wrap">  
-                      <input class="cm-setting__input js-cm-setting__input" placeholder="Please insert your email" value="" id="email" type="email" name="email" required="">  
+                      <input class="cm-setting__input js-cm-setting__input" placeholder="Please insert your password" id="password" type="password" name="password" [(ngModel)]="user.password" (change)="validateInput($event)" #password="ngModel" required="">  
                   </div>
               </div>    
           </div>
       </div>      
 
       <div class="cm-btn-bar cm-btn-bar--centered cm-btn-bar--section js-cm-setting__actions">  
-          <button type="submit" class="btn-signin">  
-              <span class="js-cm-setting__btn-label">Request Access</span>  
+          <button type="submit" class="btn-signin" [disabled]="!formValid" (click)="register()">  
+              <span class="js-cm-setting__btn-label">Register</span>  
           </button>  
       </div> 
   </form>

@@ -48,20 +48,20 @@
             </div>
           </li>
 
-          <!-- Processor Input -->
+          <!-- type Input -->
           <li class="mwf-field mwf-m">
             <label class="mwf-label mwf-label-input">
               Type
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <select class="mwf-select mwf-multiple" id="type" name="type" [(ngModel)]="license.type" #type="ngModel">
+              <select class="mwf-select mwf-multiple" id="type" name="type" [(ngModel)]="license.type" #type="ngModel" (change)="licenseTypeChange($event)">
                 <option class="mwf-select-option" *ngFor="let type of types" value="{{type}}">{{type}}</option>
               </select>            
             </div>
           </li>
 
-          <!-- Memory Input -->
+          <!-- License type Input -->
           <li class="mwf-field mwf-m">
             <label class="mwf-label mwf-label-input">
               License Type
@@ -74,7 +74,12 @@
             </div>
           </li>
 
-          <!-- OS Input -->
+          <!-- BVMS Version Input -->
+          <li class="mwf-field" id="bvms-version">
+            
+          </li>
+
+          <!-- channels include Input -->
           <li class="mwf-field mwf-m">
             <label class="mwf-label mwf-label-input">
               Channels include
@@ -85,7 +90,7 @@
             </div>
           </li>
 
-          <!-- OS Input -->
+          <!-- max channels Input -->
           <li class="mwf-field mwf-m">
             <label class="mwf-label mwf-label-input">
               Max. channels

@@ -10,6 +10,7 @@ import { RecordingRecording } from './recording-recording.model';
 import { StorageOptionsExtensionsRecording } from './storage-options-extensions-recording.model';
 import { StorageOptionsRecording } from './storage-options-recording.model';
 import { VideoOutputRecording } from './video-output-recording.model';
+import { Accessory } from './../accessory.model';
 
 export class IPRecording{
     id:number;
@@ -22,6 +23,7 @@ export class IPRecording{
     ctnClassFull:string;
     price:string;
     dataFormat:string;
+    accessories: Accessory[];
     basicFeatures: BasicFeaturesRecording = new BasicFeaturesRecording();
     advancedFeatures: AdvancedFeaturesRecording = new AdvancedFeaturesRecording();
     aioFunctions: AIOFunctionsRecording = new AIOFunctionsRecording();

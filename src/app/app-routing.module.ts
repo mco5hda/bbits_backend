@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { AddIpCameraComponent } from './video/ip-cameras/add-ip-camera/add-ip-camera.component';
-import { RequestAccessComponent } from './login/request-access/request-access.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 import { MainComponent } from './main/main/main.component';
 import { AddAnalogCameraComponent } from './video/analog-cameras/add-analog-camera/add-analog-camera.component';
@@ -31,12 +30,13 @@ import { DetailAccessoryComponent } from './video/accessories/detail-accessory/d
 import { EditAccessoryComponent } from './video/accessories/edit-accessory/edit-accessory.component';
 import { ConsultAccessoriesComponent } from './video/accessories/consult-accessories/consult-accessories.component';
 import { AddAccessoryComponent } from './video/accessories/add-accessory/add-accessory.component';
+import { RegisterComponent } from './login/register/register.component';
 
 const routes: Routes = [
   { path: "", component: SignInComponent },
   { path: "login", component: SignInComponent },
   { path: "reset-password", component: ResetPasswordComponent},
-  { path: "request-access", component: RequestAccessComponent},
+  { path: "register", component: RegisterComponent},
   { path: "home", component: MainComponent },
   { path: "add-ip-camera", component: AddIpCameraComponent},
   { path: "add-analog-camera", component: AddAnalogCameraComponent},

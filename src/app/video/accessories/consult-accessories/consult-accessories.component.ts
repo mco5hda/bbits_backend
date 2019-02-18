@@ -54,7 +54,7 @@ export class ConsultAccessoriesComponent implements OnInit {
 
     this.accessoryService.getAccessories().subscribe(
       data => {
-        this.fillList(data[0]);
+        this.fillList(data);
         this.loading = false;
       },
       error => {
@@ -69,23 +69,23 @@ export class ConsultAccessoriesComponent implements OnInit {
       let accessory: Accessory = new Accessory();
 
       for(let key in element){
-        if(key === 'ID'){
+        if(key === 'id'){
           accessory.id = element[key];
-        }else if(key === 'NAME'){
+        }else if(key === 'name'){
           accessory.name = element[key];
-        }else if(key === 'CATEGORY'){
+        }else if(key === 'category'){
           accessory.category = element[key];
-        }else if(key === 'SUB_CATEGORY'){
+        }else if(key === 'subCategory'){
           accessory.subCategory = element[key];
-        }else if(key === 'IMAGE'){
+        }else if(key === 'image'){
           accessory.image = element[key];
-        }else if(key === 'CTN_CLASS'){
+        }else if(key === 'ctnClass'){
           accessory.ctnClass = element[key];
-        }else if(key === 'CTN_CLASS_FULL'){
+        }else if(key === 'ctnClassFull'){
           accessory.ctnClassFull = element[key];
-        }else if(key === 'DESCRIPTION'){
+        }else if(key === 'description'){
           accessory.description = element[key];
-        }else if(key === 'PRICE'){
+        }else if(key === 'price'){
           accessory.price = element[key];
         }
       }

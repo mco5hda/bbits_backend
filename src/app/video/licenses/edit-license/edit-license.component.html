@@ -55,7 +55,7 @@
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <select class="mwf-select mwf-multiple" id="type" name="type" [(ngModel)]="license.type" #type="ngModel">
+              <select class="mwf-select mwf-multiple" id="type" name="type" [(ngModel)]="license.type" #type="ngModel" (change)="licenseTypeChange($event)">
                 <option class="mwf-select-option" *ngFor="let type of types" value="{{type}}">{{type}}</option>
               </select>            
             </div>
@@ -70,6 +70,19 @@
             <div class="mwf-input">
               <select class="mwf-select mwf-multiple" id="licenseType" name="licenseType" [(ngModel)]="license.licenseType" #licenseType="ngModel">
                 <option class="mwf-select-option" *ngFor="let licenseType of licenseTypes" value="{{licenseType}}">{{licenseType}}</option>
+              </select>  
+            </div>
+          </li>
+
+          <!-- BVMS Version Input -->
+          <li class="mwf-field bvms-version" id="bvms-version">
+            <label class="mwf-label mwf-label-input">
+              BVMS Version
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <select class="mwf-select mwf-multiple" id="version" name="version" [(ngModel)]="license.version" #version="ngModel">
+                <option class="mwf-select-option" *ngFor="let version of bvmsVersions" value="{{version}}">{{version}}</option>
               </select>  
             </div>
           </li>

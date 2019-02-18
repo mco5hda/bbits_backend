@@ -34,6 +34,7 @@ export class LicenseService {
     formdata.append("channelsIncluded", license.channelsIncluded.toString());
     formdata.append("maxChannels", license.maxChannels.toString());
     formdata.append("price", license.price);
+    formdata.append("version", license.version);
 
     const req = new HttpRequest("POST", this.url, formdata, {
       responseType: "json"
@@ -53,6 +54,7 @@ export class LicenseService {
     formdata.append("channelsIncluded", license.channelsIncluded.toString());
     formdata.append("maxChannels", license.maxChannels.toString());
     formdata.append("price", license.price);
+    formdata.append("version", license.version);
 
     const req = new HttpRequest("POST", this.url+"update", formdata, {
       responseType: "json"

@@ -45,7 +45,7 @@ export class ConsultLicensesComponent implements OnInit {
 
     this.licenseService.getLicenses().subscribe(
       data => {
-        this.fillList(data[0]);
+        this.fillList(data);
         this.loading = false;
       },
       error => {
@@ -59,22 +59,24 @@ export class ConsultLicensesComponent implements OnInit {
     data.forEach(element => {
       let license: License = new License();
       for(let key in element){
-        if(key === 'ID'){
+        if(key === 'id'){
           license.id = element[key];
-        }else if(key === 'NAME'){
+        }else if(key === 'name'){
           license.name = element[key];
-        }else if(key === 'CTN_CLASS_FULL'){
+        }else if(key === 'ctnClassFull'){
           license.ctnClassFull = element[key];
-        }else if(key === 'TYPE'){
+        }else if(key === 'type'){
           license.type = element[key];
-        }else if(key === 'LICENSE_TYPE'){
+        }else if(key === 'licenseType'){
           license.licenseType = element[key];
-        }else if(key === 'INCLUDED_CHANNELS'){
+        }else if(key === 'includedChannels'){
           license.channelsIncluded = element[key];
-        }else if(key === 'MAX_CHANNELS'){
+        }else if(key === 'maxChannels'){
           license.maxChannels = element[key];
-        }else if(key === 'PRICE'){
+        }else if(key === 'price'){
           license.price = element[key];
+        }else if(key === 'version'){
+          license.version = element[key];
         }
       }
 

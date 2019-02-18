@@ -699,3 +699,7 @@ input.error-validation {
 #addProductForm {
     margin-top: 40px;
 }
+
+.bvms-version{
+    display: none;
+}

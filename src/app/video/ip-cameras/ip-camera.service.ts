@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient, HttpRequest } from '@angular/common/http';
 import { Environment } from 'src/app/app.environment';
 import { IPCamera } from '../models/cameras/ip-cameras.model';
 import { stringify } from '@angular/compiler/src/util';
+import { Accessory } from '../models/accessory.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,14 @@ export class IpCameraService {
 
   public createIPCamera(ipCamera: IPCamera, datasheet: File, image: File){
     let formdata: FormData = new FormData();
+    let accessory: Accessory = new Accessory();
+    accessory.id = 1;
+    accessory.name = 'test';
+    ipCamera.accessories.push(accessory);
+    accessory.id = 2;
+    ipCamera.accessories.push(accessory);
+
+    console.log(ipCamera.accessories);
 
     formdata.append("name", ipCamera.name);
     formdata.append("family", ipCamera.family);
@@ -38,6 +47,7 @@ export class IpCameraService {
     formdata.append("price", ipCamera.price);
     formdata.append("image", image);
     formdata.append("datasheet", datasheet);
+    formdata.append("accessories", JSON.stringify(ipCamera.accessories));
     formdata.append("basicFeatures", JSON.stringify(ipCamera.basicFeatures));
     formdata.append("advancedFeatures", JSON.stringify(ipCamera.advancedFeatures));
     formdata.append("alarmTriggering", JSON.stringify(ipCamera.alarmTriggering));

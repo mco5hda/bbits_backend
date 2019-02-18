@@ -5,6 +5,7 @@ import { Sensitivity } from './sensitivity.model';
 import { Lens } from './lens.model';
 import { Connections } from './connections.model';
 import { Housing } from './housing.model';
+import { Accessory } from './../accessory.model';
 
 export class AnalogCamera{
     id:number;
@@ -16,6 +17,7 @@ export class AnalogCamera{
     ctnClass:string;
     ctnClassFull:string;
     price:string;
+    accessories: Accessory[];
     basicFeatures: BasicFeatures = new BasicFeatures();
     advancedFeatures: AdvancedFeatures = new AdvancedFeatures();
     alarmTriggering: AlarmTriggering = new AlarmTriggering();

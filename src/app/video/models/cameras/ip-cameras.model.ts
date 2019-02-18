@@ -7,6 +7,7 @@ import { DCRI } from './dcri.model';
 import { Connections } from './connections.model';
 import { Housing } from './housing.model';
 import { Storage } from './storage.model';
+import { Accessory } from './../accessory.model';
 
 export class IPCamera {
     id:number;
@@ -18,6 +19,7 @@ export class IPCamera {
     price:string;
     image:string;
     datasheet:string;
+    accessories: Accessory[] = new Array();
     basicFeatures: BasicFeatures = new BasicFeatures();
     advancedFeatures: AdvancedFeatures = new AdvancedFeatures();
     alarmTriggering: AlarmTriggering = new AlarmTriggering();

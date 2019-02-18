@@ -45,6 +45,7 @@ export class ConsultIpCamerasComponent implements OnInit {
 
     this.ipCameraService.getIPCameras().subscribe(
       data => {
+        console.log(data);
         this.fillList(data[0]);
         this.loading = false;
       },
@@ -58,6 +59,7 @@ export class ConsultIpCamerasComponent implements OnInit {
   fillList(data){
     data.forEach(element => {
       let ipCamera: IPCamera = new IPCamera();
+
       for(let key in element){
         if(key === 'ID'){
           ipCamera.id = element[key];
