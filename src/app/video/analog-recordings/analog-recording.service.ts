@@ -28,7 +28,7 @@ export class AnalogRecordingService {
 
   public createAnalogRecording(analogRecording: AnalogRecording, datasheet: File, image: File){
     let formdata: FormData = new FormData();
-
+ 
     formdata.append("name", analogRecording.name);
     formdata.append("family", analogRecording.family);
     formdata.append("category", analogRecording.category);
@@ -42,6 +42,7 @@ export class AnalogRecordingService {
     formdata.append("timeLine", analogRecording.timeLine.toString());
     formdata.append("image", image);
     formdata.append("datasheet", datasheet);
+    formdata.append("accessories", JSON.stringify(analogRecording.accessories));
     formdata.append("basicFeatures", JSON.stringify(analogRecording.basicFeatures));
     formdata.append("advancedFeatures", JSON.stringify(analogRecording.advancedFeatures));
     formdata.append("aioFunctions", JSON.stringify(analogRecording.aioFunctions));
@@ -77,6 +78,7 @@ export class AnalogRecordingService {
     formdata.append("timeLine", analogRecording.timeLine.toString());
     formdata.append("image", image);
     formdata.append("datasheet", datasheet);
+    formdata.append("accessories", JSON.stringify(analogRecording.accessories));
     formdata.append("basicFeatures", JSON.stringify(analogRecording.basicFeatures));
     formdata.append("advancedFeatures", JSON.stringify(analogRecording.advancedFeatures));
     formdata.append("aioFunctions", JSON.stringify(analogRecording.aioFunctions));
@@ -98,5 +100,9 @@ export class AnalogRecordingService {
 
   public deleteAnalogRecording(id) {
     return this.http.delete(this.url + id);
+  }
+
+  public getAnalogRecordingAccessories(id){
+    return this.http.get(this.url +"accessories/"+id)
   }
 }

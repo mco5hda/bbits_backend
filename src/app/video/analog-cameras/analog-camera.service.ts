@@ -28,7 +28,7 @@ export class AnalogCameraService {
 
   public createAnalogCamera(analogCamera: AnalogCamera, datasheet: File, image: File){
     let formdata: FormData = new FormData();
-
+ 
     formdata.append("name", analogCamera.name);
     formdata.append("family", analogCamera.family);
     formdata.append("category", analogCamera.category);
@@ -37,6 +37,7 @@ export class AnalogCameraService {
     formdata.append("price", analogCamera.price);
     formdata.append("image", image);
     formdata.append("datasheet", datasheet);
+    formdata.append("accessories", JSON.stringify(analogCamera.accessories));
     formdata.append("basicFeatures", JSON.stringify(analogCamera.basicFeatures));
     formdata.append("advancedFeatures", JSON.stringify(analogCamera.advancedFeatures));
     formdata.append("alarmTriggering", JSON.stringify(analogCamera.alarmTriggering));
@@ -64,6 +65,7 @@ export class AnalogCameraService {
     formdata.append("price", analogCamera.price);
     formdata.append("image", image);
     formdata.append("datasheet", datasheet);
+    formdata.append("accessories", JSON.stringify(analogCamera.accessories));
     formdata.append("basicFeatures", JSON.stringify(analogCamera.basicFeatures));
     formdata.append("advancedFeatures", JSON.stringify(analogCamera.advancedFeatures));
     formdata.append("alarmTriggering", JSON.stringify(analogCamera.alarmTriggering));
@@ -83,5 +85,9 @@ export class AnalogCameraService {
 
   public deleteAnalogCamera(id) {
     return this.http.delete(this.url + id);
+  }
+
+  public getAnalogCameraAccessories(id){
+    return this.http.get(this.url +"accessories/"+id)
   }
 }

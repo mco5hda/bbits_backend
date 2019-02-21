@@ -28,7 +28,7 @@ export class IpRecordingService {
 
   public createIPRecording(ipRecording: IPRecording, datasheet: File, image: File){
     let formdata: FormData = new FormData();
-
+ 
     formdata.append("name", ipRecording.name);
     formdata.append("family", ipRecording.family);
     formdata.append("category", ipRecording.category);
@@ -38,6 +38,7 @@ export class IpRecordingService {
     formdata.append("dataFormat", ipRecording.dataFormat);
     formdata.append("image", image);
     formdata.append("datasheet", datasheet);
+    formdata.append("accessories", JSON.stringify(ipRecording.accessories));
     formdata.append("basicFeatures", JSON.stringify(ipRecording.basicFeatures));
     formdata.append("advancedFeatures", JSON.stringify(ipRecording.advancedFeatures));
     formdata.append("aioFunctions", JSON.stringify(ipRecording.aioFunctions));
@@ -72,6 +73,7 @@ export class IpRecordingService {
     formdata.append("dataFormat", ipRecording.dataFormat);
     formdata.append("image", image);
     formdata.append("datasheet", datasheet);
+    formdata.append("accessories", JSON.stringify(ipRecording.accessories));
     formdata.append("basicFeatures", JSON.stringify(ipRecording.basicFeatures));
     formdata.append("advancedFeatures", JSON.stringify(ipRecording.advancedFeatures));
     formdata.append("aioFunctions", JSON.stringify(ipRecording.aioFunctions));
@@ -96,5 +98,9 @@ export class IpRecordingService {
 
   public deleteIPRecording(id) {
     return this.http.delete(this.url + id);
+  }
+
+  public getIPRecordingAccessories(id){
+    return this.http.get(this.url +"accessories/"+id)
   }
 }

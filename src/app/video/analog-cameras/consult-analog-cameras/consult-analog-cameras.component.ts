@@ -5,6 +5,7 @@ import { AnalogCamera } from '../../models/cameras/analog-cameras.model';
 import { CallOut } from './../../../utilities/callout';
 import { AnalogCameraService } from '../analog-camera.service';
 import { DialogService } from 'src/app/confirm-dialog/dialog.service';
+import { Accessory } from '../../models/accessory.model';
 
 @Component({
   selector: 'app-consult-analog-cameras',
@@ -22,7 +23,7 @@ export class ConsultAnalogCamerasComponent implements OnInit {
     private router: Router,
     private analogCameraService: AnalogCameraService,
     private dialogService: DialogService,
-  ) { }
+  ) { } 
 
   ngOnInit() {
     this.getAllAnalogCameras();
@@ -127,12 +128,58 @@ export class ConsultAnalogCamerasComponent implements OnInit {
           analogCamera.housing.operatingTemperature = element[key];
         }
       }
+
+      this.getAnalogCameraAccessories(analogCamera);
+
       this.analogCameras.push(analogCamera)
     });
       
     
   }
 
+  getAnalogCameraAccessories(analogCamera: AnalogCamera){
+    this.analogCameraService.getAnalogCameraAccessories(analogCamera.id).subscribe(
+      data => {
+        this.fillListAccessories(data[0], analogCamera);
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'Not found elements. Retry again.', 5000)     
+      }
+    );
+  }
+ 
+  fillListAccessories(data, analogCamera: AnalogCamera){
+    data.forEach(element => {
+      let accessory: Accessory = new Accessory();
+
+      for(let key in element){
+        if(key === 'id'){
+          accessory.id = element[key];
+        }else if(key === 'name'){
+          accessory.name = element[key];
+        }else if(key === 'category'){
+          accessory.category = element[key];
+        }else if(key === 'subCategory'){
+          accessory.subCategory = element[key];
+        }else if(key === 'image'){
+          accessory.image = element[key];
+        }else if(key === 'ctnClass'){
+          accessory.ctnClass = element[key];
+        }else if(key === 'ctnClassFull'){
+          accessory.ctnClassFull = element[key];
+        }else if(key === 'description'){
+          accessory.description = element[key];
+        }else if(key === 'price'){
+          accessory.price = element[key];
+        }
+      }
+
+      analogCamera.accessories.push(accessory)
+    });
+  }
+  
   detailsAnalogCamera(id: number){
     let analogCamera: AnalogCamera;
 

@@ -24,7 +24,7 @@ export class AnalogRecording {
     targetSystemSize:string;
     userLevels:string;
     timeLine: boolean;
-    accessories: Accessory[];
+    accessories: Accessory[] = new Array();
     basicFeatures: BasicFeaturesRecording = new BasicFeaturesRecording();
     advancedFeatures: AdvancedFeaturesRecording = new AdvancedFeaturesRecording();
     aioFunctions: AIOFunctionsRecording = new AIOFunctionsRecording();

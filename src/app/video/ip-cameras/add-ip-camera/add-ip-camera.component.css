@@ -634,7 +634,7 @@ input.error-validation {
 #progressbar li {
     list-style-type: none;
     color: transparent;
-    width: 16.66%;
+    width: 14.28%;
     float: left;
     position: relative;
 }
@@ -688,4 +688,29 @@ input.error-validation {
 
 .step.finish {
     background: rgb(0, 86, 145);
+}
+
+mat-card {
+    margin-bottom: 10px;
+}
+
+#accessories-container {
+    overflow: auto;
+    max-height: 50vh;
+}
+
+@font-face {
+    font-family: BoschSansRegular;
+    src: url('../../../../fonts/BoschSans-Regular.woff')
+}
+.mat-card-title {
+    font-family: BoschSansRegular;
+}
+
+@font-face {
+    font-family: BoschSansLight;
+    src: url('../../../../fonts/BoschSans-Light.woff')
+}
+.card-content {
+    font-family: BoschSansLight;
 }

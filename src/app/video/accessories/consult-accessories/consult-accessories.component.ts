@@ -54,7 +54,7 @@ export class ConsultAccessoriesComponent implements OnInit {
 
     this.accessoryService.getAccessories().subscribe(
       data => {
-        this.fillList(data);
+        this.fillList(data[0]);
         this.loading = false;
       },
       error => {

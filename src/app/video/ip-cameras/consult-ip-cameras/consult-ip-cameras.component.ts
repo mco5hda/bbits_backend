@@ -5,6 +5,7 @@ import { Environment } from 'src/app/app.environment';
 import { IpCameraService } from '../ip-camera.service';
 import { CallOut } from './../../../utilities/callout';
 import { DialogService } from 'src/app/confirm-dialog/dialog.service';
+import { Accessory } from '../../models/accessory.model';
 
 @Component({
   selector: 'app-consult-ip-cameras',
@@ -45,7 +46,6 @@ export class ConsultIpCamerasComponent implements OnInit {
 
     this.ipCameraService.getIPCameras().subscribe(
       data => {
-        console.log(data);
         this.fillList(data[0]);
         this.loading = false;
       },
@@ -201,11 +201,55 @@ export class ConsultIpCamerasComponent implements OnInit {
           ipCamera.housing.operatingTemperature = element[key];
         }
       }
+
+      this.getIPCameraAccessories(ipCamera);
+
       this.ipCameras.push(ipCamera)
     });
   }
 
+  getIPCameraAccessories(ipCamera: IPCamera){
+    this.ipCameraService.getIPCameraAccessories(ipCamera.id).subscribe(
+      data => {
+        this.fillListAccessories(data[0], ipCamera);
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'Not found elements. Retry again.', 5000)     
+      }
+    );
+  }
  
+  fillListAccessories(data, ipCamera: IPCamera){
+    data.forEach(element => {
+      let accessory: Accessory = new Accessory();
+
+      for(let key in element){
+        if(key === 'id'){
+          accessory.id = element[key];
+        }else if(key === 'name'){
+          accessory.name = element[key];
+        }else if(key === 'category'){
+          accessory.category = element[key];
+        }else if(key === 'subCategory'){
+          accessory.subCategory = element[key];
+        }else if(key === 'image'){
+          accessory.image = element[key];
+        }else if(key === 'ctnClass'){
+          accessory.ctnClass = element[key];
+        }else if(key === 'ctnClassFull'){
+          accessory.ctnClassFull = element[key];
+        }else if(key === 'description'){
+          accessory.description = element[key];
+        }else if(key === 'price'){
+          accessory.price = element[key];
+        }
+      }
+
+      ipCamera.accessories.push(accessory)
+    });
+  }
 
   detailsIPCamera(id: number){
     let ipCamera: IPCamera;

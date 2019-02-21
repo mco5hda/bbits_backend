@@ -23,7 +23,7 @@ export class IPRecording{
     ctnClassFull:string;
     price:string;
     dataFormat:string;
-    accessories: Accessory[];
+    accessories: Accessory[] = new Array();
     basicFeatures: BasicFeaturesRecording = new BasicFeaturesRecording();
     advancedFeatures: AdvancedFeaturesRecording = new AdvancedFeaturesRecording();
     aioFunctions: AIOFunctionsRecording = new AIOFunctionsRecording();

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MatCardModule} from '@angular/material/card';
 
 //Pagination
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
@@ -104,6 +105,7 @@ import { RegisterComponent } from './login/register/register.component';
     NgxPaginationModule,
     MatDialogModule,
     MatButtonModule,
+    MatCardModule,
   ],
   entryComponents: [
     ConfirmDialogComponent

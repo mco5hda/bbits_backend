@@ -634,7 +634,7 @@ input.error-validation {
 #progressbar li {
     list-style-type: none;
     color: transparent;
-    width: 16.66%;
+    width: 14.28%;
     float: left;
     position: relative;
 }
@@ -699,4 +699,29 @@ input.error-validation {
     z-index: 9999;
     background: url('./../../../../assets/spinner.gif') 50% 50% no-repeat rgb(249,249,249);
     opacity: .8;
+}
+
+mat-card {
+    margin-bottom: 10px;
+}
+
+#accessories-container {
+    overflow: auto;
+    max-height: 50vh;
+}
+
+@font-face {
+    font-family: BoschSansRegular;
+    src: url('../../../../fonts/BoschSans-Regular.woff')
+}
+.mat-card-title {
+    font-family: BoschSansRegular;
+}
+
+@font-face {
+    font-family: BoschSansLight;
+    src: url('../../../../fonts/BoschSans-Light.woff')
+}
+.card-content {
+    font-family: BoschSansLight;
 }

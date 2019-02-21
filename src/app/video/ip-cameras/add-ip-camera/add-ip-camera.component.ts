@@ -5,6 +5,9 @@ import { DatasheetService } from '../../datasheet.service';
 import { IpCameraService } from '../ip-camera.service';
 import { CallOut } from './../../../utilities/callout';
 import { HttpResponse } from '@angular/common/http';
+import { AccessoryService } from '../../accessories/accessory.service';
+import { Accessory } from '../../models/accessory.model';
+import { Environment } from 'src/app/app.environment';
 
 @Component({
   selector: 'app-add-ip-camera',
@@ -30,13 +33,18 @@ export class AddIpCameraComponent implements OnInit {
   imageFile: File;
   productType : string = 'ip_camera';
 
+  accessories: Accessory[] = new Array();
+  imagesAccessories: String[] = new Array();
+
   constructor(
     private router: Router,
     private datasheetService: DatasheetService,
     private ipCameraService: IpCameraService,
+    private accessoryService: AccessoryService,
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {
+    this.getAllAccessories();
     this.showTab(this.currentTab);//se muestra la etapa inicial del form
   }
 
@@ -453,6 +461,18 @@ export class AddIpCameraComponent implements OnInit {
     this.loading = true;
     this.imageFile = this.imageSelectedFiles.item(0);
 
+    let accessories = document.getElementsByClassName('accessories');
+    
+    for(let i = 0; i< accessories.length; i++){
+      let element = <HTMLInputElement>accessories[i];
+      
+      if(element.checked === true){
+        let accessory: Accessory = new Accessory();
+        accessory.id = Number.parseInt(element.id);
+        this.ipCamera.accessories.push(accessory)
+      }
+    }
+
     this.ipCameraService.createIPCamera(this.ipCamera, this.datasheetFile, this.imageFile)
     .subscribe(
       (data: HttpResponse< { status :  string }> ) => {
@@ -472,4 +492,56 @@ export class AddIpCameraComponent implements OnInit {
       }
     );
   }
+
+  getAllAccessories(){
+    this.loading = true;
+
+    this.accessoryService.getAccessories().subscribe(
+      data => {
+        this.fillList(data[0]);
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'Not found elements. Retry again.', 5000)
+      }
+    );
+  }
+
+  fillList(data){
+    data.forEach(element => {
+      let accessory: Accessory = new Accessory();
+
+      for(let key in element){
+        if(key === 'id'){
+          accessory.id = element[key];
+        }else if(key === 'name'){
+          accessory.name = element[key];
+        }else if(key === 'category'){
+          accessory.category = element[key];
+        }else if(key === 'subCategory'){
+          accessory.subCategory = element[key];
+        }else if(key === 'image'){
+          accessory.image = element[key];
+        }else if(key === 'ctnClass'){
+          accessory.ctnClass = element[key];
+        }else if(key === 'ctnClassFull'){
+          accessory.ctnClassFull = element[key];
+        }else if(key === 'description'){
+          accessory.description = element[key];
+        }else if(key === 'price'){
+          accessory.price = element[key];
+        }
+      }
+
+      if(accessory.image.includes('imagecache')){
+        this.imagesAccessories.push(Environment.imageSelectorURL + accessory.image);
+      }else{
+        this.imagesAccessories.push(Environment.nodeServerURL+'static/assets/video/accessories/images/'+accessory.id+'-'+accessory.image);
+      }
+
+      this.accessories.push(accessory)
+    });
+  }
+
 }

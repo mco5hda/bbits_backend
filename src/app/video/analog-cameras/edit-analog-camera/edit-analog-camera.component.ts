@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { CallOut } from './../../../utilities/callout';
 import { AnalogCameraService } from '../analog-camera.service';
 import { HttpResponse } from '@angular/common/http';
+import { Accessory } from '../../models/accessory.model';
+import { AccessoryService } from '../../accessories/accessory.service';
+import { Environment } from 'src/app/app.environment';
 
 @Component({
   selector: 'app-edit-analog-camera',
@@ -26,14 +29,19 @@ export class EditAnalogCameraComponent implements OnInit {
   datasheetFile: File;
   imageFile: File;
 
+  accessories: Accessory[] = new Array();
+  imagesAccessories: String[] = new Array();
+  checkedAccessories: Boolean[] = new Array();
+
   constructor(
     private router: Router,
     private analogCameraService: AnalogCameraService,
-
+    private accessoryService: AccessoryService,
   ) { }
 
   ngOnInit() {
     this.analogCamera = JSON.parse(sessionStorage.getItem("analogCameraElement"))
+    this.getAllAccessories();
     this.showTab(this.currentTab);
   }
 
@@ -235,6 +243,21 @@ export class EditAnalogCameraComponent implements OnInit {
     this.imageFile = this.imageSelectedFiles.item(0);
     this.datasheetFile = this.datasheetSelectedFiles.item(0);
 
+    //Clean the list of accessories
+    this.analogCamera.accessories = new Array();
+
+    let accessories = document.getElementsByClassName('accessories');
+    
+    for(let i = 0; i< accessories.length; i++){
+      let element = <HTMLInputElement>accessories[i];
+      
+      if(element.checked === true){
+        let accessory: Accessory = new Accessory();
+        accessory.id = Number.parseInt(element.id);
+        this.analogCamera.accessories.push(accessory)
+      }
+    }
+
     this.analogCameraService.updateAnalogCamera(this.analogCamera, this.datasheetFile, this.imageFile)
     .subscribe(
       (data: HttpResponse< { status :  string }> ) => {
@@ -253,5 +276,64 @@ export class EditAnalogCameraComponent implements OnInit {
         CallOut.addCallOut('error', 'The Analog Camera has not updated.', 5000)     
       }
     );
+  }
+
+  getAllAccessories(){
+    this.loading = true;
+
+    this.accessoryService.getAccessories().subscribe(
+      data => {
+        this.fillList(data[0]);
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'Not found elements. Retry again.', 5000)
+      }
+    );
+
+
+  }
+
+  fillList(data){
+    data.forEach(element => {
+      let accessory: Accessory = new Accessory();
+
+      for(let key in element){
+        if(key === 'id'){
+          accessory.id = element[key];
+        }else if(key === 'name'){
+          accessory.name = element[key];
+        }else if(key === 'category'){
+          accessory.category = element[key];
+        }else if(key === 'subCategory'){
+          accessory.subCategory = element[key];
+        }else if(key === 'image'){
+          accessory.image = element[key];
+        }else if(key === 'ctnClass'){
+          accessory.ctnClass = element[key];
+        }else if(key === 'ctnClassFull'){
+          accessory.ctnClassFull = element[key];
+        }else if(key === 'description'){
+          accessory.description = element[key];
+        }else if(key === 'price'){
+          accessory.price = element[key];
+        }
+      }
+
+      if(accessory.image.includes('imagecache')){
+        this.imagesAccessories.push(Environment.imageSelectorURL + accessory.image);
+      }else{
+        this.imagesAccessories.push(Environment.nodeServerURL+'static/assets/video/accessories/images/'+accessory.id+'-'+accessory.image);
+      }
+
+      if(this.analogCamera.accessories.some(e => e.id === accessory.id)){
+        this.checkedAccessories.push(true);
+      }else{
+        this.checkedAccessories.push(false);
+      }
+
+      this.accessories.push(accessory)
+    });
   }
 }

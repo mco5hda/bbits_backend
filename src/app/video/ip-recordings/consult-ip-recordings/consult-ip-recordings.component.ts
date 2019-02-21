@@ -5,6 +5,7 @@ import { IPRecording } from '../../models/recordings/ip-recordings.model';
 import { CallOut } from './../../../utilities/callout';
 import { IpRecordingService } from '../ip-recording.service';
 import { DialogService } from 'src/app/confirm-dialog/dialog.service';
+import { Accessory } from '../../models/accessory.model';
 
 @Component({
   selector: 'app-consult-ip-recordings',
@@ -23,7 +24,7 @@ export class ConsultIpRecordingsComponent implements OnInit {
   constructor( 
     private router: Router,
     private ipRecordingService: IpRecordingService,
-    private dialogService: DialogService,
+    private dialogService: DialogService,  
   ) { }
 
   ngOnInit() {
@@ -183,7 +184,53 @@ export class ConsultIpRecordingsComponent implements OnInit {
           ipRecording.videoOutput.spotMonitor = element[key];
         }
       }
+
+      this.getIPRecordingAccessories(ipRecording);
+
       this.ipRecordings.push(ipRecording)
+    });
+  }
+
+  getIPRecordingAccessories(ipRecording: IPRecording){
+    this.ipRecordingService.getIPRecordingAccessories(ipRecording.id).subscribe(
+      data => {
+        this.fillListAccessories(data[0], ipRecording);
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'Not found elements. Retry again.', 5000)     
+      }
+    );
+  }
+ 
+  fillListAccessories(data, ipRecording: IPRecording){
+    data.forEach(element => {
+      let accessory: Accessory = new Accessory();
+
+      for(let key in element){
+        if(key === 'id'){
+          accessory.id = element[key];
+        }else if(key === 'name'){
+          accessory.name = element[key];
+        }else if(key === 'category'){
+          accessory.category = element[key];
+        }else if(key === 'subCategory'){
+          accessory.subCategory = element[key];
+        }else if(key === 'image'){
+          accessory.image = element[key];
+        }else if(key === 'ctnClass'){
+          accessory.ctnClass = element[key];
+        }else if(key === 'ctnClassFull'){
+          accessory.ctnClassFull = element[key];
+        }else if(key === 'description'){
+          accessory.description = element[key];
+        }else if(key === 'price'){
+          accessory.price = element[key];
+        }
+      }
+
+      ipRecording.accessories.push(accessory)
     });
   }
 

@@ -15,6 +15,7 @@
         <li class="step"></li>
         <li class="step"></li>
         <li class="step"></li>
+        <li class="step"></li>
       </ul>
 
       <!--First section of form
@@ -734,6 +735,64 @@
           </li>
         </ul>
       </div>
+
+      <!--
+      Seventh section of form
+      Accessories
+      -->
+      <div class="tab col-xs-12 col-sm-8 col-sm-push-2">
+        <ul>
+          <li class="mwf-field">
+            <h3>Product Accessories</h3>
+            <hr>
+          </li>
+          <!--Accessories area-->
+          <li class="mwf-field" id="accessories-container">
+            <mat-card *ngFor="let accessory of accessories; let count = index">
+              <div class="row">
+                <div class="col-md-3">
+                  <img class="img-responsive" src="{{imagesAccessories[count]}}" alt="Photo of a Shiba Inu">
+                </div>
+                <div class="col-md-7">
+                  <ul>
+                    <li>
+                      <mat-card-title>{{accessory.name}}</mat-card-title>
+                    </li>
+                    <li>
+                      <span class="card-content">{{accessory.ctnClassFull}}</span>	
+                    </li>
+                    <li>
+                      <span class="card-content">{{accessory.description}}</span>                
+                    </li>
+                  </ul>                
+                </div>
+                <div class="col-md-2">
+                  <ul>
+                      <li class="mwf-field">              
+                          <div class="mwf-input">
+                            <fieldset >
+                              <!--Corrosion proof INPUT-->
+                              <span class="mwf-option">
+                                <input type="checkbox" *ngIf="checkedAccessories[count] == true" class="mwf-checkbox accessories" name="{{accessory.id}}" id="{{accessory.id}}" checked>
+                                <input type="checkbox" *ngIf="checkedAccessories[count] == false" class="mwf-checkbox accessories" name="{{accessory.id}}" id="{{accessory.id}}">                      
+                                <label for="{{accessory.id}}"></label>
+                              </span>
+                              <!-- <span class="mwf-option" *ngIf="checkedAccessories[count] == false">
+                                <input type="checkbox" class="mwf-checkbox accessories" name="{{accessory.id}}" id="{{accessory.id}}">                      
+                                <label for="{{accessory.id}}"></label>
+                              </span> -->
+                            </fieldset>
+                          </div>
+                        </li>
+                  </ul>
+                </div>
+            
+              </div>
+            </mat-card>
+          </li>
+        </ul>
+      </div>
+  
 
       <!--Buttons-->
       <div class="col-xs-12 col-sm-8 col-sm-push-2 forms-buttons col-xs-12">

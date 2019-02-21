@@ -5,6 +5,7 @@ import { Environment } from 'src/app/app.environment';
 import { CallOut } from './../../../utilities/callout';
 import { AnalogRecordingService } from '../analog-recording.service';
 import { DialogService } from 'src/app/confirm-dialog/dialog.service';
+import { Accessory } from '../../models/accessory.model';
 
 @Component({
   selector: 'app-consult-analog-recordings',
@@ -18,7 +19,7 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
   currentPage: number = 1;
   elementsPerPage: number = Environment.defaultPaginationElements;
 
-  loading: boolean = false;
+  loading: boolean = false; 
 
   constructor(
     private router: Router, 
@@ -57,7 +58,6 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
   }
 
   fillList(data){
-    console.log(data);
     data.forEach(element => {
       let analogRecording: AnalogRecording = new AnalogRecording();
 
@@ -191,7 +191,52 @@ export class ConsultAnalogRecordingsComponent implements OnInit {
         }
       }
   
+      this.getAnalogRecordingAccessories(analogRecording);
+
       this.analogRecordings.push(analogRecording)
+    });
+  }
+
+  getAnalogRecordingAccessories(analogRecording: AnalogRecording){
+    this.analogRecordingService.getAnalogRecordingAccessories(analogRecording.id).subscribe(
+      data => {
+        this.fillListAccessories(data[0], analogRecording);
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'Not found elements. Retry again.', 5000)     
+      }
+    );
+  }
+ 
+  fillListAccessories(data, analogRecording: AnalogRecording){
+    data.forEach(element => {
+      let accessory: Accessory = new Accessory();
+
+      for(let key in element){
+        if(key === 'id'){
+          accessory.id = element[key];
+        }else if(key === 'name'){
+          accessory.name = element[key];
+        }else if(key === 'category'){
+          accessory.category = element[key];
+        }else if(key === 'subCategory'){
+          accessory.subCategory = element[key];
+        }else if(key === 'image'){
+          accessory.image = element[key];
+        }else if(key === 'ctnClass'){
+          accessory.ctnClass = element[key];
+        }else if(key === 'ctnClassFull'){
+          accessory.ctnClassFull = element[key];
+        }else if(key === 'description'){
+          accessory.description = element[key];
+        }else if(key === 'price'){
+          accessory.price = element[key];
+        }
+      }
+
+      analogRecording.accessories.push(accessory)
     });
   }
 

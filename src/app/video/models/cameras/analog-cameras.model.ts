@@ -17,7 +17,7 @@ export class AnalogCamera{
     ctnClass:string;
     ctnClassFull:string;
     price:string;
-    accessories: Accessory[];
+    accessories: Accessory[] = new Array();
     basicFeatures: BasicFeatures = new BasicFeatures();
     advancedFeatures: AdvancedFeatures = new AdvancedFeatures();
     alarmTriggering: AlarmTriggering = new AlarmTriggering();
