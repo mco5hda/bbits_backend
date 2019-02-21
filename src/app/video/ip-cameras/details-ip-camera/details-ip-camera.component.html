@@ -85,36 +85,41 @@
       <div class="M-TabLinks">
         <div class="M-TabLinks__scrollContainer">
           <ul class="M-TabLinks__links M-TabLinks__links--alignLeft">
-              <li class="M-TabLinks__link M-TabLinks__link--active" tabindex="0">
-                <button class="M-TabLinks__trigger" (click)="changeTab(0)">
-                  <span>Basic Features</span>
-                </button>
-              </li>
-              <li class="M-TabLinks__link" tabindex="1">
-                <button class="M-TabLinks__trigger" (click)="changeTab(1)">
-                  <span>Advanced Features</span>
-                </button>
-              </li>
-              <li class="M-TabLinks__link" tabindex="2">
-                <button class="M-TabLinks__trigger" (click)="changeTab(2)">
-                  <span>Alarm Triggering & Sensitivity</span>
-                </button>
-              </li>
-              <li class="M-TabLinks__link" tabindex="3">
-                <button class="M-TabLinks__trigger" (click)="changeTab(3)">
-                  <span>Lens</span>
-                </button>
-              </li>
-              <li class="M-TabLinks__link" tabindex="4">
-                <button class="M-TabLinks__trigger" (click)="changeTab(4)">
-                  <span>DCRI & Storage</span>
-                </button>
-              </li>
-              <li class="M-TabLinks__link" tabindex="5">
-                <button class="M-TabLinks__trigger" (click)="changeTab(5)">
-                  <span>Connections & Housing</span>
-                </button>
-              </li>
+            <li class="M-TabLinks__link M-TabLinks__link--active" tabindex="0">
+              <button class="M-TabLinks__trigger" (click)="changeTab(0)">
+                <span>Basic Features</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="1">
+              <button class="M-TabLinks__trigger" (click)="changeTab(1)">
+                <span>Advanced Features</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="2">
+              <button class="M-TabLinks__trigger" (click)="changeTab(2)">
+                <span>Alarm Triggering & Sensitivity</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="3">
+              <button class="M-TabLinks__trigger" (click)="changeTab(3)">
+                <span>Lens</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="4">
+              <button class="M-TabLinks__trigger" (click)="changeTab(4)">
+                <span>DCRI & Storage</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="5">
+              <button class="M-TabLinks__trigger" (click)="changeTab(5)">
+                <span>Connections & Housing</span>
+              </button>
+            </li>
+            <li class="M-TabLinks__link" tabindex="6">
+              <button class="M-TabLinks__trigger" (click)="changeTab(6)">
+                <span>Accessories</span>
+              </button>
+            </li>
           </ul>
         </div>
       </div>
@@ -563,6 +568,56 @@
             </div>
         </div>
 
+        <!--Tab 7-->
+        <div class="M-NavigationTabs__tabContent" tabindex="6">
+          <!--Colums of table-->
+          <div class="col-xs-12">
+            <!--data row-->
+            <div class="A-DescriptionList row" >
+              <!-- First column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item" *ngFor="let accessory of ipCamera.accessories; let i=index">
+                  <img class="A-Image img-responsive accessory-details-img" *ngIf="i<(ipCamera.accessories.length/2)  && accessory.image.includes('imagecache')" src="{{selectorUrlAccessories+accessory.image}}">
+                  <img class="A-Image img-responsive accessory-details-img" *ngIf="i<(ipCamera.accessories.length/2)  && !accessory.image.includes('imagecache')" src="{{nodeServerURLAccessories+accessory.id+'-'+accessory.image}}">
+                  <div class="A-DescriptionList__value" *ngIf="i<(ipCamera.accessories.length/2)">
+                    <span>
+                      <strong style="font-size: 16px;">{{accessory.name}}</strong>
+                    </span>
+                    <br>
+                    <span>
+                      {{accessory.ctnClassFull}}
+                    </span>
+                    <br>
+                    <span>
+                      {{accessory.description}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!--Second column-->
+              <div class="A-DescriptionList__list col-xs-12 col-md-6">
+                <div class="A-DescriptionList__item" *ngFor="let accessory of ipCamera.accessories;let i=index">
+                  <img class="A-Image img-responsive accessory-details-img" *ngIf="i>=(ipCamera.accessories.length/2)  && accessory.image.includes('imagecache')" src="{{selectorUrlAccessories+accessory.image}}">
+                  <img class="A-Image img-responsive accessory-details-img" *ngIf="i>=(ipCamera.accessories.length/2)  && !accessory.image.includes('imagecache')" src="{{nodeServerURLAccessories+accessory.id+'-'+accessory.image}}">
+                  <div class="A-DescriptionList__value" *ngIf="i>=(ipCamera.accessories.length/2)">
+                    <span>
+                      <strong style="font-size: 16px;">{{accessory.name}}</strong>
+                    </span>
+                    <br>
+                    <span>
+                      {{accessory.ctnClassFull}}
+                    </span>
+                    <br>
+                    <span>
+                      {{accessory.description}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>              
+          </div>
+        </div>
       </div>
     </div>
   </div>

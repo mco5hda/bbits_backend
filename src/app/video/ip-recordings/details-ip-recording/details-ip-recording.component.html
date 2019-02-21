@@ -585,55 +585,50 @@
         <div class="M-NavigationTabs__tabContent" tabindex="6">
           <!--Colums of table-->
           <div class="col-xs-12">
-
-            <!--Headers row column-->
-            <div class="A-InformationBlock">
-              <h4 class="A-InformationBlock__headline h4">Integration tools</h4>
-            </div>
             <!--data row-->
             <div class="A-DescriptionList row" >
               <!-- First column-->
               <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                <div class="A-DescriptionList__item">
-                  <div class="A-DescriptionList__label">Optional ATM/POS integration</div>
-                  <div class="A-DescriptionList__value" *ngIf="ipRecording.integration.optionalAtpmPos">Yes</div>
-                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.integration.optionalAtpmPos">No</div>
+                <div class="A-DescriptionList__item" *ngFor="let accessory of ipRecording.accessories; let i=index">
+                  <img class="A-Image img-responsive accessory-details-img" *ngIf="i<(ipRecording.accessories.length/2)  && accessory.image.includes('imagecache')" src="{{selectorUrlAccessories+accessory.image}}">
+                  <img class="A-Image img-responsive accessory-details-img" *ngIf="i<(ipRecording.accessories.length/2)  && !accessory.image.includes('imagecache')" src="{{nodeServerURLAccessories+accessory.id+'-'+accessory.image}}">
+                  <div class="A-DescriptionList__value" *ngIf="i<(ipRecording.accessories.length/2)">
+                    <span>
+                      <strong style="font-size: 16px;">{{accessory.name}}</strong>
+                    </span>
+                    <br>
+                    <span>
+                      {{accessory.ctnClassFull}}
+                    </span>
+                    <br>
+                    <span>
+                      {{accessory.description}}
+                    </span>
+                  </div>
                 </div>
               </div>
 
               <!--Second column-->
               <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                <div class="A-DescriptionList__item">
-                  <div class="A-DescriptionList__label">SDK IPP</div>
-                  <div class="A-DescriptionList__value" *ngIf="ipRecording.integration.integrationToolsSDK">Yes</div>
-                  <div class="A-DescriptionList__value" *ngIf="!ipRecording.integration.integrationToolsSDK">No</div>
+                <div class="A-DescriptionList__item" *ngFor="let accessory of ipRecording.accessories;let i=index">
+                  <img class="A-Image img-responsive accessory-details-img" *ngIf="i>=(ipRecording.accessories.length/2)  && accessory.image.includes('imagecache')" src="{{selectorUrlAccessories+accessory.image}}">
+                  <img class="A-Image img-responsive accessory-details-img" *ngIf="i>=(ipRecording.accessories.length/2)  && !accessory.image.includes('imagecache')" src="{{nodeServerURLAccessories+accessory.id+'-'+accessory.image}}">
+                  <div class="A-DescriptionList__value" *ngIf="i>=(ipRecording.accessories.length/2)">
+                    <span>
+                      <strong style="font-size: 16px;">{{accessory.name}}</strong>
+                    </span>
+                    <br>
+                    <span>
+                      {{accessory.ctnClassFull}}
+                    </span>
+                    <br>
+                    <span>
+                      {{accessory.description}}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <!--Headers row column-->
-            <div class="A-InformationBlock">
-              <h4 class="A-InformationBlock__headline h4">Video Output</h4>
-            </div>
-            <!--data row-->
-            <div class="A-DescriptionList row" >
-              <!-- First column-->
-              <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                <div class="A-DescriptionList__item">
-                  <div class="A-DescriptionList__label">Connector type</div>
-                  <div class="A-DescriptionList__value">{{ipRecording.videoOutput.connectorType}}</div>
-                </div>
-              </div>
-
-              <!--Second column-->
-              <div class="A-DescriptionList__list col-xs-12 col-md-6">
-                <div class="A-DescriptionList__item">
-                  <div class="A-DescriptionList__label">Spot monitor</div>
-                  <div class="A-DescriptionList__value">{{ipRecording.videoOutput.spotMonitor}}</div>
-                </div>
-              </div>
-            </div>
-              
+            </div>              
           </div>
         </div>
 

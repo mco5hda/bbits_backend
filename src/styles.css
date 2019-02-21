@@ -17125,6 +17125,12 @@ main {
     object-fit: contain;
 }
 
+.accessory-details-img {
+    width: 20%;
+    height: 20%;
+    object-fit: contain;
+}
+
 .preview-image{
     width: 100%;
     height: 100%;

@@ -19,6 +19,8 @@ export class DetailsAnalogRecordingComponent implements OnInit {
   loading: boolean = false;
   image: string = '';
   datasheet: string = '';
+  selectorUrlAccessories = Environment.imageSelectorURL;
+  nodeServerURLAccessories = Environment.nodeServerURL+Environment.nodeServerImageAccessoriesPath;
 
   constructor(
     private router: Router,

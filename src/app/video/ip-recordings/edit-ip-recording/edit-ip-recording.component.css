@@ -634,7 +634,7 @@ input.error-validation {
 #progressbar li {
     list-style-type: none;
     color: transparent;
-    width: 20%;
+    width: 16.66%;
     float: left;
     position: relative;
 }
