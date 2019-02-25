@@ -9,8 +9,8 @@
       <h2 class="ca-h2">Request Access</h2>  
       
       <p class="ca-p">
-          To activate your access to the Bosch Building Installation Technologies System you have to register. 
-          With a click on the 'Register' button, you agree that your personal data will be processed. 
+          To activate your access to the Bosch Building Installation Technologies System you have to request access. 
+          With a click on the 'Request access' button, you agree that your personal data will be processed. 
       </p> 
   </div> 
   
@@ -36,7 +36,7 @@
           </div>
       </div>
       <div class="js-co-settings__elem cm-setting__elem">  
-          <div class="cm-setting__preview cm-setting__bar js-cm-setting__bar">  
+          <div class="cm-setting__preview cm-setting__bar js-cm-setting__bar">
               <label for="email" class="cm-setting__label">Email *</label> 
               <div class="cm-setting__group">    
                   <div class="cm-setting__group-wrap">  
@@ -45,20 +45,10 @@
               </div>    
           </div>
       </div>
-      <div class="js-co-settings__elem cm-setting__elem">  
-          <div class="cm-setting__preview cm-setting__bar js-cm-setting__bar">  
-              <label for="email" class="cm-setting__label">Password *</label> 
-              <div class="cm-setting__group">    
-                  <div class="cm-setting__group-wrap">  
-                      <input class="cm-setting__input js-cm-setting__input" placeholder="Please insert your password" id="password" type="password" name="password" [(ngModel)]="user.password" (change)="validateInput($event)" #password="ngModel" required="">  
-                  </div>
-              </div>    
-          </div>
-      </div>      
 
       <div class="cm-btn-bar cm-btn-bar--centered cm-btn-bar--section js-cm-setting__actions">  
-          <button type="submit" class="btn-signin" [disabled]="!formValid" (click)="register()">  
-              <span class="js-cm-setting__btn-label">Register</span>  
+          <button type="submit" class="btn-signin" [disabled]="!formValid" (click)="requestAccess()">  
+              <span class="js-cm-setting__btn-label">Request access</span>  
           </button>  
       </div> 
   </form>

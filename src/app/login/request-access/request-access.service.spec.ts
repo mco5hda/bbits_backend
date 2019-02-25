@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ResetPasswordService } from './reset-password.service';
+import { RequestAccessService } from './request-access.service';
 
-describe('ResetPasswordService', () => {
+describe('RequestAccessService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ResetPasswordService = TestBed.get(ResetPasswordService);
+    const service: RequestAccessService = TestBed.get(RequestAccessService);
     expect(service).toBeTruthy();
   });
 });

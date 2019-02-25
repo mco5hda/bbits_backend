@@ -15,7 +15,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddIpCameraComponent } from './video/ip-cameras/add-ip-camera/add-ip-camera.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
-import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 import { HeaderComponent } from './header/header/header.component';
 import { MainComponent } from './main/main/main.component';
 import { AddAnalogCameraComponent } from './video/analog-cameras/add-analog-camera/add-analog-camera.component';
@@ -51,7 +50,8 @@ import { ConsultAccessoriesComponent } from './video/accessories/consult-accesso
 import { DetailAccessoryComponent } from './video/accessories/detail-accessory/detail-accessory.component';
 import { EditAccessoryComponent } from './video/accessories/edit-accessory/edit-accessory.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { RegisterComponent } from './login/register/register.component';
+import { RequestAccessComponent } from './login/request-access/request-access.component';
+import { ConsultUsersComponent } from './user/consult-users/consult-users.component';
 
 
 @NgModule({
@@ -59,7 +59,6 @@ import { RegisterComponent } from './login/register/register.component';
     AppComponent,
     AddIpCameraComponent,
     SignInComponent,
-    ResetPasswordComponent,
     HeaderComponent,
     MainComponent,
     AddAnalogCameraComponent,
@@ -91,7 +90,8 @@ import { RegisterComponent } from './login/register/register.component';
     DetailAccessoryComponent,
     EditAccessoryComponent,
     ConfirmDialogComponent,
-    RegisterComponent,
+    RequestAccessComponent,
+    ConsultUsersComponent,
   ],
   imports: [
     BrowserAnimationsModule,

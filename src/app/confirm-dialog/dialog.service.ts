@@ -6,7 +6,8 @@ import { ConfirmDialogComponent } from './confirm-dialog.component';
   providedIn: 'root'
 })
 export class DialogService {
-
+  // message = '';
+  
   constructor(
     private dialog: MatDialog
   ) { }
