@@ -39,6 +39,7 @@ export class IpRecordingService {
     formdata.append("image", image);
     formdata.append("datasheet", datasheet);
     formdata.append("accessories", JSON.stringify(ipRecording.accessories));
+    formdata.append("raidDetails", JSON.stringify(ipRecording.raidDetails));
     formdata.append("basicFeatures", JSON.stringify(ipRecording.basicFeatures));
     formdata.append("advancedFeatures", JSON.stringify(ipRecording.advancedFeatures));
     formdata.append("aioFunctions", JSON.stringify(ipRecording.aioFunctions));
@@ -74,6 +75,7 @@ export class IpRecordingService {
     formdata.append("image", image);
     formdata.append("datasheet", datasheet);
     formdata.append("accessories", JSON.stringify(ipRecording.accessories));
+    formdata.append("raidDetails", JSON.stringify(ipRecording.raidDetails));
     formdata.append("basicFeatures", JSON.stringify(ipRecording.basicFeatures));
     formdata.append("advancedFeatures", JSON.stringify(ipRecording.advancedFeatures));
     formdata.append("aioFunctions", JSON.stringify(ipRecording.aioFunctions));
@@ -102,5 +104,9 @@ export class IpRecordingService {
 
   public getIPRecordingAccessories(id){
     return this.http.get(this.url +"accessories/"+id)
+  }
+  
+  public getIPRecordingRaidDetails(id){
+    return this.http.get(this.url +"raid-details/"+id)
   }
 }

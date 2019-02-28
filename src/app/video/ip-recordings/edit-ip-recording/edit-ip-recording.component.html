@@ -211,16 +211,43 @@
             </div>
           </li>
 
-          <!-- Wide dynamic range Input -->
           <li class="mwf-field mwf-m">
             <label class="mwf-label mwf-label-input">
-              RAID Level
+              RAID Supported
+              <span class="mwf-required">*</span>
+            </label>
+            <mat-form-field style="display: block; position: inherit; text-align: left;">
+              <mat-select multiple id="raid" name="raid" #raid (selectionChange)="checkRaidValue($event)">
+                <mat-option *ngFor="let raid of raidLevels" [value]="raid">{{raid}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </li>
+          
+          <li id="raidDetails" class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              RAID Version
               <span class="mwf-required">*</span>
             </label>
             <div class="mwf-input">
-              <input class="mwf-text" id="raid" name="raid" [(ngModel)]="ipRecording.basicFeatures.raid" (change)="validateInput($event)" #raid="ngModel" type="text" maxlength="255">
+              <input class="mwf-text" id="raid5" disabled type="text" value="0">
+              <input class="mwf-text" id="raid5Plus" disabled type="text" value="0">
+              <input class="mwf-text" id="raid6" disabled type="text" value="0">
             </div>
           </li>
+
+          <li id="raidDetailsStorage" class="mwf-field mwf-m">
+            <label class="mwf-label mwf-label-input">
+              RAID Net Capacity
+              <span class="mwf-required">*</span>
+            </label>
+            <div class="mwf-input">
+              <input class="mwf-text" id="raid5Storage" type="number" value="0" min="0" step="0.00000">
+              <input class="mwf-text" id="raid5PlusStorage" type="number" value="0" min="0" step="0.00000">
+              <input class="mwf-text" id="raid6Storage" type="number" value="0" min="0" step="0.00000">
+            </div>
+          </li>
+
           <!-- Checkboxes -->
           <li class="mwf-field">              
             <div class="mwf-input">

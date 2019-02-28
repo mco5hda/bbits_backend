@@ -6,6 +6,7 @@ import { CallOut } from './../../../utilities/callout';
 import { IpRecordingService } from '../ip-recording.service';
 import { DialogService } from 'src/app/confirm-dialog/dialog.service';
 import { Accessory } from '../../models/accessory.model';
+import { RaidDetails } from '../../models/recordings/raid-details.model';
 
 @Component({
   selector: 'app-consult-ip-recordings',
@@ -186,7 +187,8 @@ export class ConsultIpRecordingsComponent implements OnInit {
       }
 
       this.getIPRecordingAccessories(ipRecording);
-
+      this.getIPRecordingRaidDetails(ipRecording);
+      
       this.ipRecordings.push(ipRecording)
     });
   }
@@ -231,6 +233,35 @@ export class ConsultIpRecordingsComponent implements OnInit {
       }
 
       ipRecording.accessories.push(accessory)
+    });
+  }
+
+  getIPRecordingRaidDetails(ipRecording: IPRecording){
+    this.ipRecordingService.getIPRecordingRaidDetails(ipRecording.id).subscribe(
+      data => {
+        this.fillListRaidDetails(data[0], ipRecording);
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        CallOut.addCallOut('error', 'Not found elements. Retry again.', 5000)     
+      }
+    );
+  }
+ 
+  fillListRaidDetails(data, ipRecording: IPRecording){
+    data.forEach(element => {
+      let raidDetails: RaidDetails = new RaidDetails();
+
+      for(let key in element){
+        if(key === 'raidVersion'){
+          raidDetails.raidVersion = element[key];
+        }else if(key === 'netStorage'){
+          raidDetails.netStorage = element[key];
+        }
+      }
+
+      ipRecording.raidDetails.push(raidDetails)
     });
   }
 

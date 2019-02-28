@@ -109,8 +109,9 @@
               </button>
             </li>
             <li class="M-TabLinks__link" tabindex="4">
-              <button class="M-TabLinks__trigger" (click)="changeTab(4)">
-                <span>Storage</span>
+              <button class="M-TabLinks__trigger" (click)="changeTab(4)" >
+                <span *ngIf="ipRecording.raidDetails.length>0">Storage & RAID Details</span>
+                <span *ngIf="ipRecording.raidDetails.length==0">Storage</span>
               </button>
             </li>
             <li class="M-TabLinks__link" tabindex="5">
@@ -519,6 +520,29 @@
                   <div class="A-DescriptionList__value" *ngIf="ipRecording.storageExtensions.hotSwappable">Yes</div>
                   <div class="A-DescriptionList__value" *ngIf="!ipRecording.storageExtensions.hotSwappable">No</div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Headers row column-->
+          <div class="A-InformationBlock" *ngIf="ipRecording.raidDetails.length>0">
+            <h4 class="A-InformationBlock__headline h4">RAID Details</h4>
+          </div>
+          <!--data row-->
+          <div class="A-DescriptionList row" >
+            <!-- First column-->
+            <div class="A-DescriptionList__list col-xs-12 col-md-6">
+              <div class="A-DescriptionList__item" *ngFor="let raid of ipRecording.raidDetails; let i=index">
+                <div class="A-DescriptionList__label" *ngIf="i<(ipRecording.raidDetails.length/2)">{{raid.raidVersion}}</div>
+                <div class="A-DescriptionList__value" *ngIf="i<(ipRecording.raidDetails.length/2)">{{raid.netStorage}}</div>
+              </div>
+            </div>
+
+            <!--Second column-->
+            <div class="A-DescriptionList__list col-xs-12 col-md-6">
+              <div class="A-DescriptionList__item" *ngFor="let raid of ipRecording.raidDetails; let i=index">
+                <div class="A-DescriptionList__label" *ngIf="i>=(ipRecording.raidDetails.length/2)">{{raid.raidVersion}}</div>
+                <div class="A-DescriptionList__value" *ngIf="i>=(ipRecording.raidDetails.length/2)">{{raid.netStorage}}</div>
               </div>
             </div>
           </div>

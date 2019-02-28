@@ -11,6 +11,7 @@ import { StorageOptionsExtensionsRecording } from './storage-options-extensions-
 import { StorageOptionsRecording } from './storage-options-recording.model';
 import { VideoOutputRecording } from './video-output-recording.model';
 import { Accessory } from './../accessory.model';
+import { RaidDetails } from './raid-details.model';
 
 export class IPRecording{
     id:number;
@@ -24,6 +25,7 @@ export class IPRecording{
     price:string;
     dataFormat:string;
     accessories: Accessory[] = new Array();
+    raidDetails: RaidDetails[] = new Array();
     basicFeatures: BasicFeaturesRecording = new BasicFeaturesRecording();
     advancedFeatures: AdvancedFeaturesRecording = new AdvancedFeaturesRecording();
     aioFunctions: AIOFunctionsRecording = new AIOFunctionsRecording();

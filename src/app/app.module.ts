@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
 
@@ -8,7 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 //Angular material
-import { MatSnackBarModule, MatDialogModule, MatMenuModule, MatButtonModule } from '@angular/material';
+import { MatSnackBarModule, MatDialogModule, MatMenuModule, MatButtonModule, MatSelectModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -106,6 +106,8 @@ import { ConsultUsersComponent } from './user/consult-users/consult-users.compon
     MatDialogModule,
     MatButtonModule,
     MatCardModule,
+    ReactiveFormsModule,
+    MatSelectModule,
   ],
   entryComponents: [
     ConfirmDialogComponent

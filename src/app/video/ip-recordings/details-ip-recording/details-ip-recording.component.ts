@@ -29,7 +29,6 @@ export class DetailsIpRecordingComponent implements OnInit {
 
   ngOnInit() {
     this.ipRecording = JSON.parse(sessionStorage.getItem("ipRecordingElement"));
-    
     if(this.ipRecording.image.includes('imagecache')){
       this.image = Environment.imageSelectorURL+this.ipRecording.image
     }else{

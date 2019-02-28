@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPRecording } from '../../models/recordings/ip-recordings.model';
 import { CallOut } from './../../../utilities/callout';
@@ -7,6 +7,8 @@ import { HttpResponse } from '@angular/common/http';
 import { Accessory } from '../../models/accessory.model';
 import { AccessoryService } from '../../accessories/accessory.service';
 import { Environment } from 'src/app/app.environment';
+import { MatOption } from '@angular/material';
+import { RaidDetails } from '../../models/recordings/raid-details.model';
 
 @Component({
   selector: 'app-edit-ip-recording',
@@ -21,6 +23,9 @@ export class EditIpRecordingComponent implements OnInit {
   currentTab: number = 0; // Current tab is set to be the first tab (0)
 
   categories = ["All in one","Storage only"];
+  raidLevels = ["RAID-5", "RAID-5 plus hot spare", "RAID-6"];
+  @ViewChild('raid') raidSelect;
+  
   datasheetSelectedFiles: FileList;
   imageSelectedFiles: FileList;
   datasheetFile: File;
@@ -40,6 +45,7 @@ export class EditIpRecordingComponent implements OnInit {
   ngOnInit() {
     this.ipRecording = JSON.parse(sessionStorage.getItem("ipRecordingElement"));
     this.getAllAccessories();
+    this.fillRaidDetails();
     this.showTab(this.currentTab);//se muestra la etapa inicial del form
   }
 
@@ -257,6 +263,28 @@ export class EditIpRecordingComponent implements OnInit {
       }
     }
 
+    this.ipRecording.basicFeatures.raid = "";
+    this.ipRecording.raidDetails = new Array();
+
+    let array:MatOption[] = this.raidSelect.selected
+    array.forEach(element => {
+      let details: RaidDetails = new RaidDetails();
+      details.raidVersion = element.value;
+
+      if(element.value === 'RAID-5'){
+        details.netStorage = Number.parseInt((<HTMLInputElement>document.getElementById('raid5Storage')).value);
+      }else if(element.value === 'RAID-6'){
+        details.netStorage = Number.parseInt((<HTMLInputElement>document.getElementById('raid6Storage')).value);
+      }else if(element.value === 'RAID-5 plus hot spare'){
+        details.netStorage = Number.parseInt((<HTMLInputElement>document.getElementById('raid5PlusStorage')).value);
+      }
+
+      this.ipRecording.raidDetails.push(details);
+      this.ipRecording.basicFeatures.raid += element.value+',';
+    });
+    this.ipRecording.basicFeatures.raid = this.ipRecording.basicFeatures.raid.substring(0, this.ipRecording.basicFeatures.raid.length-1)
+
+
     this.ipRecordingService.updateIPRecording(this.ipRecording, this.datasheetFile, this.imageFile)
     .subscribe(
       (data: HttpResponse< { status :  string }> ) => {
@@ -336,5 +364,109 @@ export class EditIpRecordingComponent implements OnInit {
 
       this.accessories.push(accessory)
     });
+  }
+
+  checkRaidValue(event){
+    let raidDetails = document.getElementById('raidDetails')
+    let raidDetailsStorage = document.getElementById('raidDetailsStorage')
+    let raid5Label = (<HTMLInputElement>document.getElementById('raid5'))
+    let raid5Storage = (<HTMLInputElement>document.getElementById('raid5Storage'))
+    let raid5PlusLabel = (<HTMLInputElement>document.getElementById('raid5Plus'))
+    let raid5PlusStorage = (<HTMLInputElement>document.getElementById('raid5PlusStorage'))
+    let raid6Label = (<HTMLInputElement>document.getElementById('raid6'))
+    let raid6Storage = (<HTMLInputElement>document.getElementById('raid6Storage'))
+
+    raidDetails.style.display = "none";
+    raidDetailsStorage.style.display = "none";
+    raid5Label.style.display = "none";
+    raid5Storage.style.display = "none";
+    raid5PlusLabel.style.display = "none";
+    raid5PlusStorage.style.display = "none";
+    raid6Label.style.display = "none";
+    raid6Storage.style.display = "none";
+
+    if(event.value !== '' && event.value !== undefined){
+      event.value.forEach(element => {
+        if(element === 'RAID-5'){
+          raid5Label.value = element;
+          raid5Label.style.display = "block";
+          raid5Storage.style.display = "block";
+        }else if(element === 'RAID-6'){
+          raid6Label.value = element;
+          raid6Label.style.display = "block";
+          raid6Storage.style.display = "block";
+        }else if(element === 'RAID-5 plus hot spare'){
+          raid5PlusLabel.value = element;
+          raid5PlusLabel.style.display = "block";
+          raid5PlusStorage.style.display = "block";
+        }
+      
+        raidDetails.style.display = "block";
+        raidDetailsStorage.style.display = "block";
+      });
+    }else{
+      raidDetails.style.display = "none";
+      raidDetailsStorage.style.display = "none";
+    }
+  }
+
+  fillRaidDetails(){
+    let raidDetails = document.getElementById('raidDetails')
+    let raidDetailsStorage = document.getElementById('raidDetailsStorage')
+    let raid5Label = (<HTMLInputElement>document.getElementById('raid5'))
+    let raid5Storage = (<HTMLInputElement>document.getElementById('raid5Storage'))
+    let raid5PlusLabel = (<HTMLInputElement>document.getElementById('raid5Plus'))
+    let raid5PlusStorage = (<HTMLInputElement>document.getElementById('raid5PlusStorage'))
+    let raid6Label = (<HTMLInputElement>document.getElementById('raid6'))
+    let raid6Storage = (<HTMLInputElement>document.getElementById('raid6Storage'))
+
+    raidDetails.style.display = "none";
+    raidDetailsStorage.style.display = "none";
+    raid5Label.style.display = "none";
+    raid5Storage.style.display = "none";
+    raid5PlusLabel.style.display = "none";
+    raid5PlusStorage.style.display = "none";
+    raid6Label.style.display = "none";
+    raid6Storage.style.display = "none";
+
+
+    this.ipRecording.raidDetails.forEach(element => {
+      if(element.raidVersion === 'RAID-5'){
+        raid5Label.value = element.raidVersion;
+        raid5Storage.value = element.netStorage.toString();
+        raid5Label.style.display = "block";
+        raid5Storage.style.display = "block";
+      }else if(element.raidVersion === 'RAID-6'){
+        raid6Label.value = element.raidVersion;
+        raid6Storage.value = element.netStorage.toString();
+        raid6Label.style.display = "block";
+        raid6Storage.style.display = "block";
+      }else if(element.raidVersion === 'RAID-5 plus hot spare'){
+        raid5PlusLabel.value = element.raidVersion;
+        raid5PlusStorage.value = element.netStorage.toString();
+        raid5PlusLabel.style.display = "block";
+        raid5PlusStorage.style.display = "block";
+      }
+
+      raidDetails.style.display = "block";
+      raidDetailsStorage.style.display = "block";
+    });
+
+    // let array:MatOption[] = this.raidSelect.selected
+    // array.forEach(element => {
+    //   let details: RaidDetails = new RaidDetails();
+    //   details.raidVersion = element.value;
+
+    //   if(element.value === 'RAID-5'){
+    //     details.netStorage = (<HTMLInputElement>document.getElementById('raid5Storage')).value;
+    //   }else if(element.value === 'RAID-6'){
+    //     details.netStorage = (<HTMLInputElement>document.getElementById('raid6Storage')).value;
+    //   }else if(element.value === 'RAID-5 plus hot spare'){
+    //     details.netStorage = (<HTMLInputElement>document.getElementById('raid5PlusStorage')).value;
+    //   }
+
+    //   this.ipRecording.raidDetails.push(details);
+    //   this.ipRecording.basicFeatures.raid += element.value+',';
+    // });
   }
 }
